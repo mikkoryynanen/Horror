@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cabh24mlvxkp2"]
+[gd_scene load_steps=7 format=3 uid="uid://cabh24mlvxkp2"]
 
+[ext_resource type="Script" path="res://Scripts/UI/GUIManager.cs" id="1_s4ul8"]
 [ext_resource type="Texture2D" uid="uid://cntwtaxwtt2hk" path="res://Assets/crosshair007.png" id="1_syclb"]
 [ext_resource type="Shader" path="res://shaders/psx_dither.gdshader" id="1_wbj8i"]
 
@@ -9,7 +10,14 @@ shader_parameter/color_depth = 5
 shader_parameter/dithering = true
 shader_parameter/resolution_scale = 1
 
+[sub_resource type="SystemFont" id="SystemFont_6wmk4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_w35aa"]
+font = SubResource("SystemFont_6wmk4")
+font_size = 20
+
 [node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_s4ul8")
 
 [node name="Container" type="Control" parent="."]
 material = SubResource("ShaderMaterial_41fwl")
@@ -20,7 +28,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Container"]
+[node name="Reticle" type="TextureRect" parent="Container"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -36,3 +44,13 @@ grow_vertical = 2
 texture = ExtResource("1_syclb")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Label" type="Label" parent="Container/Reticle"]
+visible = false
+layout_mode = 0
+offset_left = 21.0
+offset_top = -25.0
+offset_right = 139.0
+offset_bottom = 6.0
+text = "E to Interact"
+label_settings = SubResource("LabelSettings_w35aa")

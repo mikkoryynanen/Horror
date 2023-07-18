@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using Horror.Scripts;
+using Horror.Scripts.Autoload;
 
 public partial class Player : CharacterBody3D
 {
@@ -79,6 +81,18 @@ public partial class Player : CharacterBody3D
 		if (_raycast.IsColliding())
 		{
 			var target = _raycast.GetCollider();
+			if (target is IInteractable interactable)
+			{
+				GetNode<SignalBus>("/root/SignalBus").EmitSignal(nameof(SignalBus.OnShowInteract));
+				if (Input.IsActionJustPressed("interact"))
+				{
+					interactable.Interact();
+				}
+			}
+			else
+			{
+				GetNode<SignalBus>("/root/SignalBus").EmitSignal(nameof(SignalBus.OnHideInteract));
+			}
 		}
 
 		var inputValue = Mathf.Floor(Mathf.Abs(inputDir.X) + Mathf.Abs(inputDir.Y));

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://1wsbq77tr1k5"]
+[gd_scene load_steps=9 format=3 uid="uid://1wsbq77tr1k5"]
 
 [ext_resource type="PackedScene" uid="uid://8eqkq54qfjx4" path="res://Scenes/Player.tscn" id="1_440sk"]
 [ext_resource type="PackedScene" uid="uid://drxcwmepah76t" path="res://Prefabs/room_manager.tscn" id="1_i3jld"]
 [ext_resource type="PackedScene" uid="uid://cabh24mlvxkp2" path="res://Scenes/gui.tscn" id="2_u7hmi"]
 [ext_resource type="AudioStream" uid="uid://o37uue3utwy1" path="res://Assets/music/killing_field.wav" id="4_rp4vh"]
+[ext_resource type="Script" path="res://Scripts/Objects/TestObject.cs" id="5_s8qwm"]
 
 [sub_resource type="Environment" id="Environment_pmfeb"]
 ambient_light_color = Color(1, 1, 0.756863, 1)
@@ -14,6 +15,11 @@ fog_light_energy = 0.05
 fog_density = 0.1
 volumetric_fog_density = 0.1472
 volumetric_fog_albedo = Color(1, 1, 0.756863, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0sghj"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3uvyu"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [node name="Core" type="Node3D"]
 
@@ -30,3 +36,14 @@ transform = Transform3D(0.907975, 0, 0.419024, 0, 1, 0, -0.419024, 0, 0.907975, 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_rp4vh")
 autoplay = true
+
+[node name="TestCube" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.39897, 0.648378, -7.44008)
+script = ExtResource("5_s8qwm")
+
+[node name="Mesh" type="MeshInstance3D" parent="TestCube"]
+mesh = SubResource("BoxMesh_0sghj")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TestCube"]
+shape = SubResource("ConcavePolygonShape3D_3uvyu")
