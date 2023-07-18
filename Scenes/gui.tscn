@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://cabh24mlvxkp2"]
+
+[ext_resource type="Texture2D" uid="uid://cntwtaxwtt2hk" path="res://Assets/crosshair007.png" id="1_syclb"]
+[ext_resource type="Shader" path="res://shaders/psx_dither.gdshader" id="1_wbj8i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_41fwl"]
+shader = ExtResource("1_wbj8i")
+shader_parameter/color_depth = 5
+shader_parameter/dithering = true
+shader_parameter/resolution_scale = 1
+
+[node name="GUI" type="CanvasLayer"]
+
+[node name="Container" type="Control" parent="."]
+material = SubResource("ShaderMaterial_41fwl")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Container"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_syclb")
+expand_mode = 1
+stretch_mode = 4

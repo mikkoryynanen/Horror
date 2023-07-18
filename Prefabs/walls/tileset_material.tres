@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bro7pjhliydla"]
+
+[ext_resource type="Shader" path="res://shaders/psx_lit.gdshader" id="1_144k7"]
+[ext_resource type="Texture2D" uid="uid://biaemcqnrnj6q" path="res://Assets/models/tileset_metal_grid_black.png" id="2_ihnk8"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_144k7")
+shader_parameter/jitter = 0.95
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 0.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_ihnk8")

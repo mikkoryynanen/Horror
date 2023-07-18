@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://w0ptg7qlfppn"]
+
+[ext_resource type="Texture2D" uid="uid://brbmsg4x3it63" path="res://Assets/placeholder/textures/Metal/metal_grid_black.png" id="1_0vyje"]
+[ext_resource type="Script" path="res://Scripts/Room.cs" id="1_uvsng"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cm1wm"]
+diffuse_mode = 1
+albedo_texture = ExtResource("1_0vyje")
+
+[sub_resource type="QuadMesh" id="QuadMesh_4ey8n"]
+material = SubResource("StandardMaterial3D_cm1wm")
+size = Vector2(3, 3)
+
+[node name="Room" type="Node3D"]
+script = ExtResource("1_uvsng")
+
+[node name="Roof" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, -1.5246e-23, -1.5246e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2.08165e-12, 3, 2.08165e-12)
+mesh = SubResource("QuadMesh_4ey8n")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -6.97574e-16, -1.5246e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+mesh = SubResource("QuadMesh_4ey8n")
+
+[node name="South" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -4.37114e-08, 1, -1, 2.60826e-15, -4.37114e-08, -6.97574e-16, -1, -4.37114e-08, -1.5, 1.5, 2.08165e-12)
+mesh = SubResource("QuadMesh_4ey8n")
+
+[node name="North" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.25947e-15, -4.37114e-08, -1, -1, -4.37114e-08, -3.48787e-16, -4.37114e-08, 1, -4.37114e-08, 1.5, 1.5, 2.08165e-12)
+mesh = SubResource("QuadMesh_4ey8n")
+
+[node name="East" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, -3.48787e-16, -3.47258e-15, 8.74228e-08, -1, 2.08165e-12, 1.5, 1.5)
+mesh = SubResource("QuadMesh_4ey8n")
+
+[node name="West" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 3.48787e-16, -1, -4.37114e-08, -3.48787e-16, -3.48787e-16, -3.48787e-16, 1, 2.08165e-12, 1.5, -1.5)
+mesh = SubResource("QuadMesh_4ey8n")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 3, 2.08165e-12)
+light_energy = 0.1

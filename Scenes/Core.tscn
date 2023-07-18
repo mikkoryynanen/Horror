@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://1wsbq77tr1k5"]
+
+[ext_resource type="PackedScene" uid="uid://8eqkq54qfjx4" path="res://Scenes/Player.tscn" id="1_440sk"]
+[ext_resource type="PackedScene" uid="uid://drxcwmepah76t" path="res://Prefabs/room_manager.tscn" id="1_i3jld"]
+[ext_resource type="PackedScene" uid="uid://cabh24mlvxkp2" path="res://Scenes/gui.tscn" id="2_u7hmi"]
+[ext_resource type="AudioStream" uid="uid://o37uue3utwy1" path="res://Assets/music/killing_field.wav" id="4_rp4vh"]
+
+[sub_resource type="Environment" id="Environment_pmfeb"]
+ambient_light_color = Color(1, 1, 0.756863, 1)
+ambient_light_energy = 0.02
+fog_enabled = true
+fog_light_color = Color(1, 1, 0.756863, 1)
+fog_light_energy = 0.05
+fog_density = 0.1
+volumetric_fog_density = 0.1472
+volumetric_fog_albedo = Color(1, 1, 0.756863, 1)
+
+[node name="Core" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pmfeb")
+
+[node name="RoomManager" parent="." instance=ExtResource("1_i3jld")]
+
+[node name="Player" parent="." instance=ExtResource("1_440sk")]
+transform = Transform3D(0.907975, 0, 0.419024, 0, 1, 0, -0.419024, 0, 0.907975, -1.93407, 0.469437, -0.0725112)
+
+[node name="GUI" parent="." instance=ExtResource("2_u7hmi")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_rp4vh")
+autoplay = true

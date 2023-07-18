@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://byyrwacsaxxvq"]
+
+[ext_resource type="PackedScene" uid="uid://gb38v7xtv3s" path="res://Assets/models/tileset.glb" id="1_jpt4e"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_38qk3"]
+data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1, -1, 0, -1, 1, 2, -1, 1, 0, -1, -1, 0, -1, -1, 2, -1, 1, 2, -1, -1, 2, -1, 1, 4, -1, 1, 2, -1, -1, 2, -1, -1, 4, -1, 1, 4, -1, -1, 4, -1, 0, 5, 0, 1, 4, -1, -1, 4, -1, -1, 5, 0, 0, 5, 0, -1, 5, 0, -1, 5, 1, 0, 5, 0, 1, 0, -1, 1, 2, 1, 1, 0, 1, 1, 0, -1, 1, 2, -1, 1, 2, 1, 1, 2, -1, 1, 4, 1, 1, 2, 1, 1, 2, -1, 1, 4, -1, 1, 4, 1, 1, 4, -1, 0, 5, 1, 1, 4, 1, 1, 4, -1, 0, 5, 0, 0, 5, 1, 0, 5, 0, -1, 5, 1, 0, 5, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_331a1"]
+data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1, -1, 5, -1, 1, 5, 1, 1, 5, -1, -1, 5, -1, -1, 5, 1, 1, 5, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_gbt32"]
+data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1, -1, 0, -1, 1, 2, -1, 1, 0, -1, -1, 0, -1, -1, 2, -1, 1, 2, -1, -1, 2, -1, 1, 4, -1, 1, 2, -1, -1, 2, -1, -1, 4, -1, 1, 4, -1, -1, 4, -1, 1, 5, 0, 1, 4, -1, -1, 4, -1, -1, 5, 0, 1, 5, 0, -1, 5, 0, 1, 5, 1, 1, 5, 0, -1, 5, 0, -1, 5, 1, 1, 5, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0q821"]
+data = PackedVector3Array(-1, 0, 1, 1, 0, -1, 1, 0, 1, -1, 0, 1, -1, 0, -1, 1, 0, -1, -1, 5, 1, 0, 5, -1, -1, 5, -1, 0, 5, -1, 1, 5, 1, 1, 5, 0, 0, 5, -1, -1, 5, 1, 1, 5, 1, 1, 5, 0, 1, 4, -1, 0, 5, -1)
+
+[node name="tileset" instance=ExtResource("1_jpt4e")]
+
+[node name="WallCorner" parent="." index="0"]
+transform = Transform3D(0.5, -4.11788e-05, 1.39518e-05, 4.11788e-05, 0.5, 3.67664e-06, -1.39518e-05, -3.67664e-06, 0.5, 2.01075, 0.0126852, -0.00106966)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WallCorner" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallCorner/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_38qk3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WallMiddle" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallMiddle/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_331a1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_gbt32")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WallMiddleCorner" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallMiddleCorner/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_0q821")
