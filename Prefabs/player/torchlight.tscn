@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck32hg638vemx"]
+
+[ext_resource type="Script" path="res://Scripts/Player/Torchlight.cs" id="1_ghe8v"]
+
+[node name="Torchlight" type="SpotLight3D"]
+light_color = Color(1, 1, 0.756863, 1)
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_bake_mode = 0
+distance_fade_begin = 65.54
+spot_attenuation = 0.435275
+script = ExtResource("1_ghe8v")

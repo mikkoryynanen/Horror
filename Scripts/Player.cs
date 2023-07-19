@@ -83,7 +83,7 @@ public partial class Player : CharacterBody3D
 			var target = _raycast.GetCollider();
 			if (target is IInteractable interactable)
 			{
-				GetNode<SignalBus>("/root/SignalBus").EmitSignal(nameof(SignalBus.OnShowInteract));
+				this.EmitSignalBus(nameof(SignalBus.OnShowInteract));
 				if (Input.IsActionJustPressed("interact"))
 				{
 					interactable.Interact();
@@ -91,7 +91,7 @@ public partial class Player : CharacterBody3D
 			}
 			else
 			{
-				GetNode<SignalBus>("/root/SignalBus").EmitSignal(nameof(SignalBus.OnHideInteract));
+				this.EmitSignalBus(nameof(SignalBus.OnHideInteract));
 			}
 		}
 

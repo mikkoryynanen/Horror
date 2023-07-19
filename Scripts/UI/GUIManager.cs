@@ -1,6 +1,5 @@
 using Godot;
-using System;
-using Horror.Scripts.Autoload;
+using Horror.Scripts;
 
 public partial class GUIManager : CanvasLayer
 {
@@ -10,8 +9,8 @@ public partial class GUIManager : CanvasLayer
 	{
 		_interactLabel = GetNode<Label>("Container/Reticle/Label");
 		
-		GetNode<SignalBus>("/root/SignalBus").OnShowInteract += OnShowInteract;
-		GetNode<SignalBus>("/root/SignalBus").OnHideInteract += OnHideInteract;
+		this.GetSignalBus().OnShowInteract += OnShowInteract;
+		this.GetSignalBus().OnHideInteract += OnHideInteract;
 	}
 
 	private void OnHideInteract()
