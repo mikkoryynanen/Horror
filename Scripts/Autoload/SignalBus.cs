@@ -14,4 +14,9 @@ public partial class SignalBus : Node
     
     [Signal]
     public delegate void OnChangeTimescaleEventHandler(float newTimescale);
+    
+    [Signal]
+    public delegate void OnStartDialogEventHandler(string act, string title, bool isFullscreenDialog);
+    [Signal]
+    public delegate void OnEndDialogEventHandler();
 }

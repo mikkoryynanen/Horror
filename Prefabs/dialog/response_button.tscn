@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dumm1orrqei6j"]
+
+[ext_resource type="FontFile" uid="uid://dpwx6d1fq6h2c" path="res://fonts/dogicapixel.otf" id="1_ldqkk"]
+
+[node name="response_button" type="Button"]
+theme_override_fonts/font = ExtResource("1_ldqkk")
+theme_override_font_sizes/font_size = 24
+text = "Response"

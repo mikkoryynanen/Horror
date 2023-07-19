@@ -17,6 +17,11 @@ config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 [autoload]
 
 SignalBus="*res://Scripts/Autoload/SignalBus.cs"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+
+[dialogue_manager]
+
+general/wrap_lines=true
 
 [display]
 
@@ -30,6 +35,10 @@ window/stretch/mode="viewport"
 [dotnet]
 
 project/assembly_name="Horror"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 
@@ -68,6 +77,11 @@ shoot={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://dialogue/act_0_0/act_0_0.en.translation")
+locale/translations_pot_files=PackedStringArray("res://dialogue/act_0_0/act_0_0.dialogue", "res://dialogue/act_0_1/act_0_1.dialogue")
 
 [rendering]
 

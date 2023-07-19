@@ -1,0 +1,95 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5ae3eq5eqbjf"]
+
+[ext_resource type="Script" path="res://Scripts/Dialog/DialogMenu.cs" id="1_3sh5e"]
+[ext_resource type="FontFile" uid="uid://buqd2qw57jtwj" path="res://fonts/LCDBlock.ttf" id="1_ud8x5"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_label.gd" id="2_54g0m"]
+[ext_resource type="Texture2D" uid="uid://d3lr2uas6ax8v" path="res://addons/dialogue_manager/assets/icon.svg" id="2_vo03d"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p5x53"]
+font = ExtResource("1_ud8x5")
+font_size = 24
+
+[node name="DialogBalloon" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_3sh5e")
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="Balloon" type="ColorRect" parent="Margin"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CharacterLabel" type="Label" parent="Margin/Balloon"]
+modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 1
+offset_top = -26.0
+offset_right = 220.0
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+text = "Character"
+label_settings = SubResource("LabelSettings_p5x53")
+
+[node name="ContinueIndicator" type="TextureRect" parent="Margin/Balloon"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -24.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_vo03d")
+stretch_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Balloon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_edit_layout_mode = 1
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Balloon/Margin"]
+layout_mode = 2
+
+[node name="DialogueLabel" type="RichTextLabel" parent="Margin/Balloon/Margin/VBox"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("1_ud8x5")
+bbcode_enabled = true
+text = "Dialog"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+meta_underlined = false
+hint_underlined = false
+deselect_on_focus_loss_enabled = false
+visible_characters_behavior = 1
+script = ExtResource("2_54g0m")
+seconds_per_step = 2.08165e-12
+
+[node name="Margin" type="MarginContainer" parent="Margin/Balloon/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+
+[node name="Responses" type="VBoxContainer" parent="Margin/Balloon/Margin/VBox/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 2

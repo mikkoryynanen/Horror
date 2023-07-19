@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b325d6egok50g"
+path="res://.godot/imported/ElevenLabs_2023-07-20T10 16 27.000Z_Jason - BEST range of emotions and tone_iuuYXmZulIonW65Kag8M.mp3-de02ef413afe8164d02d13ae239a47a1.mp3str"
+
+[deps]
+
+source_file="res://Assets/dialog/act_0_0/ElevenLabs_2023-07-20T10 16 27.000Z_Jason - BEST range of emotions and tone_iuuYXmZulIonW65Kag8M.mp3"
+dest_files=["res://.godot/imported/ElevenLabs_2023-07-20T10 16 27.000Z_Jason - BEST range of emotions and tone_iuuYXmZulIonW65Kag8M.mp3-de02ef413afe8164d02d13ae239a47a1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

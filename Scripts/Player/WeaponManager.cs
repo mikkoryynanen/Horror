@@ -1,5 +1,6 @@
 using System.Linq;
 using Godot;
+using Horror.Scripts;
 
 public partial class WeaponManager : Node3D
 {
@@ -16,6 +17,7 @@ public partial class WeaponManager : Node3D
 	private float _pressedDownTimer;
 	private bool _isPressingDown;
 	private int _currentAmmo = 15;
+	private bool _canProcess = true;
 
 
 	public override void _Ready()
@@ -28,10 +30,19 @@ public partial class WeaponManager : Node3D
 		
 		_audioStreamPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		_audioStreamPlayer.Stream = audioStream;
+		
+		this.GetSignalBus().OnStartDialog += (act, title, isFullscren) =>
+		{
+			if(isFullscren)
+				_canProcess = false;
+		};
+		this.GetSignalBus().OnEndDialog += () => _canProcess = true;
 	}
 
 	public override void _Process(double delta)
 	{
+		if (!_canProcess) return;
+		
 		var screenPoint = new Vector2I((int)GetViewport().GetVisibleRect().Size.X / 2, (int)GetViewport().GetVisibleRect().Size.Y / 2);
 		var from = _camera.ProjectRayOrigin(screenPoint);
 		var to = from + _camera.ProjectRayNormal(screenPoint) * 100;
@@ -46,7 +57,6 @@ public partial class WeaponManager : Node3D
 		
 		if (_currentAmmo > 0 && Input.IsActionJustPressed("shoot"))
 		{
-			GD.Print(_currentAmmo);
 			_isPressingDown = true;
 			if (!isAutomatic)
 			{

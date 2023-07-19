@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://mobuolox07pg"
+
+[deps]
+
+files=["res://dialogue/act_0_0/act_0_0.en.translation"]
+
+source_file="res://dialogue/act_0_0/act_0_0.csv"
+dest_files=["res://dialogue/act_0_0/act_0_0.en.translation"]
+
+[params]
+
+compress=true
+delimiter=0

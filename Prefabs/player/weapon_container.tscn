@@ -12,6 +12,7 @@ isAutomatic = true
 fireRate = 0.15
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
 
 [node name="Hitscan" type="RayCast3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, -3.48787e-16, 3.48787e-16, 0, 1, 0, 0, 0)

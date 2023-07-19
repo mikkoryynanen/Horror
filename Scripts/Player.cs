@@ -31,12 +31,11 @@ public partial class Player : CharacterBody3D
 	private float _footstepTimer;
 	[Export()] private float _footstepInterval = 2;
 	private WeaponManager _weaponManager;
+	private bool _canProcess = true;
 
 
 	public override void _Ready()
 	{
-		Input.MouseMode = Input.MouseModeEnum.Captured;
-		
 		_head = GetNode<Node3D>("Head");
 		_camera = GetNode<Camera3D>("Head/Camera3D");
 		_raycast = GetNode<RayCast3D>("Head/Camera3D/Hitscan");
@@ -44,10 +43,19 @@ public partial class Player : CharacterBody3D
 		_weaponManager = GetNode<WeaponManager>("Head/Camera3D/WeaponContainer");
 
 		_originalHeadPosition = _camera.Position;
+		
+		this.GetSignalBus().OnStartDialog += (act, title, isFullscren) =>
+		{
+			if(isFullscren)
+				_canProcess = false;
+		};
+		this.GetSignalBus().OnEndDialog += () => _canProcess = true;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (!_canProcess) return;
+		
 		_accumulativeDelta += (float)delta;
 		_head.RotationDegrees = new Vector3(_lookRotation.X, _head.RotationDegrees.Y, _head.RotationDegrees.Z);
 		this.RotationDegrees = new Vector3(this.RotationDegrees.X, _lookRotation.Y, this.RotationDegrees.Z);
@@ -86,7 +94,7 @@ public partial class Player : CharacterBody3D
 			
 			if (target is IInteractable interactable)
 			{
-				this.EmitSignalBus(nameof(SignalBus.OnShowInteract));
+				this.EmitSignalBus("OnShowInteract");
 				if (Input.IsActionJustPressed("interact"))
 				{
 					interactable.Interact();
@@ -94,7 +102,7 @@ public partial class Player : CharacterBody3D
 			}
 			else
 			{
-				this.EmitSignalBus(nameof(SignalBus.OnHideInteract));
+				this.EmitSignalBus("OnHideInteract");
 			}
 		}
 

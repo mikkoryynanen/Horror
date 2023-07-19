@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://dn22vynxaxbfi"]
+
+[ext_resource type="Script" path="res://Scripts/Dialog/DialogManager.cs" id="1_ldqqq"]
+[ext_resource type="PackedScene" uid="uid://b5ae3eq5eqbjf" path="res://Prefabs/dialog/dialog_balloon.tscn" id="2_gptjj"]
+[ext_resource type="Script" path="res://Scripts/Dialog/DialogMenu.cs" id="3_oayka"]
+[ext_resource type="FontFile" uid="uid://dpwx6d1fq6h2c" path="res://fonts/dogicapixel.otf" id="4_ipli8"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_label.gd" id="6_nqvrh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i05f2"]
+line_spacing = -3.0
+font = ExtResource("4_ipli8")
+font_size = 8
+
+[node name="DialogManager" type="Control" node_paths=PackedStringArray("_dialogBalloon", "_topDialogBalloon")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ldqqq")
+_dialogBalloon = NodePath("DialogBalloon")
+_topDialogBalloon = NodePath("TopBalloon")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="DialogBalloon" parent="." instance=ExtResource("2_gptjj")]
+
+[node name="DialogueLabel" parent="DialogBalloon/Margin/Balloon/Margin/VBox" index="0"]
+seconds_per_step = 0.04
+
+[node name="TopBalloon" type="CanvasLayer" parent="." node_paths=PackedStringArray("characterNameLabel", "dialogLabel")]
+script = ExtResource("3_oayka")
+characterNameLabel = NodePath("ColorRect/SpeakerName")
+dialogLabel = NodePath("ColorRect/DialogueLabel")
+
+[node name="ColorRect" type="ColorRect" parent="TopBalloon"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -135.0
+offset_bottom = 43.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0, 0, 0, 1)
+
+[node name="SpeakerName" type="Label" parent="TopBalloon/ColorRect"]
+modulate = Color(0, 1, 0, 1)
+layout_mode = 2
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 130.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+text = "Character"
+label_settings = SubResource("LabelSettings_i05f2")
+autowrap_mode = 3
+
+[node name="DialogueLabel" type="RichTextLabel" parent="TopBalloon/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("4_ipli8")
+theme_override_font_sizes/normal_font_size = 6
+bbcode_enabled = true
+text = "Dialog"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+meta_underlined = false
+hint_underlined = false
+deselect_on_focus_loss_enabled = false
+visible_characters_behavior = 1
+script = ExtResource("6_nqvrh")
+seconds_per_step = 0.04
+
+[editable path="DialogBalloon"]

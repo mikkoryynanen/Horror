@@ -1,0 +1,9 @@
+~ act_0_0
+
+AI: Hello, I am your personal voice assistant. I am here to guide you through your journey here onboard enterprise. Is there anything i can help you with? [ID:t4a68017859]
+- Who are you? [ID:t2f060f3602]
+	AI: I am the ship's Artificial Intelligence. AI For short [ID:teb9bc632ef]
+	- Ok =>< act_0_0
+- End Conversation [ID:t20f6f2a8b0] => END
+
+=> END
