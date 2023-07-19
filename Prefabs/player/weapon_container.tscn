@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://biany31re28dd"]
+
+[ext_resource type="Script" path="res://Scripts/Player/WeaponManager.cs" id="1_ghlgm"]
+[ext_resource type="PackedScene" uid="uid://h3os1dwv5bv" path="res://Assets/placeholder/pistol1.fbx" id="1_yx0lg"]
+[ext_resource type="AudioStream" uid="uid://cl8ko7vpc1xd3" path="res://Assets/sfx/wpn_fire_mossberg.mp3" id="2_b5hfk"]
+
+[node name="WeaponContainer" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_ghlgm")
+audioStream = ExtResource("2_b5hfk")
+isAutomatic = true
+fireRate = 0.15
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Hitscan" type="RayCast3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, -3.48787e-16, 3.48787e-16, 0, 1, 0, 0, 0)
+target_position = Vector3(2.08165e-12, -50, 2.08165e-12)
+
+[node name="pistol1" parent="." instance=ExtResource("1_yx0lg")]
+transform = Transform3D(-6.55671e-09, 5.2318e-17, 0.15, 5.2318e-17, 0.15, -5.2318e-17, -0.15, 5.2318e-17, -6.55671e-09, 2.08165e-12, -0.05, 2.08165e-12)
+
+[node name="AmmoIndicator" type="Label3D" parent="pistol1"]
+transform = Transform3D(-0.999999, -5.35652e-08, -1.05755e-07, -1.0713e-07, 0.790304, 0.612713, 5.07581e-08, 0.612714, -0.790304, -0.00213947, 1.11282, -0.0612811)
+pixel_size = 0.004
+modulate = Color(0.627451, 0.737255, 0.952941, 1)
+text = "30"
+
+[node name="Muzzle" type="Node3D" parent="pistol1"]
+transform = Transform3D(1, 7.17455e-22, -1.25371e-13, -5.9757e-23, 1, 2.51611e-22, 1.8242e-13, -6.72949e-22, 1, -1.33694e-07, 0.798436, 1.52928)

@@ -30,6 +30,7 @@ public partial class Player : CharacterBody3D
 	private AudioStreamPlayer _footstepsAudio;
 	private float _footstepTimer;
 	[Export()] private float _footstepInterval = 2;
+	private WeaponManager _weaponManager;
 
 
 	public override void _Ready()
@@ -40,6 +41,7 @@ public partial class Player : CharacterBody3D
 		_camera = GetNode<Camera3D>("Head/Camera3D");
 		_raycast = GetNode<RayCast3D>("Head/Camera3D/Hitscan");
 		_footstepsAudio = GetNode<AudioStreamPlayer>("Footstep");
+		_weaponManager = GetNode<WeaponManager>("Head/Camera3D/WeaponContainer");
 
 		_originalHeadPosition = _camera.Position;
 	}
@@ -81,6 +83,7 @@ public partial class Player : CharacterBody3D
 		if (_raycast.IsColliding())
 		{
 			var target = _raycast.GetCollider();
+			
 			if (target is IInteractable interactable)
 			{
 				this.EmitSignalBus(nameof(SignalBus.OnShowInteract));
