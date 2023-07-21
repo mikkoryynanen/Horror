@@ -1,17 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://drxcwmepah76t"]
+[gd_scene load_steps=5 format=3 uid="uid://drxcwmepah76t"]
 
 [ext_resource type="Script" path="res://Scripts/RoomManager.cs" id="1_o2nf0"]
 [ext_resource type="MeshLibrary" uid="uid://usvay6fb7fhk" path="res://Prefabs/walls/tileset.tres" id="3_gqit5"]
+[ext_resource type="PackedScene" uid="uid://i8ysl28g58dl" path="res://Prefabs/TestCube.tscn" id="3_x8l1h"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_llxvc"]
+vertices = PackedVector3Array(-1.125, 0.477585, -6.875, -0.875, 0.477585, -6.125, -0.625, 0.477585, -6.125, -0.625, 0.477585, -9.625, -2.875, 0.477585, -6.125, -2.375, 0.477585, -6.125, -2.125, 0.477585, -6.875, -2.875, 0.477585, -9.625, -2.125, 0.477585, -6.875, -1.125, 0.477585, -6.875, -0.625, 0.477585, -9.625, -2.875, 0.477585, -9.625, -0.625, 0.477585, -6.125, -0.875, 0.477585, -6.125, -1.125, 0.477585, -5.375, -0.625, 0.477585, 1.375, -2.125, 0.477585, -5.375, -2.375, 0.477585, -6.125, -2.875, 0.477585, -6.125, -2.875, 0.477585, 1.375, -2.125, 0.477585, -5.375, -2.875, 0.477585, 1.375, -0.625, 0.477585, 1.375, -1.125, 0.477585, -5.375)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 19), PackedInt32Array(23, 22, 20), PackedInt32Array(20, 22, 21)]
+agent_radius = 0.25
+region_min_size = 0.0
 
 [node name="RoomManager" type="Node3D"]
 script = ExtResource("1_o2nf0")
-_mapSize = Vector2i(2, 2)
 
-[node name="GridMap" type="GridMap" parent="."]
+[node name="NavigationRegion" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_llxvc")
+
+[node name="GridMap" type="GridMap" parent="NavigationRegion"]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 mesh_library = ExtResource("3_gqit5")
 cell_size = Vector3(1, 1, 1)
 cell_center_y = false
 data = {
-"cells": PackedInt32Array(65534, 65525, 1441794, 65534, 1, 1441792, 65534, 65529, 1441794, 65532, 65529, 1048578, 65534, 65531, 1441794, 65534, 65533, 1441794, 65534, 65535, 1441794, 65532, 1, 655360, 65532, 65535, 1048578, 65532, 65533, 1048578, 65532, 65525, 1048578, 65532, 65531, 1048578, 65534, 65527, 1441794, 65532, 65527, 1048578, 65534, 65523, 0, 65532, 65523, 1048576)
+"cells": PackedInt32Array(65534, 65525, 1441794, 65534, 65529, 1441794, 65532, 65529, 1048578, 65534, 65531, 1441794, 65534, 65533, 1441794, 65534, 65535, 1441794, 65532, 1, 655360, 65532, 65535, 1048578, 65532, 65533, 1048578, 65532, 65525, 1048578, 65532, 65531, 1048578, 65534, 65527, 1441794, 65532, 65527, 1048578, 65534, 65523, 0, 65532, 65523, 1048576, 65534, 1, 1441792)
 }
+
+[node name="TestCube" parent="NavigationRegion/GridMap" instance=ExtResource("3_x8l1h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11559, 0.13678, -8.13438)

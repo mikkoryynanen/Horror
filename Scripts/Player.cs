@@ -2,8 +2,9 @@ using Godot;
 using System;
 using Horror.Scripts;
 using Horror.Scripts.Autoload;
+using Horror.Scripts.Damage;
 
-public partial class Player : CharacterBody3D
+public partial class Player : CharacterBody3D, IDamageable
 {
 	[Export()] private float _sensitivity = 0.2f;
 	
@@ -26,12 +27,15 @@ public partial class Player : CharacterBody3D
 	private float _accumulativeDelta;
 	private Camera3D _camera;
 
-	// Footsteps
 	private AudioStreamPlayer _footstepsAudio;
+	private WeaponManager _weaponManager;
+	private AnimationPlayer _meleeWeaponAnimationPlayer;
+	
 	private float _footstepTimer;
 	[Export()] private float _footstepInterval = 2;
-	private WeaponManager _weaponManager;
 	private bool _canProcess = true;
+	private Area3D _meleeWeaponHitbox;
+	private int _health = 100;
 
 
 	public override void _Ready()
@@ -41,6 +45,10 @@ public partial class Player : CharacterBody3D
 		_raycast = GetNode<RayCast3D>("Head/Camera3D/Hitscan");
 		_footstepsAudio = GetNode<AudioStreamPlayer>("Footstep");
 		_weaponManager = GetNode<WeaponManager>("Head/Camera3D/WeaponContainer");
+		
+		// TODO Move
+		_meleeWeaponAnimationPlayer = GetNode<AnimationPlayer>("Head/Camera3D/WeaponPivot/AnimationPlayer");
+		_meleeWeaponHitbox = GetNode<Area3D>("Head/Camera3D/WeaponPivot/WeaponMesh/Hitbox");
 
 		_originalHeadPosition = _camera.Position;
 		
@@ -105,6 +113,14 @@ public partial class Player : CharacterBody3D
 				this.EmitSignalBus("OnHideInteract");
 			}
 		}
+		
+		// TODO Move this to common weapon manager script
+		// Melee weapon
+		if (Input.IsActionJustPressed("shoot"))
+		{
+			_meleeWeaponAnimationPlayer.Play("attack");
+			_meleeWeaponHitbox.Monitoring = true;
+		}
 
 		var inputValue = Mathf.Floor(Mathf.Abs(inputDir.X) + Mathf.Abs(inputDir.Y));
 		// Weapon Sway
@@ -137,5 +153,32 @@ public partial class Player : CharacterBody3D
 			lookVector.X = Mathf.Clamp(lookVector.X, _minAngle, _maxAngle);
 			_lookRotation = lookVector;
 		}
+	}
+
+	public void OnMeleeWeaponAnimationFinished(string anim_name)
+	{
+		if (anim_name == "attack")
+		{
+			_meleeWeaponAnimationPlayer.Play("idle");
+			_meleeWeaponHitbox.Monitoring = false;
+		}
+	}
+
+	public void OnMeleeWeaponHitboxEntered(Node node)
+	{
+		if (node.IsInGroup("enemy"))
+		{
+			if (node is IDamageable damageable)
+			{
+				damageable.TakeDamage(10);
+			}
+		}
+	}
+
+	public void TakeDamage(int amount)
+	{
+		_health -= amount;
+		if(_health <= 0)
+			GD.Print("GAme over!!!");
 	}
 }

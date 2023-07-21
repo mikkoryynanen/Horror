@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://drxcwmepah76t" path="res://Prefabs/room_manager.tscn" id="1_i3jld"]
 [ext_resource type="PackedScene" uid="uid://cabh24mlvxkp2" path="res://Scenes/gui.tscn" id="2_u7hmi"]
 [ext_resource type="AudioStream" uid="uid://d17rlwtfqfw3a" path="res://Assets/music/last_breath.wav" id="5_55gdp"]
-[ext_resource type="PackedScene" uid="uid://i8ysl28g58dl" path="res://Prefabs/TestCube.tscn" id="5_inn88"]
+[ext_resource type="PackedScene" uid="uid://d242m7dmbbcfl" path="res://Prefabs/characters/crewman.tscn" id="7_ydiok"]
 
 [sub_resource type="Environment" id="Environment_pmfeb"]
 ambient_light_color = Color(1, 1, 0.756863, 1)
@@ -27,7 +27,7 @@ environment = SubResource("Environment_pmfeb")
 [node name="RoomManager" parent="." instance=ExtResource("1_i3jld")]
 
 [node name="Player" parent="." instance=ExtResource("1_440sk")]
-transform = Transform3D(0.907975, 0, 0.419024, 0, 1, 0, -0.419024, 0, 0.907975, -1.93407, 0.469437, -5.43074)
+transform = Transform3D(0.907975, 0, 0.419024, 0, 1, 0, -0.419024, 0, 0.907975, -1.93407, 0.469437, -4.11975)
 
 [node name="GUI" parent="." instance=ExtResource("2_u7hmi")]
 
@@ -35,5 +35,5 @@ transform = Transform3D(0.907975, 0, 0.419024, 0, 1, 0, -0.419024, 0, 0.907975, 
 stream = ExtResource("5_55gdp")
 autoplay = true
 
-[node name="TestCube" parent="." instance=ExtResource("5_inn88")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.51797, 0.13678, -8.13438)
+[node name="ordinaryMan" parent="." instance=ExtResource("7_ydiok")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92923, 0, -6.7414)
