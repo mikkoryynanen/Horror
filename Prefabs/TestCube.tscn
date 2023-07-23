@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Objects/TestObject.cs" id="1_nqrvb"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_0sghj"]
+size = Vector3(1.5, 1.5, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3exrj"]
 size = Vector3(1, 2, 1)
@@ -15,7 +16,7 @@ mesh = SubResource("BoxMesh_0sghj")
 skeleton = NodePath("../..")
 
 [node name="Monitor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.173305, 0, -0.707107, 0.173305, 0, 0.994546, 0)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.173305, 0, -0.707107, 0.173305, 0, 1.18521, 0)
 mesh = SubResource("BoxMesh_0sghj")
 skeleton = NodePath("../..")
 

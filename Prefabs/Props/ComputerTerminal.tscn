@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhtydadveg0pw"]
+
+[ext_resource type="PackedScene" uid="uid://c42trkjxy6qts" path="res://Assets/models/ComputerTerminal.glb" id="1_dwifb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qwdpw"]
+size = Vector3(2.03558, 2.96553, 2.1667)
+
+[node name="ComputerTerminal" instance=ExtResource("1_dwifb")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ComputerTerminal2" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ComputerTerminal2/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50468, 0.08497)
+shape = SubResource("BoxShape3D_qwdpw")
