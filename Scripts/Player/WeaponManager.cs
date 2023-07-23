@@ -31,9 +31,9 @@ public partial class WeaponManager : Node3D
 		_audioStreamPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		_audioStreamPlayer.Stream = audioStream;
 		
-		this.GetSignalBus().OnStartDialog += (act, title, isFullscren) =>
+		this.GetSignalBus().OnStartDialog += (act, title, isFullscreen) =>
 		{
-			if(isFullscren)
+			if(isFullscreen)
 				_canProcess = false;
 		};
 		this.GetSignalBus().OnEndDialog += () => _canProcess = true;

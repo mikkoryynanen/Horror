@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d242m7dmbbcfl"]
+[gd_scene load_steps=6 format=3 uid="uid://d242m7dmbbcfl"]
 
 [ext_resource type="PackedScene" uid="uid://b2e8miqub16yf" path="res://Assets/characters/ordinaryMan/animations/idle.glb" id="2_enyfg"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Enemy.cs" id="2_g2bs1"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/StateMachine.cs" id="3_6a2ns"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a8vou"]
 animation = &"Idle"
@@ -14,33 +15,34 @@ graph_offset = Vector2(-110, -50)
 [node name="crewman" instance=ExtResource("2_enyfg")]
 script = ExtResource("2_g2bs1")
 
-[node name="Armature" parent="." index="0"]
-transform = Transform3D(0.998289, 0.0261027, -0.0523152, -0.0280715, 0.998911, -0.0372582, 0.0512857, 0.038663, 0.997935, -0.0245021, -0.0280084, -0.054963)
+[node name="StateMachine" type="Node" parent="." index="0"]
+script = ExtResource("3_6a2ns")
+
+[node name="Armature" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/2/rotation = Quaternion(0.0314766, -0.00581, 0.00607283, 0.999469)
-bones/3/rotation = Quaternion(0.0629077, -0.0118605, 0.0102169, 0.997897)
-bones/4/rotation = Quaternion(0.151382, 0.0309267, -0.0698, 0.985523)
-bones/5/rotation = Quaternion(0.0936507, 0.0311842, -0.069685, 0.992674)
-bones/7/rotation = Quaternion(0.449983, -0.000342841, -0.856796, 0.251827)
-bones/8/rotation = Quaternion(0.399189, -0.00267019, -0.000892314, 0.916865)
-bones/9/rotation = Quaternion(-0.101152, -0.0793279, -0.0777439, 0.988651)
-bones/11/rotation = Quaternion(0.505864, 0.0346196, 0.832301, 0.224004)
-bones/12/rotation = Quaternion(0.307247, 0.00277146, 0.000686679, 0.951625)
-bones/13/rotation = Quaternion(0.0379271, 0.364741, -0.119776, 0.922594)
-bones/15/rotation = Quaternion(0.148687, 0.188182, 0.967282, -0.0827378)
-bones/16/rotation = Quaternion(-0.24479, -0.00253949, 0.0294794, 0.969125)
-bones/17/rotation = Quaternion(0.669627, -0.0673139, -0.0543555, 0.737641)
-bones/19/rotation = Quaternion(-0.133672, 0.169771, 0.975954, 0.0287068)
-bones/20/rotation = Quaternion(-0.240315, 0.0720524, -0.0498136, 0.966735)
-bones/21/rotation = Quaternion(0.675491, 0.0807125, 0.0308591, 0.732287)
+bones/4/rotation = Quaternion(0.0273255, -5.82294e-10, -4.07606e-10, 0.999627)
+bones/5/rotation = Quaternion(-0.0310187, 7.71623e-10, -7.86182e-10, 0.999519)
+bones/7/rotation = Quaternion(-0.00969909, 0.0109172, -0.758666, 0.651316)
+bones/8/rotation = Quaternion(-0.0242446, -0.00290351, 0.0745435, 0.996919)
+bones/9/rotation = Quaternion(-0.0225243, 0.00523689, -0.0693135, 0.997327)
+bones/11/rotation = Quaternion(-0.00969909, -0.0109172, 0.758666, 0.651316)
+bones/12/rotation = Quaternion(-0.0242446, 0.00290351, -0.0745434, 0.996919)
+bones/13/rotation = Quaternion(-0.0225243, -0.00523688, 0.0693135, 0.997327)
+bones/15/rotation = Quaternion(8.13801e-05, -0.00121629, 0.999816, -0.0191408)
+bones/16/rotation = Quaternion(-0.055613, 0.00643172, -0.0161462, 0.998301)
+bones/17/rotation = Quaternion(0.664961, -0.00824848, -0.00107953, 0.746832)
+bones/19/rotation = Quaternion(-8.13825e-05, -0.00121629, 0.999816, 0.0191408)
+bones/20/rotation = Quaternion(-0.055613, -0.00643172, 0.0161462, 0.998301)
+bones/21/rotation = Quaternion(0.664961, 0.00824848, 0.00107953, 0.746832)
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
 tree_root = SubResource("AnimationNodeStateMachine_cifjc")
 anim_player = NodePath("../AnimationPlayer")
 active = true
 
-[node name="NavigationAgent" type="NavigationAgent3D" parent="." index="5"]
+[node name="NavigationAgent" type="NavigationAgent3D" parent="." index="6"]
 avoidance_enabled = true
 max_speed = 15.0
 debug_enabled = true

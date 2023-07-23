@@ -24,23 +24,20 @@ public partial class Enemy : Node3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (Engine.GetProcessFrames() % 2 == 0)
-		{
-			_navAgent.TargetPosition = _target.GlobalPosition;
+		_navAgent.TargetPosition = _target.GlobalPosition;
 			
-			if (_navAgent.IsTargetReachable() && !_navAgent.IsTargetReached())
-			{
-				var nextLocation = _navAgent.GetNextPathPosition();
-				var direction = GlobalPosition.DirectionTo(nextLocation);
-				GlobalPosition += direction * (float)delta;
-			}
+		if (_navAgent.IsTargetReachable() && !_navAgent.IsTargetReached())
+		{
+			var nextLocation = _navAgent.GetNextPathPosition();
+			var direction = GlobalPosition.DirectionTo(nextLocation);
+			GlobalPosition += direction * (float)delta;
+		}
 
-			if (_currentState == State.Attack)
+		if (_currentState == State.Attack)
+		{
+			if (_target is IDamageable damageable)
 			{
-				if (_target is IDamageable damageable)
-				{
-					damageable.TakeDamage(10);
-				}
+				damageable.TakeDamage(10);
 			}
 		}
 	}

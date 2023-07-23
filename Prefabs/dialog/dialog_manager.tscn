@@ -31,46 +31,51 @@ seconds_per_step = 0.04
 
 [node name="TopBalloon" type="CanvasLayer" parent="." node_paths=PackedStringArray("characterNameLabel", "dialogLabel")]
 script = ExtResource("3_oayka")
-characterNameLabel = NodePath("ColorRect/SpeakerName")
-dialogLabel = NodePath("ColorRect/DialogueLabel")
+characterNameLabel = NodePath("ColorRect/Margin/BoxContainer/SpeakerName")
+dialogLabel = NodePath("ColorRect/Margin/BoxContainer/DialogueLabel")
 
-[node name="ColorRect" type="ColorRect" parent="TopBalloon"]
-anchors_preset = 1
-anchor_left = 1.0
+[node name="ColorRect" type="Control" parent="TopBalloon"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
-offset_left = -135.0
-offset_bottom = 43.0
-grow_horizontal = 0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-color = Color(0, 0, 0, 1)
-
-[node name="SpeakerName" type="Label" parent="TopBalloon/ColorRect"]
-modulate = Color(0, 1, 0, 1)
-layout_mode = 2
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 130.0
-offset_bottom = 70.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 1
-text = "Character"
-label_settings = SubResource("LabelSettings_i05f2")
-autowrap_mode = 3
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="DialogueLabel" type="RichTextLabel" parent="TopBalloon/ColorRect"]
+[node name="Margin" type="MarginContainer" parent="TopBalloon/ColorRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 5.0
-offset_top = 15.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 150
+
+[node name="BoxContainer" type="BoxContainer" parent="TopBalloon/ColorRect/Margin"]
+layout_mode = 2
+vertical = true
+
+[node name="SpeakerName" type="Label" parent="TopBalloon/ColorRect/Margin/BoxContainer"]
+modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(2.08165e-12, 12)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Character"
+label_settings = SubResource("LabelSettings_i05f2")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DialogueLabel" type="RichTextLabel" parent="TopBalloon/ColorRect/Margin/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 1
 theme_override_fonts/normal_font = ExtResource("4_ipli8")
-theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "Dialog"
 fit_content = true

@@ -37,3 +37,4 @@ autoplay = true
 
 [node name="ordinaryMan" parent="." instance=ExtResource("7_ydiok")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92923, 0, -6.7414)
+visible = false
