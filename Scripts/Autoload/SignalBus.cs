@@ -19,4 +19,9 @@ public partial class SignalBus : Node
     public delegate void OnStartDialogEventHandler(string act, string title, bool isFullscreenDialog);
     [Signal]
     public delegate void OnEndDialogEventHandler();
+
+    [Signal]
+    public delegate void OnActivatePlayerCameraEventHandler();
+    [Signal]
+    public delegate void OnDeactivatePlayerCameraEventHandler();
 }

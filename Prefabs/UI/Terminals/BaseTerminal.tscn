@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctlr853ha5nox"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Terminal.cs" id="1_tfxes"]
+[ext_resource type="Shader" path="res://shaders/CRT.gdshader" id="2_v3dhi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k8ib6"]
+shader = ExtResource("2_v3dhi")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.074
+shader_parameter/scanlines_width = 0.015
+shader_parameter/grille_opacity = 0.08
+shader_parameter/resolution = Vector2(1280, 640)
+shader_parameter/pixelate = true
+shader_parameter/roll = false
+shader_parameter/roll_speed = 2.08165e-12
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 2.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.015
+shader_parameter/brightness = 1.205
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.65
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[node name="Terminal" type="Control"]
+editor_description = "This is the base implementation for computer terminals. Should not be usd as is. Only use it as base scene."
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tfxes")
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.513726, 0, 1)
+
+[node name="Margin" type="MarginContainer" parent="BackgroundColor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="Overlay" type="ColorRect" parent="BackgroundColor"]
+material = SubResource("ShaderMaterial_k8ib6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

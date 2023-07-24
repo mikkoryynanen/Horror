@@ -58,6 +58,16 @@ public partial class Player : CharacterBody3D, IDamageable
 				_canProcess = false;
 		};
 		this.GetSignalBus().OnEndDialog += () => _canProcess = true;
+		this.GetSignalBus().OnActivatePlayerCamera += () =>
+		{
+			_canProcess = true;
+			_camera.MakeCurrent();
+		};
+		this.GetSignalBus().OnDeactivatePlayerCamera += () =>
+		{
+			_canProcess = false;
+			_camera.ClearCurrent();
+		};
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -96,6 +106,7 @@ public partial class Player : CharacterBody3D, IDamageable
 		Velocity = velocity;
 		MoveAndSlide();
 
+		// Interact
 		if (_raycast.IsColliding())
 		{
 			var target = _raycast.GetCollider();
@@ -110,7 +121,10 @@ public partial class Player : CharacterBody3D, IDamageable
 			}
 			else
 			{
-				this.EmitSignalBus("OnHideInteract");
+				if (Engine.GetPhysicsFrames() % 2 == 0)
+				{
+					// this.EmitSignalBus("OnHideInteract");
+				}
 			}
 		}
 		

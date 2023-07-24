@@ -141,7 +141,7 @@ _data = {
 "idle": SubResource("Animation_v7h81")
 }
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_iv2h2")
 _sensitivity = 0.1
 Speed = 2.5
@@ -163,7 +163,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.5, 2.08165e-12
 current = true
 
 [node name="Hitscan" type="RayCast3D" parent="Head/Camera3D"]
-target_position = Vector3(2.08165e-12, 2.08165e-12, -1.5)
+target_position = Vector3(2.08165e-12, 2.08165e-12, -20)
+collide_with_areas = true
 
 [node name="WeaponContainer" parent="Head/Camera3D" instance=ExtResource("3_03ttg")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.121, -0.228, -0.304)

@@ -6,7 +6,7 @@
 size = Vector3(1.5, 1.5, 1.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3exrj"]
-size = Vector3(1, 2, 1)
+size = Vector3(1.84069, 4.38079, 1.54359)
 
 [node name="TestCube" type="StaticBody3D" groups=["enemy"]]
 script = ExtResource("1_nqrvb")

@@ -14,7 +14,7 @@ public class IdleState : State
 
     public override void Update(double delta)
     {
-        GD.Print("Idle update");
+        // GD.Print("Idle update");
     }
 
     public override void PhysicsUpdate(double delta)

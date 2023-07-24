@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://b51dk24klehrg"]
+
+[ext_resource type="PackedScene" uid="uid://ctlr853ha5nox" path="res://Prefabs/UI/Terminals/BaseTerminal.tscn" id="1_wui5p"]
+[ext_resource type="FontFile" uid="uid://fxgswysibsmu" path="res://fonts/monogram.ttf" id="2_x8f2r"]
+[ext_resource type="Texture2D" uid="uid://buwt370cbuqiy" path="res://Assets/placeholder/UI/Terminal/panels/panel-header-1.png" id="4_6wxn0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rbytw"]
+font = ExtResource("2_x8f2r")
+font_size = 32
+
+[node name="InfoTerminal" instance=ExtResource("1_wui5p")]
+
+[node name="Panel" type="NinePatchRect" parent="BackgroundColor/Margin" index="0"]
+layout_mode = 2
+texture = ExtResource("4_6wxn0")
+region_rect = Rect2(13, 12, 437, 81)
+
+[node name="Label" type="Label" parent="BackgroundColor/Margin/Panel" index="0"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 36.0
+grow_horizontal = 2
+text = "EMPLOYEES"
+label_settings = SubResource("LabelSettings_rbytw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBox" type="VBoxContainer" parent="BackgroundColor/Margin/Panel" index="1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="BackgroundColor/Margin/Panel/VBox" index="0"]
+layout_mode = 2
+text = "MIKE HUNT"
+
+[node name="Button2" type="Button" parent="BackgroundColor/Margin/Panel/VBox" index="1"]
+layout_mode = 2
+text = "BOB VERGANA"
+
+[node name="Button3" type="Button" parent="BackgroundColor/Margin/Panel/VBox" index="2"]
+layout_mode = 2
+text = "JOHN DOE"
