@@ -3,6 +3,7 @@ using System;
 using Horror.Scripts;
 using Horror.Scripts.Autoload;
 using Horror.Scripts.Damage;
+using Horror.Scripts.Objects;
 
 public partial class Player : CharacterBody3D, IDamageable
 {
@@ -29,13 +30,14 @@ public partial class Player : CharacterBody3D, IDamageable
 
 	private AudioStreamPlayer _footstepsAudio;
 	private WeaponManager _weaponManager;
-	private AnimationPlayer _meleeWeaponAnimationPlayer;
 	
 	private float _footstepTimer;
 	[Export()] private float _footstepInterval = 2;
 	private bool _canProcess = true;
 	private Area3D _meleeWeaponHitbox;
 	private int _health = 100;
+	private Camera3D _gunCamera;
+	private GunCamera _gunCameraController;
 
 
 	public override void _Ready()
@@ -44,11 +46,14 @@ public partial class Player : CharacterBody3D, IDamageable
 		_camera = GetNode<Camera3D>("Head/Camera3D");
 		_raycast = GetNode<RayCast3D>("Head/Camera3D/Hitscan");
 		_footstepsAudio = GetNode<AudioStreamPlayer>("Footstep");
-		_weaponManager = GetNode<WeaponManager>("Head/Camera3D/WeaponContainer");
+		// _weaponManager = GetNode<WeaponManager>("Head/Camera3D/WeaponContainer");
 		
+		//TODO Move
+		_gunCamera = GetNode<Camera3D>("Head/Camera3D/SubViewportContainer/SubViewport/GunCamera");
+		_gunCameraController = GetNode<GunCamera>("Head/Camera3D/SubViewportContainer/SubViewport/GunCamera");
+
 		// TODO Move
-		_meleeWeaponAnimationPlayer = GetNode<AnimationPlayer>("Head/Camera3D/WeaponPivot/AnimationPlayer");
-		_meleeWeaponHitbox = GetNode<Area3D>("Head/Camera3D/WeaponPivot/WeaponMesh/Hitbox");
+		// _meleeWeaponHitbox = GetNode<Area3D>("Head/Camera3D/WeaponPivot/WeaponMesh/Hitbox");
 
 		_originalHeadPosition = _camera.Position;
 		
@@ -68,6 +73,11 @@ public partial class Player : CharacterBody3D, IDamageable
 			_canProcess = false;
 			_camera.ClearCurrent();
 		};
+	}
+
+	public override void _Process(double delta)
+	{
+		_gunCamera.GlobalTransform = _camera.GlobalTransform;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -132,8 +142,13 @@ public partial class Player : CharacterBody3D, IDamageable
 		// Melee weapon
 		if (Input.IsActionJustPressed("shoot"))
 		{
-			_meleeWeaponAnimationPlayer.Play("attack");
-			_meleeWeaponHitbox.Monitoring = true;
+			_gunCameraController.Shoot();
+			// _meleeWeaponHitbox.Monitoring = true;
+			
+			var packed = ResourceLoader.Load<PackedScene>("res://Prefabs/Particles/HitParticle.tscn");
+			var instance = packed.Instantiate() as Node3D;
+			instance.Position = _raycast.GetCollisionPoint();
+			GetNode<Node3D>("/root/Core").AddChild(instance);
 		}
 
 		var inputValue = Mathf.Floor(Mathf.Abs(inputDir.X) + Mathf.Abs(inputDir.Y));
@@ -166,22 +181,36 @@ public partial class Player : CharacterBody3D, IDamageable
 			lookVector.X -= motion.Relative.Y * _sensitivity;
 			lookVector.X = Mathf.Clamp(lookVector.X, _minAngle, _maxAngle);
 			_lookRotation = lookVector;
+			
+			_gunCameraController.Sway(new Vector2(motion.Relative.X, motion.Relative.Y));
 		}
 	}
-
-	public void OnMeleeWeaponAnimationFinished(string anim_name)
+	
+	// Melee
+	public void OnMeleeAnimationStarted(StringName animName)
 	{
-		if (anim_name == "attack")
+		if (animName == "melee")
 		{
-			_meleeWeaponAnimationPlayer.Play("idle");
-			_meleeWeaponHitbox.Monitoring = false;
+			GetNode<Area3D>("Head/Camera3D/MeleeCollisionArea").Monitoring = true;
+		}
+	}
+	
+	public void OnMeleeAnimationEnded(StringName animName)
+	{
+		if (animName == "melee")
+		{
+			GetNode<Area3D>("Head/Camera3D/MeleeCollisionArea").Monitoring = false;
 		}
 	}
 
 	public void OnMeleeWeaponHitboxEntered(Node node)
 	{
+		var contactPoint = (node as Node3D).GlobalPosition;
+		
 		if (node.IsInGroup("enemy"))
 		{
+
+			
 			if (node is IDamageable damageable)
 			{
 				damageable.TakeDamage(10);

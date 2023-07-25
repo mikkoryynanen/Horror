@@ -9,6 +9,8 @@ size = Vector3(1.5, 1.5, 1.5)
 size = Vector3(1.84069, 4.38079, 1.54359)
 
 [node name="TestCube" type="StaticBody3D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_nqrvb")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
@@ -21,5 +23,5 @@ mesh = SubResource("BoxMesh_0sghj")
 skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.5, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 4.85825e-08, 0, 4.85825e-08, 1, 2.08165e-12, 0.5, 7.34655e-09)
 shape = SubResource("BoxShape3D_3exrj")

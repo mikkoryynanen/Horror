@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://uhi8mphr4w63"]
+
+[ext_resource type="Script" path="res://Scripts/Particle.cs" id="1_or864"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ptqj6"]
+shading_mode = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_ojab1"]
+material = SubResource("StandardMaterial3D_ptqj6")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="Gradient" id="Gradient_ftcc3"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[node name="HitParticle" type="CPUParticles3D"]
+emitting = false
+amount = 12
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.5
+fixed_fps = 30
+mesh = SubResource("BoxMesh_ojab1")
+direction = Vector3(2.08165e-12, 1, 2.08165e-12)
+initial_velocity_max = 5.0
+damping_max = 1.0
+scale_amount_min = 0.2
+split_scale = true
+scale_curve_x = null
+scale_curve_y = null
+scale_curve_z = null
+color = Color(1, 0.870588, 0, 1)
+color_ramp = SubResource("Gradient_ftcc3")
+script = ExtResource("1_or864")

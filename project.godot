@@ -28,8 +28,8 @@ general/wrap_lines=true
 window/size/viewport_width=480
 window/size/viewport_height=270
 window/size/resizable=false
-window/size/window_width_override=1920
-window/size/window_height_override=1080
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="viewport"
 
 [dotnet]
@@ -82,6 +82,10 @@ shoot={
 
 locale/translations=PackedStringArray("res://dialogue/act_0_0/act_0_0.en.translation")
 locale/translations_pot_files=PackedStringArray("res://dialogue/act_0_0/act_0_0.dialogue", "res://dialogue/act_0_1/act_0_1.dialogue")
+
+[layer_names]
+
+3d_physics/layer_2="StaticObjects"
 
 [rendering]
 

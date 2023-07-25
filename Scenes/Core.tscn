@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://1wsbq77tr1k5"]
+[gd_scene load_steps=15 format=3 uid="uid://1wsbq77tr1k5"]
 
 [ext_resource type="PackedScene" uid="uid://dn22vynxaxbfi" path="res://Prefabs/dialog/dialog_manager.tscn" id="1_7pf63"]
 [ext_resource type="PackedScene" uid="uid://8eqkq54qfjx4" path="res://Scenes/Player.tscn" id="1_440sk"]
@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://dkiklg2i1hnyp" path="res://Assets/Spacebox.jpg" id="3_8ptnb"]
 [ext_resource type="AudioStream" uid="uid://d17rlwtfqfw3a" path="res://Assets/music/last_breath.wav" id="5_55gdp"]
 [ext_resource type="PackedScene" uid="uid://d242m7dmbbcfl" path="res://Prefabs/characters/crewman.tscn" id="7_ydiok"]
-[ext_resource type="Script" path="res://Scripts/Objects/TestObject.cs" id="10_fqbip"]
 [ext_resource type="PackedScene" uid="uid://byq2pdynansef" path="res://Prefabs/Props/Spaceship.tscn" id="10_paebx"]
 [ext_resource type="PackedScene" uid="uid://chmtfaj8nn5h" path="res://Prefabs/computer_terminal.tscn" id="11_bybcb"]
+[ext_resource type="PackedScene" uid="uid://i8ysl28g58dl" path="res://Prefabs/TestCube.tscn" id="11_ef6ud"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nlcx5"]
 panorama = ExtResource("3_8ptnb")
@@ -30,12 +30,6 @@ fog_density = 0.1
 volumetric_fog_density = 0.1472
 volumetric_fog_albedo = Color(1, 1, 0.756863, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_0sghj"]
-size = Vector3(1.5, 1.5, 1.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_3exrj"]
-size = Vector3(1.84069, 4.38079, 1.54359)
-
 [node name="Core" type="Node3D"]
 script = ExtResource("1_nxs71")
 
@@ -48,6 +42,7 @@ environment = SubResource("Environment_pmfeb")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="RoomManager"]
 transform = Transform3D(1, -6.97574e-16, -1.52459e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 11.0339, 3.76903, 3.8046)
+layers = 3
 light_color = Color(1, 0, 0, 1)
 light_energy = 12.275
 spot_range = 9.9511
@@ -55,6 +50,7 @@ spot_angle = 51.3046
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="RoomManager"]
 transform = Transform3D(1, -6.97574e-16, -1.52459e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 11.0339, 3.76903, 7.8046)
+layers = 3
 light_color = Color(1, 0, 0, 1)
 light_energy = 12.275
 spot_range = 9.9511
@@ -76,25 +72,8 @@ visible = false
 [node name="Spaceship" parent="." instance=ExtResource("10_paebx")]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 38, -2, 86)
 
-[node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(-0.384924, 0, -0.922949, 0, 1, 0, 0.922949, 0, -0.384924, 12.9436, -1.43051e-07, 6.14339)
-script = ExtResource("10_fqbip")
-
-[node name="TestCube" type="StaticBody3D" parent="Node3D" groups=["enemy"]]
-transform = Transform3D(1, 0, 1.72523e-08, 0, 1, 0, -2.41013e-08, 0, 1, 0, 0, 0)
-
-[node name="Mesh" type="MeshInstance3D" parent="Node3D/TestCube"]
-mesh = SubResource("BoxMesh_0sghj")
-skeleton = NodePath("../../..")
-
-[node name="Monitor" type="MeshInstance3D" parent="Node3D/TestCube"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.173305, 0, -0.707107, 0.173305, 0, 1.18521, 0)
-mesh = SubResource("BoxMesh_0sghj")
-skeleton = NodePath("../../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/TestCube"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.5, 2.08165e-12)
-shape = SubResource("BoxShape3D_3exrj")
-
 [node name="ComputerTerminal" parent="." instance=ExtResource("11_bybcb")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.9234, 0, 3.44941)
+
+[node name="TestCube" parent="." instance=ExtResource("11_ef6ud")]
+transform = Transform3D(-0.295191, 0, -0.955438, 0, 1, 0, 0.955438, 0, -0.295191, 12.5251, 0, 6.33582)

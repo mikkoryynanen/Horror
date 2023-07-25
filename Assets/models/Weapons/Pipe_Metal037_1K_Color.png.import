@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxu3bkp5kk0xn"
-path.s3tc="res://.godot/imported/OrdinaryManTexture_256x256.png-80a3b4d3470fd0af96ee41be2495fc8c.s3tc.ctex"
+uid="uid://b4aqc3era38go"
+path.s3tc="res://.godot/imported/Pipe_Metal037_1K_Color.png-13b68224840ca23ce0c8d5995710437f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://Assets/characters/ordinaryMan/texture/OrdinaryManTexture_256x256.png"
-dest_files=["res://.godot/imported/OrdinaryManTexture_256x256.png-80a3b4d3470fd0af96ee41be2495fc8c.s3tc.ctex"]
+source_file="res://Assets/models/Weapons/Pipe_Metal037_1K_Color.png"
+dest_files=["res://.godot/imported/Pipe_Metal037_1K_Color.png-13b68224840ca23ce0c8d5995710437f.s3tc.ctex"]
 
 [params]
 

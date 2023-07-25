@@ -3,7 +3,7 @@ using Horror.Scripts.Damage;
 
 namespace Horror.Scripts.Objects;
 
-public partial class TestObject : Node3D, IInteractable, IDamageable
+public partial class TestObject : StaticBody3D, IInteractable, IDamageable
 {
     private int _health = 20;
 
