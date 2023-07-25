@@ -24,4 +24,9 @@ public partial class SignalBus : Node
     public delegate void OnActivatePlayerCameraEventHandler();
     [Signal]
     public delegate void OnDeactivatePlayerCameraEventHandler();
+    
+    [Signal]
+    public delegate void OnMoodIncreaseEventHandler();
+    [Signal]
+    public delegate void OnMoodDecreaseEventHandler();
 }

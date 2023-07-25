@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://8eqkq54qfjx4" path="res://Scenes/Player.tscn" id="1_440sk"]
 [ext_resource type="PackedScene" uid="uid://drxcwmepah76t" path="res://Prefabs/room_manager.tscn" id="1_i3jld"]
 [ext_resource type="Script" path="res://Scripts/Scenes/Core.cs" id="1_nxs71"]
+[ext_resource type="Script" path="res://Scripts/Audio/MoodManager.cs" id="2_e8c1n"]
 [ext_resource type="PackedScene" uid="uid://cabh24mlvxkp2" path="res://Scenes/gui.tscn" id="2_u7hmi"]
 [ext_resource type="Texture2D" uid="uid://dkiklg2i1hnyp" path="res://Assets/Spacebox.jpg" id="3_8ptnb"]
-[ext_resource type="AudioStream" uid="uid://d17rlwtfqfw3a" path="res://Assets/music/last_breath.wav" id="5_55gdp"]
-[ext_resource type="PackedScene" uid="uid://d242m7dmbbcfl" path="res://Prefabs/characters/crewman.tscn" id="7_ydiok"]
+[ext_resource type="PackedScene" uid="uid://dmv87n8li54ks" path="res://Prefabs/Props/Spotlight.tscn" id="6_pobbc"]
 [ext_resource type="PackedScene" uid="uid://byq2pdynansef" path="res://Prefabs/Props/Spaceship.tscn" id="10_paebx"]
 [ext_resource type="PackedScene" uid="uid://chmtfaj8nn5h" path="res://Prefabs/computer_terminal.tscn" id="11_bybcb"]
 [ext_resource type="PackedScene" uid="uid://i8ysl28g58dl" path="res://Prefabs/TestCube.tscn" id="11_ef6ud"]
@@ -33,6 +33,9 @@ volumetric_fog_albedo = Color(1, 1, 0.756863, 1)
 [node name="Core" type="Node3D"]
 script = ExtResource("1_nxs71")
 
+[node name="MoonManager" type="Node" parent="."]
+script = ExtResource("2_e8c1n")
+
 [node name="DialogManager" parent="." instance=ExtResource("1_7pf63")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -40,34 +43,19 @@ environment = SubResource("Environment_pmfeb")
 
 [node name="RoomManager" parent="." instance=ExtResource("1_i3jld")]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="RoomManager"]
-transform = Transform3D(1, -6.97574e-16, -1.52459e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 11.0339, 3.76903, 3.8046)
-layers = 3
-light_color = Color(1, 0, 0, 1)
-light_energy = 12.275
-spot_range = 9.9511
-spot_angle = 51.3046
+[node name="SpotLight3D" parent="RoomManager" instance=ExtResource("6_pobbc")]
+transform = Transform3D(1, -6.97574e-16, -1.52459e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 11.0339, 2.55751, 7.54167)
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="RoomManager"]
-transform = Transform3D(1, -6.97574e-16, -1.52459e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 11.0339, 3.76903, 7.8046)
-layers = 3
-light_color = Color(1, 0, 0, 1)
-light_energy = 12.275
-spot_range = 9.9511
-spot_angle = 51.3046
+[node name="SpotLight3D2" parent="RoomManager" instance=ExtResource("6_pobbc")]
+transform = Transform3D(1, -6.97574e-16, -1.52459e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 10.6958, 2.55751, 3.62545)
+
+[node name="SpotLight3D3" parent="RoomManager" instance=ExtResource("6_pobbc")]
+transform = Transform3D(1, -6.97574e-16, -1.52459e-23, -1.5246e-23, -4.37114e-08, 1, -6.97574e-16, -1, -4.37114e-08, 6.36487, 2.55751, 3.37038)
 
 [node name="Player" parent="." instance=ExtResource("1_440sk")]
 transform = Transform3D(0.830256, 0, -0.557383, 0, 1, 0, 0.557383, 0, 0.830255, 8.54483, 1.19211e-07, 3.12386)
 
 [node name="GUI" parent="." instance=ExtResource("2_u7hmi")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_55gdp")
-autoplay = true
-
-[node name="ordinaryMan" parent="." instance=ExtResource("7_ydiok")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92923, 0, -6.7414)
-visible = false
 
 [node name="Spaceship" parent="." instance=ExtResource("10_paebx")]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 38, -2, 86)
@@ -77,3 +65,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.923
 
 [node name="TestCube" parent="." instance=ExtResource("11_ef6ud")]
 transform = Transform3D(-0.295191, 0, -0.955438, 0, 1, 0, 0.955438, 0, -0.295191, 12.5251, 0, 6.33582)
+
+[editable path="RoomManager/SpotLight3D"]
+[editable path="RoomManager/SpotLight3D2"]
+[editable path="RoomManager/SpotLight3D3"]

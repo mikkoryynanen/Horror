@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dnmgbgji3m4o3"
+path="res://.godot/imported/01 - fall string (alt).wav-1d081b47558cf1c2a1d263fd29ee05a5.sample"
+
+[deps]
+
+source_file="res://Assets/music/01 - fall string (alt).wav"
+dest_files=["res://.godot/imported/01 - fall string (alt).wav-1d081b47558cf1c2a1d263fd29ee05a5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

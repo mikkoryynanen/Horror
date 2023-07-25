@@ -19,10 +19,12 @@ public partial class TestObject : StaticBody3D, IInteractable, IDamageable
 
     public void TakeDamage(int amount)
     {
+        if (_health <= 0) return;
+        
         GD.Print($"taking {amount} damage");
 
         _health -= amount;
-        if(_health <= 0)
-            QueueFree();
+        // if(_health <= 0)
+        //     QueueFree();
     }
 }

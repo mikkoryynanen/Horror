@@ -18,6 +18,7 @@ config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 
 SignalBus="*res://Scripts/Autoload/SignalBus.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+Audio="*res://Scripts/Autoload/AudioManager.cs"
 
 [dialogue_manager]
 

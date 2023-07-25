@@ -36,8 +36,7 @@ public partial class Player : CharacterBody3D, IDamageable
 	private bool _canProcess = true;
 	private Area3D _meleeWeaponHitbox;
 	private int _health = 100;
-	private Camera3D _gunCamera;
-	private GunCamera _gunCameraController;
+	private Horror.Scripts.Player.ViewObjectManager _viewObjectManager;
 
 
 	public override void _Ready()
@@ -49,8 +48,7 @@ public partial class Player : CharacterBody3D, IDamageable
 		// _weaponManager = GetNode<WeaponManager>("Head/Camera3D/WeaponContainer");
 		
 		//TODO Move
-		_gunCamera = GetNode<Camera3D>("Head/Camera3D/SubViewportContainer/SubViewport/GunCamera");
-		_gunCameraController = GetNode<GunCamera>("Head/Camera3D/SubViewportContainer/SubViewport/GunCamera");
+		_viewObjectManager = GetNode<Horror.Scripts.Player.ViewObjectManager>("Head/Camera3D/ViewObjectCamera");
 
 		// TODO Move
 		// _meleeWeaponHitbox = GetNode<Area3D>("Head/Camera3D/WeaponPivot/WeaponMesh/Hitbox");
@@ -77,7 +75,7 @@ public partial class Player : CharacterBody3D, IDamageable
 
 	public override void _Process(double delta)
 	{
-		_gunCamera.GlobalTransform = _camera.GlobalTransform;
+		_viewObjectManager.UpdateCameraTransform(_camera.GlobalTransform);
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -140,15 +138,30 @@ public partial class Player : CharacterBody3D, IDamageable
 		
 		// TODO Move this to common weapon manager script
 		// Melee weapon
-		if (Input.IsActionJustPressed("shoot"))
+		if (Input.IsActionJustPressed("shoot") && _viewObjectManager.equippedWeapon.CanShoot())
 		{
-			_gunCameraController.Shoot();
-			// _meleeWeaponHitbox.Monitoring = true;
+			var overlappingBodies = GetNode<Area3D>("Head/Camera3D/MeleeCollisionArea").GetOverlappingBodies();
+			var hitDamageable = false;
+			foreach (var body in overlappingBodies)
+			{
+				if (body.IsInGroup("enemy"))
+				{
+					if (body is IDamageable damageable)
+					{
+						damageable.TakeDamage(10);
+						hitDamageable = true;
+						
+						// TODO Enable?
+						// var packed = ResourceLoader.Load<PackedScene>("res://Prefabs/Particles/HitParticle.tscn");
+						// var instance = packed.Instantiate() as Node3D;
+						// instance.Position = _raycast.GetCollisionPoint();
+						// GetNode<Node3D>("/root/Core").AddChild(instance);
+					}
+				}
+			}
 			
-			var packed = ResourceLoader.Load<PackedScene>("res://Prefabs/Particles/HitParticle.tscn");
-			var instance = packed.Instantiate() as Node3D;
-			instance.Position = _raycast.GetCollisionPoint();
-			GetNode<Node3D>("/root/Core").AddChild(instance);
+			_viewObjectManager.Shoot();
+			_viewObjectManager.PlayHitAudio(hitDamageable);
 		}
 
 		var inputValue = Mathf.Floor(Mathf.Abs(inputDir.X) + Mathf.Abs(inputDir.Y));
@@ -182,39 +195,7 @@ public partial class Player : CharacterBody3D, IDamageable
 			lookVector.X = Mathf.Clamp(lookVector.X, _minAngle, _maxAngle);
 			_lookRotation = lookVector;
 			
-			_gunCameraController.Sway(new Vector2(motion.Relative.X, motion.Relative.Y));
-		}
-	}
-	
-	// Melee
-	public void OnMeleeAnimationStarted(StringName animName)
-	{
-		if (animName == "melee")
-		{
-			GetNode<Area3D>("Head/Camera3D/MeleeCollisionArea").Monitoring = true;
-		}
-	}
-	
-	public void OnMeleeAnimationEnded(StringName animName)
-	{
-		if (animName == "melee")
-		{
-			GetNode<Area3D>("Head/Camera3D/MeleeCollisionArea").Monitoring = false;
-		}
-	}
-
-	public void OnMeleeWeaponHitboxEntered(Node node)
-	{
-		var contactPoint = (node as Node3D).GlobalPosition;
-		
-		if (node.IsInGroup("enemy"))
-		{
-
-			
-			if (node is IDamageable damageable)
-			{
-				damageable.TakeDamage(10);
-			}
+			_viewObjectManager.Sway(new Vector2(motion.Relative.X, motion.Relative.Y));
 		}
 	}
 

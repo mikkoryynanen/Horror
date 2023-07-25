@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bpxd3rdf3gmsv"
+path="res://.godot/imported/00 - zombie behind.wav-22f7998825058abd7d08db3404822799.sample"
+
+[deps]
+
+source_file="res://Assets/music/00 - zombie behind.wav"
+dest_files=["res://.godot/imported/00 - zombie behind.wav-22f7998825058abd7d08db3404822799.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
