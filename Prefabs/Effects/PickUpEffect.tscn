@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://bxm83xqnduma5"]
+
+[ext_resource type="Texture2D" uid="uid://ctsaisfrcq2vk" path="res://Textures/Effects/star_01.png" id="1_8in2v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aokj6"]
+transparency = 1
+blend_mode = 1
+no_depth_test = true
+shading_mode = 0
+disable_ambient_light = true
+albedo_texture = ExtResource("1_8in2v")
+texture_filter = 0
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0d2c"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_fkkyf"]
+material = SubResource("StandardMaterial3D_c0d2c")
+
+[sub_resource type="Animation" id="Animation_3mb86"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_w7guy"]
+resource_name = "loop"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, -1.93187),
+"update": 0,
+"values": [Vector3(0.5, 0.5, 0.5), Vector3(2, 2, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5inp"]
+_data = {
+"RESET": SubResource("Animation_3mb86"),
+"loop": SubResource("Animation_w7guy")
+}
+
+[node name="PickUpEffect" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_aokj6")
+mesh = SubResource("QuadMesh_fkkyf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "loop"
+libraries = {
+"": SubResource("AnimationLibrary_l5inp")
+}

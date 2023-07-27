@@ -1,12 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck32hg638vemx"]
+[gd_scene load_steps=3 format=3 uid="uid://ck32hg638vemx"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Torchlight.cs" id="1_ghe8v"]
+[ext_resource type="Texture2D" uid="uid://borf5wc6otopt" path="res://Textures/light_03.png" id="1_mccw8"]
 
 [node name="Torchlight" type="SpotLight3D"]
 light_color = Color(1, 1, 0.756863, 1)
 light_indirect_energy = 0.0
 light_volumetric_fog_energy = 0.0
+light_projector = ExtResource("1_mccw8")
 light_bake_mode = 0
+shadow_enabled = true
 distance_fade_begin = 65.54
-spot_attenuation = 0.435275
+spot_range = 10.0
+spot_attenuation = 0.466517
 script = ExtResource("1_ghe8v")

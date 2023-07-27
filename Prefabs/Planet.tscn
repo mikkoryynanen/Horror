@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://crqucpmlyronr"]
+
+[ext_resource type="Texture2D" uid="uid://cue0w7yr4cto5" path="res://Assets/planets/Grassland_01-512x512.png" id="1_cjnwa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5swy"]
+shading_mode = 0
+albedo_texture = ExtResource("1_cjnwa")
+
+[sub_resource type="SphereMesh" id="SphereMesh_et5tw"]
+material = SubResource("StandardMaterial3D_h5swy")
+radius = 200.0
+height = 400.0
+radial_segments = 8
+rings = 6
+
+[sub_resource type="Animation" id="Animation_bw1qd"]
+resource_name = "rotate"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(3.48787e-16, 6.26573, 3.48787e-16)]
+}
+
+[sub_resource type="Animation" id="Animation_sm3wg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dwx3g"]
+_data = {
+"RESET": SubResource("Animation_sm3wg"),
+"rotate": SubResource("Animation_bw1qd")
+}
+
+[node name="Planet" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_et5tw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "rotate"
+speed_scale = 0.01
+libraries = {
+"": SubResource("AnimationLibrary_dwx3g")
+}

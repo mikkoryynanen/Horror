@@ -1,20 +1,28 @@
-[gd_scene load_steps=69 format=3 uid="uid://kd7skl6mxes2"]
+[gd_scene load_steps=72 format=3 uid="uid://kd7skl6mxes2"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Weapons/Pipe.cs" id="1_2tdvj"]
-[ext_resource type="Texture2D" uid="uid://b4aqc3era38go" path="res://Assets/models/Weapons/Pipe_Metal037_1K_Color.png" id="2_7w1ne"]
 [ext_resource type="AudioStream" uid="uid://ci6yocb8qduoh" path="res://Assets/sfx/weapon/Pipe/SFX_Whoosh_Sword_01.wav" id="2_huckd"]
 [ext_resource type="AudioStream" uid="uid://dgmlh872ouguc" path="res://Assets/sfx/weapon/Pipe/SFX_Whoosh_Sword_02.wav" id="3_21u5o"]
 [ext_resource type="AudioStream" uid="uid://dolj6rxuyhcyc" path="res://Assets/sfx/weapon/Pipe/SFX_Whoosh_Sword_03.wav" id="4_cbdni"]
 [ext_resource type="AudioStream" uid="uid://duw6u157m88o" path="res://Assets/sfx/weapon/Pipe/SFX_Bash_Shield_01.wav" id="5_awjqd"]
 [ext_resource type="AudioStream" uid="uid://b72goau2lemy7" path="res://Assets/sfx/weapon/Pipe/SFX_Bash_Shield_02.wav" id="6_insyq"]
 [ext_resource type="AudioStream" uid="uid://pcujpa52tmbc" path="res://Assets/sfx/weapon/Pipe/SFX_Bash_Shield_03.wav" id="7_r4a5g"]
+[ext_resource type="Texture2D" uid="uid://oxu36gjnixaq" path="res://Textures/Metal_18-128x128.png" id="9_862e7"]
+[ext_resource type="Shader" path="res://shaders/psx_unlit.gdshader" id="9_s4d4o"]
+[ext_resource type="Texture2D" uid="uid://f8w8pk5lplvp" path="res://Textures/Cloth_17-128x128.png" id="10_3megg"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5yc1e"]
-resource_name = "Material"
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_7w1ne")
-roughness = 0.5
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_byggj"]
+render_priority = 0
+shader = ExtResource("9_s4d4o")
+shader_parameter/jitter = 0.025
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(0.403922, 0.403922, 0.403922, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("9_862e7")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jq4wy"]
 _surfaces = [{
@@ -39,7 +47,7 @@ _surfaces = [{
 "index_count": 252,
 "index_data": PackedByteArray(0, 0, 8, 0, 2, 0, 24, 0, 45, 0, 17, 0, 24, 0, 49, 0, 45, 0, 3, 0, 12, 0, 7, 0, 3, 0, 9, 0, 12, 0, 0, 0, 14, 0, 8, 0, 11, 0, 40, 0, 6, 0, 11, 0, 42, 0, 40, 0, 10, 0, 19, 0, 13, 0, 10, 0, 16, 0, 19, 0, 0, 0, 21, 0, 14, 0, 5, 0, 56, 0, 37, 0, 5, 0, 39, 0, 56, 0, 15, 0, 25, 0, 18, 0, 15, 0, 22, 0, 25, 0, 0, 0, 28, 0, 21, 0, 17, 0, 42, 0, 11, 0, 17, 0, 45, 0, 42, 0, 20, 0, 30, 0, 23, 0, 20, 0, 27, 0, 30, 0, 0, 0, 34, 0, 28, 0, 37, 0, 53, 0, 31, 0, 37, 0, 56, 0, 53, 0, 26, 0, 35, 0, 29, 0, 26, 0, 32, 0, 35, 0, 0, 0, 2, 0, 34, 0, 31, 0, 49, 0, 24, 0, 31, 0, 53, 0, 49, 0, 33, 0, 4, 0, 36, 0, 33, 0, 1, 0, 4, 0, 47, 0, 64, 0, 44, 0, 47, 0, 68, 0, 64, 0, 50, 0, 67, 0, 46, 0, 50, 0, 72, 0, 67, 0, 52, 0, 69, 0, 48, 0, 52, 0, 74, 0, 69, 0, 54, 0, 73, 0, 51, 0, 54, 0, 77, 0, 73, 0, 38, 0, 78, 0, 55, 0, 38, 0, 57, 0, 78, 0, 43, 0, 60, 0, 41, 0, 43, 0, 63, 0, 60, 0, 132, 0, 102, 0, 150, 0, 132, 0, 81, 0, 102, 0, 136, 0, 84, 0, 133, 0, 136, 0, 88, 0, 84, 0, 139, 0, 87, 0, 135, 0, 139, 0, 91, 0, 87, 0, 145, 0, 92, 0, 140, 0, 145, 0, 96, 0, 92, 0, 154, 0, 93, 0, 144, 0, 154, 0, 98, 0, 93, 0, 149, 0, 97, 0, 153, 0, 149, 0, 101, 0, 97, 0, 83, 0, 127, 0, 103, 0, 83, 0, 106, 0, 127, 0, 86, 0, 105, 0, 82, 0, 86, 0, 112, 0, 105, 0, 89, 0, 111, 0, 85, 0, 89, 0, 115, 0, 111, 0, 94, 0, 116, 0, 90, 0, 94, 0, 119, 0, 116, 0, 99, 0, 120, 0, 95, 0, 99, 0, 123, 0, 120, 0, 104, 0, 124, 0, 100, 0, 104, 0, 128, 0, 124, 0, 110, 0, 108, 0, 114, 0, 109, 0, 113, 0, 117, 0, 110, 0, 118, 0, 122, 0, 109, 0, 121, 0, 125, 0, 110, 0, 126, 0, 130, 0, 109, 0, 129, 0, 107, 0, 79, 0, 151, 0, 75, 0, 79, 0, 147, 0, 151, 0, 76, 0, 143, 0, 70, 0, 76, 0, 152, 0, 143, 0, 71, 0, 141, 0, 65, 0, 71, 0, 146, 0, 141, 0, 66, 0, 138, 0, 62, 0, 66, 0, 142, 0, 138, 0, 61, 0, 134, 0, 59, 0, 61, 0, 137, 0, 134, 0, 58, 0, 148, 0, 80, 0, 58, 0, 131, 0, 148, 0),
 "lods": [0.0931884, PackedByteArray(3, 0, 12, 0, 7, 0, 3, 0, 155, 0, 12, 0, 155, 0, 156, 0, 12, 0, 155, 0, 25, 0, 156, 0, 155, 0, 22, 0, 25, 0, 2, 0, 21, 0, 8, 0, 2, 0, 34, 0, 21, 0, 20, 0, 29, 0, 23, 0, 20, 0, 157, 0, 29, 0, 157, 0, 35, 0, 29, 0, 157, 0, 4, 0, 35, 0, 157, 0, 1, 0, 4, 0, 158, 0, 161, 0, 43, 0, 43, 0, 161, 0, 41, 0, 158, 0, 168, 0, 161, 0, 161, 0, 168, 0, 134, 0, 50, 0, 168, 0, 158, 0, 50, 0, 162, 0, 168, 0, 159, 0, 69, 0, 48, 0, 159, 0, 73, 0, 69, 0, 54, 0, 73, 0, 159, 0, 38, 0, 73, 0, 54, 0, 38, 0, 160, 0, 73, 0, 160, 0, 166, 0, 73, 0, 132, 0, 164, 0, 163, 0, 163, 0, 164, 0, 93, 0, 163, 0, 93, 0, 70, 0, 164, 0, 165, 0, 93, 0, 93, 0, 165, 0, 120, 0, 164, 0, 106, 0, 165, 0, 167, 0, 82, 0, 133, 0, 167, 0, 105, 0, 82, 0, 167, 0, 115, 0, 105, 0, 94, 0, 115, 0, 167, 0, 94, 0, 119, 0, 115, 0, 71, 0, 94, 0, 167, 0, 107, 0, 117, 0, 121, 0, 107, 0, 121, 0, 125, 0)],
-"material": SubResource("StandardMaterial3D_5yc1e"),
+"material": SubResource("ShaderMaterial_byggj"),
 "name": "Material",
 "primitive": 3,
 "vertex_count": 169,
@@ -47,6 +55,19 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_jq4wy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j24rr"]
+render_priority = 0
+shader = ExtResource("9_s4d4o")
+shader_parameter/jitter = 0.001
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(0.478431, 0.537255, 0.52549, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("10_3megg")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhccv"]
 
@@ -735,102 +756,136 @@ transform = Transform3D(-0.141021, -0.374316, 0.000808839, 0.374317, -0.14102, 0
 [node name="hand2" type="MeshInstance3D" parent="hand"]
 transform = Transform3D(0.999306, 0.0372542, 2.09019e-09, -0.0372541, 0.999306, 1.08704e-08, -1.11388e-09, -5.44107e-09, 1, 0.104241, -0.135438, 0.916718)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_s8jmr")
 skeleton = NodePath("")
 
 [node name="arm_lower" type="MeshInstance3D" parent="hand/hand2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.118854, 0.00119257)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_j88jf")
 skeleton = NodePath("")
 
 [node name="index_0" type="MeshInstance3D" parent="hand/hand2"]
 transform = Transform3D(0.948938, -0.140436, -0.28248, -0.197925, 0.432226, -0.879776, 0.245647, 0.890763, 0.38236, 0.635515, -4.76837e-07, -1.8433)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_s1my4")
 skeleton = NodePath("")
 
 [node name="index_1" type="MeshInstance3D" parent="hand/hand2/index_0"]
 transform = Transform3D(0.896202, -0.27279, -0.349867, -0.27279, 0.283081, -0.919484, 0.349867, 0.919484, 0.179283, 0, 0, -0.520542)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_wr8i1")
 skeleton = NodePath("")
 
 [node name="index_2" type="MeshInstance3D" parent="hand/hand2/index_0/index_1"]
 transform = Transform3D(0.925472, -0.195866, -0.324249, -0.195866, 0.485246, -0.852158, 0.324249, 0.852158, 0.410719, 0, 0, -0.496836)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_dy27t")
 skeleton = NodePath("")
 
 [node name="middle_0" type="MeshInstance3D" parent="hand/hand2"]
 transform = Transform3D(0.927229, -0.147523, -0.344215, -0.270182, 0.372951, -0.887643, 0.259323, 0.916049, 0.305953, 0.219423, 2.38419e-07, -1.96367)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_nns1u")
 skeleton = NodePath("")
 
 [node name="middle_1" type="MeshInstance3D" parent="hand/hand2/middle_0"]
 transform = Transform3D(0.878794, -0.305163, -0.366874, -0.329913, 0.166956, -0.92913, 0.344788, 0.937551, 0.0460427, -4.76837e-07, 2.86102e-06, -0.595449)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_3o713")
 skeleton = NodePath("")
 
 [node name="middle_2" type="MeshInstance3D" parent="hand/hand2/middle_0/middle_1"]
 transform = Transform3D(0.953318, -0.122684, -0.275922, -0.122684, 0.677574, -0.725149, 0.275922, 0.725149, 0.630892, 8.9407e-08, 0, -0.576577)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_lxcrr")
 skeleton = NodePath("")
 
 [node name="pinky_0" type="MeshInstance3D" parent="hand/hand2"]
 transform = Transform3D(0.844877, -0.135974, -0.517392, -0.442926, 0.36457, -0.819089, 0.3, 0.921195, 0.247791, -0.636915, 0, -1.87594)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_u2lbd")
 skeleton = NodePath("")
 
 [node name="pinky_1" type="MeshInstance3D" parent="hand/hand2/pinky_0"]
 transform = Transform3D(0.988862, -0.0292715, -0.145928, -0.0292715, 0.923072, -0.383512, 0.145928, 0.383512, 0.911934, 0, 0, -0.508631)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_5ogbx")
 skeleton = NodePath("")
 
 [node name="pinky_2" type="MeshInstance3D" parent="hand/hand2/pinky_0/pinky_1"]
 transform = Transform3D(0.887245, -0.0297206, -0.460338, -0.440452, 0.242008, -0.864542, 0.1371, 0.969819, 0.20163, -0.00389445, 0.040554, -0.561759)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_robhv")
 skeleton = NodePath("")
 
 [node name="ring_0" type="MeshInstance3D" parent="hand/hand2"]
 transform = Transform3D(0.890678, -0.171205, -0.421168, -0.320564, 0.420408, -0.84882, 0.322385, 0.891037, 0.319566, -0.22161, -2.38419e-07, -1.94957)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_uht76")
 skeleton = NodePath("")
 
 [node name="ring_1" type="MeshInstance3D" parent="hand/hand2/ring_0"]
 transform = Transform3D(0.911329, -0.175007, -0.37263, -0.27143, 0.425116, -0.863483, 0.309526, 0.88806, 0.339919, -4.76837e-07, -9.53674e-07, -0.578411)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_h4jxe")
 skeleton = NodePath("")
 
 [node name="ring_2" type="MeshInstance3D" parent="hand/hand2/ring_0/ring_1"]
 transform = Transform3D(0.950674, -0.131894, -0.280756, -0.129579, 0.653484, -0.745766, 0.281832, 0.74536, 0.60416, -2.38419e-07, 4.76837e-07, -0.55844)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_hxx56")
 skeleton = NodePath("")
 
 [node name="thumb_0" type="MeshInstance3D" parent="hand/hand2"]
 transform = Transform3D(0.93114, -0.750389, -0.0819446, 0.751859, 0.933541, -0.00528265, 0.0671264, -0.0472956, 1.19586, 0.71163, -0.0538704, -0.365427)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_7lc5i")
 skeleton = NodePath("")
 
 [node name="thumb_1" type="MeshInstance3D" parent="hand/hand2/thumb_0"]
 transform = Transform3D(0.867257, -0.487444, 0.101309, 0.488334, 0.872481, 0.0175188, -0.0969297, 0.0342795, 0.994701, 0.418848, 2.38419e-07, -0.541474)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_yre6t")
 skeleton = NodePath("")
 
 [node name="thumb_2" type="MeshInstance3D" parent="hand/hand2/thumb_0/thumb_1"]
 transform = Transform3D(0.804138, -0.392228, 0.446677, 0.429287, 0.902946, 0.0200475, -0.411188, 0.175632, 0.894471, 0.286444, 1.19209e-06, -0.397435)
 layers = 2
+material_override = SubResource("ShaderMaterial_j24rr")
+ignore_occlusion_culling = true
 mesh = SubResource("ArrayMesh_6cgkm")
 skeleton = NodePath("")
 

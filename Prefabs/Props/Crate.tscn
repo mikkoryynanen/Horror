@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://lh3u640c8n83"]
+
+[ext_resource type="Shader" path="res://shaders/psx_lit.gdshader" id="1_sm7ra"]
+[ext_resource type="Texture2D" uid="uid://cfft804dq5dwo" path="res://Textures/Props/Crate.png" id="2_ud728"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oev5d"]
+render_priority = 0
+shader = ExtResource("1_sm7ra")
+shader_parameter/jitter = 0.15
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(0.5, 0.5)
+shader_parameter/albedo = ExtResource("2_ud728")
+
+[sub_resource type="BoxMesh" id="BoxMesh_ry277"]
+material = SubResource("ShaderMaterial_oev5d")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nm4u3"]
+
+[node name="Crate" type="MeshInstance3D"]
+mesh = SubResource("BoxMesh_ry277")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_nm4u3")

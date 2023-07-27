@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
 SignalBus="*res://Scripts/Autoload/SignalBus.cs"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Audio="*res://Scripts/Autoload/AudioManager.cs"
+CyclopsAutoload="*res://addons/cyclops_level_builder/cyclops_global_scene.tscn"
 
 [dialogue_manager]
 
@@ -39,7 +40,7 @@ project/assembly_name="Horror"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/tbloader/plugin.cfg")
 
 [input]
 
@@ -91,3 +92,15 @@ locale/translations_pot_files=PackedStringArray("res://dialogue/act_0_0/act_0_0.
 [rendering]
 
 renderer/rendering_method.mobile="gl_compatibility"
+lights_and_shadows/directional_shadow/size=256
+lights_and_shadows/directional_shadow/size.mobile=256
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
+textures/light_projectors/filter=0
+occlusion_culling/use_occlusion_culling=true
+lights_and_shadows/positional_shadow/atlas_size=256
+lights_and_shadows/positional_shadow/atlas_size.mobile=256
+lights_and_shadows/positional_shadow/atlas_quadrant_0_subdiv=1
+lights_and_shadows/positional_shadow/atlas_quadrant_1_subdiv=0
+lights_and_shadows/positional_shadow/atlas_quadrant_2_subdiv=0
+lights_and_shadows/positional_shadow/atlas_quadrant_3_subdiv=0
