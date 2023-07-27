@@ -7,9 +7,9 @@
 [ext_resource type="AudioStream" uid="uid://duw6u157m88o" path="res://Assets/sfx/weapon/Pipe/SFX_Bash_Shield_01.wav" id="5_awjqd"]
 [ext_resource type="AudioStream" uid="uid://b72goau2lemy7" path="res://Assets/sfx/weapon/Pipe/SFX_Bash_Shield_02.wav" id="6_insyq"]
 [ext_resource type="AudioStream" uid="uid://pcujpa52tmbc" path="res://Assets/sfx/weapon/Pipe/SFX_Bash_Shield_03.wav" id="7_r4a5g"]
-[ext_resource type="Texture2D" uid="uid://oxu36gjnixaq" path="res://Textures/Metal_18-128x128.png" id="9_862e7"]
 [ext_resource type="Shader" path="res://shaders/psx_unlit.gdshader" id="9_s4d4o"]
-[ext_resource type="Texture2D" uid="uid://f8w8pk5lplvp" path="res://Textures/Cloth_17-128x128.png" id="10_3megg"]
+[ext_resource type="Texture2D" uid="uid://b4aqc3era38go" path="res://Assets/models/Weapons/Pipe_Metal037_1K_Color.png" id="9_x5jwi"]
+[ext_resource type="Texture2D" uid="uid://6i65p53hsef7" path="res://Textures/Map/FabricPanel.png" id="10_ro2sm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_byggj"]
 render_priority = 0
@@ -22,7 +22,7 @@ shader_parameter/alpha_scissor = 1.0
 shader_parameter/albedo_color = Color(0.403922, 0.403922, 0.403922, 1)
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
-shader_parameter/albedo = ExtResource("9_862e7")
+shader_parameter/albedo = ExtResource("9_x5jwi")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jq4wy"]
 _surfaces = [{
@@ -67,7 +67,7 @@ shader_parameter/alpha_scissor = 1.0
 shader_parameter/albedo_color = Color(0.478431, 0.537255, 0.52549, 1)
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
-shader_parameter/albedo = ExtResource("10_3megg")
+shader_parameter/albedo = ExtResource("10_ro2sm")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhccv"]
 

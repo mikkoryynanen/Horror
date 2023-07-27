@@ -44,7 +44,6 @@ collide_with_areas = true
 
 [node name="Torchlight" parent="Head/Camera3D" instance=ExtResource("3_u74cv")]
 transform = Transform3D(1, -3.79186e-16, 3.4746e-16, 3.4746e-16, 0.996195, 0.0871557, -3.79186e-16, -0.0871557, 0.996195, 2.08165e-12, 0.245, 2.08165e-12)
-visible = false
 
 [node name="MeleeCollisionArea" type="Area3D" parent="Head/Camera3D"]
 collision_layer = 2

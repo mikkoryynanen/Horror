@@ -27,7 +27,6 @@ ssao_intensity = 16.0
 ssao_power = 0.5
 ssao_horizon = 0.0
 ssao_sharpness = 0.0
-glow_enabled = true
 glow_normalized = true
 glow_intensity = 8.0
 glow_bloom = 0.01
