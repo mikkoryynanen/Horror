@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cfft804dq5dwo"
-path.s3tc="res://.godot/imported/Crate.png-0b02bdc934fdf54f01ab6176fca56cb8.s3tc.ctex"
+path.s3tc="res://.godot/imported/Crate.png-aa36fdb6723efd51b78810d3e3c7a7ed.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/Props/Crate.png"
-dest_files=["res://.godot/imported/Crate.png-0b02bdc934fdf54f01ab6176fca56cb8.s3tc.ctex"]
+source_file="res://Textures/Props/Crate.png"
+dest_files=["res://.godot/imported/Crate.png-aa36fdb6723efd51b78810d3e3c7a7ed.s3tc.ctex"]
 
 [params]
 

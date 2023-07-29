@@ -1,0 +1,15 @@
+newmtl Map/Grid
+map_Kd textures/Map/Grid.png
+
+newmtl Map/PaintedWall
+map_Kd textures/Map/PaintedWall.png
+
+newmtl Map/Tile_11-128x128
+map_Kd textures/Map/Tile_11-128x128.png
+
+newmtl Map/Tile_12-128x128
+map_Kd textures/Map/Tile_12-128x128.png
+
+newmtl __TB_empty
+map_Kd textures/__TB_empty.png
+

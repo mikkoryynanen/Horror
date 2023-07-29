@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://6i65p53hsef7"
-path.s3tc="res://.godot/imported/FabricPanel.png-48b49292fbf46156b3b688b5c658e867.s3tc.ctex"
+path.s3tc="res://.godot/imported/FabricPanel.png-4cf556f00557a362d257eb8cc23b561d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/Map/FabricPanel.png"
-dest_files=["res://.godot/imported/FabricPanel.png-48b49292fbf46156b3b688b5c658e867.s3tc.ctex"]
+source_file="res://Textures/Map/FabricPanel.png"
+dest_files=["res://.godot/imported/FabricPanel.png-4cf556f00557a362d257eb8cc23b561d.s3tc.ctex"]
 
 [params]
 

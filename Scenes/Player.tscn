@@ -11,9 +11,10 @@ height = 1.75
 [sub_resource type="BoxShape3D" id="BoxShape3D_gppyl"]
 size = Vector3(0.356575, 1.97981, 0.50581)
 
-[node name="Player" type="CharacterBody3D" groups=["Player"]]
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 4
 input_ray_pickable = false
+floor_max_angle = 0.959931
 script = ExtResource("1_iv2h2")
 _sensitivity = 0.1
 Speed = 2.5

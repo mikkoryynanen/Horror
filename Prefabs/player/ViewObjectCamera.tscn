@@ -26,4 +26,3 @@ fov = 40.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.114882, 0)
 
 [node name="Pipe" parent="SubViewport/ObjectCamera/Rig" instance=ExtResource("2_jn75h")]
-transform = Transform3D(0.972413, 0.17162, -0.157985, -0.173803, 0.98478, -4.80262e-09, 0.155581, 0.0274583, 0.987441, 0, 0, 0)

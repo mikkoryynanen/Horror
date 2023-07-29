@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Steps_tiles-001.ogg-7be1e10cf25d3bf43fc33b854
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

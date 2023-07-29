@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwkw4mg6n4kg6"
-path.s3tc="res://.godot/imported/WhiteGround.png-a6c2edf12704c3e5e5c304e1f924f348.s3tc.ctex"
+path.s3tc="res://.godot/imported/WhiteGround.png-88427a7feffc34d8baa73f7d445d4fec.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/Map/WhiteGround.png"
-dest_files=["res://.godot/imported/WhiteGround.png-a6c2edf12704c3e5e5c304e1f924f348.s3tc.ctex"]
+source_file="res://Textures/Map/WhiteGround.png"
+dest_files=["res://.godot/imported/WhiteGround.png-88427a7feffc34d8baa73f7d445d4fec.s3tc.ctex"]
 
 [params]
 
