@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cabh24mlvxkp2"]
+[gd_scene load_steps=13 format=3 uid="uid://cabh24mlvxkp2"]
 
 [ext_resource type="Script" path="res://Scripts/UI/GUIManager.cs" id="1_s4ul8"]
 [ext_resource type="Texture2D" uid="uid://cntwtaxwtt2hk" path="res://Assets/crosshair007.png" id="1_syclb"]
 [ext_resource type="Shader" path="res://shaders/psx_dither.gdshader" id="1_wbj8i"]
+[ext_resource type="FontFile" uid="uid://fxgswysibsmu" path="res://fonts/monogram.ttf" id="4_1p708"]
+[ext_resource type="PackedScene" uid="uid://ceggctfx4hul1" path="res://Prefabs/UI/Inventory/Inventory.tscn" id="8_av7g3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_41fwl"]
 shader = ExtResource("1_wbj8i")
@@ -11,10 +13,51 @@ shader_parameter/dithering = true
 shader_parameter/resolution_scale = 1
 
 [sub_resource type="SystemFont" id="SystemFont_6wmk4"]
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_w35aa"]
 font = SubResource("SystemFont_6wmk4")
 font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_j7f5t"]
+font = ExtResource("4_1p708")
+
+[sub_resource type="Animation" id="Animation_grdu4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_71ri8"]
+resource_name = "show"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.2, 2),
+"transitions": PackedFloat32Array(1, 4.92458),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rtv0s"]
+_data = {
+"RESET": SubResource("Animation_grdu4"),
+"show": SubResource("Animation_71ri8")
+}
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_s4ul8")
@@ -44,6 +87,7 @@ grow_vertical = 2
 texture = ExtResource("1_syclb")
 expand_mode = 1
 stretch_mode = 4
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="Container/Reticle"]
 visible = false
@@ -54,3 +98,24 @@ offset_right = 139.0
 offset_bottom = 6.0
 text = "E to Interact"
 label_settings = SubResource("LabelSettings_w35aa")
+
+[node name="TextPopup" type="Label" parent="Container"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -84.0
+offset_bottom = 22.9999
+grow_horizontal = 0
+text = "Pipe picked up"
+label_settings = SubResource("LabelSettings_j7f5t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Container/TextPopup"]
+libraries = {
+"": SubResource("AnimationLibrary_rtv0s")
+}
+
+[node name="Inventory" parent="Container" instance=ExtResource("8_av7g3")]
+visible = false
+layout_mode = 1

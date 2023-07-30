@@ -7,7 +7,7 @@ public partial class Core : Node3D
 	public override void _Ready()
 	{
 		AudioManager.Instance.PlayLevelMusic("res://Assets/music/obsidian/22J01_Obsidian005_Ambience_WAV16bit.wav");
-		
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
 	public override void _Process(double delta)

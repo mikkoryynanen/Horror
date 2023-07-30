@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdgo5mhr5p22a"]
+
+[ext_resource type="Texture2D" uid="uid://yuacl2p45hvw" path="res://Assets/UI/Button/ButtonDefault.png" id="1_4p2m2"]
+[ext_resource type="Script" path="res://Scripts/Inventory/InventoryItem.cs" id="2_bsa4o"]
+[ext_resource type="Texture2D" uid="uid://bkd7kc2lotd1d" path="res://Assets/UI/Button/ButtonHover.png" id="3_8hf7w"]
+[ext_resource type="Texture2D" uid="uid://226xhr2elu58" path="res://Assets/UI/Icons/Pipe.png" id="3_jj6so"]
+
+[node name="InventoryItem" type="TextureRect"]
+custom_minimum_size = Vector2(48, 48)
+texture = ExtResource("1_4p2m2")
+expand_mode = 1
+stretch_mode = 4
+script = ExtResource("2_bsa4o")
+
+[node name="HighlightBorder" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.85098, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_8hf7w")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Icon" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_jj6so")
+expand_mode = 1

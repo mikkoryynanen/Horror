@@ -7,13 +7,13 @@ public partial class RoomManager : Node3D
 
 	public override void _Ready()
 	{
-		_gridmap = GetNode<GridMap>("NavigationRegion/GridMap");
+		// _gridmap = GetNode<GridMap>("NavigationRegion/GridMap");
 		
 		AudioManager.Instance.PlayRepeating(GD.Load<AudioStream>("res://Assets/sfx/environment/Sci_Fi_Alarm_Loop_04.wav"));
 	}
 
-	public Rid GetNavigationMap()
-	{
-		return _gridmap.GetNavigationMap();
-	}
+	// public Rid GetNavigationMap()
+	// {
+	// 	return _gridmap.GetNavigationMap();
+	// }
 }

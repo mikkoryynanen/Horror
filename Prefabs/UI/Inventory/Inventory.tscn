@@ -1,0 +1,127 @@
+[gd_scene load_steps=5 format=3 uid="uid://ceggctfx4hul1"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/InventoryUI.cs" id="1_7xy43"]
+[ext_resource type="LabelSettings" uid="uid://c2kvlknc16rwc" path="res://Prefabs/UI/UILabel.tres" id="2_k5mi4"]
+[ext_resource type="PackedScene" uid="uid://cdgo5mhr5p22a" path="res://Prefabs/UI/Inventory/InventoryItem.tscn" id="2_s4k5t"]
+[ext_resource type="Texture2D" uid="uid://bor38rjlu7p6o" path="res://Assets/UI/Arrow.png" id="3_gyl6p"]
+
+[node name="Inventory" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7xy43")
+
+[node name="BG" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(164, 260)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -117.0
+offset_right = 78.0
+offset_bottom = 117.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.415686, 0.690196, 0.980392)
+
+[node name="Margin" type="MarginContainer" parent="BG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Container" type="VBoxContainer" parent="BG/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Weapon" type="VBoxContainer" parent="BG/Margin/Container"]
+layout_mode = 2
+
+[node name="WeaponTitle" type="Label" parent="BG/Margin/Container/Weapon"]
+layout_mode = 2
+text = "Weapon"
+label_settings = ExtResource("2_k5mi4")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="VBox" type="VBoxContainer" parent="BG/Margin/Container/Weapon"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="BG/Margin/Container/Weapon/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="ArrowLeft" type="TextureRect" parent="BG/Margin/Container/Weapon/VBox/HBox"]
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_gyl6p")
+expand_mode = 1
+flip_h = true
+
+[node name="InventoryItem" parent="BG/Margin/Container/Weapon/VBox/HBox" instance=ExtResource("2_s4k5t")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ArrowRight" type="TextureRect" parent="BG/Margin/Container/Weapon/VBox/HBox"]
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_gyl6p")
+expand_mode = 1
+
+[node name="InventoryTitle" type="Label" parent="BG/Margin/Container"]
+layout_mode = 2
+text = "Inventory"
+label_settings = ExtResource("2_k5mi4")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HBox" type="HBoxContainer" parent="BG/Margin/Container"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="BG/Margin/Container/HBox"]
+layout_mode = 2
+
+[node name="Grid" type="GridContainer" parent="BG/Margin/Container/HBox/HBox"]
+layout_mode = 2
+columns = 3
+
+[node name="LootableInfo" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -154.0
+offset_top = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "R to take all
+E to take single"
+label_settings = ExtResource("2_k5mi4")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

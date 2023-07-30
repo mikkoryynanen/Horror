@@ -18,8 +18,8 @@ public partial class Enemy : Node3D
 	
 		_navAgent.PathDesiredDistance = 0.25f;
 
-		_navMap = GetNode<RoomManager>("/root/Core/RoomManager").GetNavigationMap();
-		_navAgent.SetNavigationMap(_navMap);
+		// _navMap = GetNode<RoomManager>("/root/Core/RoomManager").GetNavigationMap();
+		// _navAgent.SetNavigationMap(_navMap);
 	}
 
 	public override void _PhysicsProcess(double delta)

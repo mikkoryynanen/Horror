@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c2kvlknc16rwc"]
+
+[ext_resource type="FontFile" uid="uid://fxgswysibsmu" path="res://fonts/monogram.ttf" id="1_ccabi"]
+
+[resource]
+font = ExtResource("1_ccabi")
+outline_size = 2
+outline_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+shadow_size = 0

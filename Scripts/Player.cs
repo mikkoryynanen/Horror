@@ -3,7 +3,11 @@ using System;
 using Horror.Scripts;
 using Horror.Scripts.Autoload;
 using Horror.Scripts.Damage;
+using Horror.Scripts.Inventory;
+using Horror.Scripts.Inventory.Items;
+using Horror.Scripts.Items;
 using Horror.Scripts.Objects;
+using Horror.Scripts.UI;
 
 public partial class Player : CharacterBody3D, IDamageable
 {
@@ -37,9 +41,16 @@ public partial class Player : CharacterBody3D, IDamageable
 	private int _health = 100;
 	private Horror.Scripts.Player.ViewObjectManager _viewObjectManager;
 
+	public PlayerInventory Inventory { get; private set; }
+
 
 	public override void _Ready()
 	{
+		Inventory = new PlayerInventory(this, GetNode<GUIManager>("/root/Root/GUI").GetInventoryUI());
+		
+		// Inventory.AddItem(new Pipe());
+		// Inventory.AddItem(new QuestItem());
+		
 		_head = GetNode<Node3D>("Head");
 		_camera = GetNode<Camera3D>("Head/Camera3D");
 		_raycast = GetNode<RayCast3D>("Head/Camera3D/Hitscan");
@@ -70,6 +81,8 @@ public partial class Player : CharacterBody3D, IDamageable
 			_canProcess = false;
 			_camera.ClearCurrent();
 		};
+		this.GetSignalBus().OnOpenInventory += () => _canProcess = false;
+		this.GetSignalBus().OnCloseInventory += () => _canProcess = true;
 	}
 
 	public override void _Process(double delta)
@@ -113,7 +126,6 @@ public partial class Player : CharacterBody3D, IDamageable
 		if (_raycast.IsColliding())
 		{
 			var target = _raycast.GetCollider();
-			
 			if (target is IInteractable interactable)
 			{
 				this.EmitSignalBus("OnShowInteract");
@@ -126,9 +138,16 @@ public partial class Player : CharacterBody3D, IDamageable
 			{
 				if (Engine.GetPhysicsFrames() % 2 == 0)
 				{
-					// this.EmitSignalBus("OnHideInteract");
+					this.EmitSignalBus("OnHideInteract");
 				}
 			}
+		}
+		
+		// Inventory
+		if (Input.IsActionJustPressed("inventory_open"))
+		{
+			Inventory.Show();
+			this.EmitSignalBus("OnOpenInventory");
 		}
 		
 		// TODO Move this to common weapon manager script
@@ -181,6 +200,8 @@ public partial class Player : CharacterBody3D, IDamageable
 
 	public override void _Input(InputEvent inputEvent)
 	{
+		if (!_canProcess) return;
+		
 		if (inputEvent is InputEventMouseMotion)
 		{
 			var motion = inputEvent as InputEventMouseMotion;

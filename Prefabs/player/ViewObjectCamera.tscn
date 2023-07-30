@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://4q0u86ud5h40"]
 
 [ext_resource type="Script" path="res://Scripts/Player/ViewObjectManager.cs" id="1_u1iti"]
-[ext_resource type="PackedScene" uid="uid://kd7skl6mxes2" path="res://Prefabs/player/Weapons/Pipe.tscn" id="2_jn75h"]
+[ext_resource type="PackedScene" uid="uid://kd7skl6mxes2" path="res://Prefabs/player/Weapons/PipeWeapon.tscn" id="2_acvnm"]
 
 [node name="ViewObjectCamera" type="SubViewportContainer"]
 anchors_preset = 15
@@ -25,4 +25,7 @@ fov = 40.0
 [node name="Rig" type="Node3D" parent="SubViewport/ObjectCamera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.114882, 0)
 
-[node name="Pipe" parent="SubViewport/ObjectCamera/Rig" instance=ExtResource("2_jn75h")]
+[node name="Pipe" parent="SubViewport/ObjectCamera/Rig" instance=ExtResource("2_acvnm")]
+transform = Transform3D(0.972413, 0.17162, -0.157985, -0.173803, 0.98478, -4.80262e-09, 0.155581, 0.0274583, 0.987441, 0, 0, 0)
+
+[editable path="SubViewport/ObjectCamera/Rig/Pipe"]

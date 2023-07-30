@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace Horror.Scripts.Autoload;
@@ -8,6 +9,9 @@ public partial class SignalBus : Node
     public delegate void OnShowInteractEventHandler();
     [Signal]
     public delegate void OnHideInteractEventHandler();
+    
+    [Signal]
+    public delegate void OnItemPickedUpEventHandler(string itemId);
     
     [Signal]
     public delegate void OnRechargeTorchlightEventHandler(float value);
@@ -29,4 +33,9 @@ public partial class SignalBus : Node
     public delegate void OnMoodIncreaseEventHandler();
     [Signal]
     public delegate void OnMoodDecreaseEventHandler();
+    
+    [Signal]
+    public delegate void OnOpenInventoryEventHandler();
+    [Signal]
+    public delegate void OnCloseInventoryEventHandler();
 }
