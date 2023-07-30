@@ -7,11 +7,11 @@ namespace Horror.Scripts.Inventory;
 
 public class PlayerInventory : Inventory
 {
-    public Item EquippedWeapon { get; private set; }
+    public List<Item> EquippedWeapons { get; private set; } = new();
 
     private IReadOnlyList<Guid> _weaponIds = new[]
     {
-        new Guid("007c369c-3e9a-4391-ba0a-aaad097563b7")
+        new Guid("189eac2e-f918-43fb-a5c4-c9f40202bbed")
     };
 
     public PlayerInventory(Node node, InventoryUI ui) : base(ui)
@@ -23,7 +23,7 @@ public class PlayerInventory : Inventory
             if (!IsWeapon(id))
                 AddItem(item);
             else
-                EquippedWeapon = item;
+                EquippedWeapons.Add(item);
         };
     }
 

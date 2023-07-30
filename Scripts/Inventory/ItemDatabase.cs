@@ -35,6 +35,13 @@ public static class ItemDatabase
     
     public static Item GetItem(string itemName)
     {
+        // Make sure we haven't passed guid as item name
+        if (Guid.TryParse(itemName, out var guid))
+        {
+            GD.PrintErr("Passed Guid as item name to ItemDatabase.GetItem");
+            return null;
+        }
+        
         return Database.Values.First(x => x.Name.ToLower() == itemName.ToLower());
     }
     

@@ -107,6 +107,59 @@ layout_mode = 2
 layout_mode = 2
 columns = 3
 
+[node name="SelectedItemInfo" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -50.0
+offset_right = -32.0
+offset_bottom = 50.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0, 0.415686, 0.690196, 0.980392)
+
+[node name="ItemName" type="Label" parent="SelectedItemInfo"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.0
+offset_top = -9.0
+offset_right = 45.0
+offset_bottom = 10.0
+grow_horizontal = 2
+size_flags_vertical = 1
+text = "	quest item"
+label_settings = ExtResource("2_k5mi4")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 4
+uppercase = true
+
+[node name="ItemTechnicalText" type="Label" parent="SelectedItemInfo"]
+layout_mode = 2
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 95.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 1
+text = "This is the technical text about the item"
+label_settings = ExtResource("2_k5mi4")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+uppercase = true
+
 [node name="LootableInfo" type="Label" parent="."]
 visible = false
 layout_mode = 1

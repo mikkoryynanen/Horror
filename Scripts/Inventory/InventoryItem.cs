@@ -15,7 +15,7 @@ public partial class InventoryItem : TextureRect
 	public void Build(Texture2D icon)
 	{
 		_icon.Texture = icon;
-		_icon.Visible = true;
+		_icon.Visible = icon != null;
 
 		OnDeselect();
 	}

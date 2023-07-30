@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bevxm7oo7hgsa"]
+[gd_scene load_steps=13 format=3 uid="uid://bevxm7oo7hgsa"]
 
 [ext_resource type="PackedScene" uid="uid://cabh24mlvxkp2" path="res://Scenes/gui.tscn" id="1_0urvb"]
 [ext_resource type="Script" path="res://Scripts/Scenes/Core.cs" id="1_dsoh8"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://8eqkq54qfjx4" path="res://Scenes/Player.tscn" id="4_i4lk4"]
 [ext_resource type="PackedScene" uid="uid://b1wi1ijonmb8u" path="res://Prefabs/Items/Pickupable/Pipe.tscn" id="6_kgy06"]
 [ext_resource type="PackedScene" uid="uid://bjtncpabguax" path="res://Prefabs/Items/Chest.tscn" id="7_dyxhm"]
+[ext_resource type="PackedScene" uid="uid://xmpua4iv4jmt" path="res://Prefabs/Items/Pickupable/QuestItem.tscn" id="8_7vjdn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y7k4l"]
 albedo_texture = ExtResource("1_kwwyc")
@@ -101,3 +102,6 @@ transform = Transform3D(0.0447267, 0.245967, 1.07515e-08, -7.30993e-17, -1.09278
 
 [node name="Chest" parent="." instance=ExtResource("7_dyxhm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.40331, 1.5, 4.35009)
+
+[node name="PickupableQuestItem" parent="." instance=ExtResource("8_7vjdn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0859, 1, 4.91279)
