@@ -31,6 +31,8 @@ public partial class InventoryUI : Control
 	
 	public override void _Process(double delta)
 	{
+		if (!Visible) return;
+		
 		// Weapon selection
 		if (Input.IsActionJustPressed("right") && _currentSelectedWeaponIdx < _maxWeaponsCount)
 		{
