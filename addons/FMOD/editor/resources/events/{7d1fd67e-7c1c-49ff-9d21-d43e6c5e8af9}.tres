@@ -1,0 +1,10 @@
+[gd_resource type="EventAsset" format=3 uid="uid://cg6c1luj3y2c7"]
+
+[resource]
+is_3d = true
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Melee"
+guid = "{7d1fd67e-7c1c-49ff-9d21-d43e6c5e8af9}"
+name = "Melee"

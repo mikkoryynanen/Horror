@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bevxm7oo7hgsa"]
+[gd_scene load_steps=14 format=3 uid="uid://bevxm7oo7hgsa"]
 
 [ext_resource type="PackedScene" uid="uid://cabh24mlvxkp2" path="res://Scenes/gui.tscn" id="1_0urvb"]
 [ext_resource type="Script" path="res://Scripts/Scenes/Core.cs" id="1_dsoh8"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b1wi1ijonmb8u" path="res://Prefabs/Items/Pickupable/Pipe.tscn" id="6_kgy06"]
 [ext_resource type="PackedScene" uid="uid://bjtncpabguax" path="res://Prefabs/Items/Chest.tscn" id="7_dyxhm"]
 [ext_resource type="PackedScene" uid="uid://xmpua4iv4jmt" path="res://Prefabs/Items/Pickupable/QuestItem.tscn" id="8_7vjdn"]
+[ext_resource type="PackedScene" uid="uid://dlxk5ceknx7c6" path="res://Prefabs/AudioPlayer.tscn" id="9_nluor"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y7k4l"]
 albedo_texture = ExtResource("1_kwwyc")
@@ -68,31 +69,11 @@ shape = SubResource("ConcavePolygonShape3D_tal7y")
 [node name="Lights" type="Node" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.21916, -1.90735e-06, 7.98689)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.64366, 5.24172, 8.31876)
 light_color = Color(1, 1, 0.756863, 1)
 light_energy = 5.0
-omni_range = 4096.0
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.21916, 5.95641, 7.98689)
-light_color = Color(1, 1, 0.756863, 1)
-light_energy = 5.0
-omni_range = 4096.0
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.21916, 9.79728, 7.98689)
-light_color = Color(1, 1, 0.756863, 1)
-light_energy = 5.0
-omni_range = 4096.0
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.21916, 9.79728, 7.98689)
-light_color = Color(1, 1, 0.756863, 1)
-light_energy = 5.0
-omni_range = 4096.0
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
-transform = Transform3D(-0.130838, 0.580855, 0.803423, 3.0358e-09, -0.810389, 0.585892, 0.991404, 0.0766567, 0.106029, -5.24346, 0, -4.60615)
+omni_range = 19.232
+omni_attenuation = 1.03526
 
 [node name="Player" parent="." instance=ExtResource("4_i4lk4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.64046, 1, 7.55664)
@@ -105,3 +86,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.40331, 1.5, 4.35009)
 
 [node name="PickupableQuestItem" parent="." instance=ExtResource("8_7vjdn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0859, 1, 4.91279)
+
+[node name="AudioPlayer" parent="." instance=ExtResource("9_nluor")]

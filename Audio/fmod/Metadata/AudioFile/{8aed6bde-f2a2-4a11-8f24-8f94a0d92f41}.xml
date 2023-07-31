@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{8aed6bde-f2a2-4a11-8f24-8f94a0d92f41}">
+		<property name="assetPath">
+			<value>SFX/Weapons/Melee/SFX_Whoosh_Sword_01.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.5</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{316981fd-551e-4608-815e-608703dfe4a7}</destination>
+		</relationship>
+	</object>
+</objects>

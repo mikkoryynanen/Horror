@@ -1,0 +1,49 @@
+[gd_scene load_steps=11 format=3 uid="uid://dlxk5ceknx7c6"]
+
+[ext_resource type="Script" path="res://Scripts/Audio/AudioEmitter.gd" id="1_bi3wx"]
+[ext_resource type="EventAsset" uid="uid://6fe85rqbqe0k" path="res://addons/FMOD/editor/resources/events/{047f7897-8b82-431e-9965-652aaa6120bc}.tres" id="2_188qt"]
+[ext_resource type="EventAsset" uid="uid://c2yade5r1aq06" path="res://addons/FMOD/editor/resources/events/{27fcab1a-0e87-4e03-b97f-6e783dd4634a}.tres" id="3_k6tnk"]
+[ext_resource type="EventAsset" uid="uid://cg6c1luj3y2c7" path="res://addons/FMOD/editor/resources/events/{7d1fd67e-7c1c-49ff-9d21-d43e6c5e8af9}.tres" id="4_4uhfl"]
+[ext_resource type="BankAsset" uid="uid://bvfirckjjdjpv" path="res://addons/FMOD/editor/resources/banks/{34b4bacc-ef00-40ab-930e-df0a927dede9}.tres" id="4_exrj0"]
+[ext_resource type="BankAsset" uid="uid://cox6rxswcfm3k" path="res://addons/FMOD/editor/resources/banks/{aca99a18-9e7b-0ce9-1547-55f4638eeb71}.tres" id="5_k1g4c"]
+[ext_resource type="BankAsset" uid="uid://csj17y7l35uxf" path="res://addons/FMOD/editor/resources/banks/{ee17f3f9-14ed-4f23-8f17-a6634b0342e7}.tres" id="6_54wsd"]
+
+[sub_resource type="EventAsset" id="EventAsset_evl8d"]
+is_3d = true
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/MeleeHit"
+guid = "{1cff0c13-7489-46b0-8b9e-fa9fe593c1a6}"
+name = "MeleeHit"
+
+[sub_resource type="BankAsset" id="BankAsset_i8je7"]
+file_path = "res://Audio/fmod/Build/Desktop/Music.bank"
+modified_time = 1690797604
+path = "bank:/Music"
+guid = "{45b033ac-913a-4826-888d-98e3d77c60c0}"
+name = "Music"
+
+[sub_resource type="BankAsset" id="BankAsset_xlhyk"]
+file_path = "res://Audio/fmod/Build/Desktop/Stringers.bank"
+modified_time = 1690797604
+path = "bank:/Stringers"
+guid = "{af888b05-7bcd-4863-a30c-33189fd2ca6d}"
+name = "Stringers"
+
+[node name="AudioPlayer" type="Node3D"]
+script = ExtResource("1_bi3wx")
+music_event = ExtResource("2_188qt")
+footsteps_event = ExtResource("3_k6tnk")
+melee_event = ExtResource("4_4uhfl")
+melee_hit_event = SubResource("EventAsset_evl8d")
+
+[node name="StudioBankLoader" type="StudioBankLoader" parent="."]
+load_on = 1
+preload_sample_data = true
+num_banks = 5
+bank_0 = ExtResource("4_exrj0")
+bank_1 = ExtResource("5_k1g4c")
+bank_2 = ExtResource("6_54wsd")
+bank_3 = SubResource("BankAsset_i8je7")
+bank_4 = SubResource("BankAsset_xlhyk")

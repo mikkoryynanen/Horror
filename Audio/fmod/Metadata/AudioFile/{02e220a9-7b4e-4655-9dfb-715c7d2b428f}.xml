@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{02e220a9-7b4e-4655-9dfb-715c7d2b428f}">
+		<property name="assetPath">
+			<value>Music/Hologram.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>128</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{316981fd-551e-4608-815e-608703dfe4a7}</destination>
+		</relationship>
+	</object>
+</objects>

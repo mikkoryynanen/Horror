@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{6a2961da-ecd2-45ef-b5bd-c2319fecaaf7}">
+		<property name="assetPath">
+			<value>Stingers/6_Stinger_Encounter_1_Master.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.7692290249433107</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{316981fd-551e-4608-815e-608703dfe4a7}</destination>
+		</relationship>
+	</object>
+</objects>

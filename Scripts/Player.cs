@@ -19,33 +19,40 @@ public partial class Player : CharacterBody3D, IDamageable
 	private Node3D _head;
 	private RayCast3D _raycast;
 	
-	[Export()] private float Speed = 5.0f;
+	[Export()] private float WalkingSpeed = 5.0f;
+	[Export()] private float RunningSpeed = 5.0f;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
 	// weapon sway
 	[Export()] private float swaySpeed = 8f;
+	[Export()] private float runningSwaySpeed = 8f;
 	[Export()]	private float amplitude = 0.5f;
+	[Export()]	private float runningAmplitude = 0.5f;
 	private Vector3 _originalHeadPosition;
 	private float _accumulativeDelta;
 	private Camera3D _camera;
 
-	private AudioStreamPlayer _footstepsAudio;
 	private WeaponManager _weaponManager;
 	
-	private float _footstepTimer;
 	[Export()] private float _footstepInterval = 2;
+	[Export()] private float _footstepIntervalRunning = 1;
+	private float _footstepTimer;
+	
 	private bool _canProcess = true;
 	private Area3D _meleeWeaponHitbox;
 	private int _health = 100;
 	private Horror.Scripts.Player.ViewObjectManager _viewObjectManager;
+	private bool _isRunning = false;
 
 	public PlayerInventory Inventory { get; private set; }
 
 
 	public override void _Ready()
 	{
+		
+		
 		Inventory = new PlayerInventory(this, GetNode<GUIManager>("/root/Root/GUI").GetInventoryUI());
 		
 		// Inventory.AddItem(new Pipe());
@@ -54,7 +61,6 @@ public partial class Player : CharacterBody3D, IDamageable
 		_head = GetNode<Node3D>("Head");
 		_camera = GetNode<Camera3D>("Head/Camera3D");
 		_raycast = GetNode<RayCast3D>("Head/Camera3D/Hitscan");
-		_footstepsAudio = GetNode<AudioStreamPlayer>("Footstep");
 		// _weaponManager = GetNode<WeaponManager>("Head/Camera3D/WeaponContainer");
 		
 		//TODO Move
@@ -110,13 +116,26 @@ public partial class Player : CharacterBody3D, IDamageable
 		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 		if (direction != Vector3.Zero)
 		{
-			velocity.X = direction.X * Speed;
-			velocity.Z = direction.Z * Speed;
+			var speed = (_isRunning ? RunningSpeed : WalkingSpeed);
+			velocity.X = direction.X * speed;
+			velocity.Z = direction.Z * speed;
 		}
 		else
 		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
+			velocity.X = Mathf.MoveToward(Velocity.X, 0, _isRunning ? RunningSpeed : WalkingSpeed);
+			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, _isRunning ? RunningSpeed : WalkingSpeed);
+		}
+		
+		// Run
+		if (Input.IsActionJustPressed("run"))
+		{
+			_isRunning = true;
+			GD.Print("Running");
+		}
+		else if (Input.IsActionJustReleased("run"))
+		{
+			_isRunning = false;
+			GD.Print("STOPPED running");
 		}
 
 		Velocity = velocity;
@@ -180,21 +199,17 @@ public partial class Player : CharacterBody3D, IDamageable
 
 		var inputValue = Mathf.Floor(Mathf.Abs(inputDir.X) + Mathf.Abs(inputDir.Y));
 		// Weapon Sway
-		var headBob = inputValue * _accumulativeDelta * swaySpeed;
-		var targetPos = _originalHeadPosition + Vector3.Up * Mathf.Sin(headBob) * amplitude;
+		var headBob = inputValue * _accumulativeDelta * (_isRunning ? runningSwaySpeed : swaySpeed);
+		var targetPos = _originalHeadPosition + Vector3.Up * Mathf.Sin(headBob) * (_isRunning ? runningAmplitude : amplitude);
 		_camera.Position = _camera.Position.Lerp(targetPos, (float)delta);
 		
 		// Walking sound
 		_footstepTimer += (float)delta;
-		if ((!_footstepsAudio.Playing && inputValue > 0) && _footstepTimer >= _footstepInterval)
+		if (inputValue > 0 && _footstepTimer >= (_isRunning ? _footstepIntervalRunning : _footstepInterval))
 		{
-			_footstepsAudio.PitchScale = (float)GD.RandRange(0.95f, 1.1f);
-			_footstepsAudio.Play();
+			GetNode<GodotObject>("/root/Root/AudioPlayer").Call("on_footstep");
+			
 			_footstepTimer = 0;
-		}
-		else
-		{
-			_footstepsAudio.Stop();
 		}
 	}
 

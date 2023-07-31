@@ -1,0 +1,8 @@
+[gd_resource type="BankAsset" format=3 uid="uid://w5y1d17ypybw"]
+
+[resource]
+file_path = "res://Audio/fmod/Build/Desktop/Stringers.bank"
+modified_time = 1690797604
+path = "bank:/Stringers"
+guid = "{af888b05-7bcd-4863-a30c-33189fd2ca6d}"
+name = "Stringers"

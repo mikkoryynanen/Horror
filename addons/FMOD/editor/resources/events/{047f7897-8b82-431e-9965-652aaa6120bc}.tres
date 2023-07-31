@@ -1,0 +1,29 @@
+[gd_resource type="EventAsset" load_steps=4 format=3 uid="uid://6fe85rqbqe0k"]
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_fj8lr"]
+data1 = 525100576
+data2 = 861202842
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_sf6dg"]
+name = "Intensity"
+id = SubResource("FMOD_STUDIO_PARAMETER_ID_fj8lr")
+maximum = 3.0
+flags = 24
+guid = "{f5e09bf7-65ea-40ab-b80d-cc1d869e0ddb}"
+
+[sub_resource type="ParameterAsset" id="ParameterAsset_ub0x0"]
+parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_sf6dg")
+labels = ["Basic", "Low", "Medium", "High"]
+path = "parameter:/Intensity"
+guid = "{f5e09bf7-65ea-40ab-b80d-cc1d869e0ddb}"
+name = "Intensity"
+
+[resource]
+min_distance = 1.0
+max_distance = 20.0
+parameters = {
+"{f5e09bf7-65ea-40ab-b80d-cc1d869e0ddb}": SubResource("ParameterAsset_ub0x0")
+}
+path = "event:/LevelMusic"
+guid = "{047f7897-8b82-431e-9965-652aaa6120bc}"
+name = "LevelMusic"

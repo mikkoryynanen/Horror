@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://cyi8klh7160p3"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Stringer"
+guid = "{f2701df2-2aa6-476a-b35f-9486d7825b31}"
+name = "Stringer"

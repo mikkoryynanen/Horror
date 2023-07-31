@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://8eqkq54qfjx4"]
+[gd_scene load_steps=6 format=3 uid="uid://8eqkq54qfjx4"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_iv2h2"]
-[ext_resource type="AudioStream" uid="uid://qemiutyev7yj" path="res://Assets/sfx/Steps_tiles-001.ogg" id="2_chttf"]
 [ext_resource type="PackedScene" uid="uid://4q0u86ud5h40" path="res://Prefabs/player/ViewObjectCamera.tscn" id="3_00f43"]
 [ext_resource type="PackedScene" uid="uid://ck32hg638vemx" path="res://Prefabs/player/torchlight.tscn" id="3_u74cv"]
 
@@ -17,13 +16,13 @@ input_ray_pickable = false
 floor_max_angle = 0.959931
 script = ExtResource("1_iv2h2")
 _sensitivity = 0.1
-Speed = 2.5
-swaySpeed = 15.0
-amplitude = 0.25
-_footstepInterval = 0.5
-
-[node name="Footstep" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_chttf")
+WalkingSpeed = 1.7
+RunningSpeed = 3.0
+swaySpeed = 8.5
+runningSwaySpeed = 10.0
+runningAmplitude = 0.75
+_footstepInterval = 0.7
+_footstepIntervalRunning = 0.35
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.875, 2.08165e-12)

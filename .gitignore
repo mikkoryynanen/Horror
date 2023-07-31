@@ -10,6 +10,22 @@ export_presets.cfg
 .mono/
 data_*/
 
+# Mac stuff
+.DS_Store
+.bak
+.BAK
+
+### FMOD Unity Integration ###
+# Never ignore DLLs in the FMOD subfolder, so make sure that the FMOD-folder is in the correct path.
+!/addons/FMOD/**/*.dll
+
+# Ignore the Cache-file since it is updated locally either way
+/addons/FMOD/editor/cache/*
+
+# Log-files
+fmod.log
+fmod_editor.log
+
 .idea/
 
 .godot/

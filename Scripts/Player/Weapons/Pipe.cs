@@ -15,10 +15,6 @@ public interface IWeapon
 
 public partial class Pipe : Node3D, IWeapon
 {
-	// TODO If we want these to sound different based on what we hit, Consider moving these to resource, where we fetch them based on material hit
-	[Export()] private AudioStream[] _missAudioStreams;
-	[Export()] private AudioStream[] _hitAudioStreams;
-	
 	private AnimationPlayer _animator;
 
 	public override void _Ready()
@@ -32,14 +28,13 @@ public partial class Pipe : Node3D, IWeapon
 		if (!CanShoot()) return;
 		
 		_animator.Play("melee");
+		
 	}
 
 	public void PlayHitAudio(bool hitDamageable)
 	{
-		var stream = hitDamageable ? 
-			_hitAudioStreams[GD.RandRange(0, _hitAudioStreams.Length - 1)]: 
-			_missAudioStreams[GD.RandRange(0, _missAudioStreams.Length - 1)];
-		AudioManager.Instance.PlayClip(stream);
+		GetNode<GodotObject>("/root/Root/AudioPlayer").Call(  !hitDamageable ? "on_melee" : "on_melee_hit");
+		// AudioManager.Instance.PlayClip(stream);
 	}
 
 	public void TakeOut()
@@ -54,6 +49,7 @@ public partial class Pipe : Node3D, IWeapon
 
 	public bool CanShoot()
 	{
-		return _animator.CurrentAnimation == "idle" && AudioManager.Instance.HasPlayedClip();
+		return true;
+		// return _animator.CurrentAnimation == "idle" && AudioManager.Instance.HasPlayedClip();
 	}
 }
