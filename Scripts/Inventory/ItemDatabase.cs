@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Godot;
-using Horror.Scripts.Inventory.Items;
 
 namespace Horror.Scripts.Inventory;
 
@@ -21,6 +20,7 @@ public static class ItemDatabase
         // TODO Generate items here for now
         // TODO This generates the same times for all inventories, for example chests
         // AddItem(new Pipe());
+        // AddItem(new Pistol());
         // AddItem(new QuestItem());
         // Save();
         // =============================================
@@ -33,6 +33,7 @@ public static class ItemDatabase
         return Database.TryGetValue(itemId, out var item) ? item : null;
     }
     
+    // TODO Remove?
     public static Item GetItem(string itemName)
     {
         // Make sure we haven't passed guid as item name
@@ -42,7 +43,7 @@ public static class ItemDatabase
             return null;
         }
         
-        return Database.Values.First(x => x.Name.ToLower() == itemName.ToLower());
+        return Database.Values.FirstOrDefault(x => x.Name.ToLower() == itemName.ToLower());
     }
     
     /// <summary>
@@ -58,7 +59,7 @@ public static class ItemDatabase
     //     return Database.Remove(itemId);
     // }
 
-    private static void Load()
+    public static void Load()
     {
         if (!File.Exists(GlobalPath))
             return;

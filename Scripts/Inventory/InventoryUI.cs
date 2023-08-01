@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 using Horror.Scripts.Autoload;
@@ -9,15 +10,13 @@ public partial class InventoryUI : Control
 	private GridContainer _itemParent;
 	private VBoxContainer _weaponContainer;
 	private InventoryItem _equippedWeapon;
+	private PlayerInventory _playerInventory;
 	
-	private int _currentSelectedWeaponIdx = 0;
-	private int _maxWeaponsCount = 3;
 	private List<InventoryItem> _builtInventoryItems = new();
 	private Label _inventoryTitle;
 	private Label _lootableInfo;
 	private Label _selectedItemTechnicalTextLabel;
 	private Label _selectedItemNameLabel;
-	private List<Item> _equippedWeapons;
 
 	public override void _Ready()
 	{
@@ -28,26 +27,43 @@ public partial class InventoryUI : Control
 		_lootableInfo = GetNode<Label>("LootableInfo");
 		_selectedItemTechnicalTextLabel = GetNode<Label>("SelectedItemInfo/ItemTechnicalText");
 		_selectedItemNameLabel = GetNode<Label>("SelectedItemInfo/ItemName");
+		
+		this.GetSignalBus().OnItemPickedUp += OnItemPickup;
 	}
-	
+
+	private void OnItemPickup(string itemId)
+	{
+		// var item = ItemDatabase.GetItem(new Guid(itemId));
+		//
+		// if (item.ItemType == Item.Type.Weapon)
+		// {
+		// 	if (_equippedWeapons.Count <= 0)
+		// 	{
+		// 		_equippedWeapons.Add(item);
+		// 		BuildWeaponSlot();
+		// 	}
+		// }
+	}
+
 	public override void _Process(double delta)
 	{
 		if (!Visible) return;
 		
 		// Weapon selection
-		if (Input.IsActionJustPressed("right") && _currentSelectedWeaponIdx < _maxWeaponsCount)
+		if (_playerInventory?.EquippedWeapons.Count > 1)
 		{
-			AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIConfirm);
-			
-			_currentSelectedWeaponIdx++;
-			BuildWeaponSlot();
-		}
-		else if (Input.IsActionJustPressed("left") && _currentSelectedWeaponIdx > 0)
-		{
-			AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIConfirm);
-			
-			_currentSelectedWeaponIdx--;
-			BuildWeaponSlot();
+			if (Input.IsActionJustPressed("right"))
+			{
+				AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIConfirm);
+				_playerInventory.EquipNextWeapon();
+				BuildWeaponSlot();
+			}
+			else if (Input.IsActionJustPressed("left"))
+			{
+				AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIConfirm);
+				_playerInventory.EquipPreviousWeapon();
+				BuildWeaponSlot();
+			}	
 		}
 		
 		// Close
@@ -79,13 +95,11 @@ public partial class InventoryUI : Control
 
 	public void Build(PlayerInventory playerInventory, string inventoryName)
 	{
+		_playerInventory = playerInventory;
 		_lootableInfo.Visible = false;
 		_weaponContainer.Visible = true;
 		_inventoryTitle.Text = "Inventory";
-
-		_maxWeaponsCount = playerInventory.EquippedWeapons.Count - 1;
-		_currentSelectedWeaponIdx = 0;
-		_equippedWeapons = playerInventory.EquippedWeapons;
+		
 		BuildWeaponSlot();
 		
 		PopulateInventory(playerInventory as Inventory);
@@ -93,10 +107,10 @@ public partial class InventoryUI : Control
 
 	private void BuildWeaponSlot()
 	{
-		if (_equippedWeapons.Count > 0)
-			_equippedWeapon.Build(
-				GD.Load<Texture2D>(
-					_equippedWeapons[_currentSelectedWeaponIdx].IconPath));
+		if (_playerInventory?.CurrentEquippedWeapon == null) return;
+		
+		_equippedWeapon.Build(GD.Load<Texture2D>(_playerInventory.CurrentEquippedWeapon.IconPath));
+		GD.Print($"Currently equipped weapon {_playerInventory.CurrentEquippedWeapon.Name}");
 	}
 
 	private void PopulateInventory(Inventory inventory)
@@ -107,6 +121,7 @@ public partial class InventoryUI : Control
 		
 		// TODO Add paging if needed
 		var items = inventory.GetItems();
+		
 		// 9 is the max slots we can allow per page
 		for (int i = 0; i < 9; i++)
 		{

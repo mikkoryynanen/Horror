@@ -53,9 +53,6 @@ public partial class Player : CharacterBody3D, IDamageable
 	{
 		Inventory = new PlayerInventory(this, GetNode<GUIManager>("/root/Root/GUI").GetInventoryUI());
 		
-		// Inventory.AddItem(new Pipe());
-		// Inventory.AddItem(new QuestItem());
-		
 		_head = GetNode<Node3D>("Head");
 		_camera = GetNode<Camera3D>("Head/Camera3D");
 		_raycast = GetNode<RayCast3D>("Head/Camera3D/Hitscan");

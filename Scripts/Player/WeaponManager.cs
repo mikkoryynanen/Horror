@@ -1,4 +1,7 @@
+using System;
 using Godot;
+using Horror.Scripts.Inventory;
+using Horror.Scripts.Player.Weapons;
 
 namespace Horror.Scripts.Player;
 
@@ -11,19 +14,27 @@ public partial class WeaponManager : Node3D
 	private bool _canProcess = true;
 	private float _t;
 	private Area3D _meleeCollisionArea;
+	private Node _rig;
 
 
 	public override void _Ready()
 	{
-		// _meleeCollisionArea = GetNode<Area3D>("SubViewport/ObjectCamera/WeaponContainer/Rig/MeleeCollisionArea");
-		// _meleeCollisionArea.Visible = false;
+		_rig = GetNode("Rig");
 		
-		this.GetSignalBus().OnStartDialog += (act, title, isFullscreen) =>
+		var signalBus = this.GetSignalBus();
+		signalBus.OnStartDialog += (act, title, isFullscreen) =>
 		{
 			if(isFullscreen)
 				_canProcess = false;
 		};
-		this.GetSignalBus().OnEndDialog += () => _canProcess = true;
+		signalBus.OnEndDialog += () => _canProcess = true;
+		signalBus.OnItemPickedUp += itemId =>
+		{
+			var id = new Guid(itemId);
+			var item = ItemDatabase.GetItem(id);
+			if (item.ItemType == Item.Type.Weapon)
+				SpawnWeapon(item);
+		};
 	}
 
 	public override void _Process(double delta)
@@ -41,6 +52,21 @@ public partial class WeaponManager : Node3D
 	public void Sway(Vector2 swayAmount)
 	{
 		Position += new Vector3(swayAmount.X * -swayIntensity, swayAmount.Y * swayIntensity, 0);
+	}
+
+	private void SpawnWeapon(Item weaponItem)
+	{
+		// Don't spawn weapon if the have already spawned one
+		// Rig has melee collision as child, so check more than 1
+		if (_rig.GetChildCount() <= 1)
+		{
+			var packed = ResourceLoader.Load<PackedScene>(weaponItem.PrefabPath);
+			var instance = packed.Instantiate() as Node3D;
+			_rig.AddChild(instance);
+
+			var weapon = instance as IWeapon;
+			weapon.TakeOut();	
+		}
 	}
 
 	private void FireProjectile()

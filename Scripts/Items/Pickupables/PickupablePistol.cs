@@ -2,15 +2,15 @@ using Godot;
 using Horror.Scripts.Autoload;
 using Horror.Scripts.Inventory;
 
-namespace Horror.Scripts.Items;
+namespace Horror.Scripts.Items.Pickupables;
 
-public partial class PickupablePipe : StaticBody3D, IInteractable
+public partial class PickupablePistol : StaticBody3D, IInteractable
 {
     public void Interact()
     {
         AudioManager.Instance.PlayClip(AudioManager.AudioClipName.MeleePickup);
         
-        this.EmitSignalBus("OnItemPickedUp", ItemDatabase.GetItem("Pipe").Id.ToString());
+        this.EmitSignalBus("OnItemPickedUp", ItemDatabase.GetItem("Pistol").Id.ToString());
         
         QueueFree();
     }

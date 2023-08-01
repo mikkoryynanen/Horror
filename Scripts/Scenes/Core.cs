@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Horror.Scripts.Autoload;
+using Horror.Scripts.Inventory;
 
 public partial class Core : Node3D
 {

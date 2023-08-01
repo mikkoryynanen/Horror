@@ -5,9 +5,10 @@ public class Pipe : Item
     public Pipe() 
         : base(
             "Pipe", 
-            "res://Prefabs/Items/Pickupable/Pipe.tscn", 
+            "res://Prefabs/player/Weapons/PipeWeapon.tscn", 
             "res://Assets/UI/Icons/Pipe.png", 
-            "Very basic piece of pipe. As sturdy as they come")
+            "Very basic piece of pipe. As sturdy as they come",
+            Type.Weapon)
     {
     }
 }

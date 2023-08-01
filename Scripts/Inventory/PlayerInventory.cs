@@ -9,11 +9,9 @@ namespace Horror.Scripts.Inventory;
 public class PlayerInventory : Inventory
 {
     public List<Item> EquippedWeapons { get; private set; } = new();
-
-    private IReadOnlyList<Guid> _weaponIds = new[]
-    {
-        new Guid("189eac2e-f918-43fb-a5c4-c9f40202bbed")
-    };
+    
+    private int _currentEquippedWeaponIdx = 0;
+    public Item CurrentEquippedWeapon => EquippedWeapons.Count > 0 ? EquippedWeapons[_currentEquippedWeaponIdx] : null;
 
     public PlayerInventory(Node node, InventoryUI ui) : base(ui)
     {
@@ -21,10 +19,13 @@ public class PlayerInventory : Inventory
         {
             var id = new Guid(itemId);
             var item = ItemDatabase.GetItem(id);
-            if (!IsWeapon(id))
-                AddItem(item);
+            if (item.ItemType == Item.Type.Weapon)
+            {
+                if (EquippedWeapons.Count <= 0)
+                    EquippedWeapons.Add(item);
+            }
             else
-                EquippedWeapons.Add(item);
+                AddItem(item);
         };
     }
 
@@ -34,10 +35,19 @@ public class PlayerInventory : Inventory
         _ui.Build(this, "Inventory");
     }
 
-    private bool IsWeapon(Guid itemId)
+    public void EquipNextWeapon()
     {
-        // Note Quick checker if item is matches one of the weapon ids
-        // TODO This could be improved
-        return _weaponIds.Contains(itemId);
+        if (_currentEquippedWeaponIdx < EquippedWeapons.Count - 1)
+            _currentEquippedWeaponIdx++;
+        else
+            _currentEquippedWeaponIdx = 0;
+    }
+    
+    public void EquipPreviousWeapon()
+    {
+        if (_currentEquippedWeaponIdx > 0)
+            _currentEquippedWeaponIdx--;
+        else
+            _currentEquippedWeaponIdx = EquippedWeapons.Count - 1;
     }
 }
