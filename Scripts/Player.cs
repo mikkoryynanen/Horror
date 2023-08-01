@@ -1,12 +1,9 @@
 using Godot;
-using System;
 using Horror.Scripts;
 using Horror.Scripts.Autoload;
 using Horror.Scripts.Damage;
 using Horror.Scripts.Inventory;
-using Horror.Scripts.Inventory.Items;
-using Horror.Scripts.Items;
-using Horror.Scripts.Objects;
+using Horror.Scripts.Player;
 using Horror.Scripts.UI;
 
 public partial class Player : CharacterBody3D, IDamageable
@@ -33,7 +30,7 @@ public partial class Player : CharacterBody3D, IDamageable
 	private float _accumulativeDelta;
 	private Camera3D _camera;
 
-	private WeaponManager _weaponManager;
+	private Horror.Scripts.Player.WeaponManager _weaponManager;
 	
 	[Export()] private float _footstepInterval = 2;
 	[Export()] private float _footstepIntervalRunning = 1;
@@ -62,9 +59,8 @@ public partial class Player : CharacterBody3D, IDamageable
 		_head = GetNode<Node3D>("Head");
 		_camera = GetNode<Camera3D>("Head/Camera3D");
 		_raycast = GetNode<RayCast3D>("Head/Camera3D/Hitscan");
-		// _weaponManager = GetNode<WeaponManager>("Head/Camera3D/WeaponContainer");
 		
-		//TODO Move
+		_weaponManager = GetNode<WeaponManager>("Head/Camera3D/ViewObjectCamera/SubViewport/ObjectCamera/WeaponContainer");
 		_viewObjectManager = GetNode<Horror.Scripts.Player.ViewObjectManager>("Head/Camera3D/ViewObjectCamera");
 
 		// TODO Move
@@ -195,34 +191,6 @@ public partial class Player : CharacterBody3D, IDamageable
 			Inventory.Show();
 			this.EmitSignalBus("OnOpenInventory");
 		}
-		
-		// TODO Move this to common weapon manager script
-		// Melee weapon
-		if (Input.IsActionJustPressed("shoot") && _viewObjectManager.equippedWeapon.CanShoot())
-		{
-			var overlappingBodies = GetNode<Area3D>("Head/Camera3D/MeleeCollisionArea").GetOverlappingBodies();
-			var hitDamageable = false;
-			foreach (var body in overlappingBodies)
-			{
-				if (body.IsInGroup("enemy"))
-				{
-					if (body is IDamageable damageable)
-					{
-						damageable.TakeDamage(10);
-						hitDamageable = true;
-						
-						// TODO Enable?
-						// var packed = ResourceLoader.Load<PackedScene>("res://Prefabs/Particles/HitParticle.tscn");
-						// var instance = packed.Instantiate() as Node3D;
-						// instance.Position = _raycast.GetCollisionPoint();
-						// GetNode<Node3D>("/root/Core").AddChild(instance);
-					}
-				}
-			}
-			
-			_viewObjectManager.Shoot();
-			_viewObjectManager.PlayHitAudio(hitDamageable);
-		}
 
 		var inputValue = Mathf.Floor(Mathf.Abs(inputDir.X) + Mathf.Abs(inputDir.Y));
 		// Weapon Sway
@@ -252,7 +220,7 @@ public partial class Player : CharacterBody3D, IDamageable
 			lookVector.X = Mathf.Clamp(lookVector.X, _minAngle, _maxAngle);
 			_lookRotation = lookVector;
 			
-			_viewObjectManager.Sway(new Vector2(motion.Relative.X, motion.Relative.Y));
+			_weaponManager.Sway(new Vector2(motion.Relative.X, motion.Relative.Y));
 		}
 	}
 

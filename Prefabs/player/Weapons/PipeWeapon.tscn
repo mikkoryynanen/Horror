@@ -1,12 +1,6 @@
-[gd_scene load_steps=69 format=3 uid="uid://kd7skl6mxes2"]
+[gd_scene load_steps=63 format=3 uid="uid://kd7skl6mxes2"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Weapons/Pipe.cs" id="1_vo6bt"]
-[ext_resource type="AudioStream" uid="uid://ci6yocb8qduoh" path="res://Assets/sfx/weapon/Pipe/SFX_Whoosh_Sword_01.wav" id="2_nyp6b"]
-[ext_resource type="AudioStream" uid="uid://dgmlh872ouguc" path="res://Assets/sfx/weapon/Pipe/SFX_Whoosh_Sword_02.wav" id="3_sx5fk"]
-[ext_resource type="AudioStream" uid="uid://dolj6rxuyhcyc" path="res://Assets/sfx/weapon/Pipe/SFX_Whoosh_Sword_03.wav" id="4_fgkda"]
-[ext_resource type="AudioStream" uid="uid://duw6u157m88o" path="res://Assets/sfx/weapon/Pipe/SFX_Bash_Shield_01.wav" id="5_20b4f"]
-[ext_resource type="AudioStream" uid="uid://b72goau2lemy7" path="res://Assets/sfx/weapon/Pipe/SFX_Bash_Shield_02.wav" id="6_eautt"]
-[ext_resource type="AudioStream" uid="uid://pcujpa52tmbc" path="res://Assets/sfx/weapon/Pipe/SFX_Bash_Shield_03.wav" id="7_unxyr"]
 [ext_resource type="Shader" path="res://shaders/psx_unlit.gdshader" id="8_cjjqo"]
 [ext_resource type="PackedScene" uid="uid://bfo2fgu7xhq8v" path="res://Prefabs/player/Weapons/Pipe.tscn" id="8_oxucn"]
 [ext_resource type="Texture2D" uid="uid://6i65p53hsef7" path="res://Textures/Map/FabricPanel.png" id="10_pbw8h"]
@@ -693,8 +687,6 @@ _data = {
 [node name="PipeWeapon" type="Node3D"]
 transform = Transform3D(0.972413, 0.17162, -0.157985, -0.173803, 0.98478, -4.80262e-09, 0.155581, 0.0274583, 0.987441, 0, 0, 0)
 script = ExtResource("1_vo6bt")
-_missAudioStreams = Array[AudioStream]([ExtResource("2_nyp6b"), ExtResource("3_sx5fk"), ExtResource("4_fgkda")])
-_hitAudioStreams = Array[AudioStream]([ExtResource("5_20b4f"), ExtResource("6_eautt"), ExtResource("7_unxyr")])
 
 [node name="Pipe" parent="." instance=ExtResource("8_oxucn")]
 transform = Transform3D(0.567599, 5.56487e-08, -0.823305, -4.02543e-08, 1, 7.33416e-09, 0.823305, 1.24032e-08, 0.567599, 0.897679, -0.84863, -3.70412)

@@ -4,16 +4,9 @@ using Horror.Scripts.Autoload;
 namespace Horror.Scripts.Player.Weapons;
 
 // TODO Move
-public interface IWeapon
-{
-	void Shoot();
-	void PlayHitAudio(bool hitDamageable);
-	void TakeOut();
-	void PutAway();
-	bool CanShoot();
-}
 
-public partial class Pipe : Node3D, IWeapon
+
+public partial class Pipe : MeleeBase
 {
 	private AnimationPlayer _animator;
 
@@ -23,7 +16,7 @@ public partial class Pipe : Node3D, IWeapon
 		_animator.AnimationFinished += name => _animator.Play("idle");
 	}
 
-	public void Shoot()
+	public override void Shoot()
 	{
 		if (!CanShoot()) return;
 		
@@ -31,25 +24,17 @@ public partial class Pipe : Node3D, IWeapon
 		
 	}
 
-	public void PlayHitAudio(bool hitDamageable)
-	{
-		GetNode<GodotObject>("/root/Root/AudioPlayer").Call(  !hitDamageable ? "on_melee" : "on_melee_hit");
-		AudioManager.Instance.PlayClip(hitDamageable
-			? AudioManager.AudioClipName.MeleeHit
-			: AudioManager.AudioClipName.Melee);
-	}
-
-	public void TakeOut()
+	public override void TakeOut()
 	{
 		_animator.Play("show");
 	}
 
-	public void PutAway()
+	public override void PutAway()
 	{
 		_animator.Play("put_away");
 	}
 
-	public bool CanShoot()
+	public override bool CanShoot()
 	{
 		return _animator.CurrentAnimation == "idle";
 	}
