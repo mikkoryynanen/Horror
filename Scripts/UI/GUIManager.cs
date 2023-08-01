@@ -15,6 +15,7 @@ public partial class GUIManager : CanvasLayer
 
 	private Queue<string> _toastQueue = new();
 	private Slider _staminaMeter;
+	private Label _ammoLabel;
 
 	public override void _Ready()
 	{
@@ -23,7 +24,8 @@ public partial class GUIManager : CanvasLayer
 		_inventory = GetNode<InventoryUI>("Container/Inventory");
 		_textPopupAnimationPlayer = GetNode<AnimationPlayer>("Container/TextPopup/AnimationPlayer");
 		_textPopupLabel = GetNode<Label>("Container/TextPopup");
-		_staminaMeter = GetNode<Slider>("Container/Indicator");
+		_staminaMeter = GetNode<Slider>("Container/StaminaMeter");
+		_ammoLabel = GetNode<Label>("Container/AmmoLabel");
 
 		var signalBus = this.GetSignalBus();
 		signalBus.OnShowInteract += OnShowInteract;
@@ -34,7 +36,9 @@ public partial class GUIManager : CanvasLayer
 		signalBus.OnOpenInventory += () => _inventory.Visible = true;
 		signalBus.OnCloseInventory += () => _inventory.Visible = false;
 		signalBus.OnUpdateStamina += OnUpdateStamina;
+		signalBus.OnUpdateAmmo += OnUpdateAmmo;
 	}
+
 	public override void _PhysicsProcess(double delta)
 	{
 		if (_toastQueue.Count > 0 && !_textPopupAnimationPlayer.IsPlaying())
@@ -72,5 +76,10 @@ public partial class GUIManager : CanvasLayer
 	private void OnUpdateStamina(float value)
 	{
 		_staminaMeter.Value = value * 100;
+	}
+	
+	private void OnUpdateAmmo(int currentAmmo, int totalAmmo)
+	{
+		_ammoLabel.Text = $"{currentAmmo} / {totalAmmo}";
 	}
 }

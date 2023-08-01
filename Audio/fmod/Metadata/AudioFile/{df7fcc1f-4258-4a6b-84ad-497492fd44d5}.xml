@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="AudioFile" id="{47b60656-6a97-4e65-bf6f-d5dafe0cbb1f}">
+	<object class="AudioFile" id="{df7fcc1f-4258-4a6b-84ad-497492fd44d5}">
 		<property name="assetPath">
-			<value>SFX/Weapons/Metal scrape_scratch.wav</value>
+			<value>SFX/Weapons/Projectile/BLLTShel_Shell Eject_02.wav</value>
 		</property>
 		<property name="frequencyInKHz">
-			<value>44.0999985</value>
+			<value>48</value>
 		</property>
 		<property name="channelCount">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<property name="length">
-			<value>0.61968253968253972</value>
+			<value>0.25204166666666666</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{316981fd-551e-4608-815e-608703dfe4a7}</destination>

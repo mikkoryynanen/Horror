@@ -1,13 +1,13 @@
-[gd_scene load_steps=63 format=3 uid="uid://kd7skl6mxes2"]
+[gd_scene load_steps=63 format=3 uid="uid://0y6v0qc8dvc"]
 
-[ext_resource type="Script" path="res://Scripts/Player/Weapons/Pipe.cs" id="1_vo6bt"]
-[ext_resource type="Shader" path="res://shaders/psx_unlit.gdshader" id="8_cjjqo"]
-[ext_resource type="PackedScene" uid="uid://bfo2fgu7xhq8v" path="res://Prefabs/player/Weapons/Pipe.tscn" id="8_oxucn"]
-[ext_resource type="Texture2D" uid="uid://6i65p53hsef7" path="res://Textures/Map/FabricPanel.png" id="10_pbw8h"]
+[ext_resource type="Script" path="res://Scripts/Player/Weapons/Pipe.cs" id="1_r136u"]
+[ext_resource type="PackedScene" uid="uid://bfo2fgu7xhq8v" path="res://Prefabs/player/Weapons/Pipe.tscn" id="2_r7hrm"]
+[ext_resource type="Shader" path="res://shaders/psx_unlit.gdshader" id="3_kt2wb"]
+[ext_resource type="Texture2D" uid="uid://6i65p53hsef7" path="res://Textures/Map/FabricPanel.png" id="4_braqa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j24rr"]
 render_priority = 0
-shader = ExtResource("8_cjjqo")
+shader = ExtResource("3_kt2wb")
 shader_parameter/jitter = 0.001
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -16,7 +16,7 @@ shader_parameter/alpha_scissor = 1.0
 shader_parameter/albedo_color = Color(0.478431, 0.537255, 0.52549, 1)
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
-shader_parameter/albedo = ExtResource("10_pbw8h")
+shader_parameter/albedo = ExtResource("4_braqa")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhccv"]
 
@@ -685,10 +685,12 @@ _data = {
 }
 
 [node name="PipeWeapon" type="Node3D"]
-transform = Transform3D(0.972413, 0.17162, -0.157985, -0.173803, 0.98478, -4.80262e-09, 0.155581, 0.0274583, 0.987441, 0, 0, 0)
-script = ExtResource("1_vo6bt")
+transform = Transform3D(0.972413, 0.17162, -0.157985, -0.173803, 0.98478, 2.26392e-09, 0.155581, 0.0274583, 0.987441, 0, 0, 0)
+script = ExtResource("1_r136u")
+_meleeCollisionArea = Object(Area3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 1.19207e-07, -2.38419e-07, 2.38417e-07),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":false,"visibility_parent":NodePath(""),"disable_mode":0,"collision_layer":2,"collision_mask":2,"collision_priority":1.0,"input_ray_pickable":true,"input_capture_on_drag":false,"monitoring":true,"monitorable":true,"priority":0,"gravity_space_override":0,"gravity_point":false,"gravity_point_unit_distance":0.0,"gravity_point_center":Vector3(0, -1, 0),"gravity_direction":Vector3(0, -1, 0),"gravity":9.8,"linear_damp_space_override":0,"linear_damp":0.1,"angular_damp_space_override":0,"angular_damp":0.1,"wind_force_magnitude":0.0,"wind_attenuation_factor":0.0,"wind_source_path":NodePath(""),"audio_bus_override":false,"audio_bus_name":&"Master","reverb_bus_enabled":false,"reverb_bus_name":&"Master","reverb_bus_amount":0.0,"reverb_bus_uniformity":0.0,"script":null)
 
-[node name="Pipe" parent="." instance=ExtResource("8_oxucn")]
+
+[node name="Pipe" parent="." instance=ExtResource("2_r7hrm")]
 transform = Transform3D(0.567599, 5.56487e-08, -0.823305, -4.02543e-08, 1, 7.33416e-09, 0.823305, 1.24032e-08, 0.567599, 0.897679, -0.84863, -3.70412)
 
 [node name="hand" type="Node3D" parent="."]

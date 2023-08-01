@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3rhhhxtlh2dq"]
+
+[ext_resource type="Script" path="res://Scripts/Player/Weapons/Pistol.cs" id="1_5y87t"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3br10"]
+
+[node name="Pistol" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_5y87t")
+_fireRate = 0.15
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.5, 0, 0, 0, 0.25, 2.08165e-12, 0, 2.08165e-12)
+layers = 2
+mesh = SubResource("BoxMesh_3br10")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8.74228e-09, 0.709, -8.74228e-09, -0.2, -3.09914e-08, -8.74228e-09, -8.74228e-09, 3.09914e-08, 0.2, 0.429648, 0.147903, 1.87826e-08)
+layers = 2
+mesh = SubResource("BoxMesh_3br10")
+skeleton = NodePath("../../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

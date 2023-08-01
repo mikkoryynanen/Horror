@@ -2,7 +2,7 @@
 
 [resource]
 file_path = "res://Audio/fmod/Build/Desktop/SFX.bank"
-modified_time = 1690873151
+modified_time = 1690896683
 path = "bank:/SFX"
 guid = "{ee17f3f9-14ed-4f23-8f17-a6634b0342e7}"
 name = "SFX"

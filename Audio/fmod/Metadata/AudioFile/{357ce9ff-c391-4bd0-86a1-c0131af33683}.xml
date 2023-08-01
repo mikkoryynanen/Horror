@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{357ce9ff-c391-4bd0-86a1-c0131af33683}">
+		<property name="assetPath">
+			<value>SFX/Weapons/Projectile/LASRGun_Plasma Rifle Fire_03.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.5709791666666667</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{316981fd-551e-4608-815e-608703dfe4a7}</destination>
+		</relationship>
+	</object>
+</objects>

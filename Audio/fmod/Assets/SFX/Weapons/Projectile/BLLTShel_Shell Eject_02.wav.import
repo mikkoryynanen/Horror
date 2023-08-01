@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://1oqgg4li75eq"
+path="res://.godot/imported/BLLTShel_Shell Eject_02.wav-ad7a49802982c1a41ca6023a77b24731.sample"
+
+[deps]
+
+source_file="res://Audio/fmod/Assets/SFX/Weapons/Projectile/BLLTShel_Shell Eject_02.wav"
+dest_files=["res://.godot/imported/BLLTShel_Shell Eject_02.wav-ad7a49802982c1a41ca6023a77b24731.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

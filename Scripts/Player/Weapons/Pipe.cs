@@ -1,41 +1,28 @@
-using Godot;
-using Horror.Scripts.Autoload;
-
 namespace Horror.Scripts.Player.Weapons;
-
-// TODO Move
-
 
 public partial class Pipe : MeleeBase
 {
-	private AnimationPlayer _animator;
-
 	public override void _Ready()
 	{
-		_animator = GetNode<AnimationPlayer>("AnimationPlayer");
-		_animator.AnimationFinished += name => _animator.Play("idle");
+		base._Ready();
+		
+		Animator.AnimationFinished += name => Animator.Play("idle");
 	}
 
 	public override void Shoot()
 	{
-		if (!CanShoot()) return;
+		base.Shoot();
 		
-		_animator.Play("melee");
-		
+		Animator.Play("melee");
 	}
 
 	public override void TakeOut()
 	{
-		_animator.Play("show");
+		Animator.Play("show");
 	}
 
 	public override void PutAway()
 	{
-		_animator.Play("put_away");
-	}
-
-	public override bool CanShoot()
-	{
-		return _animator.CurrentAnimation == "idle";
+		Animator.Play("put_away");
 	}
 }

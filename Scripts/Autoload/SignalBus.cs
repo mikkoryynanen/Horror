@@ -42,4 +42,6 @@ public partial class SignalBus : Node
     [Signal]
     public delegate void OnUpdateStaminaEventHandler(float value);
     
+    [Signal]
+    public delegate void OnUpdateAmmoEventHandler(int currentAmmo, int totalAmmo);
 }

@@ -2,7 +2,7 @@
 
 [resource]
 file_path = "res://Audio/fmod/Build/Desktop/Master.bank"
-modified_time = 1690873151
+modified_time = 1690896683
 path = "bank:/Master"
 guid = "{34b4bacc-ef00-40ab-930e-df0a927dede9}"
 name = "Master"

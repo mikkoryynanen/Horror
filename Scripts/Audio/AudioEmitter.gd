@@ -12,6 +12,9 @@ extends Node3D
 
 @export var melee_pickup_event: EventAsset
 
+@export var pistol_shoot_event: EventAsset
+@export var pistol_reload_event: EventAsset
+
 var callable: Callable = Callable(self, "on_melee_end")
 
 signal on_audio_played
@@ -65,3 +68,9 @@ func on_ui_confirm():
 	
 func on_melee_pickup():
 	RuntimeManager.play_one_shot(melee_pickup_event)
+	
+func on_pistol_shoot():
+	RuntimeManager.play_one_shot(pistol_shoot_event)
+	
+func on_pistol_reload():
+	RuntimeManager.play_one_shot(pistol_reload_event)

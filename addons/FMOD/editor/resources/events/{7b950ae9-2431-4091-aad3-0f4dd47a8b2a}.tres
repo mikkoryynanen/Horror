@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://brnt07kpmb83i"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Weapons/Projectile/PistolShoot"
+guid = "{7b950ae9-2431-4091-aad3-0f4dd47a8b2a}"
+name = "PistolShoot"

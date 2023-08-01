@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dlxk5ceknx7c6"]
+[gd_scene load_steps=20 format=3 uid="uid://dlxk5ceknx7c6"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioEmitter.gd" id="1_bi3wx"]
 [ext_resource type="EventAsset" uid="uid://6fe85rqbqe0k" path="res://addons/FMOD/editor/resources/events/{047f7897-8b82-431e-9965-652aaa6120bc}.tres" id="2_188qt"]
@@ -69,6 +69,22 @@ path = "event:/Weapons/MeleePickUp"
 guid = "{f3e00a42-a96e-48f0-8c60-318e3aabc44a}"
 name = "MeleePickUp"
 
+[sub_resource type="EventAsset" id="EventAsset_2vbu4"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Weapons/Projectile/PistolShoot"
+guid = "{7b950ae9-2431-4091-aad3-0f4dd47a8b2a}"
+name = "PistolShoot"
+
+[sub_resource type="EventAsset" id="EventAsset_ri1h1"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Weapons/Projectile/PistolReload"
+guid = "{08551aa6-0161-43ac-98cc-d39e52b0964d}"
+name = "PistolReload"
+
 [sub_resource type="BankAsset" id="BankAsset_i8je7"]
 file_path = "res://Audio/fmod/Build/Desktop/Music.bank"
 modified_time = 1690797604
@@ -93,6 +109,8 @@ melee_hit_event = SubResource("EventAsset_evl8d")
 ui_click_event = SubResource("EventAsset_einri")
 ui_confirm_event = SubResource("EventAsset_bsa0u")
 melee_pickup_event = SubResource("EventAsset_vyle6")
+pistol_shoot_event = SubResource("EventAsset_2vbu4")
+pistol_reload_event = SubResource("EventAsset_ri1h1")
 
 [node name="StudioBankLoader" type="StudioBankLoader" parent="."]
 load_on = 1

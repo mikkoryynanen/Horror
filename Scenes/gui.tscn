@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cabh24mlvxkp2"]
+[gd_scene load_steps=14 format=3 uid="uid://cabh24mlvxkp2"]
 
 [ext_resource type="Script" path="res://Scripts/UI/GUIManager.cs" id="1_s4ul8"]
 [ext_resource type="Texture2D" uid="uid://cntwtaxwtt2hk" path="res://Assets/crosshair007.png" id="1_syclb"]
@@ -58,6 +58,9 @@ _data = {
 "RESET": SubResource("Animation_grdu4"),
 "show": SubResource("Animation_71ri8")
 }
+
+[sub_resource type="LabelSettings" id="LabelSettings_dh6m7"]
+font = ExtResource("4_1p708")
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_s4ul8")
@@ -119,10 +122,28 @@ libraries = {
 visible = false
 layout_mode = 1
 
-[node name="Indicator" type="HSlider" parent="Container"]
+[node name="StaminaMeter" type="HSlider" parent="Container"]
 layout_mode = 0
 offset_right = 140.0
 offset_bottom = 40.0
 value = 50.0
 editable = false
 scrollable = false
+
+[node name="AmmoLabel" type="Label" parent="Container"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -55.0
+offset_top = -24.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "30 / 30"
+label_settings = SubResource("LabelSettings_dh6m7")
+horizontal_alignment = 2
+vertical_alignment = 2

@@ -29,9 +29,14 @@ public partial class AudioManager : Node
         Melee,
         MeleeHit,
         Breathe,
+        
         UIClick,
         UIConfirm,
-        MeleePickup
+        
+        MeleePickup,
+        
+        PistolShoot,
+        PistolReload
     }
     
     
@@ -113,6 +118,16 @@ public partial class AudioManager : Node
             case AudioClipName.MeleePickup:
             {
                 _audioPlayerObject.Call("on_melee_pickup");
+            }
+                break;
+            case AudioClipName.PistolShoot:
+            {
+                _audioPlayerObject.Call("on_pistol_shoot");
+            }
+                break;
+            case AudioClipName.PistolReload:
+            {
+                _audioPlayerObject.Call("on_pistol_reload");
             }
                 break;
             default:
