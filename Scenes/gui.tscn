@@ -118,3 +118,11 @@ libraries = {
 [node name="Inventory" parent="Container" instance=ExtResource("8_av7g3")]
 visible = false
 layout_mode = 1
+
+[node name="Indicator" type="HSlider" parent="Container"]
+layout_mode = 0
+offset_right = 140.0
+offset_bottom = 40.0
+value = 50.0
+editable = false
+scrollable = false

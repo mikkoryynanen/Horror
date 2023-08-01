@@ -34,7 +34,9 @@ public partial class Pipe : Node3D, IWeapon
 	public void PlayHitAudio(bool hitDamageable)
 	{
 		GetNode<GodotObject>("/root/Root/AudioPlayer").Call(  !hitDamageable ? "on_melee" : "on_melee_hit");
-		// AudioManager.Instance.PlayClip(stream);
+		AudioManager.Instance.PlayClip(hitDamageable
+			? AudioManager.AudioClipName.MeleeHit
+			: AudioManager.AudioClipName.Melee);
 	}
 
 	public void TakeOut()
@@ -49,7 +51,6 @@ public partial class Pipe : Node3D, IWeapon
 
 	public bool CanShoot()
 	{
-		return true;
-		// return _animator.CurrentAnimation == "idle" && AudioManager.Instance.HasPlayedClip();
+		return _animator.CurrentAnimation == "idle";
 	}
 }

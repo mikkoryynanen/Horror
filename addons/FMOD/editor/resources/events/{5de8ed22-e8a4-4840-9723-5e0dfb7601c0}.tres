@@ -1,0 +1,29 @@
+[gd_resource type="EventAsset" load_steps=4 format=3 uid="uid://2ce8pa27k0ii"]
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_l3du1"]
+data1 = 1150473257
+data2 = 1619420443
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_b61d1"]
+name = "ExhaustionLevel"
+id = SubResource("FMOD_STUDIO_PARAMETER_ID_l3du1")
+maximum = 2.0
+flags = 24
+guid = "{5f3a8f74-a517-4c8e-a95b-ebdced159835}"
+
+[sub_resource type="ParameterAsset" id="ParameterAsset_au4p5"]
+parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_b61d1")
+labels = ["Normal", "Low", "High"]
+path = "parameter:/ExhaustionLevel"
+guid = "{5f3a8f74-a517-4c8e-a95b-ebdced159835}"
+name = "ExhaustionLevel"
+
+[resource]
+min_distance = 1.0
+max_distance = 20.0
+parameters = {
+"{5f3a8f74-a517-4c8e-a95b-ebdced159835}": SubResource("ParameterAsset_au4p5")
+}
+path = "event:/Exhaustion"
+guid = "{5de8ed22-e8a4-4840-9723-5e0dfb7601c0}"
+name = "Exhaustion"

@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://cb7oyew3s1gbq"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Weapons/MeleePickUp"
+guid = "{f3e00a42-a96e-48f0-8c60-318e3aabc44a}"
+name = "MeleePickUp"

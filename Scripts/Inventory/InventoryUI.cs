@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using Horror.Scripts.Autoload;
 
 namespace Horror.Scripts.Inventory;
 
@@ -36,11 +37,15 @@ public partial class InventoryUI : Control
 		// Weapon selection
 		if (Input.IsActionJustPressed("right") && _currentSelectedWeaponIdx < _maxWeaponsCount)
 		{
+			AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIConfirm);
+			
 			_currentSelectedWeaponIdx++;
 			BuildWeaponSlot();
 		}
 		else if (Input.IsActionJustPressed("left") && _currentSelectedWeaponIdx > 0)
 		{
+			AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIConfirm);
+			
 			_currentSelectedWeaponIdx--;
 			BuildWeaponSlot();
 		}
@@ -48,6 +53,7 @@ public partial class InventoryUI : Control
 		// Close
 		if (Input.IsActionJustPressed("ui_cancel"))
 		{
+			AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIConfirm);
 			this.EmitSignalBus("OnCloseInventory");
 		}
 

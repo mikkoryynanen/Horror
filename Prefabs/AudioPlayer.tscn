@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dlxk5ceknx7c6"]
+[gd_scene load_steps=18 format=3 uid="uid://dlxk5ceknx7c6"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioEmitter.gd" id="1_bi3wx"]
 [ext_resource type="EventAsset" uid="uid://6fe85rqbqe0k" path="res://addons/FMOD/editor/resources/events/{047f7897-8b82-431e-9965-652aaa6120bc}.tres" id="2_188qt"]
@@ -8,6 +8,34 @@
 [ext_resource type="BankAsset" uid="uid://cox6rxswcfm3k" path="res://addons/FMOD/editor/resources/banks/{aca99a18-9e7b-0ce9-1547-55f4638eeb71}.tres" id="5_k1g4c"]
 [ext_resource type="BankAsset" uid="uid://csj17y7l35uxf" path="res://addons/FMOD/editor/resources/banks/{ee17f3f9-14ed-4f23-8f17-a6634b0342e7}.tres" id="6_54wsd"]
 
+[sub_resource type="FMOD_STUDIO_PARAMETER_ID" id="FMOD_STUDIO_PARAMETER_ID_l3du1"]
+data1 = 1150473257
+data2 = 1619420443
+
+[sub_resource type="FMOD_STUDIO_PARAMETER_DESCRIPTION" id="FMOD_STUDIO_PARAMETER_DESCRIPTION_b61d1"]
+name = "ExhaustionLevel"
+id = SubResource("FMOD_STUDIO_PARAMETER_ID_l3du1")
+maximum = 2.0
+flags = 24
+guid = "{5f3a8f74-a517-4c8e-a95b-ebdced159835}"
+
+[sub_resource type="ParameterAsset" id="ParameterAsset_au4p5"]
+parameter_description = SubResource("FMOD_STUDIO_PARAMETER_DESCRIPTION_b61d1")
+labels = ["Normal", "Low", "High"]
+path = "parameter:/ExhaustionLevel"
+guid = "{5f3a8f74-a517-4c8e-a95b-ebdced159835}"
+name = "ExhaustionLevel"
+
+[sub_resource type="EventAsset" id="EventAsset_8pxyq"]
+min_distance = 1.0
+max_distance = 20.0
+parameters = {
+"{5f3a8f74-a517-4c8e-a95b-ebdced159835}": SubResource("ParameterAsset_au4p5")
+}
+path = "event:/Exhaustion"
+guid = "{5de8ed22-e8a4-4840-9723-5e0dfb7601c0}"
+name = "Exhaustion"
+
 [sub_resource type="EventAsset" id="EventAsset_evl8d"]
 is_3d = true
 is_oneshot = true
@@ -16,6 +44,30 @@ max_distance = 20.0
 path = "event:/MeleeHit"
 guid = "{1cff0c13-7489-46b0-8b9e-fa9fe593c1a6}"
 name = "MeleeHit"
+
+[sub_resource type="EventAsset" id="EventAsset_einri"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/OnUIClick"
+guid = "{d2b907a1-4115-4e31-be73-2bf996f1eb8a}"
+name = "OnUIClick"
+
+[sub_resource type="EventAsset" id="EventAsset_bsa0u"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/OnUIConfirm"
+guid = "{e18227e7-886c-4ff9-a9c4-5ef096c95f3b}"
+name = "OnUIConfirm"
+
+[sub_resource type="EventAsset" id="EventAsset_vyle6"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Weapons/MeleePickUp"
+guid = "{f3e00a42-a96e-48f0-8c60-318e3aabc44a}"
+name = "MeleePickUp"
 
 [sub_resource type="BankAsset" id="BankAsset_i8je7"]
 file_path = "res://Audio/fmod/Build/Desktop/Music.bank"
@@ -35,8 +87,12 @@ name = "Stringers"
 script = ExtResource("1_bi3wx")
 music_event = ExtResource("2_188qt")
 footsteps_event = ExtResource("3_k6tnk")
+breathe_event = SubResource("EventAsset_8pxyq")
 melee_event = ExtResource("4_4uhfl")
 melee_hit_event = SubResource("EventAsset_evl8d")
+ui_click_event = SubResource("EventAsset_einri")
+ui_confirm_event = SubResource("EventAsset_bsa0u")
+melee_pickup_event = SubResource("EventAsset_vyle6")
 
 [node name="StudioBankLoader" type="StudioBankLoader" parent="."]
 load_on = 1

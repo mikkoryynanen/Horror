@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using Horror.Scripts.Autoload;
 
 namespace Horror.Scripts.Inventory;
 
@@ -29,6 +30,7 @@ public class PlayerInventory : Inventory
 
     public override void Show(string inventoryName = "Inventory")
     {
+        AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIClick);
         _ui.Build(this, "Inventory");
     }
 

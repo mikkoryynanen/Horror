@@ -9,7 +9,8 @@ public partial class RoomManager : Node3D
 	{
 		// _gridmap = GetNode<GridMap>("NavigationRegion/GridMap");
 		
-		AudioManager.Instance.PlayRepeating(GD.Load<AudioStream>("res://Assets/sfx/environment/Sci_Fi_Alarm_Loop_04.wav"));
+		// TODO Add this to FMOD
+		// AudioManager.Instance.PlayRepeating(GD.Load<AudioStream>("res://Assets/sfx/environment/Sci_Fi_Alarm_Loop_04.wav"));
 	}
 
 	// public Rid GetNavigationMap()

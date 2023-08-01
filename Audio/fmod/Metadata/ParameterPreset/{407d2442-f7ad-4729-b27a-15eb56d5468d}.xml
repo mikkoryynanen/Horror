@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{407d2442-f7ad-4729-b27a-15eb56d5468d}">
+		<property name="name">
+			<value>ExhaustionLevel</value>
+		</property>
+		<relationship name="folder">
+			<destination>{deab4ac5-0ec7-40f9-b53c-a1ea8419e090}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{5f3a8f74-a517-4c8e-a95b-ebdced159835}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{5f3a8f74-a517-4c8e-a95b-ebdced159835}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Normal</value>
+			<value>Low</value>
+			<value>High</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

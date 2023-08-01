@@ -35,7 +35,7 @@ public partial class MoodManager : Node
             
             if (_currentMood >= _maxMood)
             {
-                AudioManager.Instance.PlayClip(_moodStreams[GD.RandRange(0, _moodStreams.Length - 1)]);
+                // AudioManager.Instance.PlayClip(_moodStreams[GD.RandRange(0, _moodStreams.Length - 1)]);
                 _currentMood = 0;
             }
         }

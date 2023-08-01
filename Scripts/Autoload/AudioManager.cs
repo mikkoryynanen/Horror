@@ -1,17 +1,40 @@
+using System;
 using System.Threading.Tasks;
 using Godot;
 
 namespace Horror.Scripts.Autoload;
 
+public enum AudioClipName
+{
+    Footsteps,
+    Melee,
+    MeleeHit
+}
+
+/// <summary>
+/// Wrapper for FMOD GDScript methods. More info at https://alessandrofama.com/tutorials/fmod/godot/
+/// </summary>
 public partial class AudioManager : Node
 {
-    private static AudioManager _instance;
     public static AudioManager Instance => _instance;
- 
-    private AudioStreamPlayer _player;
-    private AudioStreamPlayer _loopPlayer;
-    private AudioStreamPlayer _musicPlayer;
 
+    private static AudioManager _instance;
+    private GodotObject _audioPlayerObject;
+    
+    private string _currentIntensity = "Basic";
+
+    public enum AudioClipName
+    {
+        Footsteps,
+        Melee,
+        MeleeHit,
+        Breathe,
+        UIClick,
+        UIConfirm,
+        MeleePickup
+    }
+    
+    
     public override void _EnterTree(){
         if(_instance != null){
             this.QueueFree();
@@ -21,66 +44,83 @@ public partial class AudioManager : Node
 
     public override void _Ready()
     {
-        _player = new AudioStreamPlayer();
-        _player.Bus = "SFX";
-        AddChild(_player);
-        
-        _loopPlayer = new AudioStreamPlayer();
-        _loopPlayer.Bus = "SFX";
-        AddChild(_loopPlayer);
-        
-        _musicPlayer = new AudioStreamPlayer();
-        _musicPlayer.Bus = "Music";
-        AddChild(_musicPlayer);
+        _audioPlayerObject = GetNode<GodotObject>("/root/Root/AudioPlayer");
     }
 
-    public void PlayLevelMusic(string path)
+    public void PlayLevelMusic()
     {
-        if (!_player.Playing)
-        {
-            _musicPlayer.Stream = GD.Load<AudioStream>(path);
-            _musicPlayer.Play();    
-        }
+        _audioPlayerObject.Call("play_music");
     }
 
-    public void PlayClip(AudioStream stream, float volumeDb = 0f)
+    public void ChangeIntensity()
     {
-        if (!_player.Playing)
-        {
-            _player.Stream = stream;
-            _player.VolumeDb = volumeDb;
-            _player.Play();    
-        }
+        _currentIntensity = _currentIntensity == "High" ? "Basic" : "High";
+        _audioPlayerObject.Call("on_set_intensity", _currentIntensity);
     }
-
+    
     /// <summary>
-    /// Adds slight variation to the repeating sound in order to make it more pleasant
+    /// Ends the running and sets the exhaustion level
     /// </summary>
-    /// <param name="stream"></param>
-    public void PlayRepeating(AudioStream stream)
+    /// <param name="exhaustionLevel">Low or High</param>
+    public void SetBreatheEnd(string exhaustionLevel)
     {
-        RepeatingLoop(stream);
+        _audioPlayerObject.Call("on_set_breathe_end", exhaustionLevel);
     }
 
-    private async Task RepeatingLoop(AudioStream stream)
+    public void PlayClip(AudioClipName clipName)
     {
-        _loopPlayer.Stream = stream;
-        
-        while (true)
+        switch (clipName)
         {
+            case AudioClipName.Footsteps:
+                _audioPlayerObject.Call("on_footstep");
+                break;
+            case AudioClipName.Melee:
+            {
+                _audioPlayerObject.Connect(
+                    "on_audio_played", 
+                    Callable.From(OnAudioPlayed), 
+                    (uint)ConnectFlags.OneShot);
+                
+                _audioPlayerObject.Call("on_melee");
+            }
+                break;
+            case AudioClipName.MeleeHit:
+            {
+                _audioPlayerObject.Connect(
+                    "on_audio_played", 
+                    Callable.From(OnAudioPlayed), 
+                    (uint)ConnectFlags.OneShot);
+                
+                _audioPlayerObject.Call("on_melee_hit");
+            }
+                break;
             
-            _loopPlayer.PitchScale = (float)GD.RandRange(0.98, 1.02);
-            _loopPlayer.VolumeDb = (float)GD.RandRange(0.9, 1.1);
-            _loopPlayer.Play();
-
-            var length = (int)stream.GetLength();
-            GD.Print($"Playing repeatable clip. waiting {length}");
-            await Task.Delay(length * 1000);
+            case AudioClipName.Breathe:
+            {
+                _audioPlayerObject.Call("on_breathe");
+            }
+                break;
+            case AudioClipName.UIClick:
+            {
+                _audioPlayerObject.Call("on_ui_click");
+            }
+                break;
+            case AudioClipName.UIConfirm:
+            {
+                _audioPlayerObject.Call("on_ui_confirm");
+            }
+                break;
+            case AudioClipName.MeleePickup:
+            {
+                _audioPlayerObject.Call("on_melee_pickup");
+            }
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(clipName), clipName, null);
         }
     }
 
-    public bool HasPlayedClip()
+    private void OnAudioPlayed()
     {
-        return !_player.Playing;
     }
 }

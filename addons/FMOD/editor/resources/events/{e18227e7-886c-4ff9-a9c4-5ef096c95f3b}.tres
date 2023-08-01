@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://nrpcg8gkr0v4"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/OnUIConfirm"
+guid = "{e18227e7-886c-4ff9-a9c4-5ef096c95f3b}"
+name = "OnUIConfirm"

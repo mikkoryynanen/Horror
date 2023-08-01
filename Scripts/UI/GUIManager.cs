@@ -14,6 +14,7 @@ public partial class GUIManager : CanvasLayer
 	private Label _textPopupLabel;
 
 	private Queue<string> _toastQueue = new();
+	private Slider _staminaMeter;
 
 	public override void _Ready()
 	{
@@ -22,16 +23,18 @@ public partial class GUIManager : CanvasLayer
 		_inventory = GetNode<InventoryUI>("Container/Inventory");
 		_textPopupAnimationPlayer = GetNode<AnimationPlayer>("Container/TextPopup/AnimationPlayer");
 		_textPopupLabel = GetNode<Label>("Container/TextPopup");
-		
-		this.GetSignalBus().OnShowInteract += OnShowInteract;
-		this.GetSignalBus().OnHideInteract += OnHideInteract;
-		this.GetSignalBus().OnActivatePlayerCamera += () => _recticle.Visible = true;
-		this.GetSignalBus().OnDeactivatePlayerCamera += () => _recticle.Visible = false;
-		this.GetSignalBus().OnItemPickedUp += OnItemPickup;
-		this.GetSignalBus().OnOpenInventory += () => _inventory.Visible = true;
-		this.GetSignalBus().OnCloseInventory += () => _inventory.Visible = false;
-	}
+		_staminaMeter = GetNode<Slider>("Container/Indicator");
 
+		var signalBus = this.GetSignalBus();
+		signalBus.OnShowInteract += OnShowInteract;
+		signalBus.OnHideInteract += OnHideInteract;
+		signalBus.OnActivatePlayerCamera += () => _recticle.Visible = true;
+		signalBus.OnDeactivatePlayerCamera += () => _recticle.Visible = false;
+		signalBus.OnItemPickedUp += OnItemPickup;
+		signalBus.OnOpenInventory += () => _inventory.Visible = true;
+		signalBus.OnCloseInventory += () => _inventory.Visible = false;
+		signalBus.OnUpdateStamina += OnUpdateStamina;
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 		if (_toastQueue.Count > 0 && !_textPopupAnimationPlayer.IsPlaying())
@@ -54,9 +57,6 @@ public partial class GUIManager : CanvasLayer
 		var item = ItemDatabase.GetItem(new Guid(itemId));
 		_toastQueue.Enqueue($"{item?.Name} picked up");
 		GD.Print($"{item?.Name} picked up");
-		
-		// _textPopupLabel.Text = $"{item?.Name} picked up";
-		// _textPopupAnimationPlayer.Play("show");
 	}
 
 	private void OnHideInteract()
@@ -67,5 +67,10 @@ public partial class GUIManager : CanvasLayer
 	private void OnShowInteract()
 	{
 		_interactLabel.Visible = true;
+	}
+	
+	private void OnUpdateStamina(float value)
+	{
+		_staminaMeter.Value = value * 100;
 	}
 }

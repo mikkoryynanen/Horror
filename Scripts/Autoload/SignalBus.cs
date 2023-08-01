@@ -38,4 +38,8 @@ public partial class SignalBus : Node
     public delegate void OnOpenInventoryEventHandler();
     [Signal]
     public delegate void OnCloseInventoryEventHandler();
+    
+    [Signal]
+    public delegate void OnUpdateStaminaEventHandler(float value);
+    
 }

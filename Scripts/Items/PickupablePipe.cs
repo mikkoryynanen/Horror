@@ -1,4 +1,5 @@
 using Godot;
+using Horror.Scripts.Autoload;
 
 namespace Horror.Scripts.Items;
 
@@ -8,6 +9,8 @@ public partial class PickupablePipe : StaticBody3D, IInteractable
     
     public void Interact()
     {
+        AudioManager.Instance.PlayClip(AudioManager.AudioClipName.MeleePickup);
+        
         this.EmitSignalBus("OnItemPickedUp", Id);
         
         QueueFree();

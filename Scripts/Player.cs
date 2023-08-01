@@ -21,9 +21,8 @@ public partial class Player : CharacterBody3D, IDamageable
 	
 	[Export()] private float WalkingSpeed = 5.0f;
 	[Export()] private float RunningSpeed = 5.0f;
-
-	// Get the gravity from the project settings to be synced with RigidBody nodes.
-	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
+	[Export()] private float _staminaDepletionSpeed = 1.5f;
+	[Export()] private float _staminaRechargeSpeed = 1.5f;
 
 	// weapon sway
 	[Export()] private float swaySpeed = 8f;
@@ -45,14 +44,16 @@ public partial class Player : CharacterBody3D, IDamageable
 	private int _health = 100;
 	private Horror.Scripts.Player.ViewObjectManager _viewObjectManager;
 	private bool _isRunning = false;
+	
+	// Get the gravity from the project settings to be synced with RigidBody nodes.
+	private float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
 	public PlayerInventory Inventory { get; private set; }
+	public float Stamina { get; private set; } = 1f;
 
 
 	public override void _Ready()
 	{
-		
-		
 		Inventory = new PlayerInventory(this, GetNode<GUIManager>("/root/Root/GUI").GetInventoryUI());
 		
 		// Inventory.AddItem(new Pipe());
@@ -71,24 +72,27 @@ public partial class Player : CharacterBody3D, IDamageable
 
 		_originalHeadPosition = _camera.Position;
 		
-		this.GetSignalBus().OnStartDialog += (act, title, isFullscren) =>
+		var signalBus = this.GetSignalBus();
+		signalBus.OnStartDialog += (act, title, isFullscren) =>
 		{
 			if(isFullscren)
 				_canProcess = false;
 		};
-		this.GetSignalBus().OnEndDialog += () => _canProcess = true;
-		this.GetSignalBus().OnActivatePlayerCamera += () =>
+		signalBus.OnEndDialog += () => _canProcess = true;
+		signalBus.OnActivatePlayerCamera += () =>
 		{
 			_canProcess = true;
 			_camera.MakeCurrent();
 		};
-		this.GetSignalBus().OnDeactivatePlayerCamera += () =>
+		signalBus.OnDeactivatePlayerCamera += () =>
 		{
 			_canProcess = false;
 			_camera.ClearCurrent();
 		};
-		this.GetSignalBus().OnOpenInventory += () => _canProcess = false;
-		this.GetSignalBus().OnCloseInventory += () => _canProcess = true;
+		signalBus.OnOpenInventory += () => _canProcess = false;
+		signalBus.OnCloseInventory += () => _canProcess = true;
+		
+		this.EmitSignalBus("OnUpdateStamina", Stamina);
 	}
 
 	public override void _Process(double delta)
@@ -127,15 +131,38 @@ public partial class Player : CharacterBody3D, IDamageable
 		}
 		
 		// Run
-		if (Input.IsActionJustPressed("run"))
+		if (Stamina > 0)
 		{
-			_isRunning = true;
-			GD.Print("Running");
+			if (Input.IsActionJustPressed("run"))
+			{
+				_isRunning = true;
+				AudioManager.Instance.PlayClip(AudioManager.AudioClipName.Breathe);
+				
+				GD.Print("Running");
+			}
+			else if (Input.IsActionJustReleased("run"))
+			{
+				_isRunning = false;
+				AudioManager.Instance.SetBreatheEnd(Stamina > 0.25f ? "Low" : "High");
+				
+				GD.Print("STOPPED running");
+			}
 		}
-		else if (Input.IsActionJustReleased("run"))
-		{
+		else
 			_isRunning = false;
-			GD.Print("STOPPED running");
+
+		if (_isRunning)
+		{
+			Stamina -= ((float)delta / 100) * _staminaDepletionSpeed;
+			this.EmitSignalBus("OnUpdateStamina", Stamina);
+		}
+		else
+		{
+			if (Stamina < 1f)
+			{
+				Stamina += ((float)delta / 100) * _staminaRechargeSpeed;
+				this.EmitSignalBus("OnUpdateStamina", Stamina);
+			}
 		}
 
 		Velocity = velocity;
@@ -207,8 +234,7 @@ public partial class Player : CharacterBody3D, IDamageable
 		_footstepTimer += (float)delta;
 		if (inputValue > 0 && _footstepTimer >= (_isRunning ? _footstepIntervalRunning : _footstepInterval))
 		{
-			GetNode<GodotObject>("/root/Root/AudioPlayer").Call("on_footstep");
-			
+			AudioManager.Instance.PlayClip(AudioManager.AudioClipName.Footsteps);
 			_footstepTimer = 0;
 		}
 	}
