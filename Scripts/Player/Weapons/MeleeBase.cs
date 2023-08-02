@@ -9,11 +9,18 @@ namespace Horror.Scripts.Player.Weapons;
 /// </summary>
 public partial class MeleeBase : WeaponBase
 {
-    [Export()] private Area3D _meleeCollisionArea;
-    
+    public Area3D MeleeCollisionArea;
+
+    public override void _Ready()
+    {
+        base._Ready();
+        
+        this.EmitSignalBus("OnUpdateAmmo", 0, 0);
+    }
+
     public override void _Process(double delta)
     {
-        if (_meleeCollisionArea == null)
+        if (MeleeCollisionArea == null)
         {
             GD.PrintErr("Melee collision is not setup");
             return;
@@ -27,7 +34,12 @@ public partial class MeleeBase : WeaponBase
 
     public override void Shoot()
     {
-        var overlappingBodies = _meleeCollisionArea.GetOverlappingBodies();
+        // Consume stamina
+        this.EmitSignalBus("OnReduceStamina", 0.2f);
+        
+        // TODO stamina could increase the damage of your weapon
+
+        var overlappingBodies = MeleeCollisionArea.GetOverlappingBodies();
         var hitDamageable = false;
         foreach (var body in overlappingBodies)
         {

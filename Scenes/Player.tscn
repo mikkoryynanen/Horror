@@ -19,7 +19,6 @@ _staminaDepletionSpeed = 25.0
 _staminaRechargeSpeed = 5.0
 swaySpeed = 8.5
 runningSwaySpeed = 10.0
-amplitude = null
 runningAmplitude = 0.75
 _footstepInterval = 0.7
 _footstepIntervalRunning = 0.35

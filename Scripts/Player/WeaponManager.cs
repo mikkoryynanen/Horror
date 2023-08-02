@@ -15,11 +15,13 @@ public partial class WeaponManager : Node3D
 	private float _t;
 	private Area3D _meleeCollisionArea;
 	private Node _rig;
+	private Node3D _spawnedWeapon;
 
 
 	public override void _Ready()
 	{
 		_rig = GetNode("Rig");
+		_meleeCollisionArea = GetNode<Area3D>("MeleeCollisionArea");
 		
 		var signalBus = this.GetSignalBus();
 		signalBus.OnStartDialog += (act, title, isFullscreen) =>
@@ -28,13 +30,8 @@ public partial class WeaponManager : Node3D
 				_canProcess = false;
 		};
 		signalBus.OnEndDialog += () => _canProcess = true;
-		signalBus.OnItemPickedUp += itemId =>
-		{
-			var id = new Guid(itemId);
-			var item = ItemDatabase.GetItem(id);
-			if (item.ItemType == Item.Type.Weapon)
-				SpawnWeapon(item);
-		};
+		signalBus.OnItemPickedUp += OnItemPickup;
+		signalBus.OnChangeWeapon += OnChangeWeapon;
 	}
 
 	public override void _Process(double delta)
@@ -53,20 +50,46 @@ public partial class WeaponManager : Node3D
 	{
 		Position += new Vector3(swayAmount.X * -swayIntensity, swayAmount.Y * swayIntensity, 0);
 	}
+	
+	private void OnItemPickup(string itemId)
+	{
+		var item = ItemDatabase.GetItem(new Guid(itemId));
+		if (item.ItemType == Item.Type.Weapon)
+			SpawnWeapon(item.PrefabPath);
+	}
 
-	private void SpawnWeapon(Item weaponItem)
+	private void OnChangeWeapon(string weaponId)
+	{
+		if (_spawnedWeapon != null && !_spawnedWeapon.IsQueuedForDeletion())
+		{
+			_spawnedWeapon.QueueFree();
+			_spawnedWeapon = null;
+		}
+		
+		var item = ItemDatabase.GetItem(new Guid(weaponId));
+		SpawnWeapon(item.PrefabPath);
+	}
+
+	private void SpawnWeapon(string weaponPrefabPath)
 	{
 		// Don't spawn weapon if the have already spawned one
 		// Rig has melee collision as child, so check more than 1
-		if (_rig.GetChildCount() <= 1)
+		if (_spawnedWeapon == null)
 		{
-			var packed = ResourceLoader.Load<PackedScene>(weaponItem.PrefabPath);
+			var packed = ResourceLoader.Load<PackedScene>(weaponPrefabPath);
 			var instance = packed.Instantiate() as Node3D;
+			_spawnedWeapon = instance;
 			_rig.AddChild(instance);
 
 			var weapon = instance as IWeapon;
-			weapon.TakeOut();	
+			weapon.TakeOut();
+
+			if (weapon is MeleeBase meleeBase)
+				meleeBase.MeleeCollisionArea = _meleeCollisionArea;
+
 		}
+		else
+			GD.PrintErr("Weapon already spawned. Remove spawned weapon first before spawning a new one");
 	}
 
 	private void FireProjectile()

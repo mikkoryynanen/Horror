@@ -78,6 +78,7 @@ omni_attenuation = 1.03526
 
 [node name="Player" parent="." instance=ExtResource("4_i4lk4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.64046, 1, 7.55664)
+amplitude = 0.5
 
 [node name="PickupablePipe" parent="." instance=ExtResource("6_kgy06")]
 transform = Transform3D(0.0447267, 0.245967, 1.07515e-08, -7.30993e-17, -1.09278e-08, 0.25, 0.245967, -0.0447267, -1.95506e-09, 8.45029, 1.03645, 5.10765)

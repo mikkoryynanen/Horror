@@ -80,6 +80,7 @@ public partial class GUIManager : CanvasLayer
 	
 	private void OnUpdateAmmo(int currentAmmo, int totalAmmo)
 	{
+		_ammoLabel.Visible = currentAmmo != 0 && totalAmmo != 0;
 		_ammoLabel.Text = $"{currentAmmo} / {totalAmmo}";
 	}
 }

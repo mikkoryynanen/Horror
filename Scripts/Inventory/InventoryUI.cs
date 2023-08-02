@@ -27,22 +27,6 @@ public partial class InventoryUI : Control
 		_lootableInfo = GetNode<Label>("LootableInfo");
 		_selectedItemTechnicalTextLabel = GetNode<Label>("SelectedItemInfo/ItemTechnicalText");
 		_selectedItemNameLabel = GetNode<Label>("SelectedItemInfo/ItemName");
-		
-		this.GetSignalBus().OnItemPickedUp += OnItemPickup;
-	}
-
-	private void OnItemPickup(string itemId)
-	{
-		// var item = ItemDatabase.GetItem(new Guid(itemId));
-		//
-		// if (item.ItemType == Item.Type.Weapon)
-		// {
-		// 	if (_equippedWeapons.Count <= 0)
-		// 	{
-		// 		_equippedWeapons.Add(item);
-		// 		BuildWeaponSlot();
-		// 	}
-		// }
 	}
 
 	public override void _Process(double delta)
@@ -50,19 +34,23 @@ public partial class InventoryUI : Control
 		if (!Visible) return;
 		
 		// Weapon selection
-		if (_playerInventory?.EquippedWeapons.Count > 1)
+		if (_playerInventory?.Weapons.Count > 1)
 		{
 			if (Input.IsActionJustPressed("right"))
 			{
 				AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIConfirm);
 				_playerInventory.EquipNextWeapon();
 				BuildWeaponSlot();
+				
+				this.EmitSignalBus("OnChangeWeapon", _playerInventory.CurrentEquippedWeapon.Id.ToString());
 			}
 			else if (Input.IsActionJustPressed("left"))
 			{
 				AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIConfirm);
 				_playerInventory.EquipPreviousWeapon();
 				BuildWeaponSlot();
+				
+				this.EmitSignalBus("OnChangeWeapon", _playerInventory.CurrentEquippedWeapon.Id.ToString());
 			}	
 		}
 		

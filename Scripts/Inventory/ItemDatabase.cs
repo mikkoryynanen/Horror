@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Godot;
+using Horror.Scripts.Inventory.Items;
 
 namespace Horror.Scripts.Inventory;
 

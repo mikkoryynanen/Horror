@@ -84,6 +84,7 @@ public partial class Player : CharacterBody3D, IDamageable
 		};
 		signalBus.OnOpenInventory += () => _canProcess = false;
 		signalBus.OnCloseInventory += () => _canProcess = true;
+		signalBus.OnReduceStamina += OnReduceStamina; 
 		
 		this.EmitSignalBus("OnUpdateStamina", Stamina);
 	}
@@ -144,19 +145,7 @@ public partial class Player : CharacterBody3D, IDamageable
 		else
 			_isRunning = false;
 
-		if (_isRunning)
-		{
-			Stamina -= ((float)delta / 100) * _staminaDepletionSpeed;
-			this.EmitSignalBus("OnUpdateStamina", Stamina);
-		}
-		else
-		{
-			if (Stamina < 1f)
-			{
-				Stamina += ((float)delta / 100) * _staminaRechargeSpeed;
-				this.EmitSignalBus("OnUpdateStamina", Stamina);
-			}
-		}
+		UpdateStamina(delta);
 
 		Velocity = velocity;
 		MoveAndSlide();
@@ -202,6 +191,29 @@ public partial class Player : CharacterBody3D, IDamageable
 			AudioManager.Instance.PlayClip(AudioManager.AudioClipName.Footsteps);
 			_footstepTimer = 0;
 		}
+	}
+
+	private void UpdateStamina(double delta)
+	{
+		if (_isRunning)
+		{
+			Stamina -= ((float)delta / 100) * _staminaDepletionSpeed;
+			this.EmitSignalBus("OnUpdateStamina", Stamina);
+		}
+		else
+		{
+			if (Stamina < 1f)
+			{
+				Stamina += ((float)delta / 100) * _staminaRechargeSpeed;
+				this.EmitSignalBus("OnUpdateStamina", Stamina);
+			}	
+		}
+	}
+	
+	private void OnReduceStamina(float value)
+	{
+		Stamina -= value;
+		Stamina = Mathf.Max(Stamina, 0);
 	}
 
 	public override void _Input(InputEvent inputEvent)

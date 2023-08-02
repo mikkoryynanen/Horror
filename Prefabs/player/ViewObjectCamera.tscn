@@ -28,22 +28,20 @@ fov = 40.0
 [node name="WeaponContainer" type="Node3D" parent="SubViewport/ObjectCamera"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("2_to7ei")
-swayIntensity = null
 
 [node name="Hitscan" type="RayCast3D" parent="SubViewport/ObjectCamera/WeaponContainer"]
 transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(2.08165e-12, 2.08165e-12, -200)
 collide_with_areas = true
 
-[node name="Rig" type="Node3D" parent="SubViewport/ObjectCamera/WeaponContainer"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.114882, 0)
-
-[node name="MeleeCollisionArea" type="Area3D" parent="SubViewport/ObjectCamera/WeaponContainer/Rig"]
-transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 1.19207e-07, -2.38419e-07, 2.38417e-07)
-visible = false
+[node name="MeleeCollisionArea" type="Area3D" parent="SubViewport/ObjectCamera/WeaponContainer"]
+transform = Transform3D(-4.37114e-08, 0, -0.999999, 0, 0.999999, 0, 1, 0, -4.37114e-08, -2.38417e-07, 0.114882, 1.19207e-07)
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/ObjectCamera/WeaponContainer/Rig/MeleeCollisionArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/ObjectCamera/WeaponContainer/MeleeCollisionArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.511541, -0.73356)
 shape = SubResource("BoxShape3D_bks3m")
+
+[node name="Rig" type="Node3D" parent="SubViewport/ObjectCamera/WeaponContainer"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.114882, 0)

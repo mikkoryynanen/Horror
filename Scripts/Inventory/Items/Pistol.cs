@@ -6,7 +6,7 @@ public class Pistol : Item
         : base(
             "Pistol", 
             "res://Prefabs/player/Weapons/PistolWeapon.tscn", 
-            "res://Assets/UI/Icons/Pipe.png", 
+            "res://Assets/crosshair007.png", 
             "When you need to shoot something",
             Type.Weapon)
     {

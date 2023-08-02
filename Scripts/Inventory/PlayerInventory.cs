@@ -8,10 +8,10 @@ namespace Horror.Scripts.Inventory;
 
 public class PlayerInventory : Inventory
 {
-    public List<Item> EquippedWeapons { get; private set; } = new();
+    public List<Item> Weapons { get; private set; } = new();
     
     private int _currentEquippedWeaponIdx = 0;
-    public Item CurrentEquippedWeapon => EquippedWeapons.Count > 0 ? EquippedWeapons[_currentEquippedWeaponIdx] : null;
+    public Item CurrentEquippedWeapon => Weapons.Count > 0 ? Weapons[_currentEquippedWeaponIdx] : null;
 
     public PlayerInventory(Node node, InventoryUI ui) : base(ui)
     {
@@ -21,8 +21,7 @@ public class PlayerInventory : Inventory
             var item = ItemDatabase.GetItem(id);
             if (item.ItemType == Item.Type.Weapon)
             {
-                if (EquippedWeapons.Count <= 0)
-                    EquippedWeapons.Add(item);
+                Weapons.Add(item);
             }
             else
                 AddItem(item);
@@ -37,7 +36,7 @@ public class PlayerInventory : Inventory
 
     public void EquipNextWeapon()
     {
-        if (_currentEquippedWeaponIdx < EquippedWeapons.Count - 1)
+        if (_currentEquippedWeaponIdx < Weapons.Count - 1)
             _currentEquippedWeaponIdx++;
         else
             _currentEquippedWeaponIdx = 0;
@@ -48,6 +47,6 @@ public class PlayerInventory : Inventory
         if (_currentEquippedWeaponIdx > 0)
             _currentEquippedWeaponIdx--;
         else
-            _currentEquippedWeaponIdx = EquippedWeapons.Count - 1;
+            _currentEquippedWeaponIdx = Weapons.Count - 1;
     }
 }
