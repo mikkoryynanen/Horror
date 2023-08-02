@@ -10,9 +10,7 @@ public partial class Player : CharacterBody3D, IDamageable
 {
 	[Export()] private float _sensitivity = 0.2f;
 	
-	private float _minAngle = -80;
-	private float _maxAngle = 90;
-	private Vector3 _lookRotation;
+	
 	private Node3D _head;
 	private RayCast3D _raycast;
 	
@@ -91,7 +89,9 @@ public partial class Player : CharacterBody3D, IDamageable
 
 	public override void _Process(double delta)
 	{
+		var lookVector = InputManager.Instance.GetLookVector();
 		_viewObjectManager.UpdateCameraTransform(_camera.GlobalTransform);
+		// _weaponManager.Sway(new Vector2(lookVector.X, lookVector.Y));
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -99,8 +99,11 @@ public partial class Player : CharacterBody3D, IDamageable
 		if (!_canProcess) return;
 		
 		_accumulativeDelta += (float)delta;
-		_head.RotationDegrees = new Vector3(_lookRotation.X, _head.RotationDegrees.Y, _head.RotationDegrees.Z);
-		this.RotationDegrees = new Vector3(this.RotationDegrees.X, _lookRotation.Y, this.RotationDegrees.Z);
+
+		var lookVector = InputManager.Instance.GetLookVector();
+		
+		_head.RotationDegrees = new Vector3(lookVector.X, _head.RotationDegrees.Y, _head.RotationDegrees.Z);
+		this.RotationDegrees = new Vector3(this.RotationDegrees.X, lookVector.Y, this.RotationDegrees.Z);
 		
 		Vector3 velocity = Velocity;
 
@@ -131,15 +134,11 @@ public partial class Player : CharacterBody3D, IDamageable
 			{
 				_isRunning = true;
 				AudioManager.Instance.PlayClip(AudioManager.AudioClipName.Breathe);
-				
-				GD.Print("Running");
 			}
 			else if (Input.IsActionJustReleased("run"))
 			{
 				_isRunning = false;
 				AudioManager.Instance.SetBreatheEnd(Stamina > 0.25f ? "Low" : "High");
-				
-				GD.Print("STOPPED running");
 			}
 		}
 		else
@@ -164,15 +163,13 @@ public partial class Player : CharacterBody3D, IDamageable
 			}
 			else
 			{
-				if (Engine.GetPhysicsFrames() % 2 == 0)
-				{
-					this.EmitSignalBus("OnHideInteract");
-				}
+				// TODO This gets called too often
+				this.EmitSignalBus("OnHideInteract");
 			}
 		}
 		
 		// Inventory
-		if (Input.IsActionJustPressed("inventory_open"))
+		if (Input.IsActionJustPressed("inventory"))
 		{
 			Inventory.Show();
 			this.EmitSignalBus("OnOpenInventory");
@@ -214,23 +211,6 @@ public partial class Player : CharacterBody3D, IDamageable
 	{
 		Stamina -= value;
 		Stamina = Mathf.Max(Stamina, 0);
-	}
-
-	public override void _Input(InputEvent inputEvent)
-	{
-		if (!_canProcess) return;
-		
-		if (inputEvent is InputEventMouseMotion)
-		{
-			var motion = inputEvent as InputEventMouseMotion;
-			Vector3 lookVector = _lookRotation;
-			lookVector.Y -= motion.Relative.X * _sensitivity;
-			lookVector.X -= motion.Relative.Y * _sensitivity;
-			lookVector.X = Mathf.Clamp(lookVector.X, _minAngle, _maxAngle);
-			_lookRotation = lookVector;
-			
-			_weaponManager.Sway(new Vector2(motion.Relative.X, motion.Relative.Y));
-		}
 	}
 
 	public void TakeDamage(int amount)

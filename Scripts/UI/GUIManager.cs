@@ -1,31 +1,38 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
+using Horror.Scripts.Autoload;
 using Horror.Scripts.Inventory;
 
 namespace Horror.Scripts.UI;
 
 public partial class GUIManager : CanvasLayer
 {
-	private Label _interactLabel;
+	private BoxContainer _interactionLabelContainer;
 	private TextureRect _recticle;
 	private AnimationPlayer _textPopupAnimationPlayer;
 	private InventoryUI _inventory;
 	private Label _textPopupLabel;
+	private Control _pauseMenu;
 
 	private Queue<string> _toastQueue = new();
 	private Slider _staminaMeter;
 	private Label _ammoLabel;
+	private GridContainer _inputActionParent;
 
 	public override void _Ready()
 	{
-		_interactLabel = GetNode<Label>("Container/Reticle/Label");
+		_interactionLabelContainer = GetNode<BoxContainer>("Container/Reticle/InteractionLabelContainer");
 		_recticle = GetNode<TextureRect>("Container/Reticle");
 		_inventory = GetNode<InventoryUI>("Container/Inventory");
 		_textPopupAnimationPlayer = GetNode<AnimationPlayer>("Container/TextPopup/AnimationPlayer");
 		_textPopupLabel = GetNode<Label>("Container/TextPopup");
 		_staminaMeter = GetNode<Slider>("Container/StaminaMeter");
 		_ammoLabel = GetNode<Label>("Container/AmmoLabel");
+		
+		_pauseMenu = GetNode<Control>("Container/PauseMenu");
+		_inputActionParent = GetNode<GridContainer>("Container/PauseMenu/Container/BoxContainer/KeybindsContainer");
 
 		var signalBus = this.GetSignalBus();
 		signalBus.OnShowInteract += OnShowInteract;
@@ -33,10 +40,36 @@ public partial class GUIManager : CanvasLayer
 		signalBus.OnActivatePlayerCamera += () => _recticle.Visible = true;
 		signalBus.OnDeactivatePlayerCamera += () => _recticle.Visible = false;
 		signalBus.OnItemPickedUp += OnItemPickup;
-		signalBus.OnOpenInventory += () => _inventory.Visible = true;
-		signalBus.OnCloseInventory += () => _inventory.Visible = false;
 		signalBus.OnUpdateStamina += OnUpdateStamina;
 		signalBus.OnUpdateAmmo += OnUpdateAmmo;
+		signalBus.OnMenuCancel += OnPause;
+		
+		signalBus.OnOpenInventory += () => _inventory.Visible = true;
+		signalBus.OnCloseInventory += () => _inventory.Visible = false;
+
+		OnHideInteract();
+		
+		_pauseMenu.Visible = false;
+	}
+
+	public override void _Process(double delta)
+	{
+		// TODO This gets run immidiately after when open inventory
+		if (_inventory.Visible && Input.IsActionJustPressed("cancel"))
+		{
+			AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIConfirm);
+			_inventory.Visible = false;
+			
+			this.EmitSignalBus("OnCloseInventory");
+		}
+		// else if (!_inventory.Visible && Input.IsActionJustPressed("inventory"))
+		// {
+		// 	// Inventory.Show();
+		// 	AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIConfirm);
+		// 	_inventory.Visible = true;
+		// 	
+		// 	this.EmitSignalBus("OnOpenInventory");
+		// }
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -65,12 +98,12 @@ public partial class GUIManager : CanvasLayer
 
 	private void OnHideInteract()
 	{
-		_interactLabel.Visible = false;
+		_interactionLabelContainer.Visible = false;
 	}
 
 	private void OnShowInteract()
 	{
-		_interactLabel.Visible = true;
+		_interactionLabelContainer.Visible = true;
 	}
 	
 	private void OnUpdateStamina(float value)
@@ -82,5 +115,29 @@ public partial class GUIManager : CanvasLayer
 	{
 		_ammoLabel.Visible = currentAmmo != 0 && totalAmmo != 0;
 		_ammoLabel.Text = $"{currentAmmo} / {totalAmmo}";
+	}
+	
+	private void OnPause()
+	{
+		if (_inventory.Visible) return;
+		
+		_pauseMenu.Visible = !_pauseMenu.Visible;
+
+		if (_pauseMenu.Visible)
+		{
+			foreach (var actionNode in _inputActionParent.GetChildren())
+				actionNode.QueueFree();
+
+			var inputActions = InputMap.GetActions().Where(x => !x.ToString().Contains("ui_"));
+			foreach (var action in inputActions)
+			{
+				var packed = ResourceLoader.Load<PackedScene>("res://Prefabs/UI/InputActionTemplate.tscn");
+				var instance = packed.Instantiate() as BoxContainer;
+				_inputActionParent.AddChild(instance);
+
+				instance.GetNode("ControllerTextureRect").Set("path", action);
+				instance.GetNode<Label>("Label").Text = action;
+			}
+		}
 	}
 }

@@ -49,4 +49,8 @@ public partial class SignalBus : Node
     
     [Signal]
     public delegate void OnChangeWeaponEventHandler(string weaponId);
+    
+    // UI
+    [Signal]
+    public delegate void OnMenuCancelEventHandler();
 }

@@ -54,13 +54,6 @@ public partial class InventoryUI : Control
 			}	
 		}
 		
-		// Close
-		if (Input.IsActionJustPressed("ui_cancel"))
-		{
-			AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIConfirm);
-			this.EmitSignalBus("OnCloseInventory");
-		}
-
 		if (Input.IsActionJustPressed("interact"))
 		{
 			// GD.Print("loot single");

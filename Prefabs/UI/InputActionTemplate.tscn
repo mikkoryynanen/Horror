@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cew5v64agxe4k"]
+
+[ext_resource type="Texture2D" uid="uid://xe4n818le3p8" path="res://addons/controller_icons/assets/key/e.png" id="1_rgsyp"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/TextureRect.gd" id="2_f7p7t"]
+
+[node name="InputActionTemplate" type="BoxContainer"]
+
+[node name="ControllerTextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_rgsyp")
+expand_mode = 1
+script = ExtResource("2_f7p7t")
+path = "interact"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "to interact"

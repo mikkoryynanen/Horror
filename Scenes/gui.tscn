@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://cabh24mlvxkp2"]
+[gd_scene load_steps=17 format=3 uid="uid://cabh24mlvxkp2"]
 
 [ext_resource type="Script" path="res://Scripts/UI/GUIManager.cs" id="1_s4ul8"]
 [ext_resource type="Texture2D" uid="uid://cntwtaxwtt2hk" path="res://Assets/crosshair007.png" id="1_syclb"]
 [ext_resource type="Shader" path="res://shaders/psx_dither.gdshader" id="1_wbj8i"]
 [ext_resource type="FontFile" uid="uid://fxgswysibsmu" path="res://fonts/monogram.ttf" id="4_1p708"]
+[ext_resource type="Texture2D" uid="uid://xe4n818le3p8" path="res://addons/controller_icons/assets/key/e.png" id="4_m7cog"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/TextureRect.gd" id="5_o7ome"]
 [ext_resource type="PackedScene" uid="uid://ceggctfx4hul1" path="res://Prefabs/UI/Inventory/Inventory.tscn" id="8_av7g3"]
+[ext_resource type="LabelSettings" uid="uid://c2kvlknc16rwc" path="res://Prefabs/UI/UILabel.tres" id="8_up2yq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_41fwl"]
 shader = ExtResource("1_wbj8i")
@@ -12,12 +15,8 @@ shader_parameter/color_depth = 5
 shader_parameter/dithering = true
 shader_parameter/resolution_scale = 1
 
-[sub_resource type="SystemFont" id="SystemFont_6wmk4"]
-subpixel_positioning = 0
-
 [sub_resource type="LabelSettings" id="LabelSettings_w35aa"]
-font = SubResource("SystemFont_6wmk4")
-font_size = 20
+font = ExtResource("4_1p708")
 
 [sub_resource type="LabelSettings" id="LabelSettings_j7f5t"]
 font = ExtResource("4_1p708")
@@ -62,6 +61,10 @@ _data = {
 [sub_resource type="LabelSettings" id="LabelSettings_dh6m7"]
 font = ExtResource("4_1p708")
 
+[sub_resource type="LabelSettings" id="LabelSettings_ysrmw"]
+font = ExtResource("4_1p708")
+font_size = 24
+
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_s4ul8")
 
@@ -92,14 +95,26 @@ expand_mode = 1
 stretch_mode = 4
 metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="Container/Reticle"]
+[node name="InteractionLabelContainer" type="BoxContainer" parent="Container/Reticle"]
 visible = false
 layout_mode = 0
 offset_left = 21.0
-offset_top = -25.0
-offset_right = 139.0
-offset_bottom = 6.0
-text = "E to Interact"
+offset_top = -21.0
+offset_right = 183.0
+offset_bottom = 19.0
+theme_override_constants/separation = 0
+
+[node name="ControllerTextureRect" type="TextureRect" parent="Container/Reticle/InteractionLabelContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("4_m7cog")
+expand_mode = 1
+script = ExtResource("5_o7ome")
+path = "interact"
+
+[node name="InteractionLabel" type="Label" parent="Container/Reticle/InteractionLabelContainer"]
+layout_mode = 2
+text = "to interact"
 label_settings = SubResource("LabelSettings_w35aa")
 
 [node name="TextPopup" type="Label" parent="Container"]
@@ -147,3 +162,67 @@ text = "30 / 30"
 label_settings = SubResource("LabelSettings_dh6m7")
 horizontal_alignment = 2
 vertical_alignment = 2
+
+[node name="PauseMenu" type="Control" parent="Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="ColorRect" parent="Container/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.686275)
+
+[node name="Container" type="BoxContainer" parent="Container/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+
+[node name="Title" type="Label" parent="Container/PauseMenu/Container"]
+layout_mode = 2
+text = "Paused"
+label_settings = ExtResource("8_up2yq")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="BoxContainer" type="BoxContainer" parent="Container/PauseMenu/Container"]
+layout_mode = 2
+vertical = true
+
+[node name="Keybindings" type="Label" parent="Container/PauseMenu/Container/BoxContainer"]
+layout_mode = 2
+text = "Keybindings"
+label_settings = SubResource("LabelSettings_ysrmw")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="KeybindsContainer" type="GridContainer" parent="Container/PauseMenu/Container/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 40
+columns = 3
+
+[node name="Buttons" type="BoxContainer" parent="Container/PauseMenu/Container"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="Container/PauseMenu/Container/Buttons"]
+layout_mode = 2
+text = "CLOSE"
+
+[node name="Button2" type="Button" parent="Container/PauseMenu/Container/Buttons"]
+layout_mode = 2
+text = "MAIN MENU"

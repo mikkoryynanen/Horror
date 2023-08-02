@@ -17,8 +17,8 @@ public enum AudioClipName
 public partial class AudioManager : Node
 {
     public static AudioManager Instance => _instance;
-
     private static AudioManager _instance;
+    
     private GodotObject _audioPlayerObject;
     
     private string _currentIntensity = "Basic";
