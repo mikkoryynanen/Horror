@@ -84,7 +84,8 @@ public partial class Player : CharacterBody3D, IDamageable
 		signalBus.OnCloseInventory += () => _canProcess = true;
 		signalBus.OnReduceStamina += OnReduceStamina; 
 		
-		this.EmitSignalBus("OnUpdateStamina", Stamina);
+		this.EmitSignalBus(nameof(SignalBus.OnUpdateStamina), Stamina);
+		this.EmitSignalBus(nameof(SignalBus.OnUpdateHealth), _health);
 	}
 
 	public override void _Process(double delta)
@@ -215,8 +216,11 @@ public partial class Player : CharacterBody3D, IDamageable
 
 	public void TakeDamage(int amount)
 	{
+		GD.Print($"Player taking damage. {_health} / 100");
 		_health -= amount;
 		if(_health <= 0)
 			GD.Print("GAme over!!!");
+		
+		this.EmitSignalBus(nameof(SignalBus.OnUpdateHealth), _health);
 	}
 }

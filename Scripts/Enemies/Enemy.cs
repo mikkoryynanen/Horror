@@ -1,49 +1,123 @@
 using Godot;
 using Horror.Scripts.Damage;
 
+namespace Horror.Scripts.Enemies;
+
 public partial class Enemy : Node3D
 {
+	[Export()] private float _attackDistance = 1f;
+	[Export()] private float _attackSpeed = 0.5f;
+	
 	private Node3D _target;
 	private NavigationAgent3D _navAgent;
-	private Rid _navMap;
+	private Area3D _awarenessArea;
+	
+	private float _attackTimer = 0f;
 
-	private enum State { None, Idle, Attack }
+	private enum State { None, Idle, Chase, Attack }
 
-	private State _currentState = State.Idle;
+	private State _currentState = State.None;
+	private AnimationPlayer _animationPlayer;
 
 	public override void _Ready()
 	{
-		_target = GetNode<Node3D>("/root/Core/Player");
 		_navAgent = GetNode<NavigationAgent3D>("NavigationAgent");
+		_awarenessArea = GetNode<Area3D>("AwarenessArea");
+		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+
+		_awarenessArea.BodyEntered += OnPlayerSeen;
 	
 		_navAgent.PathDesiredDistance = 0.25f;
-
-		// _navMap = GetNode<RoomManager>("/root/Core/RoomManager").GetNavigationMap();
-		// _navAgent.SetNavigationMap(_navMap);
+		
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		_navAgent.TargetPosition = _target.GlobalPosition;
-			
-		if (_navAgent.IsTargetReachable() && !_navAgent.IsTargetReached())
+		if (_currentState == State.Chase)
 		{
-			var nextLocation = _navAgent.GetNextPathPosition();
-			var direction = GlobalPosition.DirectionTo(nextLocation);
-			GlobalPosition += direction * (float)delta;
+			if (_navAgent.IsTargetReachable() && !_navAgent.IsTargetReached())
+			{
+				var nextLocation = _navAgent.GetNextPathPosition();
+				var direction = GlobalPosition.DirectionTo(nextLocation);
+				GlobalPosition += direction * (float)delta;
+				LookAtFromPosition(this.GlobalPosition, _target.GlobalPosition, Vector3.Up, true);
+			}	
+		}
+		else if (_currentState == State.Attack)
+		{
+			AttackRoutine((float)delta);
 		}
 
-		if (_currentState == State.Attack)
+		AiProcess();
+	}
+
+	/// <summary>
+	/// Processes the AI related logic every 20th frame
+	/// </summary>
+	private void AiProcess()
+	{
+		if (Engine.GetFramesDrawn() % 20 == 0)
 		{
-			if (_target is IDamageable damageable)
+			switch (_currentState)
 			{
-				damageable.TakeDamage(10);
+				case State.None:
+					// GD.Print("Enemy state is none");
+					break;
+				case State.Idle:
+					GD.Print("Enemy idling...");
+					if (!_animationPlayer.IsPlaying())
+						_animationPlayer.Play("idle");
+					break;
+				case State.Attack:
+					GD.Print($"Attacking {_target.Name}");
+					
+					if (GetTargetDistance() > _attackDistance)
+					{
+						_currentState = State.Chase;
+					}
+					break;
+				case State.Chase:
+					GD.Print($"Chasing {_target.Name}");
+					_navAgent.TargetPosition = _target.GlobalPosition;
+					
+					_animationPlayer.Play("run/Run");
+					
+					if (GetTargetDistance() < _attackDistance)
+					{
+						_currentState = State.Attack;
+					}
+					break;
 			}
 		}
 	}
 
-	public void OnTargetReached()
+	private void AttackRoutine(float delta)
 	{
-		_currentState = State.Attack;
+		_attackTimer += delta;
+		if (_attackTimer >= _attackSpeed)
+		{
+			_animationPlayer.Play("punch/Punch");
+			
+			if (_target is IDamageable damageable)
+			{
+				damageable.TakeDamage(10);
+			}
+			_attackTimer = 0f;
+		}
+	}
+
+	private float GetTargetDistance()
+	{
+		var distance = this.GlobalPosition.DistanceSquaredTo(_target.GlobalPosition);
+		return distance;
+	}
+
+	private void OnPlayerSeen(Node3D body)
+	{
+		GD.Print($"i saw {body.Name}");
+
+		_target = body;
+		_navAgent.TargetPosition = body.GlobalPosition;
+		_currentState = State.Chase;
 	}
 }

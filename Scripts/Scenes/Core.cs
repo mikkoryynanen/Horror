@@ -6,7 +6,8 @@ using Horror.Scripts.Inventory;
 public partial class Core : Node3D
 {
 	private GodotObject _musicNode;
-	
+	private GridMap _gridmap;
+
 
 	public override void _Ready()
 	{

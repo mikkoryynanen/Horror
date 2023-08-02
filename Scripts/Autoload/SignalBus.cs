@@ -40,11 +40,6 @@ public partial class SignalBus : Node
     public delegate void OnCloseInventoryEventHandler();
     
     [Signal]
-    public delegate void OnUpdateStaminaEventHandler(float value);
-    [Signal]
-    public delegate void OnReduceStaminaEventHandler(float value);
-    
-    [Signal]
     public delegate void OnUpdateAmmoEventHandler(int currentAmmo, int totalAmmo);
     
     [Signal]
@@ -53,4 +48,10 @@ public partial class SignalBus : Node
     // UI
     [Signal]
     public delegate void OnMenuCancelEventHandler();
+    [Signal]
+    public delegate void OnUpdateStaminaEventHandler(float value);
+    [Signal]
+    public delegate void OnReduceStaminaEventHandler(float value);
+    [Signal]
+    public delegate void OnUpdateHealthEventHandler(float value);
 }

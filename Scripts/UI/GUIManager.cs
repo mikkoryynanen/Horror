@@ -20,6 +20,8 @@ public partial class GUIManager : CanvasLayer
 	private Slider _staminaMeter;
 	private Label _ammoLabel;
 	private GridContainer _inputActionParent;
+	private Slider _healthMeter;
+	private ColorRect _lowHealthWarning;
 
 	public override void _Ready()
 	{
@@ -28,7 +30,9 @@ public partial class GUIManager : CanvasLayer
 		_inventory = GetNode<InventoryUI>("Container/Inventory");
 		_textPopupAnimationPlayer = GetNode<AnimationPlayer>("Container/TextPopup/AnimationPlayer");
 		_textPopupLabel = GetNode<Label>("Container/TextPopup");
-		_staminaMeter = GetNode<Slider>("Container/StaminaMeter");
+		_healthMeter = GetNode<Slider>("Container/MetersContainer/HealthMeter");
+		_lowHealthWarning = GetNode<ColorRect>("Container/LowHealth");
+		_staminaMeter = GetNode<Slider>("Container/MetersContainer/StaminaMeter");
 		_ammoLabel = GetNode<Label>("Container/AmmoLabel");
 		
 		_pauseMenu = GetNode<Control>("Container/PauseMenu");
@@ -40,12 +44,14 @@ public partial class GUIManager : CanvasLayer
 		signalBus.OnActivatePlayerCamera += () => _recticle.Visible = true;
 		signalBus.OnDeactivatePlayerCamera += () => _recticle.Visible = false;
 		signalBus.OnItemPickedUp += OnItemPickup;
-		signalBus.OnUpdateStamina += OnUpdateStamina;
 		signalBus.OnUpdateAmmo += OnUpdateAmmo;
 		signalBus.OnMenuCancel += OnPause;
 		
 		signalBus.OnOpenInventory += () => _inventory.Visible = true;
 		signalBus.OnCloseInventory += () => _inventory.Visible = false;
+		
+		signalBus.OnUpdateStamina += OnUpdateStamina;
+		signalBus.OnUpdateHealth += OnUpdateHealth;
 
 		OnHideInteract();
 		
@@ -109,6 +115,17 @@ public partial class GUIManager : CanvasLayer
 	private void OnUpdateStamina(float value)
 	{
 		_staminaMeter.Value = value * 100;
+	}
+	
+	private void OnUpdateHealth(float value)
+	{
+		_healthMeter.Value = value;
+		if (value < 100)
+		{
+			var tween = GetTree().CreateTween();
+			var valueDelta = 100 - value;
+			tween.TweenProperty(_lowHealthWarning.Material, "shader_parameter/vignette_opacity", valueDelta / 100, 0.25f);
+		}
 	}
 	
 	private void OnUpdateAmmo(int currentAmmo, int totalAmmo)

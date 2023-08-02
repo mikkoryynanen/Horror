@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://cabh24mlvxkp2"]
+[gd_scene load_steps=19 format=3 uid="uid://cabh24mlvxkp2"]
 
 [ext_resource type="Script" path="res://Scripts/UI/GUIManager.cs" id="1_s4ul8"]
 [ext_resource type="Texture2D" uid="uid://cntwtaxwtt2hk" path="res://Assets/crosshair007.png" id="1_syclb"]
 [ext_resource type="Shader" path="res://shaders/psx_dither.gdshader" id="1_wbj8i"]
+[ext_resource type="Shader" path="res://shaders/ColorVignete.gdshader" id="3_sbgjn"]
 [ext_resource type="FontFile" uid="uid://fxgswysibsmu" path="res://fonts/monogram.ttf" id="4_1p708"]
 [ext_resource type="Texture2D" uid="uid://xe4n818le3p8" path="res://addons/controller_icons/assets/key/e.png" id="4_m7cog"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/TextureRect.gd" id="5_o7ome"]
@@ -14,6 +15,12 @@ shader = ExtResource("1_wbj8i")
 shader_parameter/color_depth = 5
 shader_parameter/dithering = true
 shader_parameter/resolution_scale = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ngsic"]
+shader = ExtResource("3_sbgjn")
+shader_parameter/vignette_intensity = 1.0
+shader_parameter/vignette_opacity = 0.0
+shader_parameter/vignette_rgb = Color(1, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_w35aa"]
 font = ExtResource("4_1p708")
@@ -77,6 +84,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="LowHealth" type="ColorRect" parent="Container"]
+material = SubResource("ShaderMaterial_ngsic")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.278431)
+
 [node name="Reticle" type="TextureRect" parent="Container"]
 layout_mode = 1
 anchors_preset = 8
@@ -137,14 +154,6 @@ libraries = {
 visible = false
 layout_mode = 1
 
-[node name="StaminaMeter" type="HSlider" parent="Container"]
-layout_mode = 0
-offset_right = 140.0
-offset_bottom = 40.0
-value = 50.0
-editable = false
-scrollable = false
-
 [node name="AmmoLabel" type="Label" parent="Container"]
 layout_mode = 1
 anchors_preset = 3
@@ -164,6 +173,7 @@ horizontal_alignment = 2
 vertical_alignment = 2
 
 [node name="PauseMenu" type="Control" parent="Container"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -226,3 +236,22 @@ text = "CLOSE"
 [node name="Button2" type="Button" parent="Container/PauseMenu/Container/Buttons"]
 layout_mode = 2
 text = "MAIN MENU"
+
+[node name="MetersContainer" type="BoxContainer" parent="Container"]
+layout_mode = 0
+offset_right = 154.0
+offset_bottom = 43.0
+vertical = true
+
+[node name="HealthMeter" type="HSlider" parent="Container/MetersContainer"]
+modulate = Color(0, 0.980392, 0, 1)
+layout_mode = 2
+value = 50.0
+editable = false
+scrollable = false
+
+[node name="StaminaMeter" type="HSlider" parent="Container/MetersContainer"]
+layout_mode = 2
+value = 50.0
+editable = false
+scrollable = false
