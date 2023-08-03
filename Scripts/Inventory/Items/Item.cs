@@ -28,8 +28,6 @@ public abstract class Item
         PrefabPath = prefabPath;
         IconPath = iconPath;
         ItemType = type;
-        
-        GD.Print($"Item {Name} of type {ItemType} created with id {Id}");
     }
     
     public virtual void Serialize(BinaryWriter writer)

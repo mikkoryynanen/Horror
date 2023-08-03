@@ -47,14 +47,15 @@ public partial class MeleeBase : WeaponBase
             {
                 if (body is IDamageable damageable)
                 {
-                    damageable.TakeDamage(10);
+                    damageable.TakeDamage(25);
                     hitDamageable = true;
-						
-                    // TODO Enable?
-                    // var packed = ResourceLoader.Load<PackedScene>("res://Prefabs/Particles/HitParticle.tscn");
-                    // var instance = packed.Instantiate() as Node3D;
-                    // instance.Position = _raycast.GetCollisionPoint();
-                    // GetNode<Node3D>("/root/Core").AddChild(instance);
+                    
+                    var packed = ResourceLoader.Load<PackedScene>("res://Prefabs/Effects/BloodEffect.tscn");
+                    var instance = packed.Instantiate() as Node3D;
+                    GetNode<Node3D>("/root/Root").AddChild(instance);
+                    
+                    instance.Position = new Vector3(body.Position.X, body.Position.Y + 1f, body.Position.Z);
+                    
                 }
             }
         }
@@ -65,7 +66,7 @@ public partial class MeleeBase : WeaponBase
     private void PlayAudio(bool hitDamageable)
     {
         AudioManager.Instance.PlayClip(hitDamageable
-            ? AudioManager.AudioClipName.MeleeHit
+            ? AudioManager.AudioClipName.MeleeHitBody
             : AudioManager.AudioClipName.Melee);
     }
 }

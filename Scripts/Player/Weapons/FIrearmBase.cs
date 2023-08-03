@@ -81,19 +81,13 @@ public partial class FirearmBase : WeaponBase
 
     public override void Shoot()
     {
-        var screenPoint = new Vector2I((int)GetViewport().GetVisibleRect().Size.X / 2, (int)GetViewport().GetVisibleRect().Size.Y / 2);
-        var from = _camera.ProjectRayOrigin(screenPoint);
-        var to = from + _camera.ProjectRayNormal(screenPoint) * 100;
-		
-        var spaceState = GetWorld3D().DirectSpaceState;
-        var query = PhysicsRayQueryParameters3D.Create(from, to);
-        var result = spaceState.IntersectRay(query);
-        if (result.Count > 0)
+        var results = this.GetCameraCenterHitObjects3D();
+        if (results.Count > 0)
         {
             var packedEffect = ResourceLoader.Load<PackedScene>("res://Prefabs/Particles/HitParticle.tscn");
             var node = packedEffect.Instantiate() as Node3D;
             GetNode<Node3D>("/root/Root").AddChild(node);
-            node.Position = result["position"].AsVector3();
+            node.Position = results["position"].AsVector3();
         }
         
         _shootAnimFinished = false;

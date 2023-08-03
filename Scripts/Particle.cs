@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Particle : CpuParticles3D
+public partial class Particle : GpuParticles3D
 {
 	public override void _Ready()
 	{

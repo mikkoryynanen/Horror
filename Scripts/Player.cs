@@ -216,8 +216,8 @@ public partial class Player : CharacterBody3D, IDamageable
 
 	public void TakeDamage(int amount)
 	{
-		GD.Print($"Player taking damage. {_health} / 100");
 		_health -= amount;
+		GD.Print($"Player taking damage. {_health} / 100");
 		if(_health <= 0)
 			GD.Print("GAme over!!!");
 		

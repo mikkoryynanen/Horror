@@ -1,8 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://da37xvrptmx"]
+[gd_scene load_steps=13 format=3 uid="uid://da37xvrptmx"]
 
 [ext_resource type="Script" path="res://Scripts/Enemies/Enemy.cs" id="1_ygkcg"]
 [ext_resource type="AnimationLibrary" uid="uid://clcbquaq60je3" path="res://Assets/characters/ordinaryMan/animations/run.glb" id="2_4f63t"]
 [ext_resource type="AnimationLibrary" uid="uid://egkhu32agtdu" path="res://Assets/characters/ordinaryMan/animations/punch.glb" id="2_pv684"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xqgth"]
+radius = 0.304034
+height = 1.64693
 
 [sub_resource type="Animation" id="Animation_y57w1"]
 resource_name = "Idle"
@@ -134,9 +138,13 @@ tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = PackedFloat32Array(0, 1, 0.0180378, -0.0259493, -0.0132744, 0.999412, 0.233333, 1, 0.0181004, -0.0264761, -0.0122629, 0.99941, 0.6, 1, 0.0192656, -0.0264359, -0.0121641, 0.999391, 0.7, 1, 0.0204382, -0.0263441, -0.0120772, 0.999371, 1.03333, 1, 0.019562, -0.0255832, -0.0119091, 0.99941, 1.46667, 1, 0.0188182, -0.0255919, -0.0126431, 0.999415, 1.86667, 1, 0.0185871, -0.0250227, -0.013495, 0.999423, 2.66667, 1, 0.0194052, -0.0253329, -0.0140805, 0.999392, 3.1, 1, 0.0201939, -0.0260221, -0.0140477, 0.999359, 3.9, 1, 0.0191473, -0.0259279, -0.0135881, 0.999388, 3.91667, 1, 0.0189919, -0.025916, -0.0135518, 0.999392)
 
+[sub_resource type="Animation" id="Animation_7ik16"]
+length = 0.001
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7rv3p"]
 _data = {
-"Idle": SubResource("Animation_y57w1")
+"Idle": SubResource("Animation_y57w1"),
+"RESET": SubResource("Animation_7ik16")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d0fel"]
@@ -263,9 +271,17 @@ bind/30/pose = Transform3D(-0.995184, 0.0847901, -0.0491946, -0.0523471, -0.0353
 [sub_resource type="SphereShape3D" id="SphereShape3D_ddtk3"]
 radius = 5.0
 
-[node name="Enemy" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_6dqp6"]
+size = Vector3(0.357, 1.5, 0.506)
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemy"]]
+collision_layer = 3
 script = ExtResource("1_ygkcg")
-_attackDistance = 5.0
+_attackDistance = 7.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.75, 2.08165e-12)
+shape = SubResource("CapsuleShape3D_xqgth")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
@@ -503,7 +519,7 @@ skin = SubResource("Skin_joosr")
 
 [node name="NavigationAgent" type="NavigationAgent3D" parent="."]
 path_height_offset = 0.25
-avoidance_enabled = true
+path_metadata_flags = 0
 max_speed = 15.0
 debug_enabled = true
 debug_use_custom = true
@@ -514,3 +530,13 @@ collision_mask = 4
 
 [node name="AwarenessCollider" type="CollisionShape3D" parent="AwarenessArea"]
 shape = SubResource("SphereShape3D_ddtk3")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 0.999999, -3.48787e-16, -3.48787e-16, 3.48787e-16, 0.999999, 2.08165e-12, 0.698649, 0.69)
+visible = false
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+shape = SubResource("BoxShape3D_6dqp6")

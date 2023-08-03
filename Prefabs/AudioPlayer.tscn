@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dlxk5ceknx7c6"]
+[gd_scene load_steps=21 format=3 uid="uid://dlxk5ceknx7c6"]
 
 [ext_resource type="Script" path="res://Scripts/Audio/AudioEmitter.gd" id="1_bi3wx"]
 [ext_resource type="EventAsset" uid="uid://6fe85rqbqe0k" path="res://addons/FMOD/editor/resources/events/{047f7897-8b82-431e-9965-652aaa6120bc}.tres" id="2_188qt"]
@@ -43,6 +43,14 @@ min_distance = 1.0
 max_distance = 20.0
 path = "event:/MeleeHit"
 guid = "{1cff0c13-7489-46b0-8b9e-fa9fe593c1a6}"
+name = "MeleeHit"
+
+[sub_resource type="EventAsset" id="EventAsset_a20ej"]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Weapons/Melee/MeleeHit"
+guid = "{04076a00-8fc1-46c2-a1a9-94005a833c4e}"
 name = "MeleeHit"
 
 [sub_resource type="EventAsset" id="EventAsset_einri"]
@@ -106,6 +114,7 @@ footsteps_event = ExtResource("3_k6tnk")
 breathe_event = SubResource("EventAsset_8pxyq")
 melee_event = ExtResource("4_4uhfl")
 melee_hit_event = SubResource("EventAsset_evl8d")
+melee_hit_body_event = SubResource("EventAsset_a20ej")
 ui_click_event = SubResource("EventAsset_einri")
 ui_confirm_event = SubResource("EventAsset_bsa0u")
 melee_pickup_event = SubResource("EventAsset_vyle6")

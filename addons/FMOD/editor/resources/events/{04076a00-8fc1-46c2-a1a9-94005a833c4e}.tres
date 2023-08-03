@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://cgxi8de4j6u1r"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Weapons/Melee/MeleeHit"
+guid = "{04076a00-8fc1-46c2-a1a9-94005a833c4e}"
+name = "MeleeHit"

@@ -6,6 +6,7 @@ extends Node3D
 
 @export var melee_event: EventAsset
 @export var melee_hit_event: EventAsset
+@export var melee_hit_body_event: EventAsset
 
 @export var ui_click_event: EventAsset
 @export var ui_confirm_event: EventAsset
@@ -59,6 +60,9 @@ func on_melee():
 
 func on_melee_hit():
 	RuntimeManager.play_one_shot(melee_hit_event)
+	
+func on_melee_hit_body():
+	RuntimeManager.play_one_shot(melee_hit_body_event)
 
 func on_ui_click():
 	RuntimeManager.play_one_shot(ui_click_event)

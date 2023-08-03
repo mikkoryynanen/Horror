@@ -1,9 +1,10 @@
+using System.Threading.Tasks;
 using Godot;
 using Horror.Scripts.Damage;
 
 namespace Horror.Scripts.Enemies;
 
-public partial class Enemy : Node3D
+public partial class Enemy : CharacterBody3D, IDamageable
 {
 	[Export()] private float _attackDistance = 1f;
 	[Export()] private float _attackSpeed = 0.5f;
@@ -14,47 +15,65 @@ public partial class Enemy : Node3D
 	
 	private float _attackTimer = 0f;
 
-	private enum State { None, Idle, Chase, Attack }
+	private enum State { None, Idle, Chase, Attack, AttackSwing }
 
 	private State _currentState = State.None;
 	private AnimationPlayer _animationPlayer;
+	private Area3D _hurtbox;
+	
+	private const int animTotalLength = 3866;
+	private const int animAttackTime = 1100;
+	private bool _swingRoutineRunning = false;
+	private int _health = 500;
 
 	public override void _Ready()
 	{
 		_navAgent = GetNode<NavigationAgent3D>("NavigationAgent");
 		_awarenessArea = GetNode<Area3D>("AwarenessArea");
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		_hurtbox = GetNode<Area3D>("Hurtbox");
 
 		_awarenessArea.BodyEntered += OnPlayerSeen;
-	
-		_navAgent.PathDesiredDistance = 0.25f;
 		
+		_navAgent.PathDesiredDistance = 0.25f;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (_currentState == State.Chase)
+		if (_navAgent.IsTargetReachable() && !_navAgent.IsTargetReached())
 		{
-			if (_navAgent.IsTargetReachable() && !_navAgent.IsTargetReached())
+			if (_currentState == State.Chase)
 			{
-				var nextLocation = _navAgent.GetNextPathPosition();
-				var direction = GlobalPosition.DirectionTo(nextLocation);
-				GlobalPosition += direction * (float)delta;
-				LookAtFromPosition(this.GlobalPosition, _target.GlobalPosition, Vector3.Up, true);
-			}	
-		}
-		else if (_currentState == State.Attack)
-		{
-			AttackRoutine((float)delta);
-		}
+				Move((float)delta);
+			}
 
-		AiProcess();
+		}
+		if ( _currentState == State.Attack)
+		{
+			Move((float)delta);
+		}
+		AiProcess((float)delta);
+	}
+	
+	public void TakeDamage(int amount)
+	{
+		_health -= amount;
+		if(_health <= 0)
+			QueueFree();
+	}
+
+	private void Move(float delta)
+	{
+		var nextLocation = _navAgent.GetNextPathPosition();
+		var direction = GlobalPosition.DirectionTo(nextLocation);
+		GlobalPosition += direction * delta;
+		LookAtFromPosition(this.GlobalPosition, _target.GlobalPosition, Vector3.Up, true);
 	}
 
 	/// <summary>
 	/// Processes the AI related logic every 20th frame
 	/// </summary>
-	private void AiProcess()
+	private void AiProcess(float delta)
 	{
 		if (Engine.GetFramesDrawn() % 20 == 0)
 		{
@@ -64,12 +83,17 @@ public partial class Enemy : Node3D
 					// GD.Print("Enemy state is none");
 					break;
 				case State.Idle:
-					GD.Print("Enemy idling...");
+					// GD.Print("Enemy idling...");
 					if (!_animationPlayer.IsPlaying())
 						_animationPlayer.Play("idle");
 					break;
 				case State.Attack:
-					GD.Print($"Attacking {_target.Name}");
+					// GD.Print($"Attacking {_target.Name}");
+					
+					_navAgent.TargetPosition = _target.GlobalPosition;
+			
+					if(!_swingRoutineRunning)
+						SwingRoutine(delta);
 					
 					if (GetTargetDistance() > _attackDistance)
 					{
@@ -91,25 +115,42 @@ public partial class Enemy : Node3D
 		}
 	}
 
-	private void AttackRoutine(float delta)
+	private async Task SwingRoutine(float delta)
 	{
-		_attackTimer += delta;
-		if (_attackTimer >= _attackSpeed)
-		{
-			_animationPlayer.Play("punch/Punch");
+		_swingRoutineRunning = true;
+		_animationPlayer.Play("punch/Punch");
+
+		_currentState = State.AttackSwing;
+		
+		await Task.Delay(animAttackTime);
 			
-			if (_target is IDamageable damageable)
-			{
-				damageable.TakeDamage(10);
-			}
-			_attackTimer = 0f;
-		}
+		OnCheckMeleeHurtbox();
+		
+		await Task.Delay(animTotalLength - animAttackTime);
+
+		_currentState = !IsFacingTarget() ? State.Chase : State.Attack;
+		_swingRoutineRunning = false;
 	}
 
 	private float GetTargetDistance()
 	{
 		var distance = this.GlobalPosition.DistanceSquaredTo(_target.GlobalPosition);
 		return distance;
+	}
+	
+	private void OnCheckMeleeHurtbox()
+	{
+		var bodies = _hurtbox.GetOverlappingBodies();
+		foreach (var body in bodies)
+		{
+			if (body.IsInGroup("player"))
+			{
+				if (body is IDamageable damageable)
+				{
+					damageable.TakeDamage(10);
+				}
+			}
+		}
 	}
 
 	private void OnPlayerSeen(Node3D body)
@@ -119,5 +160,14 @@ public partial class Enemy : Node3D
 		_target = body;
 		_navAgent.TargetPosition = body.GlobalPosition;
 		_currentState = State.Chase;
+	}
+
+	private bool IsFacingTarget()
+	{
+		var forwardVector = GlobalTransform.Basis.Z.Normalized();
+		var targetForwardVector = _target.GlobalTransform.Basis.Z.Normalized();
+
+		var dot = forwardVector.Dot(targetForwardVector);
+		return dot > 0.25f;
 	}
 }

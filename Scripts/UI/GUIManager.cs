@@ -120,7 +120,7 @@ public partial class GUIManager : CanvasLayer
 	private void OnUpdateHealth(float value)
 	{
 		_healthMeter.Value = value;
-		if (value < 100)
+		if (value < 25)
 		{
 			var tween = GetTree().CreateTween();
 			var valueDelta = 100 - value;

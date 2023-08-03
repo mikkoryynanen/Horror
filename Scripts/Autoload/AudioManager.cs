@@ -28,6 +28,7 @@ public partial class AudioManager : Node
         Footsteps,
         Melee,
         MeleeHit,
+        MeleeHitBody,
         Breathe,
         
         UIClick,
@@ -99,7 +100,11 @@ public partial class AudioManager : Node
                 _audioPlayerObject.Call("on_melee_hit");
             }
                 break;
-            
+            case AudioClipName.MeleeHitBody:
+            {
+                _audioPlayerObject.Call("on_melee_hit_body");
+            }
+                break;
             case AudioClipName.Breathe:
             {
                 _audioPlayerObject.Call("on_breathe");
