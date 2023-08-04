@@ -30,6 +30,11 @@ public partial class MeleeBase : WeaponBase
         {
             Shoot();
         }
+        
+        if (Input.IsActionJustPressed("interact"))
+        {
+            Animator.Play("PlayerArmsAnimationLibrary/Interact");
+        }
     }
 
     public override void Shoot()

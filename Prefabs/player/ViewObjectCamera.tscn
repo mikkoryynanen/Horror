@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://4q0u86ud5h40"]
+[gd_scene load_steps=5 format=3 uid="uid://4q0u86ud5h40"]
 
 [ext_resource type="Script" path="res://Scripts/Player/ViewObjectManager.cs" id="1_u1iti"]
 [ext_resource type="Script" path="res://Scripts/Player/WeaponManager.cs" id="2_to7ei"]
+[ext_resource type="PackedScene" uid="uid://nqetxndlnp6g" path="res://Prefabs/player/Weapons/Arms.tscn" id="3_fgvcm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bks3m"]
 size = Vector3(0.356575, 1.97981, 0.50581)
@@ -20,28 +21,31 @@ handle_input_locally = false
 size = Vector2i(480, 270)
 render_target_update_mode = 4
 
-[node name="ObjectCamera" type="Camera3D" parent="SubViewport"]
+[node name="Root" type="Node3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.50511, 2.08165e-12)
-cull_mask = 2
-fov = 40.0
 
-[node name="WeaponContainer" type="Node3D" parent="SubViewport/ObjectCamera"]
+[node name="WeaponContainer" type="Node3D" parent="SubViewport/Root"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("2_to7ei")
 
-[node name="Hitscan" type="RayCast3D" parent="SubViewport/ObjectCamera/WeaponContainer"]
+[node name="Arms" parent="SubViewport/Root/WeaponContainer" instance=ExtResource("3_fgvcm")]
+
+[node name="BoneAttachment3D" parent="SubViewport/Root/WeaponContainer/Arms/FPS_Arms/Skeleton3D" index="0"]
+transform = Transform3D(0.974375, 0.0787747, -0.210682, -0.224067, 0.258098, -0.939776, -0.019654, 0.962902, 0.269135, -0.355062, -0.0354859, 0.783243)
+
+[node name="Hitscan" type="RayCast3D" parent="SubViewport/Root/WeaponContainer"]
 transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(2.08165e-12, 2.08165e-12, -200)
 collide_with_areas = true
 
-[node name="MeleeCollisionArea" type="Area3D" parent="SubViewport/ObjectCamera/WeaponContainer"]
+[node name="MeleeCollisionArea" type="Area3D" parent="SubViewport/Root/WeaponContainer"]
 transform = Transform3D(-4.37114e-08, 0, -0.999999, 0, 0.999999, 0, 1, 0, -4.37114e-08, -2.38417e-07, 0.114882, 1.19207e-07)
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/ObjectCamera/WeaponContainer/MeleeCollisionArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Root/WeaponContainer/MeleeCollisionArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.511541, -0.73356)
 shape = SubResource("BoxShape3D_bks3m")
 
-[node name="Rig" type="Node3D" parent="SubViewport/ObjectCamera/WeaponContainer"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.114882, 0)
+[editable path="SubViewport/Root/WeaponContainer/Arms"]
+[editable path="SubViewport/Root/WeaponContainer/Arms/FPS_Arms/Skeleton3D/BoneAttachment3D/Pistol"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bw4cp6bhpekn8"]
 
 [ext_resource type="Shader" uid="uid://cwimao4v430c" path="res://shaders/Blood.tres" id="1_itbaa"]
-[ext_resource type="Script" path="res://Scripts/Particle.cs" id="2_6ckym"]
+[ext_resource type="Script" path="res://Scripts/GPUParticle.cs" id="2_i4bxk"]
 
 [sub_resource type="Curve" id="Curve_1fwod"]
 _data = [Vector2(0, 1), 0.0, -0.107372, 0, 1, Vector2(0.958884, 0.897043), -0.501758, -0.501758, 0, 0, Vector2(1, 0), -21.8172, 0.0, 1, 0]
@@ -36,4 +36,4 @@ explosiveness = 1.0
 fixed_fps = 24
 process_material = SubResource("ParticleProcessMaterial_jxkke")
 draw_pass_1 = SubResource("QuadMesh_uoijc")
-script = ExtResource("2_6ckym")
+script = ExtResource("2_i4bxk")

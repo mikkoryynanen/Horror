@@ -76,7 +76,7 @@ public partial class FirearmBase : WeaponBase
     
      private bool CanFire()
     {
-        return CurrentAmmo > 0 && _shootAnimFinished;
+        return CurrentAmmo > 0;
     }
 
     public override void Shoot()
@@ -93,7 +93,7 @@ public partial class FirearmBase : WeaponBase
         _shootAnimFinished = false;
         CurrentAmmo--;
         
-        Animator.Play("shoot");
+        AnimationTree.Set("parameters/shoot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
         this.EmitSignalBus("OnUpdateAmmo", CurrentAmmo, TotalAmmo);
     }
 

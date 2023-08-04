@@ -4,16 +4,17 @@ namespace Horror.Scripts.Player;
 
 public partial class ViewObjectManager : Node
 {
-	private Camera3D _objectCamera;
+	private Node3D _root;
 
 
 	public override void _Ready()
 	{
-		_objectCamera = GetNode<Camera3D>("SubViewport/ObjectCamera");
+		_root = GetNode<Node3D>("SubViewport/Root");
+		
 	}
 
-	public void UpdateCameraTransform(Transform3D transform)
+	public void UpdateView(Transform3D transform)
 	{
-		_objectCamera.GlobalTransform = transform;
+		_root.GlobalTransform = transform;
 	}
 }

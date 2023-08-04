@@ -14,15 +14,19 @@ public partial class WeaponManager : Node3D
 	private bool _canProcess = true;
 	private float _t;
 	private Area3D _meleeCollisionArea;
-	private Node _rig;
 	private Node3D _spawnedWeapon;
 
 
 	public override void _Ready()
 	{
-		_rig = GetNode("Rig");
 		_meleeCollisionArea = GetNode<Area3D>("MeleeCollisionArea");
 		
+		// TODO REMOVE ONLY FOR TESTING
+		// var unarmed = GetNode<Pistol>("Arms");
+		// unarmed.MeleeCollisionArea = _meleeCollisionArea;
+		_spawnedWeapon = GetNode<Pistol>("Arms");
+		
+			
 		var signalBus = this.GetSignalBus();
 		signalBus.OnStartDialog += (act, title, isFullscreen) =>
 		{
@@ -49,6 +53,17 @@ public partial class WeaponManager : Node3D
 	public void Sway(Vector2 swayAmount)
 	{
 		Position += new Vector3(swayAmount.X * -swayIntensity, swayAmount.Y * swayIntensity, 0);
+	}
+
+	public void SetWalkAnimation(float inputValue, bool isRunning)
+	{
+		if (_spawnedWeapon != null)
+		{
+			if (_spawnedWeapon is WeaponBase weaponBase)
+			{
+				weaponBase.SetAnimationTreeForward(inputValue, isRunning);
+			}
+		}
 	}
 	
 	private void OnItemPickup(string itemId)
@@ -79,7 +94,7 @@ public partial class WeaponManager : Node3D
 			var packed = ResourceLoader.Load<PackedScene>(weaponPrefabPath);
 			var instance = packed.Instantiate() as Node3D;
 			_spawnedWeapon = instance;
-			_rig.AddChild(instance);
+			AddChild(instance);
 
 			var weapon = instance as IWeapon;
 			weapon.TakeOut();
@@ -90,13 +105,5 @@ public partial class WeaponManager : Node3D
 		}
 		else
 			GD.PrintErr("Weapon already spawned. Remove spawned weapon first before spawning a new one");
-	}
-
-	private void FireProjectile()
-	{
-		var packed = ResourceLoader.Load("res://Prefabs/player/flash.tscn") as PackedScene;
-		var instance = packed.Instantiate() as Node3D;
-		instance.GetNode<AnimationPlayer>("AnimationPlayer").Play("flash");
-		GetNode("pistol1/Muzzle").AddChild(instance);
 	}
 }

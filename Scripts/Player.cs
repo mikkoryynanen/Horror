@@ -55,7 +55,7 @@ public partial class Player : CharacterBody3D, IDamageable
 		_camera = GetNode<Camera3D>("Head/Camera3D");
 		_raycast = GetNode<RayCast3D>("Head/Camera3D/Hitscan");
 		
-		_weaponManager = GetNode<WeaponManager>("Head/Camera3D/ViewObjectCamera/SubViewport/ObjectCamera/WeaponContainer");
+		_weaponManager = GetNode<WeaponManager>("Head/Camera3D/ViewObjectCamera/SubViewport/Root/WeaponContainer");
 		_viewObjectManager = GetNode<Horror.Scripts.Player.ViewObjectManager>("Head/Camera3D/ViewObjectCamera");
 
 		// TODO Move
@@ -91,7 +91,7 @@ public partial class Player : CharacterBody3D, IDamageable
 	public override void _Process(double delta)
 	{
 		var lookVector = InputManager.Instance.GetLookVector();
-		_viewObjectManager.UpdateCameraTransform(_camera.GlobalTransform);
+		_viewObjectManager.UpdateView(_camera.GlobalTransform);
 		// _weaponManager.Sway(new Vector2(lookVector.X, lookVector.Y));
 	}
 
@@ -177,6 +177,9 @@ public partial class Player : CharacterBody3D, IDamageable
 		}
 
 		var inputValue = Mathf.Floor(Mathf.Abs(inputDir.X) + Mathf.Abs(inputDir.Y));
+		
+		_weaponManager.SetWalkAnimation(inputValue, _isRunning);
+		
 		// Weapon Sway
 		var headBob = inputValue * _accumulativeDelta * (_isRunning ? runningSwaySpeed : swaySpeed);
 		var targetPos = _originalHeadPosition + Vector3.Up * Mathf.Sin(headBob) * (_isRunning ? runningAmplitude : amplitude);

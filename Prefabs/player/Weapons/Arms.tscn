@@ -1,0 +1,141 @@
+[gd_scene load_steps=18 format=3 uid="uid://nqetxndlnp6g"]
+
+[ext_resource type="PackedScene" uid="uid://bcg6nwwywwli" path="res://Assets/models/Arms/Arms.glb" id="1_s2p5q"]
+[ext_resource type="PackedScene" uid="uid://bu6kkp3oeqbg0" path="res://Assets/models/Weapons/Pistol.glb" id="2_loia6"]
+[ext_resource type="Script" path="res://Scripts/Player/Weapons/Pistol.cs" id="2_uhmtq"]
+[ext_resource type="AnimationLibrary" uid="uid://wn72i73bw0ph" path="res://Assets/models/Arms/PlayerArmsAnimationLibrary.glb" id="2_ywdvb"]
+[ext_resource type="Shader" path="res://shaders/psx_unlit.gdshader" id="3_ei3yt"]
+[ext_resource type="AnimationLibrary" uid="uid://hub36nnjlue8" path="res://Assets/models/Arms/ArmsPistolAnimationLibrary.glb" id="3_w4nu6"]
+[ext_resource type="Texture2D" uid="uid://bsrln0563o1gm" path="res://Assets/models/Arms/PlayerArms_FPS_Arms_White.png" id="4_g0578"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w7i0x"]
+albedo_color = Color(0.427451, 0.427451, 0.427451, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5mu2k"]
+render_priority = 0
+shader = ExtResource("3_ei3yt")
+shader_parameter/jitter = 0.01
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("4_g0578")
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b2e36"]
+animation = &"ArmsPistolAnimationLibrary/Shoot"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dt0r3"]
+animation = &"ArmsPistolAnimationLibrary/Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mlm85"]
+animation = &"ArmsPistolAnimationLibrary/Walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lbndj"]
+animation = &"ArmsPistolAnimationLibrary/Walk"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8lq0n"]
+animation = &"ArmsPistolAnimationLibrary/Run"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_3tnt5"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_dt0r3")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_mlm85")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_lbndj")
+blend_point_2/pos = -1.0
+blend_point_3/node = SubResource("AnimationNodeAnimation_8lq0n")
+blend_point_3/pos = 2.0
+max_space = 2.0
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_uiqh0"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_u5fk4"]
+graph_offset = Vector2(-584.43, -48.4876)
+nodes/Shoot/node = SubResource("AnimationNodeAnimation_b2e36")
+nodes/Shoot/position = Vector2(-320, 260)
+nodes/Walking/node = SubResource("AnimationNodeBlendSpace1D_3tnt5")
+nodes/Walking/position = Vector2(20, -40)
+nodes/output/position = Vector2(560, 180)
+nodes/shoot/node = SubResource("AnimationNodeOneShot_uiqh0")
+nodes/shoot/position = Vector2(360, 100)
+node_connections = [&"output", 0, &"shoot", &"shoot", 0, &"Walking", &"shoot", 1, &"Shoot"]
+
+[node name="Arms" instance=ExtResource("1_s2p5q")]
+script = ExtResource("2_uhmtq")
+_fireRate = null
+_clipSize = null
+
+[node name="Camera" parent="." index="0"]
+cull_mask = 2
+
+[node name="Skeleton3D" parent="FPS_Arms" index="0"]
+bones/1/rotation = Quaternion(-0.816012, 0.0218579, 0.364513, 0.448081)
+bones/2/rotation = Quaternion(-0.684547, -8.77055e-05, 0.314817, 0.657484)
+bones/3/rotation = Quaternion(0.248623, 0.309673, -0.031095, 0.917236)
+bones/4/rotation = Quaternion(0.0694544, 0.129593, -0.363681, 0.919847)
+bones/5/rotation = Quaternion(-0.054535, 0.177113, -0.424122, 0.886441)
+bones/6/rotation = Quaternion(0.10232, -0.482126, -0.201954, 0.846345)
+bones/7/rotation = Quaternion(0.0629914, 0.0790862, 0.0474238, 0.993745)
+bones/8/rotation = Quaternion(0.29428, 0.291367, -0.30824, 0.856442)
+bones/9/rotation = Quaternion(0.472428, 0.375701, -0.319881, 0.730299)
+bones/10/rotation = Quaternion(-0.096287, 0.133202, -0.352572, 0.921238)
+bones/11/rotation = Quaternion(0.172281, -0.0847799, 0.425588, 0.884312)
+bones/12/rotation = Quaternion(0.0239278, -0.218279, 0.200569, 0.954753)
+bones/13/rotation = Quaternion(-0.879746, 0.422112, -0.148016, 0.161122)
+bones/14/rotation = Quaternion(-0.30176, 0.000126019, -0.138777, 0.94323)
+bones/15/rotation = Quaternion(-0.0247958, -0.181368, -0.139183, 0.9732)
+bones/16/rotation = Quaternion(0.0694544, -0.129593, 0.363681, 0.919847)
+bones/17/rotation = Quaternion(-0.0156308, -0.00549318, 0.443373, 0.896184)
+bones/18/rotation = Quaternion(0.00771693, 0.00609643, 0.365236, 0.930863)
+bones/19/rotation = Quaternion(0.0629914, -0.0790862, -0.0474238, 0.993745)
+bones/20/rotation = Quaternion(0.29428, -0.291367, 0.30824, 0.856442)
+bones/21/rotation = Quaternion(0.472428, -0.375701, 0.319881, 0.730299)
+bones/22/position = Vector3(-0.00144362, 0.0583356, -0.042273)
+bones/22/rotation = Quaternion(-0.382845, -0.164546, 0.328418, 0.847642)
+bones/23/rotation = Quaternion(0.296347, 0.215857, -0.148519, 0.918437)
+bones/24/rotation = Quaternion(0.0728296, 0.348042, 0.06295, 0.932523)
+bones/25/position = Vector3(0.719295, 0.0725041, -0.353173)
+bones/26/position = Vector3(-0.719295, 0.0725041, -0.353173)
+bones/27/position = Vector3(-0.218339, -0.796906, -0.0794036)
+bones/27/rotation = Quaternion(0.959482, -0.206907, -0.162803, 0.100393)
+bones/28/position = Vector3(-0.353556, -0.781301, -0.0418206)
+bones/28/rotation = Quaternion(0.984512, 0.0249944, -0.110397, 0.133881)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="FPS_Arms/Skeleton3D" index="0"]
+transform = Transform3D(0.974376, 0.0787747, -0.210681, -0.224066, 0.258098, -0.939777, -0.0196543, 0.962902, 0.269135, -0.353555, -0.0287649, 0.781323)
+bone_name = "Hand.R"
+bone_idx = 3
+
+[node name="Pistol" parent="FPS_Arms/Skeleton3D/BoneAttachment3D" index="0" instance=ExtResource("2_loia6")]
+transform = Transform3D(0.0126802, -0.195922, 0.980536, -0.96046, 0.270371, 0.0664438, -0.278127, -0.942607, -0.184747, 0.0321326, 0.140144, -0.0329969)
+
+[node name="Pistol2" parent="FPS_Arms/Skeleton3D/BoneAttachment3D/Pistol/Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.999853, 0.0171818, 1.54094e-05, -0.0171627, 0.998699, 0.0480137, 0.000809573, -0.048007, 0.998847, 0, 0, 0)
+layers = 2
+material_override = SubResource("StandardMaterial3D_w7i0x")
+
+[node name="FPS_Arms_Mesh" parent="FPS_Arms/Skeleton3D" index="1"]
+layers = 2
+material_override = SubResource("ShaderMaterial_5mu2k")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+autoplay = "ArmsPistolAnimationLibrary/Idle"
+libraries = {
+"ArmsPistolAnimationLibrary": ExtResource("3_w4nu6"),
+"PlayerArmsAnimationLibrary": ExtResource("2_ywdvb")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource("AnimationNodeBlendTree_u5fk4")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/Walking/blend_position = 0
+parameters/shoot/active = false
+parameters/shoot/internal_active = false
+parameters/shoot/request = 0
+
+[editable path="FPS_Arms/Skeleton3D/BoneAttachment3D/Pistol"]
