@@ -33,7 +33,7 @@ public partial class FirearmBase : WeaponBase
 
     public override void _Process(double delta)
     {
-        if (CanFire() && Input.IsActionJustPressed("shoot"))
+        if (Input.IsActionJustPressed("shoot") && CanFire())
         {
             _isPressingDown = true;
             Shoot();
@@ -58,7 +58,7 @@ public partial class FirearmBase : WeaponBase
             }
         }
         
-        if (TotalAmmo > 0 && Input.IsActionJustPressed("reload"))
+        if (Input.IsActionJustPressed("reload") && CanReload())
         {
             Reload();
         }
@@ -67,6 +67,14 @@ public partial class FirearmBase : WeaponBase
      private bool CanFire()
      {
          return CurrentAmmo > 0 &&
+                !AnimationTree.Get("parameters/reload/active").AsBool() &&
+                !AnimationTree.Get("parameters/shoot/active").AsBool();
+     }
+
+     private bool CanReload()
+     {
+         return TotalAmmo > 0 && 
+                CurrentAmmo < _clipSize &&
                 !AnimationTree.Get("parameters/reload/active").AsBool() &&
                 !AnimationTree.Get("parameters/shoot/active").AsBool();
      }
