@@ -8,8 +8,8 @@ namespace Horror.Scripts.Player.Weapons;
 /// </summary>
 public partial class FirearmBase : WeaponBase
 {
-    [Export()] private float _fireRate = 0.5f;
-    [Export()] private int _clipSize = 7;
+    private float _fireRate = 0.5f;
+    private int _clipSize = 7;
     
     private Camera3D _camera;
     
@@ -26,16 +26,16 @@ public partial class FirearmBase : WeaponBase
         base._Ready();
 
         _camera = GetViewport().GetCamera3D();
-        CurrentAmmo = _clipSize;
-        
-        Animator.AnimationFinished += OnAnimationFinished;
+        CurrentAmmo = 7;
+
+        AnimationTree.AnimationFinished += OnAnimationFinished;
         
         this.EmitSignalBus("OnUpdateAmmo", CurrentAmmo, TotalAmmo);
     }
     
     private void OnAnimationFinished(StringName animName)
     {
-        if (animName == "shoot")
+        if (animName == "ArmsPistolAnimationLibrary/Shoot")
         {
             _shootAnimFinished = true;
         }
@@ -43,8 +43,9 @@ public partial class FirearmBase : WeaponBase
 
     public override void _Process(double delta)
     {
-        if (CanFire() && Input.IsActionJustPressed("shoot") )
+        if (Input.IsActionJustPressed("shoot") && _shootAnimFinished)
         {
+            _shootAnimFinished = false;
             _isPressingDown = true;
             Shoot();
             PlayAudio();
@@ -55,7 +56,7 @@ public partial class FirearmBase : WeaponBase
             _pressedDownTimer = 0;
             _isPressingDown = false;
         }
-
+        
         if (IsAutomatic && _isPressingDown && CurrentAmmo > 0)
         {
             _pressedDownTimer += (float)delta;
@@ -67,7 +68,7 @@ public partial class FirearmBase : WeaponBase
                 PlayAudio();
             }
         }
-
+        
         if (TotalAmmo > 0 && Input.IsActionJustPressed("reload"))
         {
             Reload();
@@ -75,12 +76,15 @@ public partial class FirearmBase : WeaponBase
     }
     
      private bool CanFire()
-    {
+     {
         return CurrentAmmo > 0;
     }
 
     public override void Shoot()
     {
+        
+        CurrentAmmo--;
+        
         var results = this.GetCameraCenterHitObjects3D();
         if (results.Count > 0)
         {
@@ -90,11 +94,9 @@ public partial class FirearmBase : WeaponBase
             node.Position = results["position"].AsVector3();
         }
         
-        _shootAnimFinished = false;
-        CurrentAmmo--;
-        
         AnimationTree.Set("parameters/shoot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
         this.EmitSignalBus("OnUpdateAmmo", CurrentAmmo, TotalAmmo);
+        this.EmitSignalBus(nameof(SignalBus.OnCameraShake), 0.25f);
     }
 
     private void Reload()
@@ -113,7 +115,7 @@ public partial class FirearmBase : WeaponBase
         CurrentAmmo += ammoToReload;
         
         this.EmitSignalBus("OnUpdateAmmo", CurrentAmmo, TotalAmmo);
-        
+        AnimationTree.Set("parameters/reload/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
         AudioManager.Instance.PlayClip(AudioManager.AudioClipName.PistolReload);
     }
 

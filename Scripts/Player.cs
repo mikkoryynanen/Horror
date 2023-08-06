@@ -10,7 +10,6 @@ public partial class Player : CharacterBody3D, IDamageable
 {
 	[Export()] private float _sensitivity = 0.2f;
 	
-	
 	private Node3D _head;
 	private RayCast3D _raycast;
 	
@@ -135,11 +134,14 @@ public partial class Player : CharacterBody3D, IDamageable
 			{
 				_isRunning = true;
 				AudioManager.Instance.PlayClip(AudioManager.AudioClipName.Breathe);
+				
+				this.EmitSignalBus(nameof(SignalBus.OnCameraShakeContinuous), .35f);
 			}
 			else if (Input.IsActionJustReleased("run"))
 			{
 				_isRunning = false;
 				AudioManager.Instance.SetBreatheEnd(Stamina > 0.25f ? "Low" : "High");
+				this.EmitSignalBus(nameof(SignalBus.OnCameraShakeStop));
 			}
 		}
 		else
@@ -198,14 +200,14 @@ public partial class Player : CharacterBody3D, IDamageable
 	{
 		if (_isRunning)
 		{
-			Stamina -= ((float)delta / 100) * _staminaDepletionSpeed;
+			// Stamina -= ((float)delta / 100) * _staminaDepletionSpeed;
 			this.EmitSignalBus("OnUpdateStamina", Stamina);
 		}
 		else
 		{
 			if (Stamina < 1f)
 			{
-				Stamina += ((float)delta / 100) * _staminaRechargeSpeed;
+				// Stamina += ((float)delta / 100) * _staminaRechargeSpeed;
 				this.EmitSignalBus("OnUpdateStamina", Stamina);
 			}	
 		}

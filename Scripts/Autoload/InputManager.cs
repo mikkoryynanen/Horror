@@ -15,8 +15,8 @@ public partial class InputManager : Node
     private float _mouseSensitivity = 0.2f;
     private Vector2 _mouseRelative;
 
-    private float _joypadSensitivity = 0.35f;
-    private float _joypadDeadzone = 0.5f;
+    private float _joypadSensitivity = 0.5f;
+    private float _joypadDeadzone = 0.3f;
     private Vector2 _joypadAxis;
     private InputEvent _lastInputEvent;
 

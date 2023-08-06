@@ -45,6 +45,13 @@ public partial class SignalBus : Node
     [Signal]
     public delegate void OnChangeWeaponEventHandler(string weaponId);
     
+    [Signal]
+    public delegate void OnCameraShakeEventHandler(float trauma);
+    [Signal]
+    public delegate void OnCameraShakeContinuousEventHandler(float trauma);
+    [Signal]
+    public delegate void OnCameraShakeStopEventHandler();
+    
     // UI
     [Signal]
     public delegate void OnMenuCancelEventHandler();

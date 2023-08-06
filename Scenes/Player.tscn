@@ -1,11 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://8eqkq54qfjx4"]
+[gd_scene load_steps=7 format=3 uid="uid://8eqkq54qfjx4"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_iv2h2"]
+[ext_resource type="Script" path="res://Scripts/CameraShaker.cs" id="2_r618u"]
 [ext_resource type="PackedScene" uid="uid://4q0u86ud5h40" path="res://Prefabs/player/ViewObjectCamera.tscn" id="3_00f43"]
 [ext_resource type="PackedScene" uid="uid://ck32hg638vemx" path="res://Prefabs/player/torchlight.tscn" id="3_u74cv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o4xb6"]
 height = 1.75
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v1slk"]
+noise_type = 0
+fractal_octaves = 4
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 4
@@ -19,6 +24,7 @@ _staminaDepletionSpeed = 25.0
 _staminaRechargeSpeed = 5.0
 swaySpeed = 8.5
 runningSwaySpeed = 10.0
+amplitude = null
 runningAmplitude = 0.75
 _footstepInterval = 0.7
 _footstepIntervalRunning = 0.35
@@ -34,6 +40,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.75, 2.08165e-1
 cull_mask = 1048573
 current = true
 fov = 77.0
+script = ExtResource("2_r618u")
+_maxVector = Vector3(15, 15, 7)
+_noise = SubResource("FastNoiseLite_v1slk")
 
 [node name="ViewObjectCamera" parent="Head/Camera3D" instance=ExtResource("3_00f43")]
 

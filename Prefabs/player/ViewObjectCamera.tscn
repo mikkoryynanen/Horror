@@ -27,11 +27,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.50511, 2.08165
 [node name="WeaponContainer" type="Node3D" parent="SubViewport/Root"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("2_to7ei")
+swayIntensity = null
 
 [node name="Arms" parent="SubViewport/Root/WeaponContainer" instance=ExtResource("3_fgvcm")]
 
 [node name="BoneAttachment3D" parent="SubViewport/Root/WeaponContainer/Arms/FPS_Arms/Skeleton3D" index="0"]
-transform = Transform3D(0.974375, 0.0787747, -0.210682, -0.224067, 0.258098, -0.939776, -0.019654, 0.962902, 0.269135, -0.355062, -0.0354859, 0.783243)
+transform = Transform3D(0.974319, 0.0785966, -0.211007, -0.22433, 0.257978, -0.939746, -0.0194255, 0.962949, 0.268985, -0.351207, -0.0178351, 0.778487)
 
 [node name="Hitscan" type="RayCast3D" parent="SubViewport/Root/WeaponContainer"]
 transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, 0, 0, 0)

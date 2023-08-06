@@ -105,3 +105,4 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.136362, -0.079229
 
 [node name="Enemy" parent="." instance=ExtResource("11_u3fo7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.769, 1, 0.899)
+_attackSpeed = null

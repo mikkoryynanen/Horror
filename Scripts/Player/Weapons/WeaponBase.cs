@@ -45,6 +45,5 @@ public partial class WeaponBase : Node3D, IWeapon
     public void SetAnimationTreeForward(float forwardInput, bool isRunning)
     {
         AnimationTree.Set("parameters/Walking/blend_position", !isRunning ? forwardInput : 2);
-        GD.Print($"Setting animation walking value {forwardInput}");
     }
 }
