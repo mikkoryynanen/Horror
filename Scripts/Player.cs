@@ -113,8 +113,9 @@ public partial class Player : CharacterBody3D, IDamageable
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 inputDir = Input.GetVector("left", "right", "forward", "back");
-		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+		var inputDir = InputManager.Instance.GetMoveVector();
+		GD.Print(inputDir);
+		var direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 		if (direction != Vector3.Zero)
 		{
 			var speed = (_isRunning ? RunningSpeed : WalkingSpeed);

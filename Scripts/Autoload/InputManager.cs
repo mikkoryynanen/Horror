@@ -8,16 +8,19 @@ public partial class InputManager : Node
     private static InputManager _instance;
 
     private Vector2 _lookRotation;
+    private Vector2 _moveVector;
 
     private float _minLookAngle = -80;
     private float _maxLookAngle = 90;
-    
+
+    private Vector2 _keyboardInputVector;
     private float _mouseSensitivity = 0.2f;
     private Vector2 _mouseRelative;
 
     private float _joypadSensitivity = 0.5f;
     private float _joypadDeadzone = 0.3f;
-    private Vector2 _joypadAxis;
+    private Vector2 _joypadRightAxisRaw;
+    private Vector2 _joypadLeftAxisRaw;
     private InputEvent _lastInputEvent;
 
     private enum InputType {
@@ -47,7 +50,15 @@ public partial class InputManager : Node
 
     public override void _Process(double delta)
     {
-        _joypadAxis = new (Input.GetJoyAxis(0, JoyAxis.RightX), Input.GetJoyAxis(0, JoyAxis.RightY));
+        if (_currentInputType == InputType.Controller)
+        {
+            _joypadLeftAxisRaw = new (Input.GetJoyAxis(0, JoyAxis.LeftX), Input.GetJoyAxis(0, JoyAxis.LeftY));
+            _joypadRightAxisRaw = new (Input.GetJoyAxis(0, JoyAxis.RightX), Input.GetJoyAxis(0, JoyAxis.RightY));
+        }
+        else
+        {
+            _keyboardInputVector = Input.GetVector("left", "right", "forward", "back");
+        }
 
         if (Input.IsActionJustPressed("cancel"))
         {
@@ -66,7 +77,25 @@ public partial class InputManager : Node
                 lookVector.X -= motion.Relative.Y * _mouseSensitivity;
                 lookVector.X = Mathf.Clamp(lookVector.X, _minLookAngle, _maxLookAngle);
                 _lookRotation = lookVector;
-            }    
+            }
+        }
+    }
+
+    /// <summary>
+    /// Calculated left joystick input with deadzone
+    /// </summary>
+    public Vector2 GetMoveVector()
+    {
+        if (_currentInputType == InputType.Controller)
+        {
+            _joypadLeftAxisRaw = new Vector2(
+                Mathf.Abs(_joypadLeftAxisRaw.X) < _joypadDeadzone ? 0 : _joypadLeftAxisRaw.X,
+                Mathf.Abs(_joypadLeftAxisRaw.Y) < _joypadDeadzone ? 0 : _joypadLeftAxisRaw.Y);
+            return _joypadLeftAxisRaw;
+        }
+        else
+        {
+            return _keyboardInputVector;
         }
     }
 
@@ -74,11 +103,12 @@ public partial class InputManager : Node
     {
         if (_currentInputType == InputType.Controller)
         {
-            if (Mathf.Abs(_joypadAxis.X) > _joypadDeadzone || Mathf.Abs(_joypadAxis.Y) > _joypadDeadzone)
+            if (Mathf.Abs(_joypadRightAxisRaw.X) > _joypadDeadzone || 
+                Mathf.Abs(_joypadRightAxisRaw.Y) > _joypadDeadzone)
             {
                 Vector2 lookVector = _lookRotation;
-                lookVector.Y -= _joypadAxis.X * _joypadSensitivity;
-                lookVector.X -= _joypadAxis.Y * _joypadSensitivity;
+                lookVector.Y -= _joypadRightAxisRaw.X * _joypadSensitivity;
+                lookVector.X -= _joypadRightAxisRaw.Y * _joypadSensitivity;
                 lookVector.X = Mathf.Clamp(lookVector.X, _minLookAngle, _maxLookAngle);
                 _lookRotation = lookVector;
             }
