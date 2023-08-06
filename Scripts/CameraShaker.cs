@@ -49,7 +49,8 @@ public partial class CameraShaker : Camera3D
 
     private void AddTrauma(float amount)
     {
-        _trauma = Mathf.Clamp(_trauma + amount, 0, 1);
+        if (_trauma == 0)
+            _trauma = Mathf.Clamp(_trauma + amount, 0, 1);
     }
 
     private float GetShakeIntensity()

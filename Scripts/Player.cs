@@ -200,14 +200,14 @@ public partial class Player : CharacterBody3D, IDamageable
 	{
 		if (_isRunning)
 		{
-			// Stamina -= ((float)delta / 100) * _staminaDepletionSpeed;
+			Stamina -= ((float)delta / 100) * _staminaDepletionSpeed;
 			this.EmitSignalBus("OnUpdateStamina", Stamina);
 		}
 		else
 		{
 			if (Stamina < 1f)
 			{
-				// Stamina += ((float)delta / 100) * _staminaRechargeSpeed;
+				Stamina += ((float)delta / 100) * _staminaRechargeSpeed;
 				this.EmitSignalBus("OnUpdateStamina", Stamina);
 			}	
 		}

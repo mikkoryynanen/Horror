@@ -1,5 +1,6 @@
 using Godot;
 using Horror.Scripts.Autoload;
+using Horror.Scripts.Damage;
 
 namespace Horror.Scripts.Player.Weapons;
 
@@ -19,7 +20,6 @@ public partial class FirearmBase : WeaponBase
     
     private float _pressedDownTimer;
     private bool _isPressingDown;
-    private bool _shootAnimFinished = true;
 
     public override void _Ready()
     {
@@ -27,25 +27,14 @@ public partial class FirearmBase : WeaponBase
 
         _camera = GetViewport().GetCamera3D();
         CurrentAmmo = 7;
-
-        AnimationTree.AnimationFinished += OnAnimationFinished;
         
         this.EmitSignalBus("OnUpdateAmmo", CurrentAmmo, TotalAmmo);
-    }
-    
-    private void OnAnimationFinished(StringName animName)
-    {
-        if (animName == "ArmsPistolAnimationLibrary/Shoot")
-        {
-            _shootAnimFinished = true;
-        }
     }
 
     public override void _Process(double delta)
     {
-        if (Input.IsActionJustPressed("shoot") && _shootAnimFinished)
+        if (CanFire() && Input.IsActionJustPressed("shoot"))
         {
-            _shootAnimFinished = false;
             _isPressingDown = true;
             Shoot();
             PlayAudio();
@@ -77,24 +66,31 @@ public partial class FirearmBase : WeaponBase
     
      private bool CanFire()
      {
-        return CurrentAmmo > 0;
-    }
+         return CurrentAmmo > 0 &&
+                !AnimationTree.Get("parameters/reload/active").AsBool() &&
+                !AnimationTree.Get("parameters/shoot/active").AsBool();
+     }
 
     public override void Shoot()
-    {
-        
+    {        
         CurrentAmmo--;
         
-        var results = this.GetCameraCenterHitObjects3D();
-        if (results.Count > 0)
+        var result = this.GetCameraCenterHitObjects3D();
+        if (result.Count > 0)
         {
+            if (result["collider"].AsGodotObject() is IDamageable damageable)
+            {
+                damageable.TakeDamage(25);
+            }
+            
             var packedEffect = ResourceLoader.Load<PackedScene>("res://Prefabs/Particles/HitParticle.tscn");
             var node = packedEffect.Instantiate() as Node3D;
             GetNode<Node3D>("/root/Root").AddChild(node);
-            node.Position = results["position"].AsVector3();
+            node.Position = result["position"].AsVector3();
         }
         
         AnimationTree.Set("parameters/shoot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
+        
         this.EmitSignalBus("OnUpdateAmmo", CurrentAmmo, TotalAmmo);
         this.EmitSignalBus(nameof(SignalBus.OnCameraShake), 0.25f);
     }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bevxm7oo7hgsa"]
+[gd_scene load_steps=18 format=3 uid="uid://bevxm7oo7hgsa"]
 
 [ext_resource type="PackedScene" uid="uid://cabh24mlvxkp2" path="res://Scenes/gui.tscn" id="1_0urvb"]
 [ext_resource type="Script" path="res://Scripts/Scenes/Core.cs" id="1_dsoh8"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dlxk5ceknx7c6" path="res://Prefabs/AudioPlayer.tscn" id="9_nluor"]
 [ext_resource type="PackedScene" uid="uid://ds1srgcq1hkdb" path="res://Prefabs/Items/Pickupable/Pistol.tscn" id="10_68yj8"]
 [ext_resource type="PackedScene" uid="uid://da37xvrptmx" path="res://Prefabs/characters/Enemy.tscn" id="11_u3fo7"]
+[ext_resource type="PackedScene" uid="uid://b5jbvkjdwu08q" path="res://Prefabs/PatrolNode.tscn" id="12_b5jda"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_pn3lm"]
 vertices = PackedVector3Array(7.75, 17.5, -0.25, 15.5, 17.5, -0.25, 8, 17.5, -0.5, 0.5, 17.5, -0.5, 7.75, 17.5, -0.25, 8, 17.5, -0.5, -0.5, 17.5, 8, -0.25, 17.5, 15.5, -0.25, 17.5, 7.75, -0.5, 17.5, 0.5, -0.5, 17.5, 8, -0.25, 17.5, 7.75, 5.25, 1.5, 3.5, 6.5, 1.5, 3.25, 6.5, 1.5, 0.75, 0.75, 1.5, 5, 5.25, 1.5, 5, 5.25, 1.5, 3.5, 5.25, 1.5, 3.5, 6.5, 1.5, 0.75, 0.75, 1.5, 0.75, 0.75, 1.5, 5, 5.25, 1.5, 3.5, 0.75, 1.5, 0.75, 6.5, 1.5, 0.75, 6.5, 1.5, 3.25, 7.5, 1.5, 3.5, 5.5, 1.5, 5.5, 5.25, 1.5, 5, 0.75, 1.5, 5, 15.5, 1.5, 0.75, 6.5, 1.5, 0.75, 7.5, 1.5, 3.5, 15.5, 1.5, 8, 15.5, 1.5, 0.75, 7.5, 1.5, 3.5, 15.5, 1.5, 8, 7.5, 1.5, 3.5, 7.5, 1.5, 5.25, 15.5, 1.5, 8, 7.5, 1.5, 5.25, 5.5, 1.5, 5.5, 8, 1.5, 15.5, 15.5, 1.5, 15.5, 15.5, 1.5, 8, 8, 1.5, 15.5, 15.5, 1.5, 8, 5.5, 1.5, 5.5, 5.5, 1.5, 5.5, 0.75, 1.5, 5, 0.75, 1.5, 15.5, 5.5, 1.5, 5.5, 0.75, 1.5, 15.5, 8, 1.5, 15.5)
@@ -89,9 +90,6 @@ light_energy = 5.0
 omni_range = 19.232
 omni_attenuation = 1.03526
 
-[node name="Player" parent="." instance=ExtResource("4_i4lk4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.64046, 1, 7.55664)
-
 [node name="PickupablePipe" parent="." instance=ExtResource("6_kgy06")]
 transform = Transform3D(0.0447267, 0.245967, 1.07515e-08, -7.30993e-17, -1.09278e-08, 0.25, 0.245967, -0.0447267, -1.95506e-09, 8.45029, 1.03645, 5.10765)
 
@@ -103,6 +101,17 @@ transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.136362, -0.079229
 
 [node name="AudioPlayer" parent="." instance=ExtResource("9_nluor")]
 
+[node name="Player" parent="." instance=ExtResource("4_i4lk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.70779, 1, 9.42481)
+
 [node name="Enemy" parent="." instance=ExtResource("11_u3fo7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.769, 1, 0.899)
 _attackSpeed = null
+
+[node name="PatrolNode" parent="." instance=ExtResource("12_b5jda")]
+
+[node name="PatrolNode2" parent="." instance=ExtResource("12_b5jda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.22545, 1.25, 5.10452)
+
+[node name="PatrolNode3" parent="." instance=ExtResource("12_b5jda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9417, 1.25, 12.1248)
