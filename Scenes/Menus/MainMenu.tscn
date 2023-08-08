@@ -1,0 +1,125 @@
+[gd_scene load_steps=8 format=3 uid="uid://brc3o4afil75s"]
+
+[ext_resource type="Script" path="res://Scripts/Scenes/MainMenu.cs" id="1_ney36"]
+[ext_resource type="FontFile" uid="uid://fxgswysibsmu" path="res://fonts/monogram.ttf" id="2_du1l2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n8syt"]
+size = Vector3(2.5, 2.5, 2.5)
+
+[sub_resource type="Animation" id="Animation_ogyo2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.785398, 0.785398, -6.28319)]
+}
+
+[sub_resource type="Animation" id="Animation_qagxv"]
+resource_name = "loop"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.785398, 0.785398, 0.785398), Vector3(-2.15548, 2.60752, 6.28319)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nsdoi"]
+_data = {
+"RESET": SubResource("Animation_ogyo2"),
+"loop": SubResource("Animation_qagxv")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_s66o5"]
+font = ExtResource("2_du1l2")
+font_size = 60
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ney36")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(480, 270)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Camera3D"]
+transform = Transform3D(0.707105, 0.500003, 0.5, -3.15821e-06, 0.707107, -0.707107, -0.707109, 0.499997, 0.5, 3, -1, -7)
+mesh = SubResource("BoxMesh_n8syt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/Camera3D/MeshInstance3D"]
+autoplay = "loop"
+speed_scale = 0.1
+libraries = {
+"": SubResource("AnimationLibrary_nsdoi")
+}
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Box" type="BoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+vertical = true
+
+[node name="Label" type="Label" parent="Margin/Box"]
+layout_mode = 2
+text = "Horror"
+label_settings = SubResource("LabelSettings_s66o5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBox" type="VBoxContainer" parent="Margin/Box"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 15
+
+[node name="Continue" type="Button" parent="Margin/Box/VBox"]
+layout_mode = 2
+text = "CONTINUE"
+
+[node name="Load" type="Button" parent="Margin/Box/VBox"]
+layout_mode = 2
+text = "LOAD GAME"
+
+[node name="Options" type="Button" parent="Margin/Box/VBox"]
+layout_mode = 2
+text = "OPTIONS"
+
+[node name="Quit" type="Button" parent="Margin/Box/VBox"]
+layout_mode = 2
+text = "QUIT GAME"

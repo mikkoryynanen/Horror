@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using Godot.Collections;
 using Horror.Scripts.Autoload;
@@ -28,5 +30,15 @@ public static class NodeExtensions
         var spaceState = node.GetWorld3D().DirectSpaceState;
         var query = PhysicsRayQueryParameters3D.Create(from, to);
         return spaceState.IntersectRay(query);
+    }
+    
+    public static TKey FindKeyByValue<TKey, TValue>(this System.Collections.Generic.Dictionary<TKey, IReadOnlyList<TValue>> dictionary, TValue targetValue)
+    {
+        foreach (var kvp in dictionary.Where(kvp => kvp.Value.Contains(targetValue)))
+        {
+            return kvp.Key;
+        }
+
+        return default;
     }
 }

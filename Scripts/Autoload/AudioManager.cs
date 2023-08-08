@@ -50,7 +50,8 @@ public partial class AudioManager : Node
 
     public override void _Ready()
     {
-        _audioPlayerObject = GetNode<GodotObject>("/root/Root/AudioPlayer");
+        _audioPlayerObject = Loader.Instantiate<GodotObject>("res://Prefabs/AudioPlayer.tscn");
+        AddChild(_audioPlayerObject as Node);
     }
 
     public void PlayLevelMusic()

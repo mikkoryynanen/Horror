@@ -26,8 +26,8 @@ swaySpeed = 8.5
 runningSwaySpeed = 10.0
 amplitude = null
 runningAmplitude = 0.75
-_footstepInterval = 0.7
-_footstepIntervalRunning = 0.35
+_footstepInterval = 0.95
+_footstepIntervalRunning = 0.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.875, 2.08165e-12)
@@ -41,6 +41,9 @@ cull_mask = 1048573
 current = true
 fov = 77.0
 script = ExtResource("2_r618u")
+_traumaReductionRate = null
+_trauma = null
+_noiseSpeed = null
 _maxVector = Vector3(15, 15, 7)
 _noise = SubResource("FastNoiseLite_v1slk")
 
@@ -52,3 +55,4 @@ collide_with_areas = true
 
 [node name="Torchlight" parent="Head/Camera3D" instance=ExtResource("3_u74cv")]
 transform = Transform3D(1, -3.79186e-16, 3.4746e-16, 3.4746e-16, 0.996195, 0.0871557, -3.79186e-16, -0.0871557, 0.996195, 2.08165e-12, 0.245, 2.08165e-12)
+visible = false

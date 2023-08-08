@@ -48,7 +48,7 @@ public partial class Player : CharacterBody3D, IDamageable
 
 	public override void _Ready()
 	{
-		Inventory = new PlayerInventory(this, GetNode<GUIManager>("/root/Root/GUI").GetInventoryUI());
+		Inventory = new PlayerInventory(this, GetNode<GUIManager>("/root/Core/GUI").GetInventoryUI());
 		
 		_head = GetNode<Node3D>("Head");
 		_camera = GetNode<Camera3D>("Head/Camera3D");
@@ -114,7 +114,6 @@ public partial class Player : CharacterBody3D, IDamageable
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		var inputDir = InputManager.Instance.GetMoveVector();
-		GD.Print(inputDir);
 		var direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 		if (direction != Vector3.Zero)
 		{

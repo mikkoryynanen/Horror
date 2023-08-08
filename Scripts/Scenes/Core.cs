@@ -1,13 +1,13 @@
 using Godot;
-using System;
 using Horror.Scripts.Autoload;
-using Horror.Scripts.Inventory;
+
+namespace Horror.Scripts.Scenes;
 
 public partial class Core : Node3D
 {
 	private GodotObject _musicNode;
 	private GridMap _gridmap;
-
+	
 
 	public override void _Ready()
 	{
@@ -25,5 +25,10 @@ public partial class Core : Node3D
 				: DisplayServer.WindowMode.Windowed;
 			DisplayServer.WindowSetMode(mode);
 		}
+	}
+
+	public void LoadRoom(string roomPath)
+	{
+		// Loader.Load(roomPath);
 	}
 }

@@ -10,7 +10,10 @@ public partial class ViewObjectManager : Node
 	public override void _Ready()
 	{
 		_root = GetNode<Node3D>("SubViewport/Root");
-		
+		GetNode<SubViewport>("SubViewport").Size = new Vector2I(
+			(int)GetViewport().GetVisibleRect().Size.X,
+			(int)GetViewport().GetVisibleRect().Size.Y);
+
 	}
 
 	public void UpdateView(Transform3D transform)

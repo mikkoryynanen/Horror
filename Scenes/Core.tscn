@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://1wsbq77tr1k5"]
+[gd_scene load_steps=7 format=3 uid="uid://1wsbq77tr1k5"]
 
 [ext_resource type="PackedScene" uid="uid://dn22vynxaxbfi" path="res://Prefabs/dialog/dialog_manager.tscn" id="1_7pf63"]
 [ext_resource type="PackedScene" uid="uid://8eqkq54qfjx4" path="res://Scenes/Player.tscn" id="1_440sk"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://Scripts/Audio/MoodManager.cs" id="2_e8c1n"]
 [ext_resource type="PackedScene" uid="uid://cabh24mlvxkp2" path="res://Scenes/gui.tscn" id="2_u7hmi"]
 [ext_resource type="Environment" uid="uid://dhd1chbrtinam" path="res://Scenes/WorldEnvironment.tres" id="4_h0c6a"]
-[ext_resource type="PackedScene" uid="uid://bdlkserajheby" path="res://Prefabs/Rooms/Act0/Act_0_Room_0.tscn" id="5_yxn2y"]
 
 [node name="Core" type="Node3D"]
 script = ExtResource("1_nxs71")
@@ -17,13 +16,11 @@ script = ExtResource("1_nxs71")
 script = ExtResource("2_e8c1n")
 
 [node name="DialogManager" parent="." instance=ExtResource("1_7pf63")]
+_dialogBalloon = null
+_topDialogBalloon = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_h0c6a")
 
-[node name="Act_0_Room_0" parent="." instance=ExtResource("5_yxn2y")]
-
 [node name="Player" parent="." instance=ExtResource("1_440sk")]
-transform = Transform3D(-0.832099, 9.67789e-17, -0.554627, 3.48787e-16, 1, -3.48787e-16, 0.554627, -4.83672e-16, -0.832099, 16.2152, 0.68869, -6.89433)
-floor_constant_speed = true
-floor_max_angle = 0.872665
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.59923, 0.611405, 0.0312965)

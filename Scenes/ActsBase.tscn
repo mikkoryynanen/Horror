@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://xumj4viu7rbn"]
+
+[ext_resource type="PackedScene" uid="uid://cabh24mlvxkp2" path="res://Scenes/gui.tscn" id="1_ffj0a"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_1vn1q"]
+geometry_parsed_geometry_type = 2
+vertices_per_polygon = 3.0
+
+[node name="ActsBase" type="Node3D"]
+
+[node name="GUI" parent="." instance=ExtResource("1_ffj0a")]
+
+[node name="NavigationRegion" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_1vn1q")
+
+[node name="TBLoader" type="TBLoader" parent="NavigationRegion"]
+lighting_unwrap_uv2 = true
+option_filter_nearest = true

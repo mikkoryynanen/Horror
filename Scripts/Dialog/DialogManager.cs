@@ -21,7 +21,7 @@ public partial class DialogManager : Control
 	private Resource _dialogResource;
 	private bool _responseGiven = false;
 	private bool _waitingForInput = false;
-	private TextureRect _continueDialog;
+	// private TextureRect _continueDialog;
 	
 	Dictionary<string, DialogueLine> _heardDialogs = new();
 
@@ -33,9 +33,9 @@ public partial class DialogManager : Control
 		// _characterLabel = GetNode<Label>("DialogBalloon/Margin/Balloon/CharacterLabel");
 		// _dialogLabel = GetNode<RichTextLabel>("DialogBalloon/Margin/Balloon/Margin/VBox/DialogueLabel");
 		// _responsesParent = GetNode<Node>("DialogBalloon/Margin/Balloon/Margin/VBox/Margin/Responses");
-		// _dialogBalloon = GetNode<CanvasLayer>("DialogBalloon");
-		// _topDialogBalloon = GetNode<CanvasLayer>("TopBalloon");
-		_continueDialog = GetNode<TextureRect>("DialogBalloon/Margin/Balloon/ContinueIndicator");
+		_dialogBalloon = GetNode<DialogMenu>("DialogBalloon");
+		_topDialogBalloon = GetNode<DialogMenu>("TopBalloon");
+		// _continueDialog = GetNode<TextureRect>("DialogBalloon/Margin/Balloon/ContinueIndicator");
 
 		_dialogBalloon.Visible = false;
 		_topDialogBalloon.Visible = false;
@@ -71,7 +71,7 @@ public partial class DialogManager : Control
 		{
 			while (_waitingForInput)
 			{
-				_continueDialog.Visible = true;
+				// _continueDialog.Visible = true;
 				await Task.Delay(10);
 			}
 			

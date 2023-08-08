@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ordi1881qiwe"]
+
+[ext_resource type="Script" path="res://Scripts/Scenes/Preload.cs" id="1_1hbox"]
+
+[node name="Preload" type="Node"]
+script = ExtResource("1_1hbox")

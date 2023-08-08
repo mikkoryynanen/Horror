@@ -93,7 +93,7 @@ public partial class FirearmBase : WeaponBase
             
             var packedEffect = ResourceLoader.Load<PackedScene>("res://Prefabs/Particles/HitParticle.tscn");
             var node = packedEffect.Instantiate() as Node3D;
-            GetNode<Node3D>("/root/Root").AddChild(node);
+            GetTree().Root.AddChild(node);
             node.Position = result["position"].AsVector3();
         }
         

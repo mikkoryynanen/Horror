@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhp35lunr1h1"]
+
+[ext_resource type="Script" path="res://Scripts/Scenes/OptionsMenu.cs" id="1_6bj51"]
+[ext_resource type="FontFile" uid="uid://fxgswysibsmu" path="res://fonts/monogram.ttf" id="1_cm3v6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6b7cu"]
+font = ExtResource("1_cm3v6")
+font_size = 31
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6bj51")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="BoxContainer" type="BoxContainer" parent="Margin"]
+layout_mode = 2
+vertical = true
+
+[node name="Label" type="Label" parent="Margin/BoxContainer"]
+layout_mode = 2
+text = "OPTIONS"
+label_settings = SubResource("LabelSettings_6b7cu")
+horizontal_alignment = 1
+
+[node name="Content" type="Control" parent="Margin/BoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 150)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/BoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Margin/BoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "BACK"

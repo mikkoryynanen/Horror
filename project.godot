@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Horror"
-run/main_scene="res://Scenes/Playground.tscn"
+run/main_scene="res://Scenes/Preload.tscn"
 config/features=PackedStringArray("4.1", "C#", "GL Compatibility")
+run/max_fps=60
 
 [autoload]
 
@@ -22,6 +23,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 Audio="*res://Scripts/Autoload/AudioManager.cs"
 InputManager="*res://Scripts/Autoload/InputManager.cs"
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+MenuManager="*res://Scripts/Scenes/MenuManager.cs"
 
 [dialogue_manager]
 
@@ -29,8 +31,8 @@ general/wrap_lines=true
 
 [display]
 
-window/size/viewport_width=480
-window/size/viewport_height=270
+window/size/viewport_width=640
+window/size/viewport_height=360
 window/size/resizable=false
 window/size/window_width_override=1280
 window/size/window_height_override=720

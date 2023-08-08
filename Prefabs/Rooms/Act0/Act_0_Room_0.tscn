@@ -1,11 +1,9 @@
-[gd_scene load_steps=40 format=3 uid="uid://bdlkserajheby"]
+[gd_scene load_steps=38 format=3 uid="uid://bdlkserajheby"]
 
-[ext_resource type="Script" path="res://Scripts/RoomManager.cs" id="1_60mc0"]
 [ext_resource type="Texture2D" uid="uid://dai86wduxg41m" path="res://Textures/Map/Tile_11-128x128.png" id="3_rnscq"]
 [ext_resource type="Texture2D" uid="uid://c0fuevudkgdgr" path="res://Textures/Map/Grid.png" id="4_evp81"]
 [ext_resource type="PackedScene" uid="uid://bxm83xqnduma5" path="res://Prefabs/Effects/PickUpEffect.tscn" id="5_8nwe4"]
 [ext_resource type="LightmapGIData" uid="uid://d1jgvecrweuyx" path="res://Prefabs/Rooms/Act0/Act_0_Room_0.lmbake" id="5_cg1be"]
-[ext_resource type="PackedScene" uid="uid://d242m7dmbbcfl" path="res://Prefabs/characters/crewman.tscn" id="5_jwt7g"]
 [ext_resource type="Texture2D" uid="uid://cecca1a4n64hl" path="res://Textures/Map/Tile_12-128x128.png" id="5_rnnlw"]
 [ext_resource type="Texture2D" uid="uid://cwkw4mg6n4kg6" path="res://Textures/Map/WhiteGround.png" id="6_611pr"]
 [ext_resource type="Texture2D" uid="uid://chs1vg2cn0g25" path="res://Textures/Map/PaintedWall.png" id="6_edxfa"]
@@ -229,7 +227,6 @@ _data = {
 }
 
 [node name="Act_0_Room_0" type="Node3D"]
-script = ExtResource("1_60mc0")
 
 [node name="NavigationRegion" type="NavigationRegion3D" parent="."]
 visible = false
@@ -277,9 +274,6 @@ mesh = SubResource("ArrayMesh_vjlnp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TBLoader/ServerRoomDoor/entity_8_geometry_col"]
 shape = SubResource("ConcavePolygonShape3D_74yo8")
-
-[node name="crewman" parent="." instance=ExtResource("5_jwt7g")]
-transform = Transform3D(0.15373, 0.984685, 0.0822328, -0.108396, 0.0995255, -0.989113, -0.982149, 0.143143, 0.122036, 12.9372, 0.512821, 2.1073)
 
 [node name="Pipe2" parent="." instance=ExtResource("6_r3hr7")]
 transform = Transform3D(0.128528, 0.214431, 9.37308e-09, 1.13639e-23, -1.09278e-08, 0.25, 0.214431, -0.128528, -5.61812e-09, 14.5192, 0.512821, 1.24643)
@@ -457,6 +451,7 @@ skeleton = NodePath("../..")
 
 [node name="EventTrigger" parent="." instance=ExtResource("17_gvklw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9314, 0, -18.0248)
+_triggerGroupName = null
 
 [node name="Creature" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.35297, -1.53599e-16, 0.91259, 5.69212e-16, 1.63198, -5.69212e-16, -0.91259, 7.90199e-16, 1.35297, 21.3338, 1.2888, -24.8377)
@@ -471,8 +466,6 @@ bus = &"SFX"
 libraries = {
 "": SubResource("AnimationLibrary_n3yex")
 }
-
-[connection signal="OnTrigger" from="EventTrigger" to="Creature" method="OnTrigger"]
 
 [editable path="Pipe2"]
 [editable path="EventTrigger"]
