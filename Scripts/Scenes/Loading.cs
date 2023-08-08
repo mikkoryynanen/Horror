@@ -15,7 +15,7 @@ public partial class Loading : Control
 	private AnimationPlayer _animationPlayer;
 	private bool _loadingCompleted;
 
-	private const string CoreScenePath = "res://Scenes/Core.tscn";
+	private const string CoreScenePath = "res://Scenes/Parent.tscn";
 
 	private readonly Dictionary<string, IReadOnlyList<string>> _roomRelationships = new()
 	{
@@ -63,7 +63,7 @@ public partial class Loading : Control
 		_animationPlayer = GetNode<AnimationPlayer>("ColorRect/AnimationPlayer");
 
 		var rootScene = LoadScene(rootScenePath);
-		LoadScene(scenePath, rootScene);
+		LoadScene(scenePath, rootScene.GetNode("CanvasLayer/BlurPostProcess/Viewport/LCDOverlay/Viewport/DitherBanding/Viewport/Core"));
 		
 		_animationPlayer.AnimationFinished += name =>
 		{

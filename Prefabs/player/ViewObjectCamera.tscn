@@ -32,17 +32,17 @@ swayIntensity = null
 [node name="Arms" parent="SubViewport/Root/WeaponContainer" instance=ExtResource("3_fgvcm")]
 
 [node name="Skeleton3D" parent="SubViewport/Root/WeaponContainer/Arms/FPS_Arms" index="0"]
-bones/1/rotation = Quaternion(-0.814752, 0.0192032, 0.362421, 0.452174)
-bones/2/rotation = Quaternion(-0.681663, -8.81941e-05, 0.313491, 0.661104)
-bones/3/rotation = Quaternion(0.239584, 0.307643, -0.029749, 0.920364)
-bones/13/rotation = Quaternion(-0.880542, 0.421363, -0.145998, 0.160571)
-bones/14/rotation = Quaternion(-0.290504, 0.000126572, -0.1336, 0.947501)
-bones/15/rotation = Quaternion(-0.0363769, -0.181517, -0.140808, 0.972575)
-bones/27/position = Vector3(-0.22086, -0.798102, -0.0870507)
-bones/28/position = Vector3(-0.354866, -0.783426, -0.04954)
+bones/1/rotation = Quaternion(-0.814677, 0.0618425, 0.36505, 0.446336)
+bones/2/rotation = Quaternion(-0.683407, -8.78938e-05, 0.314293, 0.658919)
+bones/3/rotation = Quaternion(0.245643, 0.341575, -0.0521112, 0.905688)
+bones/13/rotation = Quaternion(-0.878724, 0.440908, -0.116804, 0.140719)
+bones/14/rotation = Quaternion(-0.272217, 0.000127459, -0.12519, 0.954057)
+bones/15/rotation = Quaternion(-0.0364129, -0.150851, -0.156174, 0.975463)
+bones/27/position = Vector3(-0.249403, -0.780239, -0.060369)
+bones/28/position = Vector3(-0.388635, -0.779255, -0.0241817)
 
 [node name="BoneAttachment3D" parent="SubViewport/Root/WeaponContainer/Arms/FPS_Arms/Skeleton3D" index="0"]
-transform = Transform3D(0.974376, 0.0787726, -0.210681, -0.224065, 0.258098, -0.939777, -0.0196524, 0.962902, 0.269134, -0.354867, -0.0364822, 0.783458)
+transform = Transform3D(0.974375, 0.0787748, -0.210683, -0.224068, 0.258097, -0.939776, -0.0196541, 0.962902, 0.269134, -0.388635, -0.0111258, 0.779275)
 
 [node name="Hitscan" type="RayCast3D" parent="SubViewport/Root/WeaponContainer"]
 transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, 0, 0, 0)

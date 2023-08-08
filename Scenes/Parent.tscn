@@ -1,31 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://cyqbgo61ft54a"]
+[gd_scene load_steps=7 format=3 uid="uid://cyqbgo61ft54a"]
 
 [ext_resource type="Shader" path="res://shaders/psx/pp_band-dither.gdshader" id="1_et8l0"]
 [ext_resource type="Shader" path="res://shaders/psx/post_process_blur.gdshader" id="1_jvc0u"]
-[ext_resource type="Shader" path="res://shaders/psx/lcd_post_process.gdshader" id="2_gnbwo"]
-[ext_resource type="PackedScene" uid="uid://bdlkserajheby" path="res://Prefabs/Rooms/Act0/Act_0_Room_0.tscn" id="2_ws2ku"]
 [ext_resource type="Texture2D" uid="uid://b0ub3tqjyw46f" path="res://shaders/psx/psxdither.png" id="4_upwl0"]
+[ext_resource type="PackedScene" uid="uid://1wsbq77tr1k5" path="res://Scenes/Core.tscn" id="5_qjn7q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3lx6q"]
 shader = ExtResource("1_jvc0u")
-shader_parameter/blur_scale = Vector2(0.5, 0.5)
+shader_parameter/blur_scale = Vector2(0.05, 0.05)
 shader_parameter/blur_samples = 50.0
-shader_parameter/blur_brightness = 1.65
+shader_parameter/blur_brightness = 1.0
 shader_parameter/enabled = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fm4xo"]
-shader = ExtResource("2_gnbwo")
-shader_parameter/enabled = true
-shader_parameter/lcd_opacity = 0.5
-shader_parameter/scanline_gap = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_epr3l"]
 shader = ExtResource("1_et8l0")
-shader_parameter/col_depth = 15.0
+shader_parameter/col_depth = 32.0
 shader_parameter/dither_banding = true
 shader_parameter/dither_tex = ExtResource("4_upwl0")
 
-[node name="Node" type="Node"]
+[node name="Parent" type="Node"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
@@ -39,22 +32,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Viewport" type="SubViewport" parent="CanvasLayer/BlurPostProcess"]
-size = Vector2i(640, 360)
-
-[node name="LCDOverlay" type="SubViewportContainer" parent="CanvasLayer/BlurPostProcess/Viewport"]
-material = SubResource("ShaderMaterial_fm4xo")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Viewport" type="SubViewport" parent="CanvasLayer/BlurPostProcess/Viewport/LCDOverlay"]
 handle_input_locally = false
 size = Vector2i(640, 360)
 render_target_update_mode = 4
 
-[node name="DitherBanding" type="SubViewportContainer" parent="CanvasLayer/BlurPostProcess/Viewport/LCDOverlay/Viewport"]
+[node name="DitherBanding" type="SubViewportContainer" parent="CanvasLayer/BlurPostProcess/Viewport"]
 material = SubResource("ShaderMaterial_epr3l")
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,9 +44,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Viewport" type="SubViewport" parent="CanvasLayer/BlurPostProcess/Viewport/LCDOverlay/Viewport/DitherBanding"]
+[node name="Viewport" type="SubViewport" parent="CanvasLayer/BlurPostProcess/Viewport/DitherBanding"]
 handle_input_locally = false
 size = Vector2i(640, 360)
 render_target_update_mode = 4
 
-[node name="Act_0_Room_0" parent="CanvasLayer/BlurPostProcess/Viewport/LCDOverlay/Viewport/DitherBanding/Viewport" instance=ExtResource("2_ws2ku")]
+[node name="Core" parent="CanvasLayer/BlurPostProcess/Viewport/DitherBanding/Viewport" instance=ExtResource("5_qjn7q")]

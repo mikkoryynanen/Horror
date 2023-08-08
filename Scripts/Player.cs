@@ -48,7 +48,7 @@ public partial class Player : CharacterBody3D, IDamageable
 
 	public override void _Ready()
 	{
-		Inventory = new PlayerInventory(this, GetNode<GUIManager>("/root/Core/GUI").GetInventoryUI());
+		Inventory = new PlayerInventory(this, GetNode<GUIManager>("/root/Parent/CanvasLayer/BlurPostProcess/Viewport/DitherBanding/Viewport/Core/GUI").GetInventoryUI());
 		
 		_head = GetNode<Node3D>("Head");
 		_camera = GetNode<Camera3D>("Head/Camera3D");
