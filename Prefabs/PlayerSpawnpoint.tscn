@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx21y4ffhg3dt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ubbo"]
+shading_mode = 0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lngy3"]
+height = 1.75
+
+[node name="PlayerSpawnpoint" type="Node3D"]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00685, 1, 2.08165e-12)
+
+[node name="SizeReference" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.25, 2.08165e-12)
+material_override = SubResource("StandardMaterial3D_1ubbo")
+mesh = SubResource("CapsuleMesh_lngy3")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.5, 2.08165e-12)
+billboard = 1
+text = "PlayerSpawn"

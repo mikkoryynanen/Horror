@@ -1,11 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://0y6v0qc8dvc"]
+[gd_scene load_steps=2 format=3 uid="uid://0y6v0qc8dvc"]
 
-[ext_resource type="Script" path="res://Scripts/Player/Weapons/Pipe.cs" id="1_r136u"]
 [ext_resource type="PackedScene" uid="uid://bfo2fgu7xhq8v" path="res://Prefabs/player/Weapons/Pipe.tscn" id="2_r7hrm"]
 
 [node name="PipeWeapon" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0, 0)
-script = ExtResource("1_r136u")
 
 [node name="Pipe" parent="." instance=ExtResource("2_r7hrm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

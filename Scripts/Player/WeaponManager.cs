@@ -22,11 +22,10 @@ public partial class WeaponManager : Node3D
 		_meleeCollisionArea = GetNode<Area3D>("MeleeCollisionArea");
 		
 		// TODO REMOVE ONLY FOR TESTING
-		// var unarmed = GetNode<Pistol>("Arms");
-		// unarmed.MeleeCollisionArea = _meleeCollisionArea;
-		_spawnedWeapon = GetNode<Pistol>("Arms");
-		
-			
+		var unarmed = GetNode<Pipe>("ArmsPipe");
+		unarmed.MeleeCollisionArea = _meleeCollisionArea;
+		_spawnedWeapon = unarmed;
+
 		var signalBus = this.GetSignalBus();
 		signalBus.OnStartDialog += (act, title, isFullscreen) =>
 		{

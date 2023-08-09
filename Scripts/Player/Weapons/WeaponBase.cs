@@ -14,8 +14,11 @@ public partial class WeaponBase : Node3D, IWeapon
     
     public override void _Ready()
     {
+        var thisPath = this.GetPath();
+        
         Animator = GetNode<AnimationPlayer>("AnimationPlayer");
         AnimationTree = GetNode<AnimationTree>("AnimationTree");
+        AnimationTree.Active = true;
         
         this.GetSignalBus().OnActivatePlayerCamera += TakeOut;
         this.GetSignalBus().OnDeactivatePlayerCamera += PutAway;
@@ -39,7 +42,6 @@ public partial class WeaponBase : Node3D, IWeapon
     public virtual bool CanShoot()
     {
         return true;
-        // return Animator.CurrentAnimation == "idle";
     }
 
     public void SetAnimationTreeForward(float forwardInput, bool isRunning)

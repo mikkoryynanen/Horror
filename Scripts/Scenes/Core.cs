@@ -11,6 +11,20 @@ public partial class Core : Node3D
 
 	public override void _Ready()
 	{
+		var player = Loader.Instantiate<global::Player>("res://Scenes/Player.tscn");
+		AddChild(player);
+
+		var spawnPoint = GetNode<Node3D>("PlayerSpawnpoint");
+		if (spawnPoint == null)
+		{
+			GD.PrintErr("Could not find player spawnpoint");
+			return;
+		}
+
+		player.GlobalPosition = spawnPoint.GlobalPosition;
+		
+		spawnPoint.QueueFree();
+		
 		AudioManager.Instance.PlayLevelMusic();
 		
 		Input.MouseMode = Input.MouseModeEnum.Captured;

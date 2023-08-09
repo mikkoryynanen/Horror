@@ -63,7 +63,7 @@ public partial class Loading : Control
 		_animationPlayer = GetNode<AnimationPlayer>("ColorRect/AnimationPlayer");
 
 		var rootScene = LoadScene(rootScenePath);
-		LoadScene(scenePath, rootScene.GetNode("CanvasLayer/BlurPostProcess/Viewport/LCDOverlay/Viewport/DitherBanding/Viewport/Core"));
+		LoadScene(scenePath, rootScene.GetNode("CanvasLayer/BlurPostProcess/Viewport/DitherBanding/Viewport/Core"));
 		
 		_animationPlayer.AnimationFinished += name =>
 		{

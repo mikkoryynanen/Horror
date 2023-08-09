@@ -65,7 +65,14 @@ public partial class MeleeBase : WeaponBase
             }
         }
         
+        AnimationTree.Set("parameters/shoot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
+        
         PlayAudio(hitDamageable);
+    }
+
+    public override bool CanShoot()
+    {
+        return !AnimationTree.Get("parameters/shoot/active").AsBool();
     }
 
     private void PlayAudio(bool hitDamageable)
