@@ -1,5 +1,6 @@
-[gd_scene load_steps=38 format=3 uid="uid://bdlkserajheby"]
+[gd_scene load_steps=39 format=3 uid="uid://bdlkserajheby"]
 
+[ext_resource type="Script" path="res://Scripts/RoomManager.cs" id="1_gj6di"]
 [ext_resource type="Texture2D" uid="uid://dai86wduxg41m" path="res://Textures/Map/Tile_11-128x128.png" id="3_rnscq"]
 [ext_resource type="Texture2D" uid="uid://c0fuevudkgdgr" path="res://Textures/Map/Grid.png" id="4_evp81"]
 [ext_resource type="PackedScene" uid="uid://bxm83xqnduma5" path="res://Prefabs/Effects/PickUpEffect.tscn" id="5_8nwe4"]
@@ -13,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://chmtfaj8nn5h" path="res://Prefabs/Props/ComputerTerminal.tscn" id="12_lmax5"]
 [ext_resource type="Shader" path="res://shaders/psx_lit.gdshader" id="13_vwfxr"]
 [ext_resource type="Texture2D" uid="uid://kxn43h0t23jn" path="res://Textures/Map/Metal.png" id="14_7e8eh"]
-[ext_resource type="PackedScene" uid="uid://luoqmy8d2jsj" path="res://Prefabs/Triggers/EventTrigger.tscn" id="17_gvklw"]
+[ext_resource type="PackedScene" uid="uid://bx21y4ffhg3dt" path="res://Prefabs/PlayerSpawnpoint.tscn" id="18_5oovy"]
 [ext_resource type="Shader" path="res://shaders/psx_unlit.gdshader" id="18_8013s"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Creature.cs" id="19_v8rop"]
 [ext_resource type="AudioStream" uid="uid://du2eywdv68f1i" path="res://Assets/sfx/Cinematic/cinematic_1.wav" id="20_unmol"]
@@ -227,6 +228,7 @@ _data = {
 }
 
 [node name="Act_0_Room_0" type="Node3D"]
+script = ExtResource("1_gj6di")
 
 [node name="NavigationRegion" type="NavigationRegion3D" parent="."]
 visible = false
@@ -329,6 +331,13 @@ omni_range = 17.8655
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 16.2992, 2.25667, -4.34252)
 light_color = Color(0.688521, 1, 0.546328, 1)
 light_energy = 0.25
+light_bake_mode = 1
+omni_range = 17.8655
+
+[node name="SpotLight3D15" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 6.32077, 2.25667, 0.616996)
+light_color = Color(1, 1, 0.756863, 1)
+light_energy = 0.15
 light_bake_mode = 1
 omni_range = 17.8655
 
@@ -449,10 +458,6 @@ transform = Transform3D(1, 0, 0, 0, 0.99521, 0.0394736, 0, -0.0977566, 0.40186, 
 mesh = SubResource("BoxMesh_pro5g")
 skeleton = NodePath("../..")
 
-[node name="EventTrigger" parent="." instance=ExtResource("17_gvklw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9314, 0, -18.0248)
-_triggerGroupName = null
-
 [node name="Creature" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.35297, -1.53599e-16, 0.91259, 5.69212e-16, 1.63198, -5.69212e-16, -0.91259, 7.90199e-16, 1.35297, 21.3338, 1.2888, -24.8377)
 mesh = SubResource("BoxMesh_0g3e0")
@@ -467,5 +472,7 @@ libraries = {
 "": SubResource("AnimationLibrary_n3yex")
 }
 
+[node name="PlayerSpawnpoint" parent="." instance=ExtResource("18_5oovy")]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, 1.91518, 0.5, 2.08165e-12)
+
 [editable path="Pipe2"]
-[editable path="EventTrigger"]

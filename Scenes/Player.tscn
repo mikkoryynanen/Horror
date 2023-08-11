@@ -37,7 +37,7 @@ shape = SubResource("CapsuleShape3D_o4xb6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.75, 2.08165e-12)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
-cull_mask = 1048573
+cull_mask = 524285
 current = true
 fov = 77.0
 script = ExtResource("2_r618u")

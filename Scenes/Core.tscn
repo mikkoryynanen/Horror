@@ -1,17 +1,94 @@
-[gd_scene load_steps=8 format=3 uid="uid://1wsbq77tr1k5"]
+[gd_scene load_steps=11 format=3 uid="uid://1wsbq77tr1k5"]
 
 [ext_resource type="PackedScene" uid="uid://dn22vynxaxbfi" path="res://Prefabs/dialog/dialog_manager.tscn" id="1_7pf63"]
 [ext_resource type="Script" path="res://Scripts/Scenes/Core.cs" id="1_nxs71"]
 [ext_resource type="Script" path="res://Scripts/Audio/MoodManager.cs" id="2_e8c1n"]
 [ext_resource type="PackedScene" uid="uid://cabh24mlvxkp2" path="res://Scenes/gui.tscn" id="2_u7hmi"]
+[ext_resource type="PackedScene" uid="uid://bhavmxdkdxow" path="res://Cutscenes/CutsceneManager.tscn" id="3_ry41b"]
 [ext_resource type="Environment" uid="uid://dhd1chbrtinam" path="res://Scenes/WorldEnvironment.tres" id="4_h0c6a"]
-[ext_resource type="PackedScene" uid="uid://bdlkserajheby" path="res://Prefabs/Rooms/Act0/Act_0_Room_0.tscn" id="5_yxn2y"]
-[ext_resource type="PackedScene" uid="uid://bx21y4ffhg3dt" path="res://Prefabs/PlayerSpawnpoint.tscn" id="8_mcmj6"]
+[ext_resource type="PackedScene" uid="uid://wlj2woe3hy4w" path="res://Cutscenes/act_0_room_0_cutscene.tscn" id="8_1q34s"]
+
+[sub_resource type="Animation" id="Animation_owqw2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.347233, -2.24669, 4.32938e-09)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.434, 1.75, -2.538)]
+}
+
+[sub_resource type="Animation" id="Animation_78qw6"]
+resource_name = "cutscene"
+length = 14.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 9, 9.5, 10.3, 13.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1.43444, 1.33931, -2.53766), Vector3(1.43444, 1.33931, -2.53766), Vector3(1.43444, 1.33931, -2.53766), Vector3(1.434, 1.75, -2.538), Vector3(2.007, 1.75, 2.08165e-12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1, 2.5, 4.1, 4.6, 5.6, 6.5, 9, 9.5, 13.2),
+"transitions": PackedFloat32Array(1, 6.49802, 6.49802, 6.96441, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.926246, -2.24669, -1.49378e-08), Vector3(0.347233, -2.24669, 4.32938e-09), Vector3(0.347233, -2.24669, 4.32938e-09), Vector3(0.312577, -1.77985, 0.153761), Vector3(0.312577, -1.77985, 0.153761), Vector3(0.2985, -2.80108, -0.180111), Vector3(0.2985, -2.80108, -0.180111), Vector3(0.347233, -2.24669, 4.32938e-09), Vector3(0.347233, -2.24669, 4.32938e-09), Vector3(3.48787e-16, -1.5708, 3.48787e-16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8nlus"]
+_data = {
+"RESET": SubResource("Animation_owqw2"),
+"cutscene": SubResource("Animation_78qw6")
+}
 
 [node name="Core" type="Node3D"]
 script = ExtResource("1_nxs71")
 
 [node name="GUI" parent="." instance=ExtResource("2_u7hmi")]
+
+[node name="CutsceneManager" parent="." instance=ExtResource("3_ry41b")]
+cutsceneObject = NodePath("Act_0_Room_0_Cutscene")
+
+[node name="Act_0_Room_0_Cutscene" parent="CutsceneManager" instance=ExtResource("8_1q34s")]
+
+[node name="Camera3D" parent="CutsceneManager/Act_0_Room_0_Cutscene" index="0"]
+transform = Transform3D(-0.625595, -0.265482, -0.733587, 4.07099e-09, 0.940318, -0.340297, 0.780148, -0.212888, -0.588258, 1.434, 1.75, -2.538)
+cull_mask = 524287
+current = true
+fov = 58.7
+
+[node name="AnimationPlayer" parent="CutsceneManager/Act_0_Room_0_Cutscene" index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_8nlus")
+}
 
 [node name="MoodManager" type="Node" parent="."]
 script = ExtResource("2_e8c1n")
@@ -21,6 +98,4 @@ script = ExtResource("2_e8c1n")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_h0c6a")
 
-[node name="Act_0_Room_0" parent="." instance=ExtResource("5_yxn2y")]
-
-[node name="PlayerSpawnpoint" parent="." instance=ExtResource("8_mcmj6")]
+[editable path="CutsceneManager/Act_0_Room_0_Cutscene"]

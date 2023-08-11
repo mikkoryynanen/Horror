@@ -50,6 +50,7 @@ max_space = 2.0
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_uiqh0"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_u5fk4"]
+graph_offset = Vector2(-613.653, -147.728)
 nodes/Shoot/node = SubResource("AnimationNodeAnimation_b2e36")
 nodes/Shoot/position = Vector2(-80, 40)
 nodes/Walking/node = SubResource("AnimationNodeBlendSpace1D_3tnt5")
@@ -103,7 +104,7 @@ bones/28/position = Vector3(-0.493551, -0.802326, 0.0223371)
 bones/28/rotation = Quaternion(0.98331, -0.0295356, -0.138035, 0.114785)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="FPS_Arms/Skeleton3D" index="0"]
-transform = Transform3D(0.960148, -0.026667, -0.278216, -0.264617, 0.23367, -0.935615, 0.0899609, 0.97195, 0.217302, -0.493656, 0.0352728, 0.802437)
+transform = Transform3D(0.960148, -0.0266664, -0.278216, -0.264617, 0.233671, -0.935615, 0.0899604, 0.97195, 0.217302, -0.493656, 0.0352731, 0.802437)
 bone_name = "Hand.R"
 bone_idx = 3
 

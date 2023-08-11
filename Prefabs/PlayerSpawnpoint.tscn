@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bx21y4ffhg3dt"]
+[gd_scene load_steps=4 format=3 uid="uid://bx21y4ffhg3dt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ubbo"]
 shading_mode = 0
@@ -6,16 +6,27 @@ shading_mode = 0
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_lngy3"]
 height = 1.75
 
+[sub_resource type="BoxMesh" id="BoxMesh_drtmw"]
+
 [node name="PlayerSpawnpoint" type="Node3D"]
 process_mode = 4
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00685, 1, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
 
 [node name="SizeReference" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.25, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.875, 2.08165e-12)
+layers = 524288
 material_override = SubResource("StandardMaterial3D_1ubbo")
 mesh = SubResource("CapsuleMesh_lngy3")
 
+[node name="Mesh" type="MeshInstance3D" parent="SizeReference"]
+transform = Transform3D(-1.87033e-08, 0.389996, -1.39268e-08, -6.52348e-24, -1.70473e-08, -0.318609, -0.427882, -1.70473e-08, 6.08762e-16, 0.502849, 0.43175, -0.0158353)
+layers = 524288
+material_override = SubResource("StandardMaterial3D_1ubbo")
+mesh = SubResource("BoxMesh_drtmw")
+skeleton = NodePath("../..")
+
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.5, 2.08165e-12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.34062, 2.08165e-12)
+layers = 524288
 billboard = 1
 text = "PlayerSpawn"

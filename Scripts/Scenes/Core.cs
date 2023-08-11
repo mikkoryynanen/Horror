@@ -6,29 +6,8 @@ namespace Horror.Scripts.Scenes;
 public partial class Core : Node3D
 {
 	private GodotObject _musicNode;
-	private GridMap _gridmap;
-	
-
-	public override void _Ready()
-	{
-		var player = Loader.Instantiate<global::Player>("res://Scenes/Player.tscn");
-		AddChild(player);
-
-		var spawnPoint = GetNode<Node3D>("PlayerSpawnpoint");
-		if (spawnPoint == null)
-		{
-			GD.PrintErr("Could not find player spawnpoint");
-			return;
-		}
-
-		player.GlobalPosition = spawnPoint.GlobalPosition;
-		
-		spawnPoint.QueueFree();
-		
-		AudioManager.Instance.PlayLevelMusic();
-		
-		Input.MouseMode = Input.MouseModeEnum.Captured;
-	}
+	private bool _cutsceneRun;
+	private string _currentRoom;
 
 	public override void _Process(double delta)
 	{
@@ -39,10 +18,54 @@ public partial class Core : Node3D
 				: DisplayServer.WindowMode.Windowed;
 			DisplayServer.WindowSetMode(mode);
 		}
-	}
 
-	public void LoadRoom(string roomPath)
+		if (_cutsceneRun && Input.IsAnythingPressed())
+		{
+			InputManager.Instance.SetProcessState(true);
+		}
+	}
+	
+	public void Init(string currentRoom, bool hasIntro)
 	{
-		// Loader.Load(roomPath);
+		_currentRoom = currentRoom;
+		AudioManager.Instance.PlayLevelMusic();
+		
+		Input.MouseMode = Input.MouseModeEnum.Captured;
+
+		this.GetSignalBus().OnHideLetterbox += SpawnPlayer;
+
+		if (hasIntro)
+		{
+			this.EmitSignalBus(nameof(SignalBus.OnStartCutscene));
+		}
+		else
+		{
+			SpawnPlayer();	
+		}
+	}
+	
+	private void SpawnPlayer()
+	{
+		var spawnPoint = GetNode<Node3D>($"{_currentRoom}/PlayerSpawnpoint");
+		if (spawnPoint == null)
+		{
+			GD.PrintErr("Could not find player spawnpoint");
+			return;
+		}
+
+		Vector3 spawnPosition, spawnRotation;
+		spawnPosition = spawnPoint.Position;
+		spawnRotation = spawnPoint.Rotation;
+		
+		// spawnPoint.QueueFree();
+		
+		var player = Loader.Instantiate<global::Player>("res://Scenes/Player.tscn");
+		AddChild(player);
+		
+		player.Position = spawnPosition;
+		player.Rotation = spawnRotation;
+		player.LookAt(spawnPosition, Vector3.Up, true);
+
+		_cutsceneRun = true;
 	}
 }

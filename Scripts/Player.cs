@@ -81,7 +81,7 @@ public partial class Player : CharacterBody3D, IDamageable
 		};
 		signalBus.OnOpenInventory += () => _canProcess = false;
 		signalBus.OnCloseInventory += () => _canProcess = true;
-		signalBus.OnReduceStamina += OnReduceStamina; 
+		signalBus.OnReduceStamina += OnReduceStamina;
 		
 		this.EmitSignalBus(nameof(SignalBus.OnUpdateStamina), Stamina);
 		this.EmitSignalBus(nameof(SignalBus.OnUpdateHealth), _health);

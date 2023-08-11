@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -50,7 +51,7 @@ public partial class Loading : Control
 	/// <summary>
 	/// Actually starts the loading process of the specified level. Without calling this method, loading will not start and game hangs forever
 	/// </summary>
-	public void Start(string scenePath)
+	public void Start(string scenePath, bool sceneHasIntroCutscene = false)
 	{
 		var rootScenePath = _roomRelationships.FindKeyByValue(scenePath);
 		if (rootScenePath == null)
@@ -63,15 +64,17 @@ public partial class Loading : Control
 		_animationPlayer = GetNode<AnimationPlayer>("ColorRect/AnimationPlayer");
 
 		var rootScene = LoadScene(rootScenePath);
-		LoadScene(scenePath, rootScene.GetNode("CanvasLayer/BlurPostProcess/Viewport/DitherBanding/Viewport/Core"));
+		var core = rootScene.GetNode<Core>("CanvasLayer/BlurPostProcess/Viewport/DitherBanding/Viewport/Core");
+		LoadScene(scenePath, core);
+		
+		core.Init(Path.GetFileNameWithoutExtension(scenePath), sceneHasIntroCutscene);
 		
 		_animationPlayer.AnimationFinished += name =>
 		{
 			MenuManager.Instance.UnloadAllMenus();
 			_loadingCompleted = true;
 		};
-
-		_loadingLabel.Text = "";
+		
 		_animationPlayer.Play("show");
 	}
 

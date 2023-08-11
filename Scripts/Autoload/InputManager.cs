@@ -7,6 +7,8 @@ public partial class InputManager : Node
     public static InputManager Instance => _instance;
     private static InputManager _instance;
 
+    private bool _canProress = true;
+
     private Vector2 _lookRotation;
     private Vector2 _moveVector;
 
@@ -50,6 +52,11 @@ public partial class InputManager : Node
 
     public override void _Process(double delta)
     {
+        if (!_canProress)
+        {
+            return;
+        }
+        
         if (_currentInputType == InputType.Controller)
         {
             _joypadLeftAxisRaw = new (Input.GetJoyAxis(0, JoyAxis.LeftX), Input.GetJoyAxis(0, JoyAxis.LeftY));
@@ -68,6 +75,12 @@ public partial class InputManager : Node
     
     public override void _Input(InputEvent inputEvent)
     {
+        if (!_canProress)
+        {
+            return;
+        }
+
+        
         if (_currentInputType == InputType.KeyboardMouse)
         {
             if (inputEvent is InputEventMouseMotion motion)
@@ -115,5 +128,10 @@ public partial class InputManager : Node
         }
         
         return _lookRotation;
+    }
+
+    public void SetProcessState(bool state)
+    {
+        _canProress = state;
     }
 }

@@ -52,6 +52,9 @@ public partial class SignalBus : Node
     [Signal]
     public delegate void OnCameraShakeStopEventHandler();
     
+    [Signal]
+    public delegate void OnStartCutsceneEventHandler();
+    
     // UI
     [Signal]
     public delegate void OnMenuCancelEventHandler();
@@ -61,4 +64,8 @@ public partial class SignalBus : Node
     public delegate void OnReduceStaminaEventHandler(float value);
     [Signal]
     public delegate void OnUpdateHealthEventHandler(float value);
+    [Signal]
+    public delegate void OnShowLetterboxEventHandler();
+    [Signal]
+    public delegate void OnHideLetterboxEventHandler();
 }

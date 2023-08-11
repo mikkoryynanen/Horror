@@ -1,20 +1,12 @@
 using Godot;
 using Horror.Scripts.Autoload;
+using Horror.Scripts.UI;
 
-public partial class RoomManager : Node3D
+namespace Horror.Scripts;
+
+/// <summary>
+/// Container for current room. This is where you can put all of your events 'n such
+/// </summary>
+public partial class RoomManager : Node
 {
-	private GridMap _gridmap;
-
-	public override void _Ready()
-	{
-		// _gridmap = GetNode<GridMap>("NavigationRegion/GridMap");
-		
-		// TODO Add this to FMOD
-		// AudioManager.Instance.PlayRepeating(GD.Load<AudioStream>("res://Assets/sfx/environment/Sci_Fi_Alarm_Loop_04.wav"));
-	}
-
-	// public Rid GetNavigationMap()
-	// {
-	// 	return _gridmap.GetNavigationMap();
-	// }
 }

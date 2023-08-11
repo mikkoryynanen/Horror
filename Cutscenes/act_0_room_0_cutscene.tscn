@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://wlj2woe3hy4w"]
+
+[node name="Act_0_Room_0_Cutscene" type="Node"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 1.57588, 2.63402, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

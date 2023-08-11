@@ -10,14 +10,21 @@ public partial class WeaponBase : Node3D, IWeapon
 {
     [Obsolete("Do not use this anymore. Start using AnimationTree instead")]
     protected AnimationPlayer Animator;
-    protected AnimationTree AnimationTree;
     
+    private AnimationTree _animationTree;
+    protected AnimationTree AnimationTree
+    {
+        get
+        {
+            if (_animationTree == null)
+                _animationTree = GetNode<AnimationTree>("AnimationTree");
+            return _animationTree;
+        }
+    }
+
     public override void _Ready()
     {
-        var thisPath = this.GetPath();
-        
         Animator = GetNode<AnimationPlayer>("AnimationPlayer");
-        AnimationTree = GetNode<AnimationTree>("AnimationTree");
         AnimationTree.Active = true;
         
         this.GetSignalBus().OnActivatePlayerCamera += TakeOut;
@@ -31,12 +38,12 @@ public partial class WeaponBase : Node3D, IWeapon
 
     public virtual void TakeOut()
     {
-        throw new NotImplementedException();
+        // throw new NotImplementedException();
     }
 
     public virtual void PutAway()
     {
-        throw new NotImplementedException();
+        // throw new NotImplementedException();
     }
 
     public virtual bool CanShoot()

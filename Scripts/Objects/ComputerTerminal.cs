@@ -7,12 +7,12 @@ public partial class ComputerTerminal : Node3D, IInteractable
 {
     private bool _canInteract = false;
     private bool _isInteracting = false;
-    private Camera3D _camera;
+    // private Camera3D _camera;
     private SubViewport _subViewport;
 
     public override void _Ready()
     {
-        _camera = GetNode<Camera3D>("Camera3D");
+        // _camera = GetNode<Camera3D>("Camera3D");
         _subViewport = GetNode<SubViewport>("Node/SubViewport");
     }
 
@@ -63,7 +63,7 @@ public partial class ComputerTerminal : Node3D, IInteractable
         _canInteract = false;
         _isInteracting = false;
 
-        _camera.ClearCurrent();
+        // _camera.ClearCurrent();
     }
 
     public void Interact()
@@ -71,7 +71,7 @@ public partial class ComputerTerminal : Node3D, IInteractable
         this.EmitSignalBus(nameof(SignalBus.OnHideInteract));
         this.EmitSignalBus(nameof(SignalBus.OnDeactivatePlayerCamera));
         
-        _camera.MakeCurrent();
+        // _camera.MakeCurrent();
         
         _isInteracting = true;
             
