@@ -8,6 +8,8 @@ using Horror.Scripts.UI;
 
 public partial class Player : CharacterBody3D, IDamageable
 {
+	// [Export()] private GUIManager GUI; 
+	
 	[Export()] private float _sensitivity = 0.2f;
 	
 	private Node3D _head;
@@ -42,14 +44,11 @@ public partial class Player : CharacterBody3D, IDamageable
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	private float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
-	public PlayerInventory Inventory { get; private set; }
 	public float Stamina { get; private set; } = 1f;
 
 
 	public override void _Ready()
 	{
-		Inventory = new PlayerInventory(this, GetNode<GUIManager>("/root/Parent/CanvasLayer/BlurPostProcess/Viewport/DitherBanding/Viewport/Core/GUI").GetInventoryUI());
-		
 		_head = GetNode<Node3D>("Head");
 		_camera = GetNode<Camera3D>("Head/Camera3D");
 		_raycast = GetNode<RayCast3D>("Head/Camera3D/Hitscan");
@@ -174,7 +173,6 @@ public partial class Player : CharacterBody3D, IDamageable
 		// Inventory
 		if (Input.IsActionJustPressed("inventory"))
 		{
-			Inventory.Show();
 			this.EmitSignalBus("OnOpenInventory");
 		}
 

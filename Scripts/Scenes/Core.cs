@@ -1,5 +1,7 @@
 using Godot;
 using Horror.Scripts.Autoload;
+using Horror.Scripts.Inventory;
+using Horror.Scripts.UI;
 
 namespace Horror.Scripts.Scenes;
 
@@ -8,6 +10,13 @@ public partial class Core : Node3D
 	private GodotObject _musicNode;
 	private bool _cutsceneRun;
 	private string _currentRoom;
+	
+	public PlayerInventory Inventory { get; private set; }
+
+	public override void _Ready()
+	{
+		Input.MouseMode = Input.MouseModeEnum.Captured;
+	}
 
 	public override void _Process(double delta)
 	{
@@ -29,8 +38,6 @@ public partial class Core : Node3D
 	{
 		_currentRoom = currentRoom;
 		AudioManager.Instance.PlayLevelMusic();
-		
-		Input.MouseMode = Input.MouseModeEnum.Captured;
 
 		this.GetSignalBus().OnHideLetterbox += SpawnPlayer;
 
@@ -61,7 +68,8 @@ public partial class Core : Node3D
 		
 		var player = Loader.Instantiate<global::Player>("res://Scenes/Player.tscn");
 		AddChild(player);
-		
+
+		Inventory = new PlayerInventory(player, GetNode<GUIManager>("GUI").GetInventoryUI());
 		player.Position = spawnPosition;
 		player.Rotation = spawnRotation;
 		player.LookAt(spawnPosition, Vector3.Up, true);

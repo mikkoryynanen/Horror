@@ -22,9 +22,9 @@ public partial class WeaponManager : Node3D
 		_meleeCollisionArea = GetNode<Area3D>("MeleeCollisionArea");
 		
 		// TODO REMOVE ONLY FOR TESTING
-		var unarmed = GetNode<Pipe>("ArmsPipe");
-		unarmed.MeleeCollisionArea = _meleeCollisionArea;
-		_spawnedWeapon = unarmed;
+		// var unarmed = GetNode<Pipe>("ArmsPipe");
+		// unarmed.MeleeCollisionArea = _meleeCollisionArea;
+		// _spawnedWeapon = unarmed;
 
 		var signalBus = this.GetSignalBus();
 		signalBus.OnStartDialog += (act, title, isFullscreen) =>
@@ -90,7 +90,7 @@ public partial class WeaponManager : Node3D
 		// Rig has melee collision as child, so check more than 1
 		if (_spawnedWeapon == null)
 		{
-			var packed = ResourceLoader.Load<PackedScene>(weaponPrefabPath);
+			var packed = ResourceLoader.Load<PackedScene>("res://Prefabs/player/Weapons/ArmsPipe.tscn");
 			var instance = packed.Instantiate() as Node3D;
 			_spawnedWeapon = instance;
 			AddChild(instance);

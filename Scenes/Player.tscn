@@ -24,7 +24,6 @@ _staminaDepletionSpeed = 25.0
 _staminaRechargeSpeed = 5.0
 swaySpeed = 8.5
 runningSwaySpeed = 10.0
-amplitude = null
 runningAmplitude = 0.75
 _footstepInterval = 0.95
 _footstepIntervalRunning = 0.5
@@ -41,9 +40,6 @@ cull_mask = 524285
 current = true
 fov = 77.0
 script = ExtResource("2_r618u")
-_traumaReductionRate = null
-_trauma = null
-_noiseSpeed = null
 _maxVector = Vector3(15, 15, 7)
 _noise = SubResource("FastNoiseLite_v1slk")
 
