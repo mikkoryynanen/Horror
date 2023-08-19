@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bpgg24vjemd5a"]
+
+[ext_resource type="Shader" path="res://shaders/psx_unlit.gdshader" id="1_8oho0"]
+[ext_resource type="Texture2D" uid="uid://35cxgjutl6sv" path="res://Textures/brick_medium_brown.png" id="2_8n2c1"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_8oho0")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(100, 100)
+shader_parameter/albedo = ExtResource("2_8n2c1")

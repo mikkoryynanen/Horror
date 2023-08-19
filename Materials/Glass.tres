@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bl82ctpmutjdg"]
+
+[ext_resource type="Shader" path="res://shaders/FakeSpace.gdshader" id="1_03fvi"]
+[ext_resource type="Texture2D" uid="uid://dkiklg2i1hnyp" path="res://Assets/Spacebox.jpg" id="2_g1r0i"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_03fvi")
+shader_parameter/rooms = Vector2(1, 1)
+shader_parameter/room_seed = 0.0
+shader_parameter/atlas_rooms = Vector2(1, 1)
+shader_parameter/depth = 0.5
+shader_parameter/emission_cutoff = 0.5
+shader_parameter/emission_strength = 0.0
+shader_parameter/room_texture = ExtResource("2_g1r0i")

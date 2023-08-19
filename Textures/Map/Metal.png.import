@@ -3,26 +3,25 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://kxn43h0t23jn"
-path.s3tc="res://.godot/imported/Metal.png-cf72587c601672316a7340b73a8a4ba7.s3tc.ctex"
+path="res://.godot/imported/Metal.png-435ca34cedd9637abf7fd6e732d8cfc5.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Map/Metal.png"
-dest_files=["res://.godot/imported/Metal.png-cf72587c601672316a7340b73a8a4ba7.s3tc.ctex"]
+source_file="res://Textures/Map/Metal.png"
+dest_files=["res://.godot/imported/Metal.png-435ca34cedd9637abf7fd6e732d8cfc5.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

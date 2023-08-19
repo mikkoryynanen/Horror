@@ -1,0 +1,360 @@
+[gd_scene load_steps=22 format=3 uid="uid://bdlkserajheby"]
+
+[ext_resource type="Script" path="res://Scripts/RoomManager.cs" id="1_p0qdp"]
+[ext_resource type="Texture2D" uid="uid://kxn43h0t23jn" path="res://Textures/Map/Metal.png" id="8_s03qj"]
+[ext_resource type="PackedScene" uid="uid://chmtfaj8nn5h" path="res://Prefabs/Props/ComputerTerminal.tscn" id="11_wf8lj"]
+[ext_resource type="Shader" path="res://shaders/psx_lit.gdshader" id="12_fjdr8"]
+[ext_resource type="Shader" path="res://shaders/psx_unlit.gdshader" id="13_cfb70"]
+[ext_resource type="PackedScene" uid="uid://b880qr54k0dfq" path="res://Prefabs/Props/EmissiveLight.tscn" id="13_jhv5i"]
+[ext_resource type="Script" path="res://Scripts/Enemies/Creature.cs" id="14_5q8pr"]
+[ext_resource type="PackedScene" uid="uid://bavhrsqcpnscw" path="res://Assets/models/tiles/Map.glb" id="14_b7qb8"]
+[ext_resource type="AudioStream" uid="uid://du2eywdv68f1i" path="res://Assets/sfx/Cinematic/cinematic_1.wav" id="15_kw0s4"]
+[ext_resource type="PackedScene" uid="uid://bx21y4ffhg3dt" path="res://Prefabs/PlayerSpawnpoint.tscn" id="16_pu4dc"]
+[ext_resource type="PackedScene" uid="uid://b1wi1ijonmb8u" path="res://Prefabs/Items/Pickupable/Pipe.tscn" id="17_llnjg"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_llxvc"]
+agent_radius = 0.25
+region_min_size = 0.0
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_5ma6k"]
+auto_exposure_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1j1vn"]
+render_priority = 0
+shader = ExtResource("12_fjdr8")
+shader_parameter/jitter = 0.15
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("8_s03qj")
+
+[sub_resource type="BoxMesh" id="BoxMesh_nfy85"]
+material = SubResource("ShaderMaterial_1j1vn")
+
+[sub_resource type="BoxMesh" id="BoxMesh_pro5g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gq0o3"]
+render_priority = 0
+shader = ExtResource("13_cfb70")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0g3e0"]
+material = SubResource("ShaderMaterial_gq0o3")
+
+[sub_resource type="Animation" id="Animation_jigfm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(21.3338, 1.2888, -24.8377)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.48787e-16, 0.593412, 3.48787e-16)]
+}
+
+[sub_resource type="Animation" id="Animation_pb01p"]
+resource_name = "trigger"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 2, 3),
+"transitions": PackedFloat32Array(1, 5.09824, 3.73213, 0.00571909),
+"update": 0,
+"values": [Vector3(11.9961, 1.2888, -24.8377), Vector3(16.3537, 1.2888, -24.8377), Vector3(16.3537, 1.2888, -24.8377), Vector3(21.3338, 1.2888, -24.8377)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.7, 1.1, 1.5, 2),
+"transitions": PackedFloat32Array(5.09824, -0.5, -0.5, 3.73213),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(3.48787e-16, 0.593412, 3.48787e-16), Vector3(3.48787e-16, -2.18864, 3.48787e-16), Vector3(3.48787e-16, 3.48787e-16, 3.48787e-16)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n3yex"]
+_data = {
+"RESET": SubResource("Animation_jigfm"),
+"trigger": SubResource("Animation_pb01p")
+}
+
+[node name="Act_0_Room_0" type="Node3D"]
+script = ExtResource("1_p0qdp")
+
+[node name="NavigationRegion" type="NavigationRegion3D" parent="."]
+visible = false
+navigation_mesh = SubResource("NavigationMesh_llxvc")
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+quality = 0
+bounces = 1
+interior = true
+use_denoiser = false
+max_texture_size = 2048
+environment_mode = 3
+environment_custom_color = Color(0, 0, 0, 1)
+environment_custom_energy = 1.0
+camera_attributes = SubResource("CameraAttributesPractical_5ma6k")
+
+[node name="LightmapProbe" type="LightmapProbe" parent="LightmapGI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="DynamicLights" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="DynamicLights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 9, 4, -4.37114e-08)
+visible = false
+light_color = Color(1, 1, 0.756863, 1)
+light_energy = 3.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+spot_range = 332.847
+spot_attenuation = 0.189465
+spot_angle = 49.2525
+spot_angle_attenuation = 2.92817
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="DynamicLights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 4, -4.37114e-08)
+visible = false
+light_color = Color(1, 1, 0.756863, 1)
+light_energy = 3.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+spot_range = 332.847
+spot_attenuation = 0.189465
+spot_angle = 49.2525
+spot_angle_attenuation = 2.92817
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="DynamicLights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 14, 4, -4.37114e-08)
+visible = false
+light_color = Color(1, 1, 0.756863, 1)
+light_energy = 3.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+spot_range = 332.847
+spot_attenuation = 0.189465
+spot_angle = 49.2525
+spot_angle_attenuation = 2.92817
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="DynamicLights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 14, 4, -8)
+light_color = Color(1, 1, 0.756863, 1)
+light_energy = 3.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+spot_range = 332.847
+spot_attenuation = 0.189465
+spot_angle = 49.2525
+spot_angle_attenuation = 2.92817
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="DynamicLights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 14, 4, -16)
+light_color = Color(1, 1, 0.756863, 1)
+light_energy = 3.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+spot_range = 332.847
+spot_attenuation = 0.189465
+spot_angle = 49.2525
+spot_angle_attenuation = 2.92817
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="DynamicLights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 14, 4, 12)
+light_color = Color(1, 1, 0.756863, 1)
+light_energy = 3.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+spot_range = 332.847
+spot_attenuation = 0.189465
+spot_angle = 49.2525
+spot_angle_attenuation = 2.92817
+
+[node name="SpotLight3D10" type="SpotLight3D" parent="DynamicLights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 30, 4, 4)
+light_color = Color(1, 1, 0.756863, 1)
+light_energy = 3.0
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+spot_range = 332.847
+spot_attenuation = 0.189465
+spot_angle = 49.2525
+spot_angle_attenuation = 2.92817
+
+[node name="ServerRoom" type="Node3D" parent="."]
+
+[node name="Lights" type="Node3D" parent="ServerRoom"]
+
+[node name="ComputerTerminal" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27.6683, -0.177871, 3.62585)
+
+[node name="ComputerTerminal2" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27.6683, -0.177871, 1.62185)
+
+[node name="ComputerTerminal7" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 32.6979, -0.177871, 1.62185)
+
+[node name="ComputerTerminal8" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 32.6979, -0.177871, 3.62585)
+
+[node name="ComputerTerminal5" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 29.2255, 0.0228637, -1.10867)
+
+[node name="ComputerTerminal6" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 31.2295, 0.0228637, -1.10867)
+
+[node name="Mainframe" type="MeshInstance3D" parent="ServerRoom"]
+transform = Transform3D(2.66473, 0, 0, 0, 3.36672, 0, 0, 0, 1.94938, 30.1468, 0.926592, 1.06492)
+mesh = SubResource("BoxMesh_nfy85")
+skeleton = NodePath("../..")
+
+[node name="SpotLight3D4" type="OmniLight3D" parent="ServerRoom/Mainframe"]
+transform = Transform3D(0.375273, 0, 0, 0, -1.29834e-08, 0.297025, 0, -0.512984, -2.24232e-08, -0.0292931, 0.624696, -0.02411)
+light_color = Color(0.688521, 1, 0.546328, 1)
+light_energy = 0.25
+light_bake_mode = 1
+omni_range = 5.933
+omni_attenuation = 0.0853775
+
+[node name="Mainframe2" type="MeshInstance3D" parent="ServerRoom"]
+transform = Transform3D(2.66473, 0, 0, 0, 3.36672, 0, 0, 0, 1.94938, 30.1468, 0.926592, 4.06492)
+mesh = SubResource("BoxMesh_nfy85")
+skeleton = NodePath("../..")
+
+[node name="SpotLight3D4" type="OmniLight3D" parent="ServerRoom/Mainframe2"]
+transform = Transform3D(0.375273, 0, 0, 0, -1.29834e-08, 0.297025, 0, -0.512984, -2.24232e-08, -0.0292931, 0.624696, -0.02411)
+light_color = Color(0.688521, 1, 0.546328, 1)
+light_energy = 0.25
+light_bake_mode = 1
+omni_range = 5.933
+omni_attenuation = 0.0853775
+
+[node name="Mainframe3" type="MeshInstance3D" parent="ServerRoom"]
+transform = Transform3D(2.66473, 0, 0, 0, 3.36672, 0, 0, 0, 1.94938, 30.1468, 0.926592, 7.06492)
+mesh = SubResource("BoxMesh_nfy85")
+skeleton = NodePath("../..")
+
+[node name="SpotLight3D4" type="OmniLight3D" parent="ServerRoom/Mainframe3"]
+transform = Transform3D(0.375273, 0, 0, 0, -1.29834e-08, 0.297025, 0, -0.512984, -2.24232e-08, -0.0292931, 0.624696, -0.02411)
+light_color = Color(0.688521, 1, 0.546328, 1)
+light_energy = 0.25
+light_bake_mode = 1
+omni_range = 5.933
+omni_attenuation = 0.0853775
+
+[node name="Quarters" type="Node3D" parent="."]
+visible = false
+
+[node name="SpotLight3D15" type="OmniLight3D" parent="Quarters"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 24.4432, 2.25667, -15.8145)
+light_color = Color(1, 1, 0.756863, 1)
+light_bake_mode = 1
+omni_range = 17.8655
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Quarters"]
+transform = Transform3D(5.3707, 0, 0, 0, 1, 0, 0, 0, 2.60603, 24.8042, 0.818414, -18.156)
+mesh = SubResource("BoxMesh_pro5g")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Quarters"]
+transform = Transform3D(2.85761, 0, 0, 0, 0.874001, 0, 0, 0, 1.06231, 25.9755, 0.860969, -13.0437)
+mesh = SubResource("BoxMesh_pro5g")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Quarters"]
+transform = Transform3D(6.02412e-15, 3.82038e-08, -1.06231, 2.85761, -3.82038e-08, 0, -1.2491e-07, -0.874001, -4.64352e-08, 23.2701, 1.83039, -13.0435)
+mesh = SubResource("BoxMesh_pro5g")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Quarters"]
+transform = Transform3D(1.2491e-07, 0.874001, 9.28705e-08, 2.85761, -3.82038e-08, -6.002e-23, 6.99323e-15, 7.64076e-08, -1.06231, 21.0359, 0.388807, -14.3365)
+mesh = SubResource("BoxMesh_pro5g")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Quarters"]
+transform = Transform3D(1.8959e-08, 0.262769, 2.18151e-08, 0.433732, -1.1486e-08, -1.40986e-23, 1.06144e-15, 2.2972e-08, -0.249536, 20.6868, 0.388807, -19.2658)
+mesh = SubResource("BoxMesh_pro5g")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Quarters"]
+transform = Transform3D(3.95522e-08, 0.548187, 4.55106e-08, 0.90485, -2.3962e-08, -2.94124e-23, 2.21438e-15, 4.79241e-08, -0.520581, 21.9577, 0.388807, -19.2345)
+mesh = SubResource("BoxMesh_pro5g")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Quarters"]
+transform = Transform3D(3.95522e-08, 0.548187, 4.55106e-08, 0.90485, -2.3962e-08, -2.94124e-23, 2.21438e-15, 4.79241e-08, -0.520581, 20.7319, 0.388807, -18.6723)
+mesh = SubResource("BoxMesh_pro5g")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Quarters"]
+transform = Transform3D(0.743721, 0, 0, 0, 0.874001, 0, 0, 0, 0.702746, 25.9755, 0.570724, -14.4328)
+mesh = SubResource("BoxMesh_pro5g")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Quarters/MeshInstance3D3"]
+transform = Transform3D(1, 0, 0, 0, 0.99521, 0.0394736, 0, -0.0977566, 0.40186, 0, 0.724124, -0.231976)
+mesh = SubResource("BoxMesh_pro5g")
+skeleton = NodePath("../..")
+
+[node name="Creature" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.35297, -1.53599e-16, 0.91259, 5.69212e-16, 1.63198, -5.69212e-16, -0.91259, 7.90199e-16, 1.35297, 21.3338, 1.2888, -24.8377)
+visible = false
+mesh = SubResource("BoxMesh_0g3e0")
+script = ExtResource("14_5q8pr")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Creature"]
+stream = ExtResource("15_kw0s4")
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Creature"]
+libraries = {
+"": SubResource("AnimationLibrary_n3yex")
+}
+
+[node name="PlayerSpawnpoint" parent="." instance=ExtResource("16_pu4dc")]
+transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -4.08482, 0.5, 2.09272e-15)
+
+[node name="PickupablePipe" parent="." instance=ExtResource("17_llnjg")]
+transform = Transform3D(0.128528, 0.214431, 9.37307e-09, 0, -1.09278e-08, 0.25, 0.214431, -0.128528, -5.61813e-09, 12.5678, 0.49998, 0.967737)
+visible = false
+
+[node name="Map" parent="." instance=ExtResource("14_b7qb8")]
+
+[node name="EmissiveLight" parent="." instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, -1.02157e-16, 2.4663e-16, 2.4663e-16, 0.707107, -0.707107, -1.02157e-16, 0.707107, 0.707107, 7, 3.41311, -2.67885)
+
+[node name="EmissiveLight2" parent="." instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, -1.02157e-16, 2.4663e-16, 2.4663e-16, 0.707107, -0.707107, -1.02157e-16, 0.707107, 0.707107, 2.05936, 3.41311, -2.67885)
+
+[node name="EmissiveLight3" parent="." instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-1, -6.18172e-08, -6.18172e-08, 2.4663e-16, 0.707107, -0.707107, 8.74228e-08, -0.707107, -0.707107, 2.05936, 3.41311, 2.60881)
+
+[node name="EmissiveLight4" parent="." instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-1, -6.18172e-08, -6.18172e-08, 2.4663e-16, 0.707107, -0.707107, 8.74228e-08, -0.707107, -0.707107, 7, 3.41311, 2.60881)

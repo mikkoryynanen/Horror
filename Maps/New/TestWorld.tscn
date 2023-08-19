@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://cab8robe1gxj1"]
+
+[ext_resource type="PackedScene" uid="uid://dy16j24ry2eyn" path="res://Prefabs/Tiles/TileMiddle.tscn" id="1_1tpw1"]
+[ext_resource type="PackedScene" uid="uid://8eqkq54qfjx4" path="res://Scenes/Player.tscn" id="2_bo3tq"]
+[ext_resource type="PackedScene" uid="uid://dywsfaaojkkar" path="res://Prefabs/Tiles/TileWall.tscn" id="2_vfuqp"]
+[ext_resource type="PackedScene" uid="uid://buv2iruul3mwy" path="res://Prefabs/Tiles/TileTurn.tscn" id="4_u33pk"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 0, 0)
+light_color = Color(1, 1, 0.756863, 1)
+light_energy = 0.5
+
+[node name="Player" parent="." instance=ExtResource("2_bo3tq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+
+[node name="Middle" parent="." instance=ExtResource("1_1tpw1")]
+
+[node name="Middle2" parent="." instance=ExtResource("1_1tpw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Middle3" parent="." instance=ExtResource("1_1tpw1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="Wall" parent="." instance=ExtResource("2_vfuqp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -6)
+
+[node name="Wall2" parent="." instance=ExtResource("2_vfuqp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+
+[node name="Wall3" parent="." instance=ExtResource("2_vfuqp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -6)
+
+[node name="Wall4" parent="." instance=ExtResource("2_vfuqp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -6)
+
+[node name="Wall5" parent="." instance=ExtResource("2_vfuqp")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 10, 0, 2)
+
+[node name="Wall6" parent="." instance=ExtResource("2_vfuqp")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6, 0, 2)
+
+[node name="Wall7" parent="." instance=ExtResource("2_vfuqp")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 2)
+
+[node name="Wall8" parent="." instance=ExtResource("2_vfuqp")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, 0, 2)
+
+[node name="Turn" parent="." instance=ExtResource("4_u33pk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -6)

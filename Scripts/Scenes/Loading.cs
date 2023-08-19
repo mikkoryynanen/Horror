@@ -20,7 +20,7 @@ public partial class Loading : Control
 
 	private readonly Dictionary<string, IReadOnlyList<string>> _roomRelationships = new()
 	{
-		{CoreScenePath, new List<string>() { "res://Prefabs/Rooms/Act0/Act_0_Room_0.tscn" }}
+		{CoreScenePath, new List<string>() { "res://Prefabs/Rooms/Act0/Room0/Act_0_Room_0.tscn" }}
 	};
 
 	public override void _Process(double delta)
@@ -31,7 +31,7 @@ public partial class Loading : Control
 		// 	return;
 		// }
 		
-		if (!_loadingCompleted)
+		if (!_loadingCompleted && _loadingLabel != null)
 		{
 			_timer += (float)delta;
 			if (_timer >= _waitTime)

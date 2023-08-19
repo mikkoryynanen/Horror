@@ -3,11 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://dkiklg2i1hnyp" path="res://Assets/Spacebox.jpg" id="1_ti8wt"]
 
 [sub_resource type="Gradient" id="Gradient_6eem6"]
-offsets = PackedFloat32Array(0, 0.147059, 1)
+offsets = PackedFloat32Array(0, 0.151724, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.102306, 0.102303, 0.0743451, 1, 1, 1, 0.827451, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_863ni"]
 gradient = SubResource("Gradient_6eem6")
+width = 64
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nlcx5"]
 panorama = ExtResource("1_ti8wt")
@@ -28,18 +29,18 @@ ssao_power = 0.5
 ssao_horizon = 0.0
 ssao_sharpness = 0.0
 glow_normalized = true
-glow_intensity = 8.0
-glow_bloom = 0.01
+glow_intensity = 1.92
+glow_bloom = 1.0
 glow_blend_mode = 1
 glow_hdr_luminance_cap = 0.15
 glow_map_strength = 1.0
-fog_light_color = Color(1, 1, 0.709804, 1)
-fog_light_energy = 0.07
-fog_density = 0.015
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 0.4
 volumetric_fog_density = 0.1472
 volumetric_fog_albedo = Color(1, 1, 0.756863, 1)
 adjustment_enabled = true
-adjustment_brightness = 1.35
-adjustment_contrast = 0.47
-adjustment_saturation = 1.44
+adjustment_brightness = 1.5
+adjustment_contrast = 0.61
+adjustment_saturation = 0.54
 adjustment_color_correction = SubResource("GradientTexture1D_863ni")

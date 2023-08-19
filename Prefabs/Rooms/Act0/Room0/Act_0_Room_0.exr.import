@@ -1,0 +1,26 @@
+[remap]
+
+importer="2d_array_texture"
+type="CompressedTexture2DArray"
+uid="uid://b3opkwtmavdiu"
+path="res://.godot/imported/Act_0_Room_0.exr-7f3f8472b4cee348b5dcf33333e2008e.ctexarray"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Prefabs/Rooms/Act0/Room0/Act_0_Room_0.exr"
+dest_files=["res://.godot/imported/Act_0_Room_0.exr-7f3f8472b4cee348b5dcf33333e2008e.ctexarray"]
+
+[params]
+
+compress/mode=3
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/channel_pack=1
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/horizontal=1
+slices/vertical=1

@@ -104,7 +104,7 @@ public partial class MenuManager : Node
 		var menu = ShowMenu(Menu.Loading);
 		if (menu is Loading loadingMenu)
 			// TODO Using first act for now, but give it save games level
-			loadingMenu.Start("res://Prefabs/Rooms/Act0/Act_0_Room_0.tscn", true);
+			loadingMenu.Start("res://Prefabs/Rooms/Act0/Room0/Act_0_Room_0.tscn", false);
 			
 		// ChangeScene("");
 	}
