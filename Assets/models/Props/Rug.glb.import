@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bavhrsqcpnscw"
-path="res://.godot/imported/Map.glb-0267e4491b5a56576a1db6e2f17cdb16.scn"
+uid="uid://dbwot8sdf21f2"
+path="res://.godot/imported/Rug.glb-cb33ddce0037cca465768c536fe8be0b.scn"
 
 [deps]
 
-source_file="res://Assets/models/tiles/Map.glb"
-dest_files=["res://.godot/imported/Map.glb-0267e4491b5a56576a1db6e2f17cdb16.scn"]
+source_file="res://Assets/models/Props/Rug.glb"
+dest_files=["res://.godot/imported/Rug.glb-cb33ddce0037cca465768c536fe8be0b.scn"]
 
 [params]
 
@@ -30,9 +30,9 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "materials": {
-"Wall": {
+"Props": {
 "use_external/enabled": true,
-"use_external/path": "res://Materials/Tileset.tres"
+"use_external/path": "res://Materials/Props.tres"
 }
 }
 }

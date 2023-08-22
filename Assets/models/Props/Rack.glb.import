@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bavhrsqcpnscw"
-path="res://.godot/imported/Map.glb-0267e4491b5a56576a1db6e2f17cdb16.scn"
+uid="uid://b23mbietvbn32"
+path="res://.godot/imported/Rack.glb-a8e79df1d74db04e3cc2624baef1e062.scn"
 
 [deps]
 
-source_file="res://Assets/models/tiles/Map.glb"
-dest_files=["res://.godot/imported/Map.glb-0267e4491b5a56576a1db6e2f17cdb16.scn"]
+source_file="res://Assets/models/Props/Rack.glb"
+dest_files=["res://.godot/imported/Rack.glb-a8e79df1d74db04e3cc2624baef1e062.scn"]
 
 [params]
 
@@ -30,9 +30,9 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "materials": {
-"Wall": {
+"metal_rack_stackable.001": {
 "use_external/enabled": true,
-"use_external/path": "res://Materials/Tileset.tres"
+"use_external/path": "res://Materials/Props.tres"
 }
 }
 }

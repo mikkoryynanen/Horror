@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bavhrsqcpnscw"
-path="res://.godot/imported/Map.glb-0267e4491b5a56576a1db6e2f17cdb16.scn"
+uid="uid://bja33jxuojv3o"
+path="res://.godot/imported/Paper.glb-0225ce2236d3702de31159f99d63addf.scn"
 
 [deps]
 
-source_file="res://Assets/models/tiles/Map.glb"
-dest_files=["res://.godot/imported/Map.glb-0267e4491b5a56576a1db6e2f17cdb16.scn"]
+source_file="res://Assets/models/Props/Paper.glb"
+dest_files=["res://.godot/imported/Paper.glb-0225ce2236d3702de31159f99d63addf.scn"]
 
 [params]
 
@@ -28,12 +28,5 @@ animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={
-"materials": {
-"Wall": {
-"use_external/enabled": true,
-"use_external/path": "res://Materials/Tileset.tres"
-}
-}
-}
+_subresources={}
 gltf/embedded_image_handling=1

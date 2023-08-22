@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bavhrsqcpnscw"
-path="res://.godot/imported/Map.glb-0267e4491b5a56576a1db6e2f17cdb16.scn"
+uid="uid://c5vl65a6d5dhm"
+path="res://.godot/imported/Box.glb-a0e298e09cfe06fe434514741d116892.scn"
 
 [deps]
 
-source_file="res://Assets/models/tiles/Map.glb"
-dest_files=["res://.godot/imported/Map.glb-0267e4491b5a56576a1db6e2f17cdb16.scn"]
+source_file="res://Assets/models/Props/Box.glb"
+dest_files=["res://.godot/imported/Box.glb-a0e298e09cfe06fe434514741d116892.scn"]
 
 [params]
 
@@ -30,9 +30,9 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "materials": {
-"Wall": {
+"Material": {
 "use_external/enabled": true,
-"use_external/path": "res://Materials/Tileset.tres"
+"use_external/path": "res://Materials/CardboardBox.tres"
 }
 }
 }

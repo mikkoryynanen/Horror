@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bcr7xc5e7ypoy"]
+
+[ext_resource type="Shader" path="res://shaders/psx_lit.gdshader" id="1_7s0ds"]
+[ext_resource type="Texture2D" uid="uid://bibk6k2v3vjao" path="res://Assets/Textures/Props.png" id="2_3ty44"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_7s0ds")
+shader_parameter/jitter = 0.25
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = false
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_3ty44")

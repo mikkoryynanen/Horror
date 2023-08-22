@@ -107,8 +107,8 @@ public partial class Player : CharacterBody3D, IDamageable
 		Vector3 velocity = Velocity;
 
 		// Add the gravity.
-		if (!IsOnFloor())
-			velocity.Y -= gravity * (float)delta;
+		// if (!IsOnFloor())
+		// 	velocity.Y -= gravity * (float)delta;
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.

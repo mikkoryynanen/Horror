@@ -15,7 +15,8 @@ fractal_octaves = 4
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 4
 input_ray_pickable = false
-floor_max_angle = 0.959931
+wall_min_slide_angle = 1.309
+floor_constant_speed = true
 script = ExtResource("1_iv2h2")
 _sensitivity = 0.1
 WalkingSpeed = 1.7

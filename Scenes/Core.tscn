@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://1wsbq77tr1k5"]
+[gd_scene load_steps=15 format=3 uid="uid://1wsbq77tr1k5"]
 
 [ext_resource type="PackedScene" uid="uid://dn22vynxaxbfi" path="res://Prefabs/dialog/dialog_manager.tscn" id="1_7pf63"]
 [ext_resource type="Script" path="res://Scripts/Scenes/Core.cs" id="1_nxs71"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://wlj2woe3hy4w" path="res://Cutscenes/act_0_room_0_cutscene.tscn" id="8_1q34s"]
 [ext_resource type="PackedScene" uid="uid://bdlkserajheby" path="res://Prefabs/Rooms/Act0/Room0/Act_0_Room_0.tscn" id="8_bpro1"]
 [ext_resource type="Texture2D" uid="uid://dkiklg2i1hnyp" path="res://Assets/Spacebox.jpg" id="9_jnu41"]
-[ext_resource type="PackedScene" uid="uid://8eqkq54qfjx4" path="res://Scenes/Player.tscn" id="10_xob3p"]
 
 [sub_resource type="Animation" id="Animation_owqw2"]
 length = 0.001
@@ -108,7 +107,9 @@ libraries = {
 [node name="MoodManager" type="Node" parent="."]
 script = ExtResource("2_e8c1n")
 
-[node name="DialogManager" parent="." instance=ExtResource("1_7pf63")]
+[node name="DialogManager" parent="." node_paths=PackedStringArray("_dialogBalloon", "_topDialogBalloon") instance=ExtResource("1_7pf63")]
+_dialogBalloon = NodePath("")
+_topDialogBalloon = NodePath("")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_h0c6a")
@@ -117,8 +118,5 @@ environment = ExtResource("4_h0c6a")
 
 [node name="Skybox" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_8s3b4")
-
-[node name="Player" parent="." instance=ExtResource("10_xob3p")]
-transform = Transform3D(0.281839, 0, -0.959462, 0, 1, 0, 0.959462, 0, 0.281839, 0, 0, 0)
 
 [editable path="CutsceneManager/Act_0_Room_0_Cutscene"]

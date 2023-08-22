@@ -1,16 +1,28 @@
-[gd_scene load_steps=22 format=3 uid="uid://bdlkserajheby"]
+[gd_scene load_steps=34 format=3 uid="uid://bdlkserajheby"]
 
 [ext_resource type="Script" path="res://Scripts/RoomManager.cs" id="1_p0qdp"]
 [ext_resource type="Texture2D" uid="uid://kxn43h0t23jn" path="res://Textures/Map/Metal.png" id="8_s03qj"]
 [ext_resource type="PackedScene" uid="uid://chmtfaj8nn5h" path="res://Prefabs/Props/ComputerTerminal.tscn" id="11_wf8lj"]
 [ext_resource type="Shader" path="res://shaders/psx_lit.gdshader" id="12_fjdr8"]
+[ext_resource type="PackedScene" uid="uid://dnjgepi8f3q27" path="res://Prefabs/Props/Door.tscn" id="12_sito8"]
 [ext_resource type="Shader" path="res://shaders/psx_unlit.gdshader" id="13_cfb70"]
 [ext_resource type="PackedScene" uid="uid://b880qr54k0dfq" path="res://Prefabs/Props/EmissiveLight.tscn" id="13_jhv5i"]
+[ext_resource type="PackedScene" uid="uid://8eqkq54qfjx4" path="res://Scenes/Player.tscn" id="13_xbqju"]
 [ext_resource type="Script" path="res://Scripts/Enemies/Creature.cs" id="14_5q8pr"]
 [ext_resource type="PackedScene" uid="uid://bavhrsqcpnscw" path="res://Assets/models/tiles/Map.glb" id="14_b7qb8"]
+[ext_resource type="PackedScene" uid="uid://6wsd8bmu043m" path="res://Assets/models/Props/Bed.glb" id="15_3ivj0"]
+[ext_resource type="PackedScene" uid="uid://b23mbietvbn32" path="res://Assets/models/Props/Rack.glb" id="15_c7igb"]
 [ext_resource type="AudioStream" uid="uid://du2eywdv68f1i" path="res://Assets/sfx/Cinematic/cinematic_1.wav" id="15_kw0s4"]
+[ext_resource type="PackedScene" uid="uid://saombc4xiy1d" path="res://Assets/models/Props/Desk.glb" id="16_587d7"]
 [ext_resource type="PackedScene" uid="uid://bx21y4ffhg3dt" path="res://Prefabs/PlayerSpawnpoint.tscn" id="16_pu4dc"]
+[ext_resource type="PackedScene" uid="uid://b8jmhvbsrqhhu" path="res://Assets/models/Props/Chair.glb" id="17_lf0mi"]
 [ext_resource type="PackedScene" uid="uid://b1wi1ijonmb8u" path="res://Prefabs/Items/Pickupable/Pipe.tscn" id="17_llnjg"]
+[ext_resource type="PackedScene" uid="uid://c5vl65a6d5dhm" path="res://Assets/models/Props/Box.glb" id="18_55t8h"]
+[ext_resource type="PackedScene" uid="uid://bvnu73irkaowt" path="res://Assets/models/Props/Box2.glb" id="19_w4nbn"]
+[ext_resource type="PackedScene" uid="uid://bja33jxuojv3o" path="res://Assets/models/Props/Paper.glb" id="20_vpnku"]
+[ext_resource type="PackedScene" uid="uid://bk7efynoehrhi" path="res://Assets/models/Props/Computer.glb" id="21_6oq6p"]
+[ext_resource type="PackedScene" uid="uid://cbno8bfsygcl8" path="res://Assets/models/Props/Cabinet.glb" id="22_jajjk"]
+[ext_resource type="PackedScene" uid="uid://dbwot8sdf21f2" path="res://Assets/models/Props/Rug.glb" id="23_m65go"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_llxvc"]
 agent_radius = 0.25
@@ -358,3 +370,104 @@ transform = Transform3D(-1, -6.18172e-08, -6.18172e-08, 2.4663e-16, 0.707107, -0
 
 [node name="EmissiveLight4" parent="." instance=ExtResource("13_jhv5i")]
 transform = Transform3D(-1, -6.18172e-08, -6.18172e-08, 2.4663e-16, 0.707107, -0.707107, 8.74228e-08, -0.707107, -0.707107, 7, 3.41311, 2.60881)
+
+[node name="EmissiveLight7" parent="." instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 7, 4.023, -11.864)
+
+[node name="EmissiveLight8" parent="." instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2, 4.023, -15.4566)
+
+[node name="EmissiveLight12" parent="." instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5.25761, 4.023, -15.4566)
+
+[node name="EmissiveLight11" parent="." instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2, 4.023, -10.1358)
+
+[node name="EmissiveLight13" parent="." instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5.25761, 4.023, -10.1358)
+
+[node name="EmissiveLight9" parent="." instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 25.439, 4.023, -11.864)
+
+[node name="EmissiveLight10" parent="." instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 20.439, 4.023, -11.864)
+
+[node name="EmissiveLight5" parent="." instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 11.7316, 4.0741, -12.0361)
+
+[node name="RegularLight" parent="EmissiveLight5" index="1"]
+light_energy = 0.45
+spot_angle = 90.0
+
+[node name="EmissiveLight6" parent="." instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 16.0322, 4.0741, -12.0361)
+
+[node name="RegularLight" parent="EmissiveLight6" index="1"]
+light_energy = 0.45
+spot_angle = 90.0
+
+[node name="Door" parent="." instance=ExtResource("12_sito8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1653, 0, -13.0076)
+
+[node name="Door2" parent="." instance=ExtResource("12_sito8")]
+transform = Transform3D(-1, 0, -7.01036e-08, 0, 1, 0, 9.12883e-08, 0, -1, 17.1653, 0, -11.0076)
+
+[node name="Player" parent="." instance=ExtResource("13_xbqju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -12)
+
+[node name="Bed" parent="." instance=ExtResource("15_3ivj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.997514, 0.00625682, -9.96585)
+
+[node name="Rack" parent="." instance=ExtResource("15_c7igb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -15)
+
+[node name="Desk" parent="." instance=ExtResource("16_587d7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.99427, 0, -8.70983)
+
+[node name="Chair" parent="." instance=ExtResource("17_lf0mi")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 4.40357, 2.38419e-07, -9.40381)
+
+[node name="Box" parent="." instance=ExtResource("18_55t8h")]
+transform = Transform3D(-0.366063, 4.52255e-16, 0.93059, 3.48787e-16, 1, -3.48787e-16, -0.93059, 1.969e-16, -0.366063, 0.877886, 1.05701, -8.62856)
+
+[node name="Box2" parent="." instance=ExtResource("19_w4nbn")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0.863577, 0.5, -8.49802)
+
+[node name="Box3" parent="." instance=ExtResource("19_w4nbn")]
+transform = Transform3D(-0.260776, 0, 1.98293, 0, 2, 0, -1.98293, 0, -0.260776, 0.876499, 0.5, -9.31439)
+
+[node name="Paper" parent="." instance=ExtResource("20_vpnku")]
+transform = Transform3D(-0.904492, 0, -0.42649, 0, 1, 0, 0.42649, 0, -0.904492, 5.00714, 1.20291, -8.76122)
+
+[node name="Paper5" parent="." instance=ExtResource("20_vpnku")]
+transform = Transform3D(-0.968135, 0, -0.250431, 0, 1, 0, 0.250431, 0, -0.968135, 4.57974, 1.20706, -9.01969)
+
+[node name="Paper6" parent="." instance=ExtResource("20_vpnku")]
+transform = Transform3D(-0.979428, 0, 0.201796, 0, 1, 0, -0.201796, 0, -0.979428, 4.24868, 1.20706, -8.80873)
+
+[node name="Paper2" parent="." instance=ExtResource("20_vpnku")]
+transform = Transform3D(-0.937931, 0, -0.346821, 0, 1, 0, 0.346821, 0, -0.937931, 5.00714, 1.212, -8.76122)
+
+[node name="Paper3" parent="." instance=ExtResource("20_vpnku")]
+transform = Transform3D(-0.93674, 0, -0.350028, 0, 1, 0, 0.350028, 0, -0.93674, 5.00714, 1.21666, -8.76122)
+
+[node name="Paper4" parent="." instance=ExtResource("20_vpnku")]
+transform = Transform3D(-0.914861, 0, -0.403769, 0, 1, 0, 0.403769, 0, -0.914861, 5.00714, 1.22053, -8.76122)
+
+[node name="Computer" parent="." instance=ExtResource("21_6oq6p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.53049, 1.25152, -8.46332)
+
+[node name="Cabinet" parent="." instance=ExtResource("22_jajjk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.98457, 0, -15.2396)
+
+[node name="Cabinet2" parent="." instance=ExtResource("22_jajjk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.02555, 0, -15.2396)
+
+[node name="Cabinet3" parent="." instance=ExtResource("22_jajjk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.05908, -0.00321841, -15.238)
+
+[node name="Rug" parent="." instance=ExtResource("23_m65go")]
+transform = Transform3D(0.90583, 0, 0.787065, 0, 1.2, 0, -0.787065, 0, 0.90583, 5.375, 0.05, -12.228)
+
+[editable path="EmissiveLight5"]
+[editable path="EmissiveLight6"]

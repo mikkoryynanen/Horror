@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://dnjgepi8f3q27"]
+
+[ext_resource type="PackedScene" uid="uid://dtjtrp3frptvr" path="res://Assets/models/Props/Door.glb" id="1_x24yj"]
+[ext_resource type="Script" path="res://Scripts/Interactables/Door.cs" id="2_p53uj"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d510k"]
+points = PackedVector3Array(-0.25, -0.456045, -0.373529, 0.25, 1.42632, 1.33253, 0.25, 1.42632, -0.346406, -0.25, 1.45624, -0.373529, -0.25, -0.456045, 1.35965, 0.25, -0.42612, 1.33253, -0.25, 1.45624, 1.35965, 0.25, -0.42612, -0.346406)
+
+[sub_resource type="Animation" id="Animation_7b6c7"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 1, 2.08165e-12), Vector3(2.08165e-12, -3.74, 2.08165e-12)]
+}
+
+[sub_resource type="Animation" id="Animation_1ii63"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.08165e-12, 1, 2.08165e-12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q48bm"]
+_data = {
+"RESET": SubResource("Animation_1ii63"),
+"open": SubResource("Animation_7b6c7")
+}
+
+[node name="Door" type="AnimatableBody3D"]
+script = ExtResource("2_p53uj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2.08165e-12, 1, 2.08165e-12)
+shape = SubResource("ConvexPolygonShape3D_d510k")
+
+[node name="Door" parent="CollisionShape3D" instance=ExtResource("1_x24yj")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.04082e-12, -0.5, -1.04082e-12)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q48bm")
+}
