@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dne0yj0kcu3t1"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/QuestCompleter.cs" id="1_gipq6"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_37as6"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fmtdv"]
+
+[node name="Keypad" type="StaticBody3D"]
+script = ExtResource("1_gipq6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.535845, 0, 0, 0, 0.535845, 0, 0, 0, 0.200641, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_37as6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.535845, 0, 0, 0, 0.535845, 0, 0, 0, 0.200641, 0, 0, 0)
+mesh = SubResource("BoxMesh_fmtdv")

@@ -2,7 +2,7 @@ using Godot;
 
 namespace Horror.Scripts.Interactables;
 
-public partial class Door : AnimatableBody3D, IInteractable
+public partial class Door : AnimatableBody3D, IUnlockable
 {
 	private AnimationPlayer _animationPlayer;
 
@@ -11,7 +11,7 @@ public partial class Door : AnimatableBody3D, IInteractable
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
-	public void Interact()
+	public void Unlock()
 	{
 		_animationPlayer.Play("open");
 	}
