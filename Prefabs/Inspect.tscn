@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://btd7pnpeigq1c"]
+
+[ext_resource type="PackedScene" uid="uid://dne0yj0kcu3t1" path="res://Prefabs/Props/Keypad.tscn" id="1_m1qd3"]
+
+[sub_resource type="Animation" id="Animation_s1lpo"]
+resource_name = "show"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:fov")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 0.101531),
+"update": 0,
+"values": [90.0, 77.0]
+}
+
+[sub_resource type="Animation" id="Animation_6ule0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:fov")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [90.0]
+}
+
+[sub_resource type="Animation" id="Animation_rte44"]
+resource_name = "hide"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:fov")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [77.0, 90.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q5fdt"]
+_data = {
+"RESET": SubResource("Animation_6ule0"),
+"hide": SubResource("Animation_rte44"),
+"show": SubResource("Animation_s1lpo")
+}
+
+[node name="Inspect" type="Node3D"]
+
+[node name="Keypad" parent="." instance=ExtResource("1_m1qd3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, -0.917)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+fov = 90.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q5fdt")
+}

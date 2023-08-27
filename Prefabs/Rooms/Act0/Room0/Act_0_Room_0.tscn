@@ -1,6 +1,8 @@
 [gd_scene load_steps=36 format=3 uid="uid://bdlkserajheby"]
 
 [ext_resource type="Script" path="res://Scripts/RoomManager.cs" id="1_p0qdp"]
+[ext_resource type="PackedScene" uid="uid://b03767c2s7abc" path="res://Prefabs/Props/Screen.tscn" id="3_foytq"]
+[ext_resource type="FontFile" uid="uid://buqd2qw57jtwj" path="res://fonts/LCDBlock.ttf" id="4_qri4k"]
 [ext_resource type="Texture2D" uid="uid://kxn43h0t23jn" path="res://Textures/Map/Metal.png" id="8_s03qj"]
 [ext_resource type="PackedScene" uid="uid://chmtfaj8nn5h" path="res://Prefabs/Props/ComputerTerminal.tscn" id="11_wf8lj"]
 [ext_resource type="Shader" path="res://shaders/psx_lit.gdshader" id="12_fjdr8"]
@@ -16,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://saombc4xiy1d" path="res://Assets/models/Props/Desk.glb" id="16_587d7"]
 [ext_resource type="PackedScene" uid="uid://bx21y4ffhg3dt" path="res://Prefabs/PlayerSpawnpoint.tscn" id="16_pu4dc"]
 [ext_resource type="PackedScene" uid="uid://b8jmhvbsrqhhu" path="res://Assets/models/Props/Chair.glb" id="17_lf0mi"]
-[ext_resource type="PackedScene" uid="uid://b1wi1ijonmb8u" path="res://Prefabs/Items/Pickupable/Pipe.tscn" id="17_llnjg"]
 [ext_resource type="PackedScene" uid="uid://c5vl65a6d5dhm" path="res://Assets/models/Props/Box.glb" id="18_55t8h"]
 [ext_resource type="PackedScene" uid="uid://bvnu73irkaowt" path="res://Assets/models/Props/Box2.glb" id="19_w4nbn"]
 [ext_resource type="PackedScene" uid="uid://bja33jxuojv3o" path="res://Assets/models/Props/Paper.glb" id="20_vpnku"]
@@ -39,7 +40,7 @@ shader = ExtResource("12_fjdr8")
 shader_parameter/jitter = 0.15
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
-shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_mapping = false
 shader_parameter/alpha_scissor = 1.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/emission_color = Color(1, 1, 1, 1)
@@ -48,8 +49,6 @@ shader_parameter/albedo = ExtResource("8_s03qj")
 
 [sub_resource type="BoxMesh" id="BoxMesh_nfy85"]
 material = SubResource("ShaderMaterial_1j1vn")
-
-[sub_resource type="BoxMesh" id="BoxMesh_pro5g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gq0o3"]
 render_priority = 0
@@ -150,110 +149,179 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="DynamicLights" type="Node3D" parent="."]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="DynamicLights"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 9, 4, -4.37114e-08)
+[node name="EmissiveLight" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, -1.02157e-16, 2.4663e-16, 2.4663e-16, 0.707107, -0.707107, -1.02157e-16, 0.707107, 0.707107, 7, 3.41311, -2.67885)
+
+[node name="EmissiveLight2" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, -1.02157e-16, 2.4663e-16, 2.4663e-16, 0.707107, -0.707107, -1.02157e-16, 0.707107, 0.707107, 2.05936, 3.41311, -2.67885)
+
+[node name="EmissiveLight3" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-1, -6.18172e-08, -6.18172e-08, 2.4663e-16, 0.707107, -0.707107, 8.74228e-08, -0.707107, -0.707107, 2.05936, 3.41311, 2.60881)
+
+[node name="EmissiveLight4" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-1, -6.18172e-08, -6.18172e-08, 2.4663e-16, 0.707107, -0.707107, 8.74228e-08, -0.707107, -0.707107, 7, 3.41311, 2.60881)
+
+[node name="EmissiveLight7" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 7, 4.023, -11.864)
+
+[node name="EmissiveLight8" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2, 4.023, -15.4566)
+
+[node name="EmissiveLight12" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5.25761, 4.023, -15.4566)
+
+[node name="EmissiveLight11" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2, 4.023, -10.1358)
+
+[node name="EmissiveLight13" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5.25761, 4.023, -10.1358)
+
+[node name="EmissiveLight15" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 13.9368, 4.023, 6.11232)
+
+[node name="EmissiveLight16" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 13.9368, 4.023, -1.88768)
+
+[node name="EmissiveLight17" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 30.1425, 4.023, 7.59363)
+
+[node name="RegularLight" parent="DynamicLights/EmissiveLight17" index="1"]
+light_color = Color(0.690196, 1, 0.545098, 1)
+spot_angle = 90.0
+
+[node name="FlashingLight" parent="DynamicLights/EmissiveLight17" index="2"]
 visible = false
-light_color = Color(1, 1, 0.756863, 1)
-light_energy = 3.0
-light_indirect_energy = 0.0
-light_volumetric_fog_energy = 0.0
-spot_range = 332.847
-spot_attenuation = 0.189465
-spot_angle = 49.2525
-spot_angle_attenuation = 2.92817
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="DynamicLights"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 4, 4, -4.37114e-08)
+[node name="EmissiveLight18" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 30.1425, 4.023, 1.59363)
+
+[node name="RegularLight" parent="DynamicLights/EmissiveLight18" index="1"]
 visible = false
-light_color = Color(1, 1, 0.756863, 1)
-light_energy = 3.0
-light_indirect_energy = 0.0
-light_volumetric_fog_energy = 0.0
-spot_range = 332.847
-spot_attenuation = 0.189465
-spot_angle = 49.2525
-spot_angle_attenuation = 2.92817
+light_color = Color(0.690196, 1, 0.545098, 1)
+spot_angle = 90.0
 
-[node name="SpotLight3D3" type="SpotLight3D" parent="DynamicLights"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 14, 4, -4.37114e-08)
+[node name="FlashingLight" parent="DynamicLights/EmissiveLight18" index="2"]
 visible = false
-light_color = Color(1, 1, 0.756863, 1)
-light_energy = 3.0
-light_indirect_energy = 0.0
-light_volumetric_fog_energy = 0.0
-spot_range = 332.847
-spot_attenuation = 0.189465
-spot_angle = 49.2525
-spot_angle_attenuation = 2.92817
 
-[node name="SpotLight3D4" type="SpotLight3D" parent="DynamicLights"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 14, 4, -8)
-light_color = Color(1, 1, 0.756863, 1)
-light_energy = 3.0
-light_indirect_energy = 0.0
-light_volumetric_fog_energy = 0.0
-spot_range = 332.847
-spot_attenuation = 0.189465
-spot_angle = 49.2525
-spot_angle_attenuation = 2.92817
+[node name="EmissiveLight19" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 2.15632e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91068e-15, 26.1425, 4.023, 11.5936)
 
-[node name="SpotLight3D5" type="SpotLight3D" parent="DynamicLights"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 14, 4, -16)
-light_color = Color(1, 1, 0.756863, 1)
-light_energy = 3.0
-light_indirect_energy = 0.0
-light_volumetric_fog_energy = 0.0
-spot_range = 332.847
-spot_attenuation = 0.189465
-spot_angle = 49.2525
-spot_angle_attenuation = 2.92817
+[node name="RegularLight" parent="DynamicLights/EmissiveLight19" index="1"]
+visible = false
+light_color = Color(0.690196, 1, 0.545098, 1)
+spot_angle = 90.0
 
-[node name="SpotLight3D6" type="SpotLight3D" parent="DynamicLights"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 14, 4, 12)
-light_color = Color(1, 1, 0.756863, 1)
-light_energy = 3.0
-light_indirect_energy = 0.0
-light_volumetric_fog_energy = 0.0
-spot_range = 332.847
-spot_attenuation = 0.189465
-spot_angle = 49.2525
-spot_angle_attenuation = 2.92817
+[node name="FlashingLight" parent="DynamicLights/EmissiveLight19" index="2"]
+visible = false
 
-[node name="SpotLight3D10" type="SpotLight3D" parent="DynamicLights"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 30, 4, 4)
-light_color = Color(1, 1, 0.756863, 1)
-light_energy = 3.0
-light_indirect_energy = 0.0
-light_volumetric_fog_energy = 0.0
-spot_range = 332.847
-spot_attenuation = 0.189465
-spot_angle = 49.2525
-spot_angle_attenuation = 2.92817
+[node name="EmissiveLight20" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 2.15632e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91068e-15, 33.1425, 4.023, 11.5936)
+
+[node name="RegularLight" parent="DynamicLights/EmissiveLight20" index="1"]
+light_color = Color(0.690196, 1, 0.545098, 1)
+spot_angle = 90.0
+
+[node name="FlashingLight" parent="DynamicLights/EmissiveLight20" index="2"]
+visible = false
+
+[node name="EmissiveLight5" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 11.7316, 4.0741, -12.0361)
+
+[node name="RegularLight" parent="DynamicLights/EmissiveLight5" index="1"]
+light_energy = 0.45
+spot_angle = 90.0
+
+[node name="EmissiveLight9" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-1, -8.74228e-08, 3.82138e-15, 2.15632e-23, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 13.7316, 4.0741, 13.9639)
+
+[node name="RegularLight" parent="DynamicLights/EmissiveLight9" index="1"]
+light_energy = 0.45
+spot_angle = 90.0
+
+[node name="EmissiveLight6" parent="DynamicLights" instance=ExtResource("13_jhv5i")]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 16.0322, 4.0741, -12.0361)
+
+[node name="RegularLight" parent="DynamicLights/EmissiveLight6" index="1"]
+light_energy = 0.45
+spot_angle = 90.0
 
 [node name="ServerRoom" type="Node3D" parent="."]
 
-[node name="Lights" type="Node3D" parent="ServerRoom"]
+[node name="Screen" parent="ServerRoom" instance=ExtResource("3_foytq")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26.7054, 0.595797, -4)
+
+[node name="Screen2" parent="ServerRoom" instance=ExtResource("3_foytq")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26.7054, 2.22231, -4)
+
+[node name="Screen3" parent="ServerRoom" instance=ExtResource("3_foytq")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 29.9951, 0.595797, -4)
+
+[node name="Screen4" parent="ServerRoom" instance=ExtResource("3_foytq")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 29.9951, 2.22231, -4)
+
+[node name="Screen5" parent="ServerRoom" instance=ExtResource("3_foytq")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 33.2923, 0.595797, -4)
+
+[node name="Screen6" parent="ServerRoom" instance=ExtResource("3_foytq")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 33.2923, 2.22231, -4)
+
+[node name="Door4" parent="ServerRoom" instance=ExtResource("12_sito8")]
+transform = Transform3D(-1, 0, -2.53673e-07, 0, 1, 0, 1.50996e-07, 0, -1.68, 23.5329, 0, 13.725)
+
+[node name="Keypad" parent="ServerRoom/Door4" instance=ExtResource("25_rby21")]
+transform = Transform3D(-0.601206, 3.48787e-16, -8.74227e-08, 2.09693e-16, 1, -3.48787e-16, 5.25591e-08, -3.48787e-16, -1, 1.44528, 1.75243, 2.84056)
 
 [node name="ComputerTerminal" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27.6683, -0.177871, 3.62585)
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 25.001, -0.0133313, 7.62585)
 
 [node name="ComputerTerminal2" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27.6683, -0.177871, 1.62185)
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 27.001, -0.0133313, 7.62585)
 
-[node name="ComputerTerminal7" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 32.6979, -0.177871, 1.62185)
+[node name="ComputerTerminal3" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 27.001, -0.0133313, 6.62585)
 
-[node name="ComputerTerminal8" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 32.6979, -0.177871, 3.62585)
+[node name="ComputerTerminal4" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 25.001, -0.0133313, 6.62585)
 
 [node name="ComputerTerminal5" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 29.2255, 0.0228637, -1.10867)
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 25.001, -0.0133313, 2.62585)
 
 [node name="ComputerTerminal6" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 31.2295, 0.0228637, -1.10867)
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 27.001, -0.0133313, 2.62585)
+
+[node name="ComputerTerminal7" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 27.001, -0.0133313, 1.62585)
+
+[node name="ComputerTerminal8" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 25.001, -0.0133313, 1.62585)
+
+[node name="ComputerTerminal9" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 32.9972, -0.0133313, 7.62585)
+
+[node name="ComputerTerminal10" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 34.9972, -0.0133313, 7.62585)
+
+[node name="ComputerTerminal11" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 34.9972, -0.0133313, 6.62585)
+
+[node name="ComputerTerminal12" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 32.9972, -0.0133313, 6.62585)
+
+[node name="ComputerTerminal13" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 32.9972, -0.0133313, 2.62585)
+
+[node name="ComputerTerminal14" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 34.9972, -0.0133313, 2.62585)
+
+[node name="ComputerTerminal15" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 34.9972, -0.0133313, 1.62585)
+
+[node name="ComputerTerminal16" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 32.9972, -0.0133313, 1.62585)
 
 [node name="Mainframe" type="MeshInstance3D" parent="ServerRoom"]
 transform = Transform3D(2.66473, 0, 0, 0, 3.36672, 0, 0, 0, 1.94938, 30.1468, 0.926592, 1.06492)
+visible = false
 mesh = SubResource("BoxMesh_nfy85")
 skeleton = NodePath("../..")
 
@@ -267,6 +335,7 @@ omni_attenuation = 0.0853775
 
 [node name="Mainframe2" type="MeshInstance3D" parent="ServerRoom"]
 transform = Transform3D(2.66473, 0, 0, 0, 3.36672, 0, 0, 0, 1.94938, 30.1468, 0.926592, 4.06492)
+visible = false
 mesh = SubResource("BoxMesh_nfy85")
 skeleton = NodePath("../..")
 
@@ -280,6 +349,7 @@ omni_attenuation = 0.0853775
 
 [node name="Mainframe3" type="MeshInstance3D" parent="ServerRoom"]
 transform = Transform3D(2.66473, 0, 0, 0, 3.36672, 0, 0, 0, 1.94938, 30.1468, 0.926592, 7.06492)
+visible = false
 mesh = SubResource("BoxMesh_nfy85")
 skeleton = NodePath("../..")
 
@@ -292,50 +362,60 @@ omni_range = 5.933
 omni_attenuation = 0.0853775
 
 [node name="Quarters" type="Node3D" parent="."]
-visible = false
 
-[node name="SpotLight3D15" type="OmniLight3D" parent="Quarters"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 24.4432, 2.25667, -15.8145)
-light_color = Color(1, 1, 0.756863, 1)
-light_bake_mode = 1
-omni_range = 17.8655
+[node name="Bed" parent="Quarters" instance=ExtResource("15_3ivj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.997514, 0.00625682, -9.96585)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Quarters"]
-transform = Transform3D(5.3707, 0, 0, 0, 1, 0, 0, 0, 2.60603, 24.8042, 0.818414, -18.156)
-mesh = SubResource("BoxMesh_pro5g")
+[node name="Rack" parent="Quarters" instance=ExtResource("15_c7igb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -15)
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Quarters"]
-transform = Transform3D(2.85761, 0, 0, 0, 0.874001, 0, 0, 0, 1.06231, 25.9755, 0.860969, -13.0437)
-mesh = SubResource("BoxMesh_pro5g")
+[node name="Desk" parent="Quarters" instance=ExtResource("16_587d7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.99427, 0, -8.70983)
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Quarters"]
-transform = Transform3D(6.02412e-15, 3.82038e-08, -1.06231, 2.85761, -3.82038e-08, 0, -1.2491e-07, -0.874001, -4.64352e-08, 23.2701, 1.83039, -13.0435)
-mesh = SubResource("BoxMesh_pro5g")
+[node name="Chair" parent="Quarters" instance=ExtResource("17_lf0mi")]
+transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 4.40357, 2.38419e-07, -9.40381)
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Quarters"]
-transform = Transform3D(1.2491e-07, 0.874001, 9.28705e-08, 2.85761, -3.82038e-08, -6.002e-23, 6.99323e-15, 7.64076e-08, -1.06231, 21.0359, 0.388807, -14.3365)
-mesh = SubResource("BoxMesh_pro5g")
+[node name="Box" parent="Quarters" instance=ExtResource("18_55t8h")]
+transform = Transform3D(-0.366063, 4.52255e-16, 0.93059, 3.48787e-16, 1, -3.48787e-16, -0.93059, 1.969e-16, -0.366063, 0.877886, 1.05701, -8.62856)
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="Quarters"]
-transform = Transform3D(1.8959e-08, 0.262769, 2.18151e-08, 0.433732, -1.1486e-08, -1.40986e-23, 1.06144e-15, 2.2972e-08, -0.249536, 20.6868, 0.388807, -19.2658)
-mesh = SubResource("BoxMesh_pro5g")
+[node name="Box2" parent="Quarters" instance=ExtResource("19_w4nbn")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0.863577, 0.5, -8.49802)
 
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="Quarters"]
-transform = Transform3D(3.95522e-08, 0.548187, 4.55106e-08, 0.90485, -2.3962e-08, -2.94124e-23, 2.21438e-15, 4.79241e-08, -0.520581, 21.9577, 0.388807, -19.2345)
-mesh = SubResource("BoxMesh_pro5g")
+[node name="Box3" parent="Quarters" instance=ExtResource("19_w4nbn")]
+transform = Transform3D(-0.260776, 0, 1.98293, 0, 2, 0, -1.98293, 0, -0.260776, 0.876499, 0.5, -9.31439)
 
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="Quarters"]
-transform = Transform3D(3.95522e-08, 0.548187, 4.55106e-08, 0.90485, -2.3962e-08, -2.94124e-23, 2.21438e-15, 4.79241e-08, -0.520581, 20.7319, 0.388807, -18.6723)
-mesh = SubResource("BoxMesh_pro5g")
+[node name="Paper" parent="Quarters" instance=ExtResource("20_vpnku")]
+transform = Transform3D(-0.904492, 0, -0.42649, 0, 1, 0, 0.42649, 0, -0.904492, 5.00714, 1.20291, -8.76122)
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Quarters"]
-transform = Transform3D(0.743721, 0, 0, 0, 0.874001, 0, 0, 0, 0.702746, 25.9755, 0.570724, -14.4328)
-mesh = SubResource("BoxMesh_pro5g")
+[node name="Paper5" parent="Quarters" instance=ExtResource("20_vpnku")]
+transform = Transform3D(-0.968135, 0, -0.250431, 0, 1, 0, 0.250431, 0, -0.968135, 4.57974, 1.20706, -9.01969)
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Quarters/MeshInstance3D3"]
-transform = Transform3D(1, 0, 0, 0, 0.99521, 0.0394736, 0, -0.0977566, 0.40186, 0, 0.724124, -0.231976)
-mesh = SubResource("BoxMesh_pro5g")
-skeleton = NodePath("../..")
+[node name="Paper6" parent="Quarters" instance=ExtResource("20_vpnku")]
+transform = Transform3D(-0.979428, 0, 0.201796, 0, 1, 0, -0.201796, 0, -0.979428, 4.24868, 1.20706, -8.80873)
+
+[node name="Paper2" parent="Quarters" instance=ExtResource("20_vpnku")]
+transform = Transform3D(-0.937931, 0, -0.346821, 0, 1, 0, 0.346821, 0, -0.937931, 5.00714, 1.212, -8.76122)
+
+[node name="Paper3" parent="Quarters" instance=ExtResource("20_vpnku")]
+transform = Transform3D(-0.93674, 0, -0.350028, 0, 1, 0, 0.350028, 0, -0.93674, 5.00714, 1.21666, -8.76122)
+
+[node name="Paper4" parent="Quarters" instance=ExtResource("20_vpnku")]
+transform = Transform3D(-0.914861, 0, -0.403769, 0, 1, 0, 0.403769, 0, -0.914861, 5.00714, 1.22053, -8.76122)
+
+[node name="Computer" parent="Quarters" instance=ExtResource("21_6oq6p")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.51178, 1.18785, -8.40976)
+
+[node name="Cabinet2" parent="Quarters" instance=ExtResource("22_jajjk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.02555, 0, -15.2396)
+
+[node name="Cabinet3" parent="Quarters" instance=ExtResource("22_jajjk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.05908, -0.00321841, -15.238)
+
+[node name="Rug" parent="Quarters" instance=ExtResource("23_m65go")]
+transform = Transform3D(0.90583, 0, 0.787065, 0, 1.2, 0, -0.787065, 0, 0.90583, 5.375, 0.05, -12.228)
+
+[node name="Cabinet" parent="Quarters" instance=ExtResource("24_7l2v2")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.83065, 0, -15.2856)
 
 [node name="Creature" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.35297, -1.53599e-16, 0.91259, 5.69212e-16, 1.63198, -5.69212e-16, -0.91259, 7.90199e-16, 1.35297, 21.3338, 1.2888, -24.8377)
@@ -355,58 +435,35 @@ libraries = {
 [node name="PlayerSpawnpoint" parent="." instance=ExtResource("16_pu4dc")]
 transform = Transform3D(1, -3.48787e-16, 3.48787e-16, 3.48787e-16, 1, -3.48787e-16, -3.48787e-16, 3.48787e-16, 1, -4.08482, 0.5, 2.09272e-15)
 
-[node name="PickupablePipe" parent="." instance=ExtResource("17_llnjg")]
-transform = Transform3D(0.128528, 0.214431, 9.37307e-09, 0, -1.09278e-08, 0.25, 0.214431, -0.128528, -5.61813e-09, 12.5678, 0.49998, 0.967737)
-visible = false
-
 [node name="Map" parent="." instance=ExtResource("14_b7qb8")]
+metadata/_edit_lock_ = true
 
-[node name="EmissiveLight" parent="." instance=ExtResource("13_jhv5i")]
-transform = Transform3D(1, -1.02157e-16, 2.4663e-16, 2.4663e-16, 0.707107, -0.707107, -1.02157e-16, 0.707107, 0.707107, 7, 3.41311, -2.67885)
+[node name="ServerRoom" type="Label3D" parent="Map"]
+transform = Transform3D(2.94277e-08, 0, -1, 0, 1, 0, 1, 0, 1.87433e-08, 16.9478, 2.6818, 0)
+double_sided = false
+texture_filter = 0
+text = "SERVER ROOM >"
+font = ExtResource("4_qri4k")
+font_size = 82
+outline_size = 0
 
-[node name="EmissiveLight2" parent="." instance=ExtResource("13_jhv5i")]
-transform = Transform3D(1, -1.02157e-16, 2.4663e-16, 2.4663e-16, 0.707107, -0.707107, -1.02157e-16, 0.707107, 0.707107, 2.05936, 3.41311, -2.67885)
+[node name="ServerRoom2" type="Label3D" parent="Map"]
+transform = Transform3D(-1, 0, -6.45325e-08, 0, 1, 0, 5.26458e-08, 0, -1, 19.5594, 2.6818, 14.9827)
+double_sided = false
+texture_filter = 0
+text = "< SERVER ROOM"
+font = ExtResource("4_qri4k")
+font_size = 82
+outline_size = 0
 
-[node name="EmissiveLight3" parent="." instance=ExtResource("13_jhv5i")]
-transform = Transform3D(-1, -6.18172e-08, -6.18172e-08, 2.4663e-16, 0.707107, -0.707107, 8.74228e-08, -0.707107, -0.707107, 2.05936, 3.41311, 2.60881)
-
-[node name="EmissiveLight4" parent="." instance=ExtResource("13_jhv5i")]
-transform = Transform3D(-1, -6.18172e-08, -6.18172e-08, 2.4663e-16, 0.707107, -0.707107, 8.74228e-08, -0.707107, -0.707107, 7, 3.41311, 2.60881)
-
-[node name="EmissiveLight7" parent="." instance=ExtResource("13_jhv5i")]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 7, 4.023, -11.864)
-
-[node name="EmissiveLight8" parent="." instance=ExtResource("13_jhv5i")]
-transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2, 4.023, -15.4566)
-
-[node name="EmissiveLight12" parent="." instance=ExtResource("13_jhv5i")]
-transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5.25761, 4.023, -15.4566)
-
-[node name="EmissiveLight11" parent="." instance=ExtResource("13_jhv5i")]
-transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2, 4.023, -10.1358)
-
-[node name="EmissiveLight13" parent="." instance=ExtResource("13_jhv5i")]
-transform = Transform3D(1, 0, 5.0822e-21, 2.15632e-23, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5.25761, 4.023, -10.1358)
-
-[node name="EmissiveLight9" parent="." instance=ExtResource("13_jhv5i")]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 25.439, 4.023, -11.864)
-
-[node name="EmissiveLight10" parent="." instance=ExtResource("13_jhv5i")]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 20.439, 4.023, -11.864)
-
-[node name="EmissiveLight5" parent="." instance=ExtResource("13_jhv5i")]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -1.5246e-23, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 11.7316, 4.0741, -12.0361)
-
-[node name="RegularLight" parent="EmissiveLight5" index="1"]
-light_energy = 0.45
-spot_angle = 90.0
-
-[node name="EmissiveLight6" parent="." instance=ExtResource("13_jhv5i")]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 16.0322, 4.0741, -12.0361)
-
-[node name="RegularLight" parent="EmissiveLight6" index="1"]
-light_energy = 0.45
-spot_angle = 90.0
+[node name="CrewQuarters" type="Label3D" parent="Map"]
+transform = Transform3D(2.94277e-08, 0, -1, 0, 1, 0, 1, 0, 1.87433e-08, 16.9478, 2.37191, 0)
+double_sided = false
+texture_filter = 0
+text = "< CREW QUARTERS"
+font = ExtResource("4_qri4k")
+font_size = 82
+outline_size = 0
 
 [node name="Door" parent="." instance=ExtResource("12_sito8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1653, 0, -13.0076)
@@ -414,65 +471,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1653, 0, -13.0076)
 [node name="Keypad" parent="Door" instance=ExtResource("25_rby21")]
 transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 1, -3.48787e-16, -4.37114e-08, -0.165297, 1.58604, 3.60608)
 
+[node name="Door3" parent="." instance=ExtResource("12_sito8")]
+transform = Transform3D(-4.37114e-08, 0, 1.66332, 0, 1, 0, -1, 0, -7.27061e-08, 12.3206, 0, 15.267)
+
+[node name="Keypad" parent="Door3" instance=ExtResource("25_rby21")]
+transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787e-16, 0.601206, -2.09693e-16, -2.62796e-08, 0.502741, 1.75243, 2.88747)
+
 [node name="Door2" parent="." instance=ExtResource("12_sito8")]
 transform = Transform3D(-1, 0, -7.01036e-08, 0, 1, 0, 9.12883e-08, 0, -1, 17.1653, 0, -11.0076)
 
 [node name="Player" parent="." instance=ExtResource("13_xbqju")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4883, 0, -12)
+transform = Transform3D(-0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, -0.965926, 30.7632, 0, -1.83189)
 
-[node name="Bed" parent="." instance=ExtResource("15_3ivj0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.997514, 0.00625682, -9.96585)
-
-[node name="Rack" parent="." instance=ExtResource("15_c7igb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -15)
-
-[node name="Desk" parent="." instance=ExtResource("16_587d7")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.99427, 0, -8.70983)
-
-[node name="Chair" parent="." instance=ExtResource("17_lf0mi")]
-transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 4.40357, 2.38419e-07, -9.40381)
-
-[node name="Box" parent="." instance=ExtResource("18_55t8h")]
-transform = Transform3D(-0.366063, 4.52255e-16, 0.93059, 3.48787e-16, 1, -3.48787e-16, -0.93059, 1.969e-16, -0.366063, 0.877886, 1.05701, -8.62856)
-
-[node name="Box2" parent="." instance=ExtResource("19_w4nbn")]
-transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 0.863577, 0.5, -8.49802)
-
-[node name="Box3" parent="." instance=ExtResource("19_w4nbn")]
-transform = Transform3D(-0.260776, 0, 1.98293, 0, 2, 0, -1.98293, 0, -0.260776, 0.876499, 0.5, -9.31439)
-
-[node name="Paper" parent="." instance=ExtResource("20_vpnku")]
-transform = Transform3D(-0.904492, 0, -0.42649, 0, 1, 0, 0.42649, 0, -0.904492, 5.00714, 1.20291, -8.76122)
-
-[node name="Paper5" parent="." instance=ExtResource("20_vpnku")]
-transform = Transform3D(-0.968135, 0, -0.250431, 0, 1, 0, 0.250431, 0, -0.968135, 4.57974, 1.20706, -9.01969)
-
-[node name="Paper6" parent="." instance=ExtResource("20_vpnku")]
-transform = Transform3D(-0.979428, 0, 0.201796, 0, 1, 0, -0.201796, 0, -0.979428, 4.24868, 1.20706, -8.80873)
-
-[node name="Paper2" parent="." instance=ExtResource("20_vpnku")]
-transform = Transform3D(-0.937931, 0, -0.346821, 0, 1, 0, 0.346821, 0, -0.937931, 5.00714, 1.212, -8.76122)
-
-[node name="Paper3" parent="." instance=ExtResource("20_vpnku")]
-transform = Transform3D(-0.93674, 0, -0.350028, 0, 1, 0, 0.350028, 0, -0.93674, 5.00714, 1.21666, -8.76122)
-
-[node name="Paper4" parent="." instance=ExtResource("20_vpnku")]
-transform = Transform3D(-0.914861, 0, -0.403769, 0, 1, 0, 0.403769, 0, -0.914861, 5.00714, 1.22053, -8.76122)
-
-[node name="Computer" parent="." instance=ExtResource("21_6oq6p")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.51178, 1.18785, -8.40976)
-
-[node name="Cabinet2" parent="." instance=ExtResource("22_jajjk")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.02555, 0, -15.2396)
-
-[node name="Cabinet3" parent="." instance=ExtResource("22_jajjk")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.05908, -0.00321841, -15.238)
-
-[node name="Rug" parent="." instance=ExtResource("23_m65go")]
-transform = Transform3D(0.90583, 0, 0.787065, 0, 1.2, 0, -0.787065, 0, 0.90583, 5.375, 0.05, -12.228)
-
-[node name="Cabinet" parent="." instance=ExtResource("24_7l2v2")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.83065, 0, -15.2856)
-
-[editable path="EmissiveLight5"]
-[editable path="EmissiveLight6"]
+[editable path="DynamicLights/EmissiveLight17"]
+[editable path="DynamicLights/EmissiveLight18"]
+[editable path="DynamicLights/EmissiveLight19"]
+[editable path="DynamicLights/EmissiveLight20"]
+[editable path="DynamicLights/EmissiveLight5"]
+[editable path="DynamicLights/EmissiveLight9"]
+[editable path="DynamicLights/EmissiveLight6"]

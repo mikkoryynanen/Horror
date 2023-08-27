@@ -2,6 +2,7 @@ using Godot;
 using Horror.Scripts;
 using Horror.Scripts.Autoload;
 using Horror.Scripts.Damage;
+using Horror.Scripts.Interactables;
 using Horror.Scripts.Inventory;
 using Horror.Scripts.Player;
 using Horror.Scripts.UI;

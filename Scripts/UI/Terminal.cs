@@ -14,7 +14,7 @@ public partial class Terminal : Control
 		//                   "1. List all employees\n" +
 		//                   "2. Show map\n" +
 		//                   "3. Show messages");
-		GetNode<Button>("BackgroundColor/Margin/Panel/VBox/Button").GrabFocus();
+		// GetNode<Button>("BackgroundColor/Margin/Panel/VBox/Button").GrabFocus();
 	}
 
 	// public override void _Input(InputEvent @event)

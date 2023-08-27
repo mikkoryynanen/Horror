@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b03767c2s7abc"]
+
+[ext_resource type="PackedScene" uid="uid://b66ybg2xp67la" path="res://Assets/models/Props/Screen.glb" id="1_spd3s"]
+
+[node name="Screen" instance=ExtResource("1_spd3s")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.092707, 0.905834, 0)
+light_color = Color(0, 0.278431, 0.121569, 1)

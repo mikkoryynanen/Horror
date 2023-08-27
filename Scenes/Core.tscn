@@ -107,7 +107,9 @@ libraries = {
 [node name="MoodManager" type="Node" parent="."]
 script = ExtResource("2_e8c1n")
 
-[node name="DialogManager" parent="." instance=ExtResource("1_7pf63")]
+[node name="DialogManager" parent="." node_paths=PackedStringArray("_dialogBalloon", "_topDialogBalloon") instance=ExtResource("1_7pf63")]
+_dialogBalloon = NodePath("")
+_topDialogBalloon = NodePath("")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_h0c6a")

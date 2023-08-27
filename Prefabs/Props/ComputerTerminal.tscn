@@ -1,15 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://chmtfaj8nn5h"]
+[gd_scene load_steps=11 format=3 uid="uid://chmtfaj8nn5h"]
 
-[ext_resource type="PackedScene" uid="uid://c42trkjxy6qts" path="res://Assets/models/ComputerTerminal.glb" id="1_gd7b1"]
 [ext_resource type="Script" path="res://Scripts/Objects/ComputerTerminal.cs" id="2_chxmx"]
 [ext_resource type="Texture2D" uid="uid://jaiit3ywr7qy" path="res://Assets/models/ComputerTerminal_ComputerTerminal.png" id="3_1ht7f"]
 [ext_resource type="PackedScene" uid="uid://b51dk24klehrg" path="res://Prefabs/UI/Terminals/InfoTerminal.tscn" id="3_f8t07"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_44hfb"]
+size = Vector3(1.99947, 2.99361, 1.93874)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_1cxo1"]
 viewport_path = NodePath("Node/SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xnmxn"]
 resource_local_to_scene = true
+shading_mode = 0
 albedo_texture = SubResource("ViewportTexture_1cxo1")
 
 [sub_resource type="QuadMesh" id="QuadMesh_1padx"]
@@ -53,33 +56,27 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8633g")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_44hfb"]
-size = Vector3(1.99947, 2.99361, 1.93874)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ifb6f"]
-size = Vector3(2.02181, 2.08464, 1)
-
-[node name="ComputerTerminal" instance=ExtResource("1_gd7b1")]
+[node name="ComputerTerminal" type="StaticBody3D"]
 script = ExtResource("2_chxmx")
 
-[node name="LeftMonitorMesh" type="MeshInstance3D" parent="." index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.74638, -0.022344)
+shape = SubResource("BoxShape3D_44hfb")
+
+[node name="LeftMonitorMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.602898, -1.81011e-16, 1.41137e-16, 1.90581e-16, 0.330623, 0.188692, -2.99152e-16, -0.154172, 0.404652, 0.504706, 1.21707, 0.0783411)
 material_override = SubResource("StandardMaterial3D_xnmxn")
 mesh = SubResource("QuadMesh_1padx")
 skeleton = NodePath("../ComputerTerminal2")
 
-[node name="ComputerTerminal2" parent="." index="1"]
+[node name="ComputerTerminal2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_jexef")
+skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="ComputerTerminal2" index="0"]
+[node name="Node" type="Node" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ComputerTerminal2/StaticBody3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49276, -0.044688)
-shape = SubResource("BoxShape3D_44hfb")
-
-[node name="Node" type="Node" parent="." index="2"]
-
-[node name="SubViewport" type="SubViewport" parent="Node" index="0"]
+[node name="SubViewport" type="SubViewport" parent="Node"]
 disable_3d = true
 positional_shadow_atlas_size = 0
 positional_shadow_atlas_16_bits = false
@@ -89,13 +86,8 @@ positional_shadow_atlas_quad_2 = 0
 positional_shadow_atlas_quad_3 = 0
 size = Vector2i(480, 270)
 
-[node name="InfoTerminal" parent="Node/SubViewport" index="0" instance=ExtResource("3_f8t07")]
+[node name="InfoTerminal" parent="Node/SubViewport" instance=ExtResource("3_f8t07")]
 
-[node name="Area3D" type="Area3D" parent="." index="3"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.636797, 0)
-shape = SubResource("BoxShape3D_ifb6f")
-
-[connection signal="body_entered" from="Area3D" to="." method="OnAreaEntered"]
-[connection signal="body_exited" from="Area3D" to="." method="OnAreaExited"]
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, -4.68079e-16, 3.27752e-16, 3.27752e-16, 0.939693, 0.34202, -4.68079e-16, -0.34202, 0.939693, 0.517615, 1.32481, 0.411137)
+fov = 77.0
