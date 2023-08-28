@@ -64,6 +64,11 @@ public partial class WeaponManager : Node3D
 			}
 		}
 	}
+
+	public bool IsMeleeEquipped()
+	{
+		return _spawnedWeapon is MeleeBase;
+	}
 	
 	private void OnItemPickup(string itemId)
 	{

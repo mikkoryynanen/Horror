@@ -14,4 +14,8 @@ public partial class PickupablePistol : StaticBody3D, IInteractable
         
         QueueFree();
     }
+
+    public void HoldInteract()
+    {
+    }
 }

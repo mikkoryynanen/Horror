@@ -11,4 +11,8 @@ public partial class PickupableQuestItem  : StaticBody3D, IInteractable
         
         QueueFree();
     }
+
+    public void HoldInteract()
+    {
+    }
 }

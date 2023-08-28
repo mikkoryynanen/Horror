@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cabh24mlvxkp2"]
+[gd_scene load_steps=20 format=3 uid="uid://cabh24mlvxkp2"]
 
 [ext_resource type="Script" path="res://Scripts/UI/GUIManager.cs" id="1_s4ul8"]
 [ext_resource type="Texture2D" uid="uid://cntwtaxwtt2hk" path="res://Assets/crosshair007.png" id="1_syclb"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://addons/controller_icons/objects/TextureRect.gd" id="5_o7ome"]
 [ext_resource type="PackedScene" uid="uid://ceggctfx4hul1" path="res://Prefabs/UI/Inventory/Inventory.tscn" id="8_av7g3"]
 [ext_resource type="LabelSettings" uid="uid://c2kvlknc16rwc" path="res://Prefabs/UI/UILabel.tres" id="8_up2yq"]
+[ext_resource type="Texture2D" uid="uid://baj5u7vhsfuqd" path="res://Assets/UI/Circle.png" id="8_v5tcc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_41fwl"]
 shader = ExtResource("1_wbj8i")
@@ -133,6 +134,22 @@ path = "interact"
 layout_mode = 2
 text = "to interact"
 label_settings = SubResource("LabelSettings_w35aa")
+
+[node name="PryProgress" type="TextureProgressBar" parent="Container/Reticle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 4
+texture_progress = ExtResource("8_v5tcc")
 
 [node name="TextPopup" type="Label" parent="Container"]
 modulate = Color(1, 1, 1, 0)

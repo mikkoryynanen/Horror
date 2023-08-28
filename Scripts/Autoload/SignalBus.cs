@@ -68,6 +68,10 @@ public partial class SignalBus : Node
     public delegate void OnShowLetterboxEventHandler();
     [Signal]
     public delegate void OnHideLetterboxEventHandler();
+    [Signal]
+    public delegate void OnPryEventHandler();
+    [Signal]
+    public delegate void OnPryEndEventHandler();
     
     // Game Events
     [Signal]

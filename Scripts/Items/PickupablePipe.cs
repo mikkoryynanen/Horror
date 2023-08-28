@@ -14,4 +14,9 @@ public partial class PickupablePipe : StaticBody3D, IInteractable
         
         QueueFree();
     }
+
+    public void HoldInteract()
+    {
+        throw new System.NotImplementedException();
+    }
 }

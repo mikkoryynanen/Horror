@@ -163,6 +163,17 @@ public partial class Player : CharacterBody3D, IDamageable
 				{
 					interactable.Interact();
 				}
+				else if (Input.IsActionPressed("interact"))
+				{
+					if (_weaponManager.IsMeleeEquipped())
+						interactable.HoldInteract();
+					else
+						GD.PrintErr("Cannot open door. missing melee weapon");
+				}
+				else if (Input.IsActionJustReleased("interact"))
+				{
+					this.EmitSignalBus(nameof(SignalBus.OnPryEnd));
+				}
 			}
 			else
 			{

@@ -27,4 +27,8 @@ public partial class QuestCompleter : StaticBody3D, IInteractable
         if (completed)
             _parentUnlockable.Unlock();
     }
+
+    public void HoldInteract()
+    {
+    }
 }

@@ -17,6 +17,11 @@ public partial class TestObject : StaticBody3D, IInteractable, IDamageable
         this.EmitSignalBus("OnStartDialog", "act_0_1", "act_0_1", false);
     }
 
+    public void HoldInteract()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void TakeDamage(int amount)
     {
         if (_health <= 0) return;

@@ -19,4 +19,9 @@ public partial class Chest : StaticBody3D, IInteractable
         Inventory.Show("Chest");
         this.EmitSignalBus("OnOpenInventory");
     }
+
+    public void HoldInteract()
+    {
+        throw new System.NotImplementedException();
+    }
 }

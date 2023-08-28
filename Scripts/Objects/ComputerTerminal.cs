@@ -52,4 +52,8 @@ public partial class ComputerTerminal : StaticBody3D, IInteractable
         GetNode<Button>("Node/SubViewport/InfoTerminal/BackgroundColor/Margin/Panel/VBox/Button").GrabFocus();
         // GetNode<AnimationPlayer>("Camera3D/AnimationPlayer").Play("show");
     }
+
+    public void HoldInteract()
+    {
+    }
 }

@@ -17,5 +17,10 @@ public partial class Keypad : StaticBody3D, IInteractable
 	public void Interact()
 	{
 		GD.PrintErr("NYI Add interact scene here");
+		GetParent<IUnlockable>().Unlock();
+	}
+
+	public void HoldInteract()
+	{
 	}
 }

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfq7pjhxstejr"]
+
+[ext_resource type="PackedScene" uid="uid://dnjgepi8f3q27" path="res://Prefabs/Props/Door.tscn" id="1_0uum4"]
+[ext_resource type="Script" path="res://Scripts/Interactables/PryableDoor.cs" id="2_ljsqo"]
+
+[node name="PryableDoor" instance=ExtResource("1_0uum4")]
+script = ExtResource("2_ljsqo")
+duration = 100.0

@@ -19,4 +19,8 @@ public partial class Cabinet : StaticBody3D, IInteractable
         Inventory.Show("Cabinet");
         this.EmitSignalBus("OnOpenInventory");
     }
+
+    public void HoldInteract()
+    {
+    }
 }

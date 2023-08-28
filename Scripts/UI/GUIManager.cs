@@ -22,6 +22,7 @@ public partial class GUIManager : CanvasLayer
 	private GridContainer _inputActionParent;
 	private Slider _healthMeter;
 	private ColorRect _lowHealthWarning;
+	private TextureProgressBar _pryProgress;
 
 	public override void _Ready()
 	{
@@ -34,6 +35,7 @@ public partial class GUIManager : CanvasLayer
 		_lowHealthWarning = GetNode<ColorRect>("Container/LowHealth");
 		_staminaMeter = GetNode<Slider>("Container/MetersContainer/StaminaMeter");
 		_ammoLabel = GetNode<Label>("Container/AmmoLabel");
+		_pryProgress = GetNode<TextureProgressBar>("Container/Reticle/PryProgress");
 		
 		_pauseMenu = GetNode<Control>("Container/PauseMenu");
 		_inputActionParent = GetNode<GridContainer>("Container/PauseMenu/Container/BoxContainer/KeybindsContainer");
@@ -53,6 +55,13 @@ public partial class GUIManager : CanvasLayer
 		signalBus.OnUpdateStamina += OnUpdateStamina;
 		signalBus.OnUpdateHealth += OnUpdateHealth;
 
+		signalBus.OnPry += () =>
+		{
+			_pryProgress.Visible = true;
+			_pryProgress.Value++;
+		};
+		signalBus.OnPryEnd += () => _pryProgress.Visible = false;
+
 		OnHideInteract();
 		
 		_pauseMenu.Visible = false;
@@ -60,7 +69,7 @@ public partial class GUIManager : CanvasLayer
 
 	public override void _Process(double delta)
 	{
-		// TODO This gets run immidiately after when open inventory
+		// TODO This gets run immediately after when open inventory
 		if (_inventory.Visible && Input.IsActionJustPressed("cancel"))
 		{
 			AudioManager.Instance.PlayClip(AudioManager.AudioClipName.UIConfirm);

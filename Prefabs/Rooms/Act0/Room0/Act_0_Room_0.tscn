@@ -1,7 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://bdlkserajheby"]
+[gd_scene load_steps=38 format=3 uid="uid://bdlkserajheby"]
 
 [ext_resource type="Script" path="res://Scripts/RoomManager.cs" id="1_p0qdp"]
 [ext_resource type="PackedScene" uid="uid://b03767c2s7abc" path="res://Prefabs/Props/Screen.tscn" id="3_foytq"]
+[ext_resource type="PackedScene" uid="uid://dfq7pjhxstejr" path="res://Prefabs/Props/PryableDoor.tscn" id="4_jrxkp"]
 [ext_resource type="FontFile" uid="uid://buqd2qw57jtwj" path="res://fonts/LCDBlock.ttf" id="4_qri4k"]
 [ext_resource type="Texture2D" uid="uid://kxn43h0t23jn" path="res://Textures/Map/Metal.png" id="8_s03qj"]
 [ext_resource type="PackedScene" uid="uid://chmtfaj8nn5h" path="res://Prefabs/Props/ComputerTerminal.tscn" id="11_wf8lj"]
@@ -18,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://saombc4xiy1d" path="res://Assets/models/Props/Desk.glb" id="16_587d7"]
 [ext_resource type="PackedScene" uid="uid://bx21y4ffhg3dt" path="res://Prefabs/PlayerSpawnpoint.tscn" id="16_pu4dc"]
 [ext_resource type="PackedScene" uid="uid://b8jmhvbsrqhhu" path="res://Assets/models/Props/Chair.glb" id="17_lf0mi"]
+[ext_resource type="PackedScene" uid="uid://b1wi1ijonmb8u" path="res://Prefabs/Items/Pickupable/Pipe.tscn" id="17_llnjg"]
 [ext_resource type="PackedScene" uid="uid://c5vl65a6d5dhm" path="res://Assets/models/Props/Box.glb" id="18_55t8h"]
 [ext_resource type="PackedScene" uid="uid://bvnu73irkaowt" path="res://Assets/models/Props/Box2.glb" id="19_w4nbn"]
 [ext_resource type="PackedScene" uid="uid://bja33jxuojv3o" path="res://Assets/models/Props/Paper.glb" id="20_vpnku"]
@@ -265,10 +267,10 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 33.292
 [node name="Screen6" parent="ServerRoom" instance=ExtResource("3_foytq")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 33.2923, 2.22231, -4)
 
-[node name="Door4" parent="ServerRoom" instance=ExtResource("12_sito8")]
-transform = Transform3D(-1, 0, -2.53673e-07, 0, 1, 0, 1.50996e-07, 0, -1.68, 23.5329, 0, 13.725)
+[node name="PryableDoor" parent="ServerRoom" instance=ExtResource("4_jrxkp")]
+transform = Transform3D(-1, 0, -2.53673e-07, 0, 1, 0, 1.50996e-07, 0, -1.68, 23.3847, 0, 13.725)
 
-[node name="Keypad" parent="ServerRoom/Door4" instance=ExtResource("25_rby21")]
+[node name="Keypad" parent="ServerRoom/PryableDoor" instance=ExtResource("25_rby21")]
 transform = Transform3D(-0.601206, 3.48787e-16, -8.74227e-08, 2.09693e-16, 1, -3.48787e-16, 5.25591e-08, -3.48787e-16, -1, 1.44528, 1.75243, 2.84056)
 
 [node name="ComputerTerminal" parent="ServerRoom" instance=ExtResource("11_wf8lj")]
@@ -480,8 +482,11 @@ transform = Transform3D(-4.37114e-08, -3.48787e-16, -1, 3.48787e-16, 1, -3.48787
 [node name="Door2" parent="." instance=ExtResource("12_sito8")]
 transform = Transform3D(-1, 0, -7.01036e-08, 0, 1, 0, 9.12883e-08, 0, -1, 17.1653, 0, -11.0076)
 
+[node name="PickupablePipe" parent="." instance=ExtResource("17_llnjg")]
+transform = Transform3D(0.128528, 0.214431, 9.37307e-09, 0, -1.09278e-08, 0.25, 0.214431, -0.128528, -5.61813e-09, 5.64435, 1.2, -9.03312)
+
 [node name="Player" parent="." instance=ExtResource("13_xbqju")]
-transform = Transform3D(-0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, -0.965926, 30.7632, 0, -1.83189)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7051, 0, -11.4031)
 
 [editable path="DynamicLights/EmissiveLight17"]
 [editable path="DynamicLights/EmissiveLight18"]
